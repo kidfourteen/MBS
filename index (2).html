@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mũm Bigsize – Love Your Size</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pk:#D4537E;--pk-l:#FBEAF0;--pk-b:#F4C0D1;--pk-d:#993556;
+  --pu:#7F77DD;--pu-l:#EEEDFE;--pu-d:#3C3489;
+  --gr:#3B6D11;--gr-l:#EAF3DE;
+  --am:#BA7517;--am-l:#FAEEDA;
+  --re:#E24B4A;--re-l:#FCEBEB;
+  --zl:#006AF5;--zl-l:#ddeeff;
+  --fb:#1877F2;--fb-l:#ddeeff;
+  --bg:#faf7f9;--card:#fff;--border:#ede0e8;
+  --text:#2C2C2A;--muted:#888780;--light:#B4B2A9;
+  --r:12px;--rs:8px;
+  --font:'Be Vietnam Pro',system-ui,sans-serif;
+  --max:1200px;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* ── UTILS ── */
+.btn{padding:8px 16px;border-radius:var(--rs);border:1px solid var(--border);background:var(--card);font-size:13px;cursor:pointer;color:var(--text);display:inline-flex;align-items:center;gap:6px;transition:all .18s;white-space:nowrap;font-family:var(--font);font-weight:500}
+.btn:hover{opacity:.86}
+.btn-pk{background:var(--pk);color:#fff;border-color:var(--pk)}
+.btn-zl{background:var(--zl);color:#fff;border-color:var(--zl)}
+.btn-fb{background:var(--fb);color:#fff;border-color:var(--fb)}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600}
+.badge-on{background:var(--gr-l);color:var(--gr)}
+.badge-off{background:#f1f1f1;color:var(--muted)}
+.badge-low{background:var(--am-l);color:var(--am)}
+#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--pk-d);color:#fff;padding:10px 24px;border-radius:24px;font-size:13px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+.screen{display:none}.screen.active{display:block}
+
+/* ══ PC HEADER ══ */
+.pc-header{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:300}
+.pc-header-inner{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;height:62px}
+.logo{font-size:22px;font-weight:700;color:var(--pk);letter-spacing:-.5px;flex-shrink:0;cursor:pointer}
+.logo span{color:var(--pu)}
+.pc-search{flex:1;max-width:420px;display:flex;align-items:center;background:var(--bg);border:1px solid var(--border);border-radius:24px;padding:8px 16px;gap:8px}
+.pc-search input{border:none;background:transparent;font-size:13px;color:var(--text);flex:1;outline:none;font-family:var(--font)}
+.pc-search input::placeholder{color:var(--light)}
+.pc-nav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.pc-nav-link{padding:7px 14px;border-radius:var(--rs);font-size:13px;cursor:pointer;color:var(--muted);font-weight:500;transition:all .15s}
+.pc-nav-link:hover{background:var(--pk-l);color:var(--pk)}
+.pc-cart-btn{padding:8px 18px;background:var(--pk);color:#fff;border:none;border-radius:var(--rs);font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:var(--font)}
+.cart-badge-num{background:#fff;color:var(--pk);border-radius:50%;width:18px;height:18px;font-size:10px;display:inline-flex;align-items:center;justify-content:center;font-weight:700}
+.pc-admin-btn{padding:8px 14px;background:var(--pu-l);color:var(--pu-d);border:1px solid #AFA9EC;border-radius:var(--rs);font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font)}
+
+/* ══ HERO ══ */
+.hero{background:linear-gradient(130deg,#FBEAF0,#EEEDFE);border-bottom:1px solid var(--pk-b)}
+.hero-inner{max-width:var(--max);margin:0 auto;padding:48px 24px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero-tag{display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
+.hero-inner h1{font-size:40px;font-weight:700;line-height:1.2;color:var(--pk-d);margin-bottom:12px}
+.hero-inner p{font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.7}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.hero-emoji-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hero-card{background:var(--card);border-radius:var(--r);border:1px solid var(--pk-b);padding:18px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:transform .2s;cursor:pointer}
+.hero-card:hover{transform:translateY(-4px)}
+.hero-card span{font-size:36px}
+.hero-card p{font-size:11px;color:var(--muted);text-align:center;font-weight:500}
+
+/* ══ FLASH SALE ══ */
+.flash-bar{background:var(--card);border-bottom:1px solid var(--border)}
+.flash-bar-inner{max-width:var(--max);margin:0 auto;padding:0 24px}
+.flash-head{display:flex;align-items:center;gap:16px;padding:14px 0 10px}
+.flash-head h3{font-size:15px;font-weight:700}
+.countdown{display:flex;gap:4px;align-items:center}
+.cbox{background:var(--pk);color:#fff;border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.csep{color:var(--pk);font-size:14px;font-weight:700}
+.flash-items{display:flex;gap:12px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none}
+.flash-items::-webkit-scrollbar{display:none}
+.fi{flex:0 0 110px;cursor:pointer;text-align:center}
+.fi-img{width:110px;height:110px;border-radius:var(--rs);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;border:1px solid var(--border);margin-bottom:7px;overflow:hidden;transition:transform .15s}
+.fi-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.fi:hover .fi-img{transform:scale(1.04)}
+.disc-badge{position:absolute;top:5px;left:5px;background:var(--pk);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;z-index:1}
+.fi-name{font-size:11px;color:var(--text);font-weight:500;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fi-price{color:var(--pk-d);font-size:13px;font-weight:700}
+.fi-old{color:var(--light);font-size:10px;text-decoration:line-through;margin-left:3px}
+
+/* ══ SHOP BODY ══ */
+.shop-body{max-width:var(--max);margin:0 auto;padding:28px 24px;display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:start}
+.filter-sidebar{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;position:sticky;top:80px}
+.fs-title{font-size:13px;font-weight:700;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.fs-section{margin-bottom:18px}
+.fs-section h4{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.cat-list{display:flex;flex-direction:column;gap:2px}
+.cat-item{padding:7px 10px;border-radius:var(--rs);font-size:13px;cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:8px;transition:all .15s}
+.cat-item:hover,.cat-item.active{background:var(--pk-l);color:var(--pk)}
+.cat-item.active{font-weight:600}
+.size-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sz-btn{padding:6px;border-radius:7px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--bg);color:var(--muted);text-align:center;transition:all .15s;font-family:var(--font)}
+.sz-btn.active{background:var(--pu);color:#fff;border-color:var(--pu)}
+.prod-area-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.prod-area-head h2{font-size:17px;font-weight:700}
+.prod-area-head h2 span{color:var(--pk)}
+.sort-select{padding:7px 12px;border:1px solid var(--border);border-radius:var(--rs);font-size:12px;color:var(--text);background:var(--card);font-family:var(--font);cursor:pointer}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prod-card{background:var(--card);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:all .2s}
+.prod-card:hover{transform:translateY(-3px);border-color:var(--pk-b)}
+.prod-img-wrap{width:100%;aspect-ratio:1/1;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:58px;position:relative;overflow:hidden}
+.prod-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.prod-emoji-fallback{font-size:58px;position:relative;z-index:0}
+.like-btn{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;z-index:2;transition:transform .15s}
+.like-btn:hover{transform:scale(1.15)}
+.sold-tag{position:absolute;bottom:7px;left:7px;background:rgba(255,255,255,.88);color:var(--muted);font-size:9px;padding:2px 8px;border-radius:10px;z-index:2}
+.prod-info{padding:12px}
+.prod-name{font-size:13px;font-weight:500;margin-bottom:4px;line-height:1.4}
+.prod-price{color:var(--pk-d);font-size:15px;font-weight:700}
+.prod-old{color:var(--light);font-size:11px;text-decoration:line-through;margin-left:4px}
+.prod-sizes{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.ps-tag{font-size:9px;padding:2px 6px;border:1px solid var(--border);border-radius:4px;color:var(--muted)}
+.stars{color:#EF9F27;font-size:11px}
+.add-btn{width:100%;background:var(--pk-l);border:1px solid var(--pk-b);color:var(--pk-d);border-radius:8px;padding:8px;font-size:12px;font-weight:600;cursor:pointer;margin-top:8px;font-family:var(--font);transition:all .2s}
+.add-btn:hover{background:var(--pk);color:#fff}
+
+/* ══ MOBILE FILTER ══ */
+.mob-filter-bar{display:none;padding:10px 16px 0;gap:7px;overflow-x:auto;scrollbar-width:none}
+.mob-filter-bar::-webkit-scrollbar{display:none}
+.mob-chip{flex:0 0 auto;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);white-space:nowrap;font-family:var(--font);transition:all .2s}
+.mob-chip.active{background:var(--pk);color:#fff;border-color:var(--pk)}
+
+/* ══ CART DRAWER ══ */
+.cart-overlay-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:590}
+.cart-overlay-bg.show{display:block}
+.cart-drawer{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:var(--card);border-left:1px solid var(--border);z-index:600;transition:right .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{right:0}
+.cart-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.cart-head h2{font-size:17px;font-weight:700}
+.cart-close{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center}
+.cart-items{flex:1;overflow-y:auto;padding:12px 20px}
+.ci{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bg);align-items:center}
+.ci-img{width:60px;height:60px;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--border);flex-shrink:0;overflow:hidden}
+.ci-img img{width:100%;height:100%;object-fit:cover}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-size:13px;font-weight:500;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-meta{font-size:11px;color:var(--muted)}
+.ci-price{color:var(--pk-d);font-size:14px;font-weight:700}
+.ci-del{background:none;border:none;color:var(--light);cursor:pointer;font-size:19px;padding:4px;flex-shrink:0}
+.cart-foot{padding:16px 20px;border-top:1px solid var(--border);flex-shrink:0}
+.cart-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:var(--muted)}
+.cart-row.total{font-size:16px;font-weight:700;color:var(--text);padding-top:10px;border-top:1px solid var(--border);margin-top:6px}
+.empty-cart{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+
+/* ══ PRODUCT DETAIL PAGE (LANDING PAGE STYLE) ══ */
+.pdp-header-inner{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;height:62px}
+#scr-detail .pc-header{position:sticky;top:0;z-index:300}
+
+.pdp-wrap{max-width:var(--max);margin:0 auto;padding:32px 24px}
+
+/* Top section: images + purchase */
+.pdp-top{display:grid;grid-template-columns:1fr 480px;gap:40px;align-items:start;margin-bottom:60px}
+
+/* Image gallery */
+.pdp-gallery{position:sticky;top:80px}
+.pdp-main-img{width:100%;aspect-ratio:1/1;border-radius:16px;border:1px solid var(--border);overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:120px;cursor:zoom-in;margin-bottom:12px;position:relative}
+.pdp-main-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pdp-main-emoji{font-size:120px;position:relative;z-index:0}
+.pdp-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.pdp-thumb{aspect-ratio:1/1;border-radius:8px;border:2px solid transparent;overflow:hidden;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .2s;position:relative}
+.pdp-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pdp-thumb.active{border-color:var(--pk)}
+.pdp-thumb:hover{border-color:var(--pk-b)}
+
+/* Purchase panel */
+.pdp-buy{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;position:sticky;top:80px}
+.pdp-badge-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.pdp-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.4px}
+.tag-sale{background:var(--re-l);color:var(--re)}
+.tag-hot{background:var(--am-l);color:var(--am)}
+.tag-new{background:var(--pu-l);color:var(--pu-d)}
+.pdp-name{font-size:22px;font-weight:700;line-height:1.3;margin-bottom:12px}
+.pdp-rating{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.pdp-stars{color:#EF9F27;font-size:14px}
+.pdp-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:20px}
+.pdp-price{font-size:32px;font-weight:700;color:var(--pk-d)}
+.pdp-old{font-size:18px;color:var(--light);text-decoration:line-through}
+.pdp-save{background:var(--re-l);color:var(--re);font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+.pdp-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.pdp-sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pdp-sopt{padding:9px 18px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.pdp-sopt:hover{border-color:var(--pu)}
+.pdp-sopt.sel{background:var(--pu);color:#fff;border-color:var(--pu)}
+.pdp-colors{display:flex;gap:10px;margin-bottom:20px}
+.pdp-cdot{width:32px;height:32px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .2s;flex-shrink:0}
+.pdp-cdot.sel{border-color:var(--pk-d);transform:scale(1.12)}
+.pdp-qty-row{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.pdp-qbtn{width:36px;height:36px;border:1.5px solid var(--border);border-radius:9px;background:var(--bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--font);transition:all .15s}
+.pdp-qbtn:hover{background:var(--pk-l);border-color:var(--pk)}
+.pdp-qty-num{font-size:17px;font-weight:700;min-width:28px;text-align:center}
+.pdp-btn-row{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.pdp-btn-add{width:100%;padding:14px;border:2px solid var(--pk);color:var(--pk);background:var(--card);border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s}
+.pdp-btn-add:hover{background:var(--pk-l)}
+.pdp-btn-buy{width:100%;padding:14px;background:linear-gradient(90deg,var(--pk),var(--pu));color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)}
+.pdp-btn-zl{width:100%;padding:12px;background:var(--zl);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:6px}
+.pdp-btn-fb{width:100%;padding:12px;background:var(--fb);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:6px}
+.pdp-trust{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.pdp-trust-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+
+/* Content sections below */
+.pdp-content{display:grid;grid-template-columns:1fr 340px;gap:32px}
+.pdp-main-content{}
+.pdp-section{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;margin-bottom:20px}
+.pdp-section h2{font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+
+/* Description – rich */
+.pdp-desc-text{font-size:14px;line-height:1.9;color:var(--text);white-space:pre-wrap}
+.pdp-features{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.feat-item{display:flex;align-items:flex-start;gap:10px;padding:12px;background:var(--bg);border-radius:var(--rs)}
+.feat-icon{font-size:20px;flex-shrink:0}
+.feat-text{font-size:12px;line-height:1.5;color:var(--muted)}
+.feat-text strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+
+/* Size guide */
+.size-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.size-table th{background:var(--pk-l);color:var(--pk-d);padding:10px 14px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase}
+.size-table td{padding:10px 14px;border-bottom:1px solid var(--bg)}
+.size-table tr:hover td{background:var(--pk-l)}
+
+/* Reviews */
+.review-summary{display:flex;gap:24px;align-items:center;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.review-score{text-align:center}
+.review-score .big{font-size:48px;font-weight:700;color:var(--pk-d);line-height:1}
+.review-bars{flex:1}
+.rbar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.rbar-lbl{font-size:12px;color:var(--muted);width:20px;text-align:right}
+.rbar-track{flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.rbar-fill{height:100%;background:var(--am);border-radius:3px}
+.review-item{padding:16px 0;border-bottom:1px solid var(--bg)}
+.review-item:last-child{border-bottom:none}
+.ri-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ri-avatar{width:36px;height:36px;border-radius:50%;background:var(--pk-l);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:var(--pk-d);flex-shrink:0}
+.ri-name{font-size:13px;font-weight:600}
+.ri-date{font-size:11px;color:var(--muted)}
+.ri-text{font-size:13px;color:var(--text);line-height:1.6}
+.ri-verified{font-size:10px;color:var(--gr);font-weight:600;display:flex;align-items:center;gap:3px;margin-top:4px}
+
+/* Right sticky sidebar */
+.pdp-sidebar{}
+.pdp-sidebar-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px;position:sticky;top:80px}
+.pdp-sidebar-card h3{font-size:14px;font-weight:700;margin-bottom:14px}
+.related-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bg);cursor:pointer;transition:all .15s}
+.related-item:hover{opacity:.8}
+.related-item:last-child{border-bottom:none}
+.rel-img{width:56px;height:56px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;overflow:hidden;border:1px solid var(--border)}
+.rel-img img{width:100%;height:100%;object-fit:cover}
+.rel-info{flex:1;min-width:0}
+.rel-name{font-size:12px;font-weight:500;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rel-price{font-size:13px;font-weight:700;color:var(--pk-d)}
+
+/* ══ CHECKOUT ══ */
+.checkout-page{max-width:860px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+.ck-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:16px}
+.ck-card h3{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.fg{margin-bottom:13px}
+.fg label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px;font-weight:600}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;color:var(--text);background:var(--bg);outline:none;font-family:var(--font);transition:border .15s}
+.fg input:focus,.fg select:focus{border-color:var(--pk);background:var(--card)}
+.fg textarea{height:70px;resize:none}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pay-opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;cursor:pointer;margin-bottom:9px;transition:all .2s}
+.pay-opt:hover{border-color:var(--pk-b)}
+.pay-opt.sel{border-color:var(--pk);background:var(--pk-l)}
+.pay-opt input[type=radio]{accent-color:var(--pk)}
+.ck-summary{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:22px;position:sticky;top:80px}
+.sum-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--muted)}
+.sum-row.total{font-size:16px;font-weight:700;color:var(--text);padding-top:12px;border-top:1px solid var(--border);margin-top:8px}
+.ch-btns{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.ch-btn{width:100%;padding:13px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font)}
+.ch-btn:hover{opacity:.88}
+.ch-btn-zl{background:var(--zl);color:#fff}
+.ch-btn-fb{background:var(--fb);color:#fff}
+.ch-btn-web{background:linear-gradient(90deg,var(--pk),var(--pu));color:#fff}
+
+/* ══ ADMIN ══ */
+.admin-wrap{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.ad-sidebar{background:var(--card);border-right:1px solid var(--border);display:flex;flex-direction:column}
+.ad-logo-box{padding:16px 18px;border-bottom:1px solid var(--border)}
+.ad-logo-box .n{font-size:15px;font-weight:700;color:var(--pk)}
+.ad-logo-box .s{font-size:11px;color:var(--muted)}
+.ad-back{display:block;margin:10px;padding:8px 12px;background:var(--pk-l);color:var(--pk-d);border:1px solid var(--pk-b);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;text-align:center;font-family:var(--font)}
+.ad-back:hover{background:var(--pk);color:#fff}
+.ad-sep{font-size:10px;color:var(--light);padding:10px 16px 3px;text-transform:uppercase;letter-spacing:.8px}
+.ad-nav-it{display:flex;align-items:center;gap:9px;padding:10px 16px;cursor:pointer;font-size:13px;color:var(--muted);border-left:3px solid transparent;transition:all .15s;font-weight:500}
+.ad-nav-it:hover{background:var(--pk-l);color:var(--pk)}
+.ad-nav-it.active{background:var(--pk-l);color:var(--pk);border-left-color:var(--pk);font-weight:700}
+.ad-main{background:var(--bg);display:flex;flex-direction:column}
+.ad-topbar{background:var(--card);border-bottom:1px solid var(--border);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.ad-topbar h1{font-size:17px;font-weight:700}
+.ad-content{padding:20px 22px}
+.ad-page{display:none}.ad-page.active{display:block}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.stat-lbl{font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.stat-val{font-size:24px;font-weight:700}
+.stat-sub{font-size:11px;margin-top:4px}
+.sub-up{color:var(--gr)}.sub-dn{color:var(--re)}
+.ad-section{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.ad-sec-head{padding:13px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ad-sec-head h2{font-size:14px;font-weight:700}
+.tab-bar{display:flex;gap:2px;padding:2px;background:var(--bg);border-radius:var(--rs);width:fit-content}
+.tab{padding:5px 14px;border-radius:7px;font-size:12px;cursor:pointer;color:var(--muted);font-family:var(--font);font-weight:500;transition:all .15s}
+.tab.active{background:var(--card);color:var(--text);font-weight:700}
+.pt{width:100%;border-collapse:collapse;table-layout:fixed}
+.pt th{font-size:11px;color:var(--muted);text-align:left;padding:9px 14px;background:var(--bg);font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.pt td{padding:10px 14px;border-top:1px solid var(--bg);font-size:13px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pt tr:hover td{background:var(--pk-l)}
+.p-thumb{width:38px;height:38px;border-radius:8px;background:var(--pk-l);display:inline-flex;align-items:center;justify-content:center;font-size:20px;border:1px solid var(--pk-b);flex-shrink:0;overflow:hidden}
+.p-thumb img{width:100%;height:100%;object-fit:cover}
+.rib{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
+.rib:hover{background:var(--bg)}
+.rib.del:hover{background:var(--re-l);border-color:#F09595}
+.ord-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:1px solid var(--bg)}
+.ord-row:hover{background:var(--pk-l)}
+.ord-ch{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex:0 0 36px}
+.ch-zl{background:var(--zl-l)}.ch-fb{background:var(--fb-l)}
+.ord-info{flex:1;min-width:0}
+.ord-name{font-size:13px;font-weight:600}
+.ord-detail{font-size:11px;color:var(--muted)}
+.ord-price{font-size:14px;font-weight:700;color:var(--pk-d);white-space:nowrap}
+.st-badge{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:700;white-space:nowrap}
+.st-new{background:var(--pu-l);color:var(--pu-d)}.st-proc{background:var(--am-l);color:var(--am)}.st-done{background:var(--gr-l);color:var(--gr)}
+
+/* Admin modal */
+.ad-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:700;align-items:flex-start;justify-content:center;padding-top:40px;overflow-y:auto}
+.ad-overlay.show{display:flex}
+.ad-modal{background:var(--card);border-radius:var(--r);width:600px;max-height:90vh;overflow-y:auto;border:1px solid var(--border)}
+.ad-modal-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--card);z-index:1}
+.ad-modal-head h3{font-size:15px;font-weight:700}
+.ad-modal-body{padding:18px}
+.ad-modal-foot{padding:13px 18px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;position:sticky;bottom:0;background:var(--card)}
+.af{margin-bottom:12px}
+.af label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.af input,.af select,.af textarea{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:var(--rs);font-size:13px;color:var(--text);background:var(--bg);outline:none;font-family:var(--font);transition:border .15s}
+.af input:focus,.af select:focus{border-color:var(--pk);background:var(--card)}
+.af textarea{height:100px;resize:vertical}
+.sz-checks{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.szc{padding:5px 12px;border-radius:7px;border:1px solid var(--border);font-size:12px;cursor:pointer;background:var(--bg);color:var(--muted);font-family:var(--font);transition:all .15s}
+.szc.sel{background:var(--pu-l);color:var(--pu-d);border-color:var(--pu)}
+
+/* Image upload grid in admin */
+.img-upload-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:6px}
+.img-slot{aspect-ratio:1/1;border:2px dashed var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;background:var(--bg)}
+.img-slot:hover{border-color:var(--pk);background:var(--pk-l)}
+.img-slot img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.img-slot .img-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:2}
+.img-slot:hover .img-del{display:flex}
+.img-slot .add-icon{font-size:22px;color:var(--muted)}
+.img-slot .add-txt{font-size:10px;color:var(--muted);margin-top:2px}
+.img-slot input[type=file]{display:none}
+
+/* Emoji pick */
+.emoji-pick{display:flex;gap:7px;flex-wrap:wrap;margin-top:5px}
+.ep{width:38px;height:38px;border-radius:8px;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:19px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.ep.sel{border-color:var(--pk);background:var(--pk-l)}
+
+/* Channel config */
+.ch-card-cfg{background:var(--bg);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:9px;border:1px solid var(--border)}
+.ch-ic{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.ch-ic-zl{background:var(--zl-l)}.ch-ic-fb{background:var(--fb-l)}
+.ch-dot{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:700;flex-shrink:0}
+.conn{background:var(--gr-l);color:var(--gr)}.disc{background:var(--re-l);color:var(--re)}
+.info-box{font-size:12px;padding:11px 14px;border-radius:var(--rs);line-height:1.6;margin-bottom:14px}
+.info-zl{background:var(--zl-l);color:#0C447C}.info-fb{background:var(--fb-l);color:#0C447C}
+.toggle{width:40px;height:22px;border-radius:11px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--pk)}.toggle.off{background:var(--light)}
+.toggle::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s}
+.toggle.on::after{left:21px}.toggle.off::after{left:3px}
+
+/* Success */
+.success-page{max-width:500px;margin:80px auto;text-align:center;padding:24px}
+
+/* Footer */
+.site-footer{background:var(--card);border-top:1px solid var(--border);padding:32px 24px;margin-top:20px}
+.site-footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  .pdp-top{grid-template-columns:1fr}
+  .pdp-gallery{position:static}
+  .pdp-buy{position:static}
+  .pdp-content{grid-template-columns:1fr}
+  .pdp-sidebar-card{position:static}
+  .pdp-features{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .pc-nav{display:none}
+  .hero-inner{grid-template-columns:1fr;padding:28px 16px}
+  .hero-inner h1{font-size:26px}
+  .hero-visual{display:none}
+  .shop-body{grid-template-columns:1fr;padding:16px}
+  .filter-sidebar{display:none}
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .mob-filter-bar{display:flex!important}
+  .checkout-page{grid-template-columns:1fr;padding:16px}
+  .ck-summary{position:static}
+  .fr{grid-template-columns:1fr}
+  .cart-drawer{width:100%;right:-100%}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .admin-wrap{grid-template-columns:1fr}
+  .ad-sidebar{display:none}
+  .site-footer-inner{grid-template-columns:1fr}
+  .pdp-thumbs{grid-template-columns:repeat(4,1fr)}
+  .img-upload-grid{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+
+<!-- ══════════ SHOP ══════════ -->
+<div id="scr-shop" class="screen active">
+  <header class="pc-header">
+    <div class="pc-header-inner">
+      <div class="logo" onclick="backShop()">Mũm <span>Big</span></div>
+      <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm sản phẩm bigsize..." id="search-inp" oninput="doSearch()"></div>
+      <nav class="pc-nav">
+        <div class="pc-nav-link" onclick="goScroll('flash-section')">Flash Sale</div>
+        <div class="pc-nav-link" onclick="goScroll('products-section')">Sản phẩm</div>
+      </nav>
+      <div style="display:flex;gap:8px;margin-left:auto">
+        <button class="pc-admin-btn" onclick="goAdmin()">⚙️ Admin</button>
+        <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button>
+      </div>
+    </div>
+  </header>
+  <div class="mob-filter-bar" id="mob-cats">
+    <div class="mob-chip active" onclick="setCat(this,'all')">Tất cả</div>
+    <div class="mob-chip" onclick="setCat(this,'vay')">Váy đầm</div>
+    <div class="mob-chip" onclick="setCat(this,'ao')">Áo</div>
+    <div class="mob-chip" onclick="setCat(this,'quan')">Quần</div>
+    <div class="mob-chip" onclick="setCat(this,'set')">Bộ set</div>
+  </div>
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-tag">✨ NEW COLLECTION 2025</span>
+        <h1>Tỏa sáng với<br>style của bạn</h1>
+        <p>Thời trang bigsize dành riêng cho nàng — Size S đến 5XL.<br>Đẹp cho mọi vóc dáng, tự tin với mọi khoảnh khắc.</p>
+        <div class="hero-actions">
+          <button class="btn btn-pk" style="padding:12px 24px;font-size:14px" onclick="goScroll('products-section')">Mua sắm ngay →</button>
+          <button class="btn" style="padding:12px 24px;font-size:14px" onclick="goScroll('flash-section')">⚡ Flash Sale</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-emoji-grid">
+          <div class="hero-card" onclick="setCatDirect('vay')"><span>👗</span><p>Váy đầm</p></div>
+          <div class="hero-card" onclick="setCatDirect('ao')"><span>👔</span><p>Áo</p></div>
+          <div class="hero-card" onclick="setCatDirect('set')"><span>🎀</span><p>Bộ set</p></div>
+          <div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div>
+          <div class="hero-card"><span>🌸</span><p>Mới về</p></div>
+          <div class="hero-card"><span>⚡</span><p>Sale</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flash-bar" id="flash-section">
+    <div class="flash-bar-inner">
+      <div class="flash-head">
+        <h3>⚡ Flash Sale hôm nay</h3>
+        <div class="countdown" style="margin-left:14px">
+          <div class="cbox" id="fc-h">02</div><span class="csep">:</span>
+          <div class="cbox" id="fc-m">47</div><span class="csep">:</span>
+          <div class="cbox" id="fc-s">30</div>
+        </div>
+        <div style="margin-left:auto;font-size:12px;color:var(--muted)">Giảm đến 40%</div>
+      </div>
+      <div class="flash-items" id="flash-items"></div>
+    </div>
+  </div>
+  <div class="shop-body" id="products-section">
+    <aside class="filter-sidebar">
+      <div class="fs-title">🔍 Lọc sản phẩm</div>
+      <div class="fs-section">
+        <h4>Danh mục</h4>
+        <div class="cat-list" id="cat-list">
+          <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div>
+          <div class="cat-item" onclick="setCat(this,'vay')"><span>👗</span>Váy đầm</div>
+          <div class="cat-item" onclick="setCat(this,'ao')"><span>👔</span>Áo</div>
+          <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div>
+          <div class="cat-item" onclick="setCat(this,'set')"><span>🎀</span>Bộ set</div>
+        </div>
+      </div>
+      <div class="fs-section">
+        <h4>Size</h4>
+        <div class="size-grid" id="sz-grid">
+          <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div>
+          <div class="sz-btn" onclick="setSz(this,'L')">L</div>
+          <div class="sz-btn" onclick="setSz(this,'XL')">XL</div>
+          <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div>
+          <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div>
+          <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div>
+          <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div>
+        </div>
+      </div>
+    </aside>
+    <div>
+      <div class="prod-area-head">
+        <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2>
+        <select class="sort-select" onchange="doSort(this.value)">
+          <option value="default">Mặc định</option>
+          <option value="price-asc">Giá tăng dần</option>
+          <option value="price-desc">Giá giảm dần</option>
+          <option value="sold">Bán chạy nhất</option>
+        </select>
+      </div>
+      <div class="prod-grid" id="prod-grid"></div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div><div class="logo" style="margin-bottom:10px">Mũm <span>Big Size</span></div><p style="font-size:13px;color:var(--muted);line-height:1.7">Thương hiệu thời trang bigsize dành cho phụ nữ Việt. Size S–5XL, đẹp cho mọi vóc dáng.</p></div>
+      <div><div style="font-size:13px;font-weight:700;margin-bottom:10px">Liên hệ</div><div style="font-size:13px;color:var(--muted);line-height:2">📱 <a href="https://www.facebook.com/mumbigsize.top/" style="color:var(--fb)" target="_blank">facebook.com/mumbigsize.top</a><br>💬 Zalo: Cấu hình trong Admin<br>📍 TP. Hồ Chí Minh</div></div>
+      <div><div style="font-size:13px;font-weight:700;margin-bottom:10px">Chính sách</div><div style="font-size:13px;color:var(--muted);line-height:2">🚚 Miễn phí ship từ 300k<br>🔄 Đổi size trong 7 ngày<br>✅ Hàng chất lượng cam kết</div></div>
+    </div>
+    <div style="max-width:var(--max);margin:20px auto 0;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);text-align:center">© 2025 Mũm Bigsize – Love Your Size</div>
+  </footer>
+</div>
+
+<!-- Cart bg + drawer -->
+<div class="cart-overlay-bg" id="cart-bg" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head"><h2>🛒 Giỏ hàng</h2><button class="cart-close" onclick="closeCart()">×</button></div>
+  <div class="cart-items" id="cart-items-el"></div>
+  <div class="cart-foot" id="cart-foot-el"></div>
+</div>
+
+<!-- ══════════ PRODUCT DETAIL (LANDING PAGE) ══════════ -->
+<div id="scr-detail" class="screen">
+  <header class="pc-header">
+    <div class="pdp-header-inner">
+      <div class="logo" onclick="backShop()">Mũm <span>Big</span></div>
+      <div style="flex:1"></div>
+      <nav class="pc-nav">
+        <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button>
+      </nav>
+      <div style="display:flex;gap:8px;margin-left:12px">
+        <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="pdp-wrap">
+    <!-- Breadcrumb -->
+    <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px">
+      <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span>
+      <span>›</span><span id="pdp-cat-crumb"></span>
+      <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span>
+    </div>
+
+    <!-- Top: gallery + buy -->
+    <div class="pdp-top">
+      <div class="pdp-gallery">
+        <div class="pdp-main-img" id="pdp-main-img">
+          <span class="pdp-main-emoji" id="pdp-main-emoji"></span>
+        </div>
+        <div class="pdp-thumbs" id="pdp-thumbs"></div>
+      </div>
+
+      <div class="pdp-buy">
+        <div class="pdp-badge-row" id="pdp-badges"></div>
+        <div class="pdp-name" id="pdp-name"></div>
+        <div class="pdp-rating">
+          <span class="pdp-stars">★★★★★</span>
+          <span style="font-size:13px;font-weight:600">4.9</span>
+          <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span>
+          <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span>
+        </div>
+        <div class="pdp-price-row">
+          <span class="pdp-price" id="pdp-price"></span>
+          <span class="pdp-old" id="pdp-old"></span>
+          <span class="pdp-save" id="pdp-save"></span>
+        </div>
+        <div class="pdp-label">Chọn size</div>
+        <div class="pdp-sizes" id="pdp-sizes"></div>
+        <div class="pdp-label">Màu sắc</div>
+        <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div>
+        <div class="pdp-label">Số lượng</div>
+        <div class="pdp-qty-row" style="margin-bottom:24px">
+          <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button>
+          <span class="pdp-qty-num" id="pdp-qty">1</span>
+          <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button>
+        </div>
+        <div class="pdp-btn-row">
+          <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button>
+          <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button>
+          <button class="pdp-btn-zl" onclick="pdpOrderZalo()">💬 Đặt hàng qua Zalo</button>
+          <button class="pdp-btn-fb" onclick="pdpOrderFB()">📘 Đặt hàng qua Facebook</button>
+        </div>
+        <div class="pdp-trust">
+          <div class="pdp-trust-item">🚚 Miễn phí ship từ 300k</div>
+          <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div>
+          <div class="pdp-trust-item">✅ Hàng chất lượng</div>
+          <div class="pdp-trust-item">💳 COD toàn quốc</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content: description + reviews + related -->
+    <div class="pdp-content">
+      <div class="pdp-main-content">
+
+        <!-- Description -->
+        <div class="pdp-section">
+          <h2>📋 Mô tả sản phẩm</h2>
+          <div class="pdp-desc-text" id="pdp-desc-text"></div>
+          <div class="pdp-features" id="pdp-features">
+            <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div>
+            <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div>
+            <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div>
+            <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div>
+          </div>
+        </div>
+
+        <!-- Size guide -->
+        <div class="pdp-section">
+          <h2>📏 Bảng size chi tiết</h2>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p>
+          <table class="size-table">
+            <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead>
+            <tbody>
+              <tr><td><strong>L</strong></td><td>55–65 kg</td><td>90–96 cm</td><td>74–80 cm</td><td>96–102 cm</td></tr>
+              <tr><td><strong>XL</strong></td><td>65–75 kg</td><td>96–102 cm</td><td>80–88 cm</td><td>102–108 cm</td></tr>
+              <tr><td><strong>2XL</strong></td><td>75–85 kg</td><td>102–108 cm</td><td>88–96 cm</td><td>108–114 cm</td></tr>
+              <tr><td><strong>3XL</strong></td><td>85–95 kg</td><td>108–116 cm</td><td>96–104 cm</td><td>114–120 cm</td></tr>
+              <tr><td><strong>4XL</strong></td><td>95–105 kg</td><td>116–124 cm</td><td>104–112 cm</td><td>120–128 cm</td></tr>
+              <tr><td><strong>5XL</strong></td><td>105–120 kg</td><td>124–132 cm</td><td>112–122 cm</td><td>128–136 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Reviews -->
+        <div class="pdp-section">
+          <h2>⭐ Đánh giá khách hàng</h2>
+          <div class="review-summary">
+            <div class="review-score"><div class="big">4.9</div><div style="color:#EF9F27;font-size:16px;margin:4px 0">★★★★★</div><div style="font-size:12px;color:var(--muted)">1,247 đánh giá</div></div>
+            <div class="review-bars">
+              <div class="rbar-row"><span class="rbar-lbl">5</span><div class="rbar-track"><div class="rbar-fill" style="width:88%"></div></div><span style="font-size:11px;color:var(--muted)">88%</span></div>
+              <div class="rbar-row"><span class="rbar-lbl">4</span><div class="rbar-track"><div class="rbar-fill" style="width:9%"></div></div><span style="font-size:11px;color:var(--muted)">9%</span></div>
+              <div class="rbar-row"><span class="rbar-lbl">3</span><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><span style="font-size:11px;color:var(--muted)">2%</span></div>
+              <div class="rbar-row"><span class="rbar-lbl">2</span><div class="rbar-track"><div class="rbar-fill" style="width:1%"></div></div><span style="font-size:11px;color:var(--muted)">1%</span></div>
+            </div>
+          </div>
+          <div id="review-list">
+            <div class="review-item"><div class="ri-header"><div class="ri-avatar">LT</div><div><div class="ri-name">Lê Thị Thảo</div><div style="color:#EF9F27;font-size:12px">★★★★★</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">2 ngày trước</div></div><div class="ri-text">Mình mua size 2XL, nặng 78kg. Vải mềm lắm, mặc vào rất thoải mái. Đường may tỉ mỉ, nhìn sang hơn hình nhiều. Chắc chắn sẽ mua thêm!</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div>
+            <div class="review-item"><div class="ri-header"><div class="ri-avatar">NH</div><div><div class="ri-name">Nguyễn Hà My</div><div style="color:#EF9F27;font-size:12px">★★★★★</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">5 ngày trước</div></div><div class="ri-text">Shop giao hàng nhanh, đóng gói cẩn thận. Size chuẩn theo bảng, mình 85kg mua 3XL vừa đẹp. Màu đẹp y hình, chất liệu mát mẻ phù hợp thời tiết miền Nam.</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div>
+            <div class="review-item"><div class="ri-header"><div class="ri-avatar">PB</div><div><div class="ri-name">Phạm Bảo Châu</div><div style="color:#EF9F27;font-size:12px">★★★★☆</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">1 tuần trước</div></div><div class="ri-text">Sản phẩm đẹp, vải tốt. Trừ 1 sao vì giao hơi chậm 1 ngày so với dự kiến. Nhưng chất lượng thì 10/10, sẽ ủng hộ shop tiếp!</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right sidebar -->
+      <div class="pdp-sidebar">
+        <div class="pdp-sidebar-card">
+          <h3>🔥 Sản phẩm liên quan</h3>
+          <div id="pdp-related"></div>
+        </div>
+        <div class="pdp-sidebar-card" style="position:sticky;top:80px">
+          <h3>📦 Thông tin giao hàng</h3>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🚚</span><div><div style="font-size:13px;font-weight:600">Giao hàng toàn quốc</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Miễn phí ship đơn từ 300k. Ship trong 2–4 ngày.</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🔄</span><div><div style="font-size:13px;font-weight:600">Đổi trả dễ dàng</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Đổi size miễn phí trong 7 ngày nếu không vừa.</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">💳</span><div><div style="font-size:13px;font-weight:600">Thanh toán linh hoạt</div><div style="font-size:12px;color:var(--muted);margin-top:2px">COD, chuyển khoản, MoMo, ZaloPay.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CHECKOUT ══════════ -->
+<div id="scr-checkout" class="screen">
+  <header class="pc-header"><div class="pc-header-inner"><div class="logo" onclick="backShop()">Mũm <span>Big</span></div><div style="flex:1"></div><button class="btn" onclick="closeCheckout()">← Quay lại giỏ hàng</button></div></header>
+  <div class="checkout-page">
+    <div>
+      <div class="ck-card"><h3>Thông tin giao hàng</h3>
+        <div class="fr">
+          <div class="fg"><label>Họ và tên</label><input id="ck-name" placeholder="Nguyễn Thị Lan"></div>
+          <div class="fg"><label>Số điện thoại</label><input type="tel" id="ck-phone" placeholder="0912 345 678"></div>
+        </div>
+        <div class="fg"><label>Tỉnh / Thành phố</label><select id="ck-city"><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Bình Dương</option><option>Đồng Nai</option></select></div>
+        <div class="fg"><label>Địa chỉ</label><input id="ck-addr" placeholder="Số nhà, tên đường, phường/xã"></div>
+        <div class="fg"><label>Ghi chú</label><textarea id="ck-note" placeholder="Giao giờ hành chính, gọi trước..."></textarea></div>
+      </div>
+      <div class="ck-card"><h3>Thanh toán</h3>
+        <label class="pay-opt sel"><input type="radio" name="pay" checked><span style="font-size:22px">💵</span><div><div style="font-size:13px;font-weight:600">COD – Thanh toán khi nhận hàng</div><div style="font-size:11px;color:var(--muted)">Miễn phí ship đơn từ 300k</div></div></label>
+        <label class="pay-opt"><input type="radio" name="pay"><span style="font-size:22px">🏦</span><div><div style="font-size:13px;font-weight:600">Chuyển khoản ngân hàng</div><div style="font-size:11px;color:var(--muted)">Giảm thêm 10k</div></div></label>
+        <label class="pay-opt"><input type="radio" name="pay"><span style="font-size:22px">📱</span><div><div style="font-size:13px;font-weight:600">MoMo / ZaloPay</div><div style="font-size:11px;color:var(--muted)">Hoàn tiền 5% lần đầu</div></div></label>
+      </div>
+    </div>
+    <div class="ck-summary">
+      <div style="font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">Tóm tắt đơn hàng</div>
+      <div id="ck-summary-items"></div>
+      <div class="ch-btns">
+        <button class="ch-btn ch-btn-zl" onclick="orderZalo()">💬 Đặt qua Zalo</button>
+        <button class="ch-btn ch-btn-fb" onclick="orderFB()">📘 Đặt qua Facebook</button>
+        <button class="ch-btn ch-btn-web" onclick="orderWeb()">🛒 Xác nhận đặt hàng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SUCCESS ══════════ -->
+<div id="scr-success" class="screen">
+  <header class="pc-header"><div class="pc-header-inner"><div class="logo" onclick="backShop()">Mũm <span>Big</span></div></div></header>
+  <div class="success-page">
+    <div style="font-size:72px;margin-bottom:18px">🎉</div>
+    <h2 style="font-size:26px;font-weight:700;color:var(--pk-d);margin-bottom:10px">Đặt hàng thành công!</h2>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7">Mũm sẽ xác nhận và liên hệ bạn trong 24h.<br>Cảm ơn bạn đã tin tưởng Mũm Bigsize! 🌸</p>
+    <button class="btn btn-pk" style="padding:13px 36px;font-size:15px;border-radius:12px" onclick="backShop()">← Tiếp tục mua sắm</button>
+  </div>
+</div>
+
+<!-- ══════════ ADMIN ══════════ -->
+<div id="scr-admin" class="screen">
+  <div class="admin-wrap">
+    <aside class="ad-sidebar">
+      <div class="ad-logo-box"><div class="n">Mũm Admin</div><div class="s">Quản lý cửa hàng</div></div>
+      <button class="ad-back" onclick="backShop()">← Về trang shop</button>
+      <div>
+        <div class="ad-sep">Tổng quan</div>
+        <div class="ad-nav-it active" onclick="adPage('dashboard',this)"><span>📊</span>Dashboard</div>
+        <div class="ad-sep">Quản lý</div>
+        <div class="ad-nav-it" onclick="adPage('products',this)"><span>👗</span>Sản phẩm</div>
+        <div class="ad-nav-it" onclick="adPage('orders',this)"><span>📦</span>Đơn hàng</div>
+        <div class="ad-sep">Kênh bán</div>
+        <div class="ad-nav-it" onclick="adPage('channels',this)"><span>🔗</span>Zalo & Facebook</div>
+        <div class="ad-sep">Hệ thống</div>
+        <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div>
+      </div>
+    </aside>
+    <main class="ad-main">
+      <div id="adp-dashboard" class="ad-page active">
+        <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div>
+        <div class="ad-content">
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val">24</div><div class="stat-sub sub-up">↑ 12% hôm qua</div></div>
+            <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" style="font-size:20px">18.4tr</div><div class="stat-sub sub-up">↑ 8% tháng trước</div></div>
+            <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div>
+            <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" style="color:var(--am)">6</div><div class="stat-sub sub-dn">3 Zalo · 3 FB</div></div>
+          </div>
+          <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div>
+          <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div>
+            <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div>
+              <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="adp-products" class="ad-page">
+        <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div>
+        <div class="ad-content">
+          <div class="ad-section">
+            <div class="ad-sec-head"><div class="tab-bar" id="apt"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'vay')">Váy đầm</div><div class="tab" onclick="apTab(this,'ao')">Áo</div><div class="tab" onclick="apTab(this,'quan')">Quần</div><div class="tab" onclick="apTab(this,'set')">Bộ set</div></div></div>
+            <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div>
+          </div>
+        </div>
+      </div>
+      <div id="adp-orders" class="ad-page">
+        <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div>
+        <div class="ad-content">
+          <div class="ad-section">
+            <div class="ad-sec-head"><div class="tab-bar" id="aot"><div class="tab active" onclick="aoTab(this,'all')">Tất cả</div><div class="tab" onclick="aoTab(this,'new')">Mới</div><div class="tab" onclick="aoTab(this,'proc')">Xử lý</div><div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div></div></div>
+            <div id="ad-ords"></div>
+          </div>
+        </div>
+      </div>
+      <div id="adp-channels" class="ad-page">
+        <div class="ad-topbar"><h1>Zalo & Facebook</h1></div>
+        <div class="ad-content" style="max-width:680px">
+          <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div>
+            <div style="padding:18px">
+              <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div>
+              <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div>
+              <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div>
+              <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div>
+              <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div>
+              <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div>
+              <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.top</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div>
+              <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.top/"></div>
+              <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div>
+              <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="adp-settings" class="ad-page">
+        <div class="ad-topbar"><h1>Cài đặt</h1></div>
+        <div class="ad-content" style="max-width:680px">
+          <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div>
+            <div style="padding:18px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div>
+              <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="300000"></div></div>
+              <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button>
+            </div>
+          </div>
+          <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div>
+            <div style="padding:18px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Add/Edit Product Modal -->
+<div class="ad-overlay" id="prod-modal" onclick="if(event.target===this)closeProdModal()">
+  <div class="ad-modal">
+    <div class="ad-modal-head"><h3 id="pm-title">Thêm sản phẩm mới</h3><button style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:16px" onclick="closeProdModal()">×</button></div>
+    <div class="ad-modal-body">
+      <!-- Image upload -->
+      <div class="af">
+        <label>Ảnh sản phẩm (tối đa 5 ảnh, tỉ lệ 1:1)</label>
+        <div class="img-upload-grid" id="img-upload-grid">
+          <div class="img-slot" id="slot-0" onclick="triggerUpload(0)">
+            <input type="file" accept="image/*" onchange="handleImgUpload(0,this)">
+            <span class="add-icon">📷</span><span class="add-txt">Ảnh chính</span>
+          </div>
+          <div class="img-slot" id="slot-1" onclick="triggerUpload(1)">
+            <input type="file" accept="image/*" onchange="handleImgUpload(1,this)">
+            <span class="add-icon">+</span><span class="add-txt">Ảnh 2</span>
+          </div>
+          <div class="img-slot" id="slot-2" onclick="triggerUpload(2)">
+            <input type="file" accept="image/*" onchange="handleImgUpload(2,this)">
+            <span class="add-icon">+</span><span class="add-txt">Ảnh 3</span>
+          </div>
+          <div class="img-slot" id="slot-3" onclick="triggerUpload(3)">
+            <input type="file" accept="image/*" onchange="handleImgUpload(3,this)">
+            <span class="add-icon">+</span><span class="add-txt">Ảnh 4</span>
+          </div>
+          <div class="img-slot" id="slot-4" onclick="triggerUpload(4)">
+            <input type="file" accept="image/*" onchange="handleImgUpload(4,this)">
+            <span class="add-icon">+</span><span class="add-txt">Ảnh 5</span>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">💡 Click ô để chọn ảnh. Ảnh sẽ được crop tự động về tỉ lệ 1:1. Ảnh đầu là ảnh đại diện.</div>
+      </div>
+      <!-- Fallback emoji -->
+      <div class="af">
+        <label>Icon dự phòng (nếu chưa có ảnh)</label>
+        <div class="emoji-pick" id="ep-pick">
+          <div class="ep sel" onclick="pickEp(this,'👗')">👗</div><div class="ep" onclick="pickEp(this,'👔')">👔</div>
+          <div class="ep" onclick="pickEp(this,'👖')">👖</div><div class="ep" onclick="pickEp(this,'👘')">👘</div>
+          <div class="ep" onclick="pickEp(this,'🩱')">🩱</div><div class="ep" onclick="pickEp(this,'🎀')">🎀</div>
+          <div class="ep" onclick="pickEp(this,'🌸')">🌸</div><div class="ep" onclick="pickEp(this,'🧶')">🧶</div>
+        </div>
+      </div>
+      <div class="af"><label>Tên sản phẩm</label><input id="ap-name" placeholder="VD: Váy maxi hoa nhí bigsize"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="af"><label>Giá bán (nghìn đ)</label><input id="ap-price" type="number" placeholder="259"></div>
+        <div class="af"><label>Giá gốc (nghìn đ)</label><input id="ap-old" type="number" placeholder="350"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="af"><label>Danh mục</label><select id="ap-cat"><option value="vay">Váy đầm</option><option value="ao">Áo</option><option value="quan">Quần</option><option value="set">Bộ set</option></select></div>
+        <div class="af"><label>Trạng thái</label><select id="ap-st"><option value="on">Đang bán</option><option value="off">Ẩn</option><option value="low">Sắp hết</option></select></div>
+      </div>
+      <div class="af"><label>Size có sẵn</label><div class="sz-checks" id="ap-sizes"><div class="szc" onclick="togSz(this,'L')">L</div><div class="szc" onclick="togSz(this,'XL')">XL</div><div class="szc" onclick="togSz(this,'2XL')">2XL</div><div class="szc" onclick="togSz(this,'3XL')">3XL</div><div class="szc" onclick="togSz(this,'4XL')">4XL</div><div class="szc" onclick="togSz(this,'5XL')">5XL</div></div></div>
+      <div class="af"><label>Màu sắc (mã hex, phân cách phẩy)</label><input id="ap-colors" placeholder="#F4C0D1, #AFA9EC, #ffffff"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="af"><label>Số đã bán (hiển thị)</label><input id="ap-sold" type="number" placeholder="0"></div>
+        <div class="af"><label>Tags (phân cách phẩy)</label><input id="ap-tags" placeholder="sale, mới về, hot"></div>
+      </div>
+      <div class="af">
+        <label>Mô tả chi tiết sản phẩm</label>
+        <textarea id="ap-desc" style="height:140px" placeholder="Nhập mô tả chi tiết sản phẩm. Nội dung này sẽ hiển thị đầy đủ trên trang sản phẩm như một landing page.&#10;&#10;Ví dụ:&#10;- Chất liệu: Vải lụa cao cấp, mát mẻ thoáng khí&#10;- Kiểu dáng: Dáng suông, phù hợp nhiều dịp&#10;- Hướng dẫn bảo quản: Giặt máy 30°C, không sấy"></textarea>
+      </div>
+    </div>
+    <div class="ad-modal-foot"><button class="btn" onclick="closeProdModal()">Hủy</button><button class="btn btn-pk" onclick="saveProd()">Lưu sản phẩm</button></div>
+  </div>
+</div>
+
+<script>
+/* ══ DATA ══ */
+let products=[
+  {id:1,name:'Váy maxi hoa nhí bigsize',price:259,old:350,emoji:'👗',cat:'vay',sizes:['L','XL','2XL','3XL'],colors:['#F4C0D1','#AFA9EC','#fff'],status:'on',sold:1200,images:[],tags:['hot','sale'],desc:'Váy maxi hoa nhí – thiết kế riêng cho nàng bigsize, ôm vừa phải tôn đường cong tự nhiên.\n\n✔ Chất liệu: Vải thun lụa cao cấp 4 chiều co giãn thoải mái\n✔ Thiết kế: Cổ chữ V thanh lịch, tay bồng nhẹ nhàng nữ tính\n✔ Phù hợp: Đi chơi, đi làm, dự tiệc nhẹ\n✔ Bảo quản: Giặt máy 30°C, phơi bóng mát'},
+  {id:2,name:'Áo sơ mi lụa tay bồng',price:189,old:260,emoji:'👔',cat:'ao',sizes:['XL','2XL','3XL','4XL'],colors:['#fff','#F4C0D1','#5DCAA5'],status:'on',sold:856,images:[],tags:['mới về'],desc:'Áo sơ mi lụa tay bồng – thanh lịch và nữ tính.\n\n✔ Chất liệu: Lụa mềm mịn, không nhăn\n✔ Kiểu dáng: Tay bồng nhẹ, cổ V sâu vừa phải\n✔ Màu sắc: Đa dạng, phù hợp nhiều phong cách'},
+  {id:3,name:'Đầm wrap body midi',price:329,old:420,emoji:'👘',cat:'vay',sizes:['L','XL','2XL'],colors:['#7F77DD','#D4537E','#2C2C2A'],status:'on',sold:2100,images:[],tags:['hot','bán chạy'],desc:'Đầm wrap body midi – ôm nhẹ tôn vóc dáng.\n\n✔ Chất liệu: Jersey co giãn 4 chiều\n✔ Kiểu dáng: Wrap chéo tôn eo, midi qua gối\n✔ Phù hợp: Công sở, dự tiệc, hẹn hò'},
+  {id:4,name:'Áo croptop tay phồng',price:149,old:200,emoji:'🩱',cat:'ao',sizes:['L','XL','2XL','3XL'],colors:['#F4C0D1','#fff','#B5D4F4'],status:'low',sold:643,images:[],tags:['sale'],desc:'Áo croptop tay phồng – trendy và dễ phối đồ.'},
+  {id:5,name:'Bộ set áo + chân váy',price:389,old:490,emoji:'🎀',cat:'set',sizes:['XL','2XL','3XL','4XL'],colors:['#FBEAF0','#EEEDFE'],status:'on',sold:412,images:[],tags:['hot'],desc:'Bộ set áo + chân váy – outfit hoàn chỉnh tiết kiệm thời gian phối đồ.'},
+  {id:6,name:'Quần suông ống rộng',price:225,old:290,emoji:'👖',cat:'quan',sizes:['XL','2XL','3XL','4XL','5XL'],colors:['#2C2C2A','#888780','#D4537E'],status:'on',sold:987,images:[],tags:[],desc:'Quần suông ống rộng – thoải mái cả ngày, phù hợp nhiều vóc dáng.'},
+  {id:7,name:'Váy babydoll kẻ caro',price:279,old:360,emoji:'🌸',cat:'vay',sizes:['L','XL','2XL','3XL'],colors:['#F4C0D1','#fff'],status:'on',sold:1500,images:[],tags:['mới về','hot'],desc:'Váy babydoll kẻ caro – nhẹ nhàng vintage đáng yêu.'},
+  {id:8,name:'Áo len tay dài oversize',price:195,old:250,emoji:'🧶',cat:'ao',sizes:['XL','2XL','3XL','4XL'],colors:['#F0997B','#AFA9EC','#5DCAA5'],status:'off',sold:334,images:[],tags:[],desc:'Áo len tay dài oversize – ấm áp và thời trang mùa lạnh.'},
+  {id:9,name:'Đầm midi vintage floral',price:299,old:390,emoji:'👘',cat:'vay',sizes:['L','XL','2XL','3XL'],colors:['#F4C0D1','#EEEDFE'],status:'on',sold:720,images:[],tags:['mới về'],desc:'Đầm midi vintage hoa nhỏ – lãng mạn và nữ tính.'},
+  {id:10,name:'Áo thun oversize basic',price:89,old:130,emoji:'👕',cat:'ao',sizes:['L','XL','2XL','3XL','4XL'],colors:['#fff','#2C2C2A','#F4C0D1'],status:'on',sold:2340,images:[],tags:['bán chạy'],desc:'Áo thun oversize basic – cơ bản mà không nhàm chán.'},
+  {id:11,name:'Quần palazzo hoa nhí',price:249,old:320,emoji:'👖',cat:'quan',sizes:['XL','2XL','3XL','4XL'],colors:['#F4C0D1','#fff'],status:'on',sold:430,images:[],tags:[],desc:'Quần palazzo hoa nhí – bay bổng và duyên dáng.'},
+  {id:12,name:'Bộ set linen mùa hè',price:449,old:560,emoji:'🎀',cat:'set',sizes:['L','XL','2XL','3XL'],colors:['#fff','#F4C0D1','#5DCAA5'],status:'on',sold:289,images:[],tags:['mới về'],desc:'Bộ set linen mùa hè – mát mẻ thoáng khí, sang trọng đơn giản.'},
+];
+let orders=[
+  {id:'#2401',name:'Nguyễn Thị Lan',product:'Váy maxi hoa nhí',size:'2XL',price:259,ch:'zalo',status:'new',time:'5 phút trước'},
+  {id:'#2400',name:'Trần Bảo Châu',product:'Đầm wrap body midi',size:'XL',price:329,ch:'fb',status:'proc',time:'22 phút trước'},
+  {id:'#2399',name:'Lê Thùy Dung',product:'Bộ set áo + chân váy',size:'3XL',price:389,ch:'zalo',status:'done',time:'1 giờ trước'},
+  {id:'#2398',name:'Phạm Thu Hà',product:'Quần suông ống rộng',size:'4XL',price:225,ch:'fb',status:'done',time:'2 giờ trước'},
+  {id:'#2397',name:'Vũ Minh Châu',product:'Áo sơ mi lụa',size:'2XL',price:189,ch:'zalo',status:'new',time:'3 giờ trước'},
+];
+let cart=[], curProd=null, curSize='', curQty=1;
+let catF='all', szF='all', sortF='default', searchQ='';
+let adPF='all', adOF='all';
+let editId=null, selEmoji='👗', selSizes=[], uploadedImgs=[];
+const catMap={vay:'Váy đầm',ao:'Áo',quan:'Quần',set:'Bộ set'};
+const stMap={on:'Đang bán',off:'Ẩn',low:'Sắp hết'};
+
+/* ══ SCREENS ══ */
+const allScr=['scr-shop','scr-detail','scr-checkout','scr-success','scr-admin'];
+function showScr(id){allScr.forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function goAdmin(){showScr('scr-admin');renderAdmin();}
+function backShop(){showScr('scr-shop');}
+function closeCheckout(){showScr('scr-shop');openCart();}
+
+/* ══ CONFIG ══ */
+function getZalo(){const v=(document.getElementById('cfg-zalo')||{}).value||'';const p=v.replace(/\D/g,'');return p?'https://zalo.me/'+p:'https://zalo.me/';}
+function getFB(){return(document.getElementById('cfg-fb')||{}).value||'https://www.facebook.com/mumbigsize.top/';}
+
+/* ══ HELPERS ══ */
+function imgOrEmoji(p,size=''){
+  if(p.images&&p.images[0])return`<img src="${p.images[0]}" alt="${p.name}">`;
+  return`<span class="prod-emoji-fallback">${p.emoji}</span>`;
+}
+function thumbHTML(p){
+  if(p.images&&p.images[0])return`<img src="${p.images[0]}" alt="">`;
+  return p.emoji;
+}
+
+/* ══ SHOP RENDER ══ */
+function getProds(){
+  let list=products.filter(p=>{
+    if(p.status==='off')return false;
+    if(catF!=='all'&&p.cat!==catF)return false;
+    if(szF!=='all'&&!p.sizes.includes(szF))return false;
+    if(searchQ&&!p.name.toLowerCase().includes(searchQ.toLowerCase()))return false;
+    return true;
+  });
+  if(sortF==='price-asc')list.sort((a,b)=>a.price-b.price);
+  else if(sortF==='price-desc')list.sort((a,b)=>b.price-a.price);
+  else if(sortF==='sold')list.sort((a,b)=>b.sold-a.sold);
+  return list;
+}
+function renderShop(){
+  const fi=document.getElementById('flash-items');
+  fi.innerHTML=products.filter(p=>p.status!=='off').slice(0,8).map(p=>{
+    const d=Math.round((1-p.price/p.old)*100);
+    const imgHtml=p.images&&p.images[0]?`<img src="${p.images[0]}" alt="">`:'';
+    return`<div class="fi" onclick="openDetail(${p.id})"><div class="fi-img">${imgHtml}<span style="font-size:44px;position:relative;z-index:0${imgHtml?';display:none':''}">${p.emoji}</span><span class="disc-badge">-${d}%</span></div><div class="fi-name">${p.name}</div><span class="fi-price">${p.price}k</span><span class="fi-old">${p.old}k</span></div>`;
+  }).join('');
+  const grid=document.getElementById('prod-grid');
+  const list=getProds();
+  const ct=document.getElementById('prod-count-txt');if(ct)ct.textContent='('+list.length+' sản phẩm)';
+  if(!list.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:14px">Không tìm thấy sản phẩm</div>';return;}
+  grid.innerHTML=list.map(p=>{
+    const hasImg=p.images&&p.images[0];
+    return`<div class="prod-card" onclick="openDetail(${p.id})">
+      <div class="prod-img-wrap">
+        ${hasImg?`<img src="${p.images[0]}" alt="${p.name}">`:`<span class="prod-emoji-fallback">${p.emoji}</span>`}
+        <button class="like-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button>
+        <span class="sold-tag">Đã bán ${p.sold>=1000?(p.sold/1000).toFixed(1)+'k':p.sold}</span>
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${p.name}</div>
+        <div><span class="prod-price">${p.price}k</span><span class="prod-old">${p.old}k</span></div>
+        <div class="prod-sizes">${p.sizes.slice(0,4).map(s=>`<span class="ps-tag">${s}</span>`).join('')}</div>
+        <div style="display:flex;align-items:center;gap:4px"><span class="stars">★★★★★</span><span style="font-size:11px;color:var(--light)">4.9</span></div>
+        <button class="add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">+ Thêm vào giỏ hàng</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function setCat(el,c){
+  catF=c;
+  document.querySelectorAll('#cat-list .cat-item').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('#mob-cats .mob-chip').forEach(x=>x.classList.remove('active'));
+  if(el){el.classList.add('active');}
+  else{
+    document.querySelectorAll('#cat-list .cat-item, #mob-cats .mob-chip').forEach(x=>{
+      const oc=x.getAttribute('onclick')||'';
+      if(oc.includes("'"+c+"'"))x.classList.add('active');
+    });
+  }
+  renderShop();
+}
+function setCatDirect(c){setCat(null,c);goScroll('products-section');}
+function setSz(el,s){szF=s;document.querySelectorAll('#sz-grid .sz-btn').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderShop();}
+function doSearch(){searchQ=document.getElementById('search-inp').value;renderShop();}
+function doSort(v){sortF=v;renderShop();}
+function goScroll(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+
+/* ══ PRODUCT DETAIL PAGE ══ */
+let pdpCurSize='', pdpCurColor='', pdpQtyVal=1;
+function openDetail(id){
+  const p=products.find(x=>x.id===id);if(!p)return;
+  curProd=p;pdpCurSize=p.sizes[0]||'';pdpQtyVal=1;
+
+  // breadcrumb
+  document.getElementById('pdp-cat-crumb').textContent=catMap[p.cat]||'';
+  document.getElementById('pdp-name-crumb').textContent=p.name;
+
+  // badges
+  const tags=(p.tags||[]);
+  document.getElementById('pdp-badges').innerHTML=
+    (p.price<p.old?`<span class="pdp-tag tag-sale">🔥 SALE -${Math.round((1-p.price/p.old)*100)}%</span>`:'')
+    +tags.map(t=>`<span class="pdp-tag tag-new">${t}</span>`).join('');
+
+  document.getElementById('pdp-name').textContent=p.name;
+  document.getElementById('pdp-sold-txt').textContent=`| Đã bán ${p.sold>=1000?(p.sold/1000).toFixed(1)+'k':p.sold}`;
+  document.getElementById('pdp-price').textContent=p.price+'k';
+  document.getElementById('pdp-old').textContent=p.old+'k';
+  document.getElementById('pdp-save').textContent=`Tiết kiệm ${p.old-p.price}k`;
+  document.getElementById('pdp-qty').textContent=1;
+
+  // Main image
+  const mainImg=document.getElementById('pdp-main-img');
+  const mainEmoji=document.getElementById('pdp-main-emoji');
+  mainEmoji.textContent=p.emoji;
+  // clear old img
+  const oldImg=mainImg.querySelector('img.pdp-real-img');if(oldImg)oldImg.remove();
+  if(p.images&&p.images[0]){
+    const img=document.createElement('img');img.src=p.images[0];img.className='pdp-real-img';
+    img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';
+    mainImg.appendChild(img);mainEmoji.style.display='none';
+  } else {mainEmoji.style.display='block';}
+
+  // Thumbnails
+  const thumbs=document.getElementById('pdp-thumbs');
+  const allImgs=p.images&&p.images.length?p.images:[];
+  thumbs.innerHTML=allImgs.map((src,i)=>`
+    <div class="pdp-thumb${i===0?' active':''}" onclick="switchThumb('${src}',this)">
+      <img src="${src}" alt="">
+    </div>`).join('')+(allImgs.length===0?`<div class="pdp-thumb active" style="border-color:var(--pk)"><span style="font-size:28px">${p.emoji}</span></div>`:'');
+
+  // Sizes
+  document.getElementById('pdp-sizes').innerHTML=p.sizes.map(s=>
+    `<div class="pdp-sopt${s===pdpCurSize?' sel':''}" onclick="pdpSelSz(this,'${s}')">${s}</div>`).join('');
+
+  // Colors
+  document.getElementById('pdp-colors').innerHTML=(p.colors||[]).map((c,i)=>
+    `<div class="pdp-cdot${i===0?' sel':''}" style="background:${c};border:2px solid #ddd" onclick="pdpSelCol(this)" title="${c}"></div>`).join('');
+
+  // Description
+  document.getElementById('pdp-desc-text').textContent=p.desc||'Sản phẩm chất lượng cao, thiết kế dành riêng cho nàng bigsize. Chất liệu thoáng mát, co giãn tốt, phù hợp nhiều dịp.';
+
+  // Related
+  const related=products.filter(x=>x.cat===p.cat&&x.id!==p.id&&x.status!=='off').slice(0,5);
+  document.getElementById('pdp-related').innerHTML=related.map(r=>`
+    <div class="related-item" onclick="openDetail(${r.id})">
+      <div class="rel-img">${r.images&&r.images[0]?`<img src="${r.images[0]}" alt="">`:`<span style="font-size:24px">${r.emoji}</span>`}</div>
+      <div class="rel-info"><div class="rel-name">${r.name}</div><div class="rel-price">${r.price}k <span style="color:var(--light);font-size:10px;text-decoration:line-through">${r.old}k</span></div></div>
+    </div>`).join('')||(related.length===0?'<div style="font-size:13px;color:var(--muted);text-align:center;padding:10px">Không có sản phẩm liên quan</div>':'');
+
+  showScr('scr-detail');
+  // sync cart badge
+  document.getElementById('cart-count2').textContent=document.getElementById('cart-count').textContent;
+}
+function switchThumb(src,el){
+  const mainImg=document.getElementById('pdp-main-img');
+  const mainEmoji=document.getElementById('pdp-main-emoji');
+  const oldImg=mainImg.querySelector('img.pdp-real-img');if(oldImg)oldImg.remove();
+  if(src&&!src.startsWith('emoji:')){
+    const img=document.createElement('img');img.src=src;img.className='pdp-real-img';
+    img.style.cssText='width:100%;height:100%;object-fit:cover;position:absolute;inset:0';
+    mainImg.appendChild(img);mainEmoji.style.display='none';
+  }
+  document.querySelectorAll('.pdp-thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function pdpSelSz(el,s){pdpCurSize=s;document.querySelectorAll('.pdp-sopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
+function pdpSelCol(el){document.querySelectorAll('.pdp-cdot').forEach(d=>d.classList.remove('sel'));el.classList.add('sel');}
+function pdpChangeQty(d){pdpQtyVal=Math.max(1,pdpQtyVal+d);document.getElementById('pdp-qty').textContent=pdpQtyVal;}
+function pdpAddCart(){
+  if(!curProd)return;
+  const ex=cart.find(i=>i.id===curProd.id&&i.size===pdpCurSize);
+  if(ex)ex.qty+=pdpQtyVal;else cart.push({...curProd,size:pdpCurSize,qty:pdpQtyVal});
+  updBadge();showToast('Đã thêm vào giỏ hàng!');
+}
+function pdpBuyNow(){pdpAddCart();setTimeout(openCart,150);}
+function pdpOrderZalo(){
+  if(!curProd)return;
+  const msg=encodeURIComponent(`🛍 ĐẶT HÀNG – MŨM BIGSIZE\n\nSản phẩm: ${curProd.name}\nSize: ${pdpCurSize} | SL: ${pdpQtyVal}\nGiá: ${curProd.price*pdpQtyVal}k\n\nVui lòng cho mình biết tên, SĐT và địa chỉ nhận hàng ạ 🌸`);
+  window.open(getZalo()+'?text='+msg,'_blank');
+}
+function pdpOrderFB(){
+  const pg=getFB().split('facebook.com/')[1]?.replace(/\//g,'')||'mumbigsize.top';
+  window.open('https://m.me/'+pg,'_blank');
+}
+
+/* ══ CART ══ */
+function openCart(){renderCart();document.getElementById('cart-drawer').classList.add('open');document.getElementById('cart-bg').classList.add('show');}
+function closeCart(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('cart-bg').classList.remove('show');}
+function quickAdd(id){const p=products.find(x=>x.id===id);if(!p)return;const ex=cart.find(i=>i.id===p.id&&i.size===p.sizes[0]);if(ex)ex.qty++;else cart.push({...p,size:p.sizes[0],qty:1});updBadge();showToast('Đã thêm vào giỏ!');}
+function updBadge(){const n=cart.reduce((a,i)=>a+i.qty,0);['cart-count','cart-count2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});}
+function renderCart(){
+  const el=document.getElementById('cart-items-el'),fo=document.getElementById('cart-foot-el');
+  if(!cart.length){el.innerHTML='<div class="empty-cart">🛒<br><br>Giỏ hàng trống</div>';fo.innerHTML='';return;}
+  el.innerHTML=cart.map((it,i)=>`<div class="ci">
+    <div class="ci-img">${it.images&&it.images[0]?`<img src="${it.images[0]}" alt="">`:`<span>${it.emoji}</span>`}</div>
+    <div class="ci-info"><div class="ci-name">${it.name}</div><div class="ci-meta">Size: ${it.size} · SL: ${it.qty}</div><div class="ci-price">${it.price*it.qty}k</div></div>
+    <button class="ci-del" onclick="rmCart(${i})">×</button>
+  </div>`).join('');
+  const tot=cart.reduce((a,i)=>a+i.price*i.qty,0),ship=tot>=300?0:30;
+  fo.innerHTML=`<div class="cart-row"><span>Tạm tính</span><span>${tot}k</span></div><div class="cart-row"><span>Phí ship</span><span>${ship===0?'<span style="color:var(--gr);font-weight:600">Miễn phí</span>':ship+'k'}</span></div><div class="cart-row total"><span>Tổng cộng</span><span style="color:var(--pk-d)">${tot+ship}k</span></div><button class="btn btn-pk" style="width:100%;padding:13px;font-size:14px;border-radius:10px;justify-content:center;margin-top:12px" onclick="goCheckout()">Tiến hành đặt hàng →</button>`;
+}
+function rmCart(i){cart.splice(i,1);updBadge();renderCart();}
+
+/* ══ CHECKOUT ══ */
+function goCheckout(){closeCart();const tot=cart.reduce((a,i)=>a+i.price*i.qty,0),ship=tot>=300?0:30;document.getElementById('ck-summary-items').innerHTML=cart.map(it=>`<div class="sum-row"><span>${it.name} x${it.qty}</span><span>${it.price*it.qty}k</span></div>`).join('')+`<div class="sum-row"><span>Ship</span><span>${ship===0?'Miễn phí':ship+'k'}</span></div><div class="sum-row total"><span>Tổng</span><span style="color:var(--pk-d)">${tot+ship}k</span></div>`;showScr('scr-checkout');}
+function buildMsg(){const n=document.getElementById('ck-name').value||'Khách';const ph=document.getElementById('ck-phone').value||'';const ci=document.getElementById('ck-city').value||'';const ad=document.getElementById('ck-addr').value||'';const no=document.getElementById('ck-note').value||'';const it=cart.map(i=>`- ${i.name} (Size ${i.size}) x${i.qty}: ${i.price*i.qty}k`).join('\n');const tot=cart.reduce((a,i)=>a+i.price*i.qty,0);const ship=tot>=300?0:30;return encodeURIComponent(`🛍 ĐẶT HÀNG – MŨM BIGSIZE\n\n👤 ${n}${ph?' | 📞 '+ph:''}\n📍 ${ad?ad+', ':''}${ci}\n${no?'📝 '+no+'\n':''}\nSẢN PHẨM:\n${it}\n\n💰 Tổng: ${tot+ship}k`);}
+function orderZalo(){window.open(getZalo()+'?text='+buildMsg(),'_blank');cart=[];updBadge();showScr('scr-success');}
+function orderFB(){const p=getFB().split('facebook.com/')[1]?.replace(/\//g,'')||'mumbigsize.top';window.open('https://m.me/'+p,'_blank');cart=[];updBadge();showScr('scr-success');}
+function orderWeb(){if(!document.getElementById('ck-name').value.trim()||!document.getElementById('ck-phone').value.trim()){showToast('Vui lòng nhập họ tên và SĐT!');return;}cart=[];updBadge();showScr('scr-success');}
+
+/* ══ COUNTDOWN ══ */
+let fs=30,fm=47,fh=2;
+setInterval(()=>{fs--;if(fs<0){fs=59;fm--;}if(fm<0){fm=59;fh--;}if(fh<0)fh=0;['h','m','s'].forEach((id,i)=>{const el=document.getElementById('fc-'+id);if(el)el.textContent=String([fh,fm,fs][i]).padStart(2,'0');});},1000);
+
+/* ══ ADMIN ══ */
+function renderAdmin(){renderAProd();renderAOrds('all');renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}
+function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products')renderAProd();if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}}
+function apTab(el,c){adPF=c;document.querySelectorAll('#apt .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAProd();}
+function aoTab(el,s){adOF=s;document.querySelectorAll('#aot .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAOrds(s);}
+function renderAProd(){const tb=document.getElementById('ad-ptb');if(!tb)return;const list=adPF==='all'?products:products.filter(p=>p.cat===adPF);tb.innerHTML=list.map(p=>`<tr><td><div style="display:flex;align-items:center;gap:10px"><div class="p-thumb">${p.images&&p.images[0]?`<img src="${p.images[0]}" alt="">`:`${p.emoji}`}</div><div><div style="font-size:13px;font-weight:600">${p.name}</div><div style="font-size:11px;color:var(--muted)">Đã bán ${p.sold.toLocaleString()}</div></div></div></td><td style="font-size:12px;color:var(--muted)">${catMap[p.cat]}</td><td><div style="font-size:13px;font-weight:700;color:var(--pk-d)">${p.price}k</div><div style="font-size:10px;color:var(--light);text-decoration:line-through">${p.old}k</div></td><td style="font-size:11px;color:var(--muted)">${p.sizes.join(', ')}</td><td><span class="badge badge-${p.status}">${stMap[p.status]}</span></td><td><div style="display:flex;gap:5px"><button class="rib" onclick="editProd(${p.id})">✏️</button><button class="rib del" onclick="delProd(${p.id})">🗑️</button></div></td></tr>`).join('');}
+function renderAOrds(f){const el=document.getElementById('ad-ords');if(!el)return;const sl={new:'Mới',proc:'Xử lý',done:'Hoàn thành'};const sc={new:'st-new',proc:'st-proc',done:'st-done'};const list=f==='all'?orders:orders.filter(o=>o.status===f);if(!list.length){el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Không có đơn hàng</div>';return;}el.innerHTML=list.map(o=>`<div class="ord-row"><div class="ord-ch ch-${o.ch}">${o.ch==='zalo'?'💬':'📘'}</div><div class="ord-info"><div class="ord-name">${o.name} <span style="font-size:11px;color:var(--muted)">${o.id}</span></div><div class="ord-detail">${o.product}·Size ${o.size}·${o.ch==='zalo'?'Zalo':'Facebook'}·${o.time}</div></div><div style="text-align:right;flex-shrink:0;margin-right:8px"><div class="ord-price">${o.price}k</div><span class="st-badge ${sc[o.status]}">${sl[o.status]}</span></div><button class="btn" onclick="window.open(${o.ch==='zalo'?'getZalo()':'getFB()'},'_blank')">Phản hồi</button></div>`).join('');}
+function renderDashOrds(){const el=document.getElementById('dash-ords');if(!el)return;const sl={new:'Mới',proc:'Xử lý',done:'Hoàn thành'};const sc={new:'st-new',proc:'st-proc',done:'st-done'};el.innerHTML=orders.slice(0,5).map(o=>`<div class="ord-row"><div class="ord-ch ch-${o.ch}">${o.ch==='zalo'?'💬':'📘'}</div><div class="ord-info"><div class="ord-name">${o.name} <span style="font-size:11px;color:var(--muted)">${o.id}</span></div><div class="ord-detail">${o.product}·Size ${o.size}·${o.time}</div></div><div style="text-align:right;flex-shrink:0"><div class="ord-price">${o.price}k</div><span class="st-badge ${sc[o.status]}">${sl[o.status]}</span></div></div>`).join('');}
+
+/* ══ IMAGE UPLOAD ══ */
+function triggerUpload(idx){document.querySelector(`#slot-${idx} input[type=file]`).click();}
+function handleImgUpload(idx,input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const src=e.target.result;
+    while(uploadedImgs.length<=idx)uploadedImgs.push(null);
+    uploadedImgs[idx]=src;
+    const slot=document.getElementById('slot-'+idx);
+    slot.innerHTML=`<input type="file" accept="image/*" onchange="handleImgUpload(${idx},this)"><img src="${src}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><button class="img-del" onclick="event.stopPropagation();delImg(${idx})">×</button>`;
+    slot.querySelector('.img-del').style.display='flex';
+  };
+  reader.readAsDataURL(file);
+}
+function delImg(idx){uploadedImgs[idx]=null;const slot=document.getElementById('slot-'+idx);slot.innerHTML=`<input type="file" accept="image/*" onchange="handleImgUpload(${idx},this)"><span class="add-icon">+</span><span class="add-txt">Ảnh ${idx+1}</span>`;}
+
+/* ══ PRODUCT CRUD ══ */
+function openAddProd(){
+  editId=null;selEmoji='👗';selSizes=[];uploadedImgs=[];
+  document.getElementById('pm-title').textContent='Thêm sản phẩm mới';
+  ['ap-name','ap-price','ap-old','ap-desc','ap-sold','ap-colors','ap-tags'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.getElementById('ap-cat').value='vay';document.getElementById('ap-st').value='on';
+  document.querySelectorAll('.ep').forEach(e=>e.classList.toggle('sel',e.textContent==='👗'));
+  document.querySelectorAll('.szc').forEach(s=>s.classList.remove('sel'));
+  resetImgSlots();
+  document.getElementById('prod-modal').classList.add('show');
+}
+function editProd(id){
+  editId=id;const p=products.find(x=>x.id===id);if(!p)return;
+  selEmoji=p.emoji;selSizes=[...p.sizes];uploadedImgs=[...(p.images||[])];
+  document.getElementById('pm-title').textContent='Sửa sản phẩm';
+  document.getElementById('ap-name').value=p.name;document.getElementById('ap-price').value=p.price;document.getElementById('ap-old').value=p.old;
+  document.getElementById('ap-cat').value=p.cat;document.getElementById('ap-st').value=p.status;
+  document.getElementById('ap-sold').value=p.sold;document.getElementById('ap-colors').value=(p.colors||[]).join(', ');
+  document.getElementById('ap-tags').value=(p.tags||[]).join(', ');
+  document.getElementById('ap-desc').value=p.desc||'';
+  document.querySelectorAll('.ep').forEach(e=>e.classList.toggle('sel',e.textContent===p.emoji));
+  document.querySelectorAll('.szc').forEach(s=>s.classList.toggle('sel',p.sizes.includes(s.textContent)));
+  resetImgSlots();
+  (p.images||[]).forEach((src,i)=>{if(i<5&&src){const slot=document.getElementById('slot-'+i);slot.innerHTML=`<input type="file" accept="image/*" onchange="handleImgUpload(${i},this)"><img src="${src}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><button class="img-del" onclick="event.stopPropagation();delImg(${i})">×</button>`;slot.querySelector('.img-del').style.display='flex';}});
+  document.getElementById('prod-modal').classList.add('show');
+}
+function resetImgSlots(){
+  const labels=['Ảnh chính','Ảnh 2','Ảnh 3','Ảnh 4','Ảnh 5'];
+  for(let i=0;i<5;i++){const slot=document.getElementById('slot-'+i);slot.innerHTML=`<input type="file" accept="image/*" onchange="handleImgUpload(${i},this)"><span class="add-icon">${i===0?'📷':'+'}</span><span class="add-txt">${labels[i]}</span>`;}
+}
+function delProd(id){if(!confirm('Xóa sản phẩm này?'))return;products=products.filter(p=>p.id!==id);renderAProd();renderShop();showToast('Đã xóa!');}
+function closeProdModal(){document.getElementById('prod-modal').classList.remove('show');}
+function pickEp(el,e){selEmoji=e;document.querySelectorAll('.ep').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
+function togSz(el,s){if(selSizes.includes(s)){selSizes=selSizes.filter(x=>x!==s);el.classList.remove('sel');}else{selSizes.push(s);el.classList.add('sel');}}
+function saveProd(){
+  const name=document.getElementById('ap-name').value.trim(),price=parseInt(document.getElementById('ap-price').value)||0;
+  if(!name||!price){showToast('Vui lòng nhập tên và giá!');return;}
+  if(!selSizes.length){showToast('Vui lòng chọn ít nhất 1 size!');return;}
+  const dat={name,price,old:parseInt(document.getElementById('ap-old').value)||price,emoji:selEmoji,cat:document.getElementById('ap-cat').value,sizes:selSizes,colors:document.getElementById('ap-colors').value.split(',').map(c=>c.trim()).filter(Boolean)||['#F4C0D1'],status:document.getElementById('ap-st').value,sold:parseInt(document.getElementById('ap-sold').value)||0,images:uploadedImgs.filter(Boolean),tags:document.getElementById('ap-tags').value.split(',').map(t=>t.trim()).filter(Boolean),desc:document.getElementById('ap-desc').value.trim()};
+  if(editId!==null){const i=products.findIndex(p=>p.id===editId);if(i>=0)products[i]={...products[i],...dat};showToast('Đã cập nhật sản phẩm!');}
+  else{products.push({id:Date.now(),...dat});showToast('Đã thêm sản phẩm!');}
+  closeProdModal();renderAProd();renderShop();
+  const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;
+}
+/* ══ CHANNELS ══ */
+function saveZalo(){const v=document.getElementById('cfg-zalo').value.trim();if(!v){showToast('Nhập số Zalo!');return;}const d=document.getElementById('zalo-disp');const s=document.getElementById('zalo-st');if(d)d.textContent='zalo.me/'+v.replace(/\D/g,'');if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('Đã lưu Zalo!');}
+function saveFB(){const d=document.getElementById('fb-disp');const s=document.getElementById('fb-st');if(d)d.textContent=getFB();if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('Đã lưu Facebook!');}
+
+/* ══ TOAST ══ */
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.classList.remove('show'),2200);}
+
+/* ══ INIT ══ */
+renderShop();
+</script>
+</body>
+</html>
