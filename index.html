@@ -426,8 +426,8 @@ a{text-decoration:none;color:inherit}
         <div class="pc-nav-link" onclick="goScroll('flash-section')">Flash Sale</div>
         <div class="pc-nav-link" onclick="goScroll('products-section')">Sản phẩm</div>
       </nav>
-      <div style="display:flex;gap:8px;margin-left:auto">
-        <button class="pc-admin-btn" onclick="goAdmin()">⚙️ Admin</button>
+      <div style="display:flex;gap:8px;margin-left:auto;align-items:center">
+        <span id="admin-dot" onclick="openAdminLogin()" title="" style="font-size:11px;color:var(--border);cursor:default;user-select:none;padding:6px 4px;opacity:0.15;transition:opacity .4s;line-height:1" onmouseenter="this.style.opacity='0.4'" onmouseleave="this.style.opacity='0.15'">⚙</span>
         <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button>
       </div>
     </div>
@@ -916,7 +916,41 @@ const stMap={on:'Đang bán',off:'Ẩn',low:'Sắp hết'};
 /* ══ SCREENS ══ */
 const allScr=['scr-shop','scr-detail','scr-checkout','scr-success','scr-admin'];
 function showScr(id){allScr.forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
-function goAdmin(){showScr('scr-admin');renderAdmin();}
+function openAdminLogin(){
+  document.getElementById('admin-login-overlay').style.display='flex';
+  setTimeout(()=>document.getElementById('login-user').focus(),100);
+  document.getElementById('login-user').value='';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-err').style.display='none';
+  document.getElementById('login-attempts').textContent='';
+}
+function closeAdminLogin(){document.getElementById('admin-login-overlay').style.display='none';}
+function clearLoginErr(){document.getElementById('login-err').style.display='none';}
+function togglePassVis(){const inp=document.getElementById('login-pass');const eye=document.getElementById('pass-eye');if(inp.type==='password'){inp.type='text';eye.textContent='🙈';}else{inp.type='password';eye.textContent='👁';}}
+
+const ADMIN_CREDS=[{user:'admin',pass:'mum2025'},{user:'ducian',pass:'mumbigsize'}];
+let loginFails=0, loginLocked=false, lockUntil=0;
+
+function doLogin(){
+  if(loginLocked){
+    const rem=Math.ceil((lockUntil-Date.now())/1000);
+    if(Date.now()<lockUntil){document.getElementById('login-attempts').textContent='⏳ Thử lại sau '+rem+'s';return;}
+    loginLocked=false;loginFails=0;
+  }
+  const u=document.getElementById('login-user').value.trim();
+  const p=document.getElementById('login-pass').value;
+  const ok=ADMIN_CREDS.some(c=>c.user===u&&c.pass===p);
+  if(ok){
+    loginFails=0;closeAdminLogin();showScr('scr-admin');renderAdmin();
+  } else {
+    loginFails++;
+    document.getElementById('login-err').style.display='block';
+    if(loginFails>=5){loginLocked=true;lockUntil=Date.now()+30000;document.getElementById('login-attempts').textContent='🔒 Khoá 30 giây do nhập sai quá nhiều';}
+    else{document.getElementById('login-attempts').textContent='Còn '+(5-loginFails)+' lần thử';}
+    document.getElementById('login-pass').value='';
+  }
+}
+function goAdmin(){openAdminLogin();}
 function backShop(){showScr('scr-shop');}
 function closeCheckout(){showScr('scr-shop');openCart();}
 
@@ -1203,5 +1237,31 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 /* ══ INIT ══ */
 renderShop();
 </script>
+
+<!-- Admin Login Modal -->
+<div id="admin-login-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:36px;width:340px;border:1px solid var(--border);position:relative">
+    <button onclick="closeAdminLogin()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button>
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:32px;margin-bottom:8px">🔐</div>
+      <div style="font-size:17px;font-weight:700;color:var(--text)">Đăng nhập Admin</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Chỉ dành cho quản trị viên</div>
+    </div>
+    <div style="margin-bottom:14px">
+      <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Tên đăng nhập</label>
+      <input id="login-user" type="text" placeholder="Nhập username" autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div style="margin-bottom:20px">
+      <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Mật khẩu</label>
+      <div style="position:relative">
+        <input id="login-pass" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" style="width:100%;padding:10px 40px 10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()">
+        <button onclick="togglePassVis()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)" id="pass-eye">👁</button>
+      </div>
+    </div>
+    <div id="login-err" style="display:none;background:var(--re-l);color:var(--re);font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:600">❌ Sai tên đăng nhập hoặc mật khẩu</div>
+    <button onclick="doLogin()" style="width:100%;padding:13px;background:linear-gradient(90deg,var(--pk),var(--pu));color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)">Đăng nhập</button>
+    <div id="login-attempts" style="text-align:center;font-size:11px;color:var(--muted);margin-top:10px"></div>
+  </div>
+</div>
 </body>
 </html>
