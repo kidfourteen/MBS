@@ -3,6 +3,13 @@
     "zalo": "0868488884",
     "fb": "https://www.facebook.com/mumbigsize.top/"
   },
+  "shopInfo": {
+    "name": "Mũm Bigsize",
+    "phone": "0912 345 678",
+    "address": "TP. Hồ Chí Minh",
+    "shipFee": 30000,
+    "freeFrom": 500000
+  },
   "bank": {
     "bankName": "TECHCOMBANK",
     "accountNo": "2009222222",
@@ -17,8 +24,9 @@
     "enabled": true
   },
   "telegram": {
+    "token": "8795364117:AAEl18Ht74P7Zs8FWd_7-WVsgJxpuhY6yxQ",
     "chatId": "-1003747002472",
-    "enabled": false
+    "enabled": true
   },
-  "_updatedAt": "2026-04-28T16:00:03.418Z"
+  "_updatedAt": "2026-04-28T16:12:54.294Z"
 }
