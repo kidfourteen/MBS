@@ -2721,7 +2721,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 </div> <!-- ══════════ CHECKOUT ══════════ -->
 <div id="scr-checkout" class="screen"> <header class="pc-header"> <div class="pc-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <button class="btn" onclick="closeCheckout()">← Quay lại giỏ hàng</button> </div> </header> <div class="checkout-page"> <div> <div class="ck-card"> <h3>Thông tin giao hàng</h3> <div class="fr"> <div class="fg"><label>Họ và tên</label><input id="ck-name" placeholder="Nguyễn Thị Lan"></div> <div class="fg"><label>Số điện thoại</label> <input type="tel" id="ck-phone" placeholder="0912 345 678" oninput="checkVip()" onpaste="setTimeout(checkVip,10)" onchange="checkVip()" onblur="checkVip()"> <div id="vip-badge" style="display:none;margin-top:6px;background:linear-gradient(90deg,#f5a623,#e91e8c);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;align-items:center;gap:6px;width:fit-content">
             🌟 Khách hàng VIP — Giảm thêm 10%!
-          </div> </div> </div> <div class="fg"><label>Tỉnh / Thành phố</label> <select id="ck-city"><option>TP. Hồ Chí Minh</option><option>Hà Nội</option><option>Đà Nẵng</option><option>Cần Thơ</option><option>Bình Dương</option><option>Đồng Nai</option></select> </div> <div class="fg"><label>Địa chỉ</label><input id="ck-addr" placeholder="Số nhà, tên đường, phường/xã"></div> <div class="fg"><label>Ghi chú</label><textarea id="ck-note" placeholder="Giao giờ hành chính, gọi trước..."></textarea></div> </div> <div class="ck-card"> <h3>🎟 Mã giảm giá</h3> <div style="display:flex;gap:8px;align-items:flex-start"> <div style="flex:1"><input id="voucher-input" placeholder="Nhập mã voucher..." style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:13px;font-family:var(--font);outline:none" onkeydown="if(event.key==='Enter')applyVoucher()"></div> <button onclick="applyVoucher()" style="padding:10px 16px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);white-space:nowrap">Áp dụng</button> </div> <div id="voucher-msg" style="font-size:12px;margin-top:6px;min-height:18px"></div> </div> <div class="ck-card"> <h3>Phương thức thanh toán</h3> <div class="pay-radio-group" id="pay-radio-group"> <label class="pay-radio-item selected" onclick="selectPayMethod(this,'cod')"> <input type="radio" name="paymethod" value="cod" checked> <span class="pay-radio-ic">💵</span> <div class="pay-radio-info"> <strong>Thanh toán khi nhận hàng (COD) <span class="pay-badge">Phổ biến</span></strong> <span>Kiểm tra hàng trước khi trả tiền. Miễn phí ship đơn từ 500k.</span> </div> </label> <label class="pay-radio-item" onclick="selectPayMethod(this,'bank')"> <input type="radio" name="paymethod" value="bank"> <span class="pay-radio-ic">🏦</span> <div class="pay-radio-info"> <strong>Chuyển khoản ngân hàng <span class="pay-badge" style="background:var(--zl-l);color:var(--zl)">-10k</span></strong> <span>Quét QR VietQR hoặc chuyển khoản thủ công. Giảm thêm 10k.</span> </div> </label> <label class="pay-radio-item" onclick="selectPayMethod(this,'momo')"> <input type="radio" name="paymethod" value="momo"> <span class="pay-radio-ic">🍑</span> <div class="pay-radio-info"> <strong>Ví MoMo <span class="pay-badge" style="background:#fce4ec;color:#880e4f">-5%</span></strong> <span>Quét QR MoMo hoặc mở app. Hoàn tiền 5% lần đầu.</span> </div> </label> </div> </div> </div> <div> <div class="ck-summary-box"> <div style="font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">📦 Tóm tắt đơn hàng</div> <div id="ck-summary-items"></div> <button class="ck-confirm-btn" onclick="handleConfirmOrder()">Xác nhận đặt hàng →</button> <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">🔒 Thông tin được bảo mật an toàn<br>Đơn hàng sẽ được xác nhận trong 30 phút</div> </div> </div> </div>
+          </div> </div> </div> <div class="fg"><label>Tỉnh / Thành phố</label> <select id="ck-city"></select> </div> <div class="fg"><label>Địa chỉ</label><input id="ck-addr" placeholder="Số nhà, tên đường, phường/xã"></div></div> <div class="fg"><label>Ghi chú</label><textarea id="ck-note" placeholder="Giao giờ hành chính, gọi trước..."></textarea></div> </div> <div class="ck-card"> <h3>🎟 Mã giảm giá</h3> <div style="display:flex;gap:8px;align-items:flex-start"> <div style="flex:1"><input id="voucher-input" placeholder="Nhập mã voucher..." style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:13px;font-family:var(--font);outline:none" onkeydown="if(event.key==='Enter')applyVoucher()"></div> <button onclick="applyVoucher()" style="padding:10px 16px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);white-space:nowrap">Áp dụng</button> </div> <div id="voucher-msg" style="font-size:12px;margin-top:6px;min-height:18px"></div> </div> <div class="ck-card"> <h3>Phương thức thanh toán</h3> <div class="pay-radio-group" id="pay-radio-group"> <label class="pay-radio-item selected" onclick="selectPayMethod(this,'cod')"> <input type="radio" name="paymethod" value="cod" checked> <span class="pay-radio-ic">💵</span> <div class="pay-radio-info"> <strong>Thanh toán khi nhận hàng (COD) <span class="pay-badge">Phổ biến</span></strong> <span>Kiểm tra hàng trước khi trả tiền. Miễn phí ship đơn từ 500k.</span> </div> </label> <label class="pay-radio-item" onclick="selectPayMethod(this,'bank')"> <input type="radio" name="paymethod" value="bank"> <span class="pay-radio-ic">🏦</span> <div class="pay-radio-info"> <strong>Chuyển khoản ngân hàng <span class="pay-badge" style="background:var(--zl-l);color:var(--zl)">-10k</span></strong> <span>Quét QR VietQR hoặc chuyển khoản thủ công. Giảm thêm 10k.</span> </div> </label> <label class="pay-radio-item" onclick="selectPayMethod(this,'momo')"> <input type="radio" name="paymethod" value="momo"> <span class="pay-radio-ic">🍑</span> <div class="pay-radio-info"> <strong>Ví MoMo <span class="pay-badge" style="background:#fce4ec;color:#880e4f">-5%</span></strong> <span>Quét QR MoMo hoặc mở app. Hoàn tiền 5% lần đầu.</span> </div> </label> </div> </div> </div> <div> <div class="ck-summary-box"> <div style="font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">📦 Tóm tắt đơn hàng</div> <div id="ck-summary-items"></div> <button class="ck-confirm-btn" onclick="handleConfirmOrder()">Xác nhận đặt hàng →</button> <div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">🔒 Thông tin được bảo mật an toàn<br>Đơn hàng sẽ được xác nhận trong 30 phút</div> </div> </div> </div>
 </div> <!-- ══════════ SUCCESS ══════════ -->
 <div id="scr-success" class="screen"> <header class="pc-header"><div class="pc-header-inner"><div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" style="height:44px;width:auto;object-fit:contain;display:block"></div></div></header> <div class="success-page"> <div style="font-size:72px;margin-bottom:18px">🎉</div> <h2 style="font-size:26px;font-weight:700;color:var(--pk-d);margin-bottom:10px">Đặt hàng thành công!</h2> <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7">Mũm sẽ xác nhận và liên hệ bạn trong 24h.<br>Cảm ơn bạn đã tin tưởng Mũm Bigsize! 🌸</p> <button class="btn btn-pk" style="padding:13px 36px;font-size:15px;border-radius:12px" onclick="backShop()">← Tiếp tục mua sắm</button> </div>
 </div> <!-- ══════════ ADMIN ══════════ -->
@@ -2735,7 +2735,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
               <strong>Cách lấy token:</strong> github.com/settings/personal-access-tokens → <em>Generate new token (Fine-grained)</em>. Repository access: chỉ chọn repo chứa GitHub Pages. Permissions: <code>Contents = Read and write</code>. Token chỉ lưu trên máy này (localStorage), không có trong file HTML public.
               </div> <div class="af"><label>GitHub Personal Access Token</label><input id="cfg-gh-token" type="password" autocomplete="new-password" placeholder="github_pat_..." onfocus="if(this.dataset.masked==='1'){this.value='';this.dataset.masked='';}"></div> <div id="gh-token-status" style="font-size:12px;margin-bottom:12px;min-height:18px"></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveGithubToken()">Lưu token</button> <button class="btn" onclick="testGithubConnection()">🔌 Test kết nối</button> <button class="btn" onclick="clearGithubToken()" style="color:var(--re)">🗑 Xóa token</button> </div> <div id="gh-test-result" style="font-size:12px;margin-top:10px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
                 Mỗi đơn hàng mới sẽ tự động gửi tin nhắn vào Telegram của bạn ngay lập tức.<br> <strong>Cách lấy Token:</strong> Tìm @BotFather trên Telegram → /newbot → copy Token<br> <strong>Cách lấy Chat ID:</strong> Mở bot → gõ /start → vào <code>api.telegram.org/bot[TOKEN]/getUpdates</code> → tìm "id"
-              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle off" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value=""></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value=""></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📊 Đồng bộ đơn hàng vào Google Sheet</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px"> Mỗi khi có đơn mới, hệ thống tự động ghi vào Google Sheet. Bạn xem được đơn hàng từ <strong>điện thoại / máy tính bất cứ đâu</strong> qua app Google Sheets. <br><br> <strong>Cách setup (làm 1 lần, ~3 phút):</strong><br> 1. Tạo 1 Google Sheet mới tại <a href="https://sheets.new" target="_blank" style="color:var(--pk);font-weight:600">sheets.new</a><br> 2. Vào <strong>Tiện ích mở rộng → Apps Script</strong><br> 3. Xóa code cũ, dán code dưới đây vào, đổi tên file thành "Code.gs"<br> 4. Bấm <strong>Triển khai → Triển khai mới → Loại: Ứng dụng web</strong><br> 5. Chọn "Thực thi với tư cách: Tôi" và "Ai có quyền truy cập: Bất kỳ ai"<br> 6. Copy URL Web App, dán vào ô bên dưới và bấm Lưu </div> <details style="margin-bottom:14px;background:var(--bg);border-radius:8px;padding:10px 14px"> <summary style="cursor:pointer;font-weight:600;font-size:13px">📋 Xem code Apps Script (click để mở)</summary> <textarea readonly onclick="this.select()" style="width:100%;height:280px;margin-top:10px;font-family:monospace;font-size:11.5px;padding:10px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);resize:vertical">// ===== MUM BIGSIZE - Order Webhook =====
+              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle off" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value=""></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value=""></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input id="cfg-shop-name" value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input id="cfg-shop-phone" value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input id="cfg-shop-addr" value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" id="cfg-shop-ship" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" id="cfg-shop-free" value="500000"></div></div> <button class="btn btn-pk" onclick="saveShopInfo()">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📊 Đồng bộ đơn hàng vào Google Sheet</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px"> Mỗi khi có đơn mới, hệ thống tự động ghi vào Google Sheet. Bạn xem được đơn hàng từ <strong>điện thoại / máy tính bất cứ đâu</strong> qua app Google Sheets. <br><br> <strong>Cách setup (làm 1 lần, ~3 phút):</strong><br> 1. Tạo 1 Google Sheet mới tại <a href="https://sheets.new" target="_blank" style="color:var(--pk);font-weight:600">sheets.new</a><br> 2. Vào <strong>Tiện ích mở rộng → Apps Script</strong><br> 3. Xóa code cũ, dán code dưới đây vào, đổi tên file thành "Code.gs"<br> 4. Bấm <strong>Triển khai → Triển khai mới → Loại: Ứng dụng web</strong><br> 5. Chọn "Thực thi với tư cách: Tôi" và "Ai có quyền truy cập: Bất kỳ ai"<br> 6. Copy URL Web App, dán vào ô bên dưới và bấm Lưu </div> <details style="margin-bottom:14px;background:var(--bg);border-radius:8px;padding:10px 14px"> <summary style="cursor:pointer;font-weight:600;font-size:13px">📋 Xem code Apps Script (click để mở)</summary> <textarea readonly onclick="this.select()" style="width:100%;height:280px;margin-top:10px;font-family:monospace;font-size:11.5px;padding:10px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);resize:vertical">// ===== MUM BIGSIZE - Order Webhook =====
 // Triển khai → Triển khai mới → Ứng dụng web
 // Thực thi: Tôi  |  Ai có quyền truy cập: Bất kỳ ai
 function doPost(e) {
@@ -3136,6 +3136,55 @@ const SHOP_CONFIG={
   fb:'https://www.facebook.com/mumbigsize.top/'
 };
 
+/* Thông tin cửa hàng — hiển thị + dùng cho tính phí ship */
+const SHOP_INFO = {
+  name:     'Mũm Bigsize',
+  phone:    '0912 345 678',
+  address:  'TP. Hồ Chí Minh',
+  shipFee:  30000,    // VNĐ
+  freeFrom: 500000    // VNĐ — đơn từ ngần này trở lên miễn ship
+};
+
+/* ══ Danh sách 34 tỉnh/thành phố Việt Nam (từ 1/7/2025, theo Nghị quyết 202/2025/QH15) ══
+   Sắp xếp: 6 thành phố trực thuộc TW lên đầu, sau đó 28 tỉnh theo bảng chữ cái */
+const VN_PROVINCES = [
+  // 6 thành phố trực thuộc Trung ương
+  'TP. Hồ Chí Minh','Hà Nội','Hải Phòng','Đà Nẵng','Cần Thơ','Huế',
+  // 28 tỉnh
+  'An Giang','Bắc Ninh','Cà Mau','Cao Bằng','Đắk Lắk','Điện Biên','Đồng Nai','Đồng Tháp',
+  'Gia Lai','Hà Tĩnh','Hưng Yên','Khánh Hòa','Lai Châu','Lạng Sơn','Lào Cai','Lâm Đồng',
+  'Nghệ An','Ninh Bình','Phú Thọ','Quảng Ngãi','Quảng Ninh','Quảng Trị','Sơn La','Tây Ninh',
+  'Thái Nguyên','Thanh Hóa','Tuyên Quang','Vĩnh Long'
+];
+
+/* Validate SĐT Việt Nam:
+   - Bắt đầu bằng 0 + đầu số nhà mạng (3,5,7,8,9) + 8 số → 10 số tổng
+   - Hoặc dạng quốc tế: +84 hoặc 84 + đầu số (3,5,7,8,9) + 8 số
+   - Cho phép có khoảng trắng, dấu chấm, dấu gạch ngang (sẽ bỏ qua)
+   Trả về { ok, normalized } — normalized là dạng 10 số bắt đầu bằng 0 */
+function validateVNPhone(raw){
+  if(!raw) return { ok:false, error:'Vui lòng nhập số điện thoại' };
+  // Loại bỏ khoảng trắng, dấu chấm, gạch ngang, dấu ngoặc
+  const cleaned = String(raw).replace(/[\s.\-()]/g,'');
+  // Quy về dạng 0xxxxxxxxx
+  let phone = cleaned;
+  if (phone.startsWith('+84')) phone = '0' + phone.slice(3);
+  else if (phone.startsWith('84') && phone.length === 11) phone = '0' + phone.slice(2);
+  // Kiểm tra cuối: 10 chữ số, đầu số 03/05/07/08/09
+  if (!/^0[35789]\d{8}$/.test(phone)){
+    return { ok:false, error:'Số điện thoại không đúng định dạng Việt Nam (10 số, đầu 03/05/07/08/09)' };
+  }
+  return { ok:true, normalized:phone };
+}
+
+/* Fill dropdown 63→34 tỉnh thành cho ô checkout */
+function initProvinceDropdown(){
+  const sel = document.getElementById('ck-city');
+  if (!sel || sel.options.length > 1) return; // đã fill rồi thì bỏ qua
+  sel.innerHTML = '<option value="">-- Chọn tỉnh/thành --</option>' +
+    VN_PROVINCES.map(p => `<option value="${p}">${p}</option>`).join('');
+}
+
 /* Cấu hình Google Sheets — admin tạo 1 Apps Script Web App rồi dán URL vào đây
    qua Admin → Cài đặt → Google Sheets. Mỗi khi có đơn, web sẽ POST đơn lên Sheet. */
 const SHEET_CONFIG={
@@ -3156,6 +3205,16 @@ const SHEET_CONFIG={
   try{
     const s = JSON.parse(localStorage.getItem('shop_cfg')||'null');
     if(s){ SHOP_CONFIG.zalo=s.zalo||SHOP_CONFIG.zalo; SHOP_CONFIG.fb=s.fb||SHOP_CONFIG.fb; }
+  }catch(e){}
+  try{
+    const si = JSON.parse(localStorage.getItem('shop_info')||'null');
+    if(si){
+      SHOP_INFO.name = si.name || SHOP_INFO.name;
+      SHOP_INFO.phone = si.phone || SHOP_INFO.phone;
+      SHOP_INFO.address = si.address || SHOP_INFO.address;
+      if (typeof si.shipFee === 'number')  SHOP_INFO.shipFee = si.shipFee;
+      if (typeof si.freeFrom === 'number') SHOP_INFO.freeFrom = si.freeFrom;
+    }
   }catch(e){}
   try{
     const t = JSON.parse(localStorage.getItem('telegram_cfg')||'null');
@@ -3747,14 +3806,35 @@ function goCheckout(){
     cart.map(it=>`<div class="sum-row"><span>${it.name} x${it.qty}</span><span>${it.price*it.qty}k</span></div>`).join('')+
     `<div class="sum-row"><span>Phí vận chuyển</span><span>${ship===0?'<span style="color:var(--gr);font-weight:600">Miễn phí</span>':ship+'k'}</span></div>`+
     `<div class="sum-row total"><span>Tổng thanh toán</span><span style="color:var(--pk-d)">${total}k</span></div>`;
+  initProvinceDropdown();
   showScr('scr-checkout');window.scrollTo(0,0);
 }
 
 function validateCheckout(){
   const name=document.getElementById('ck-name').value.trim();
-  const phone=document.getElementById('ck-phone').value.trim();
+  const phoneRaw=document.getElementById('ck-phone').value.trim();
+  const city=document.getElementById('ck-city').value;
+  const addr=document.getElementById('ck-addr').value.trim();
   if(!name){showToast('Vui lòng nhập họ tên!');document.getElementById('ck-name').focus();return false;}
-  if(!phone){showToast('Vui lòng nhập số điện thoại!');document.getElementById('ck-phone').focus();return false;}
+  if(!phoneRaw){showToast('Vui lòng nhập số điện thoại!');document.getElementById('ck-phone').focus();return false;}
+  const ph = validateVNPhone(phoneRaw);
+  if(!ph.ok){
+    showToast('❌ ' + ph.error);
+    document.getElementById('ck-phone').focus();
+    return false;
+  }
+  // Chuẩn hóa SĐT về dạng 0xxxxxxxxx ngay trên ô input
+  document.getElementById('ck-phone').value = ph.normalized;
+  if(!city){
+    showToast('Vui lòng chọn tỉnh / thành phố!');
+    document.getElementById('ck-city').focus();
+    return false;
+  }
+  if(!addr){
+    showToast('Vui lòng nhập địa chỉ chi tiết!');
+    document.getElementById('ck-addr').focus();
+    return false;
+  }
   return true;
 }
 
@@ -4035,6 +4115,16 @@ function initSettingsUI(){
   const shU=document.getElementById('cfg-sheet-url'); if(shU) shU.value=SHEET_CONFIG.webhookUrl||'';
   const shB=document.getElementById('sheet-toggle'); if(shB) shB.className='toggle '+(SHEET_CONFIG.enabled?'on':'off');
   const shS=document.getElementById('sheet-status'); if(shS) shS.textContent=SHEET_CONFIG.enabled?'Đang bật':'Đang tắt';
+  initShopInfoUI();
+}
+
+/* Đẩy SHOP_INFO lên các input trên trang Cài đặt */
+function initShopInfoUI(){
+  const n=document.getElementById('cfg-shop-name'); if(n) n.value=SHOP_INFO.name||'';
+  const p=document.getElementById('cfg-shop-phone'); if(p) p.value=SHOP_INFO.phone||'';
+  const a=document.getElementById('cfg-shop-addr'); if(a) a.value=SHOP_INFO.address||'';
+  const s=document.getElementById('cfg-shop-ship'); if(s) s.value=SHOP_INFO.shipFee||0;
+  const f=document.getElementById('cfg-shop-free'); if(f) f.value=SHOP_INFO.freeFrom||0;
 }
 
 /* Cập nhật UI trang Channels từ SHOP_CONFIG đã lưu */
@@ -4373,6 +4463,24 @@ function saveMomoCfg(){
   try{localStorage.setItem('momo_cfg',JSON.stringify(MOMO_CONFIG));}catch(e){}
   showToast('✅ Đã lưu MoMo' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
   if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync MoMo lên GitHub'); });
+}
+
+/* ══ SHOP INFO (tên, sđt, địa chỉ, phí ship) ══ */
+function saveShopInfo(){
+  const n=document.getElementById('cfg-shop-name')?.value.trim();
+  const p=document.getElementById('cfg-shop-phone')?.value.trim();
+  const a=document.getElementById('cfg-shop-addr')?.value.trim();
+  const s=parseInt(document.getElementById('cfg-shop-ship')?.value||'0',10);
+  const f=parseInt(document.getElementById('cfg-shop-free')?.value||'0',10);
+  if(!n){showToast('Vui lòng nhập tên shop!');return;}
+  SHOP_INFO.name=n;
+  SHOP_INFO.phone=p||'';
+  SHOP_INFO.address=a||'';
+  SHOP_INFO.shipFee=isNaN(s)?0:s;
+  SHOP_INFO.freeFrom=isNaN(f)?0:f;
+  try{localStorage.setItem('shop_info',JSON.stringify(SHOP_INFO));}catch(e){}
+  showToast('✅ Đã lưu cài đặt cửa hàng' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
+  if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync cửa hàng lên GitHub'); });
 }
 
 /* ══ GOOGLE SHEET CONFIG ══ */
@@ -5068,20 +5176,29 @@ async function loadSettingsFromGithub(){
     SHEET_CONFIG.enabled    = !!data.sheet.enabled;
   }
   if (data.telegram){
-    // Chỉ đồng bộ flag enabled + chatId (không nhạy cảm) — token vẫn ở mỗi máy
+    // Đồng bộ TOÀN BỘ telegram (token + chatId + enabled) để khách đặt hàng cũng gửi được noti
     if (typeof data.telegram.enabled === 'boolean') TELEGRAM_CONFIG.enabled = data.telegram.enabled;
     if (data.telegram.chatId) TELEGRAM_CONFIG.chatId = data.telegram.chatId;
+    if (data.telegram.token)  TELEGRAM_CONFIG.token  = data.telegram.token;
+  }
+  if (data.shopInfo){
+    // Thông tin cửa hàng public (tên, sđt, địa chỉ, phí ship)
+    SHOP_INFO.name    = data.shopInfo.name    || SHOP_INFO.name;
+    SHOP_INFO.phone   = data.shopInfo.phone   || SHOP_INFO.phone;
+    SHOP_INFO.address = data.shopInfo.address || SHOP_INFO.address;
+    if (typeof data.shopInfo.shipFee === 'number')   SHOP_INFO.shipFee = data.shopInfo.shipFee;
+    if (typeof data.shopInfo.freeFrom === 'number')  SHOP_INFO.freeFrom = data.shopInfo.freeFrom;
   }
   // Lưu lại localStorage để cache (giữ nguyên cấu trúc cũ)
   try { localStorage.setItem('shop_cfg',     JSON.stringify(SHOP_CONFIG)); } catch(e){}
   try { localStorage.setItem('bank_cfg',     JSON.stringify(BANK_CONFIG)); } catch(e){}
   try { localStorage.setItem('momo_cfg',     JSON.stringify(MOMO_CONFIG)); } catch(e){}
   try { localStorage.setItem('sheet_cfg',    JSON.stringify(SHEET_CONFIG)); } catch(e){}
+  try { localStorage.setItem('shop_info',    JSON.stringify(SHOP_INFO)); } catch(e){}
   try {
-    // Telegram: giữ token cũ ở localStorage (không bị override), chỉ update flag/chatId
-    const old = JSON.parse(localStorage.getItem('telegram_cfg')||'{}');
+    // Telegram: đồng bộ toàn bộ (cả token) để khách cũng gửi được noti
     localStorage.setItem('telegram_cfg', JSON.stringify({
-      token: old.token || TELEGRAM_CONFIG.token || '',
+      token: TELEGRAM_CONFIG.token || '',
       chatId: TELEGRAM_CONFIG.chatId,
       enabled: TELEGRAM_CONFIG.enabled
     }));
@@ -5089,13 +5206,23 @@ async function loadSettingsFromGithub(){
   // Refresh UI nếu đang mở trang settings/channels
   try { if (typeof initSettingsUI === 'function') initSettingsUI(); } catch(e){}
   try { if (typeof initChannelsUI === 'function') initChannelsUI(); } catch(e){}
+  try { if (typeof initShopInfoUI === 'function') initShopInfoUI(); } catch(e){}
   return true;
 }
 
 async function saveSettingsToGithub(){
-  // Đóng gói các phần PUBLIC, KHÔNG bao gồm token nhạy cảm
+  // Đóng gói TOÀN BỘ cài đặt — kể cả Telegram token (theo yêu cầu user, chấp nhận trade-off)
+  // CẢNH BÁO: Nếu repo public, token Telegram bot sẽ lộ. Người khác có thể dùng token đó để gửi tin nhắn từ bot của bạn.
+  // Nếu lo ngại, đổi repo sang private (vẫn truy cập được qua raw URL nhờ PAT).
   const payload = {
     shop: { zalo: SHOP_CONFIG.zalo || '', fb: SHOP_CONFIG.fb || '' },
+    shopInfo: {
+      name:     SHOP_INFO.name     || '',
+      phone:    SHOP_INFO.phone    || '',
+      address:  SHOP_INFO.address  || '',
+      shipFee:  SHOP_INFO.shipFee  || 0,
+      freeFrom: SHOP_INFO.freeFrom || 0
+    },
     bank: {
       bankName:    BANK_CONFIG.bankName    || '',
       accountNo:   BANK_CONFIG.accountNo   || '',
@@ -5104,8 +5231,8 @@ async function saveSettingsToGithub(){
     momo: { phone: MOMO_CONFIG.phone || '', name: MOMO_CONFIG.name || '' },
     sheet: { webhookUrl: SHEET_CONFIG.webhookUrl || '', enabled: !!SHEET_CONFIG.enabled },
     telegram: {
-      // KHÔNG đưa token lên repo
-      chatId:  TELEGRAM_CONFIG.chatId || '',
+      token:   TELEGRAM_CONFIG.token   || '',
+      chatId:  TELEGRAM_CONFIG.chatId  || '',
       enabled: !!TELEGRAM_CONFIG.enabled
     },
     _updatedAt: new Date().toISOString()
