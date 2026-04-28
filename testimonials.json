@@ -36,5 +36,19 @@
     "fbUrl": "https://www.facebook.com/mumbigsize.top/posts/pfbid02x1EnDFhr3zAff8zgB7xnNFts3pAHiWWNK4vZ4uxgMvXgdwDAY18BTX4UYjHqrSSGl",
     "name": "Đánh giá Facebook",
     "visible": true
+  },
+  {
+    "id": 6,
+    "type": "fb",
+    "fbUrl": "https://www.facebook.com/mumbigsize.top/posts/pfbid03x1x6kqmckT1KLvDh2sxeTeBTaqeJzpzvTfZSXQn5DbqzpMhrMfsrAc49t3kJEgVl",
+    "name": "chị Hạnh chia sẽ",
+    "visible": true
+  },
+  {
+    "id": 7,
+    "type": "fb",
+    "fbUrl": "https://www.facebook.com/mumbigsize.top/posts/pfbid03x1x6kqmckT1KLvDh2sxeTeBTaqeJzpzvTfZSXQn5DbqzpMhrMfsrAc49t3kJEgVl",
+    "name": "Chị hạnh chia sẻ",
+    "visible": true
   }
 ]
