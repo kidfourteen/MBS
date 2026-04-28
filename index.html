@@ -4429,8 +4429,7 @@ async function loadProductsFromSheet() {
     const data = await res.json();
     if (data.ok) {
       products = data.products;
-      renderShop();
-      renderFlash();
+      renderShop(); // renderShop đã bao gồm flash sale bên trong
     } else {
       throw new Error(data.error || 'Sheet error');
     }
