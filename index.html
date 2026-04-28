@@ -2729,9 +2729,9 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
               <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val" id="ad-stat-today">0</div><div class="stat-sub" style="color:var(--muted)" id="ad-stat-today-sub">đơn mới</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" id="ad-stat-rev" style="font-size:20px">0k</div><div class="stat-sub" style="color:var(--muted)">đã thanh toán</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" id="ad-stat-pending" style="color:var(--am)">0</div><div class="stat-sub" style="color:var(--muted)">đơn cần xác nhận</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><div style="display:flex;gap:8px"><button class="btn" onclick="loadProductsFromSheet(true).then(()=>{renderAProd();showToast('Đã tải lại từ GitHub!');})" title="Tải lại từ GitHub">🔄 Sync GitHub</button><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div></div> <div class="ad-content">
 <div class="sheet-status-bar" id="sheet-status-bar"></div>
  <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt" style="overflow-x:auto;flex-wrap:nowrap"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'ao-chong-nang')" style="flex-shrink:0">Áo chống nắng</div><div class="tab" onclick="apTab(this,'ao-gio')" style="flex-shrink:0">Áo gió</div><div class="tab" onclick="apTab(this,'ao-khoac-dong')" style="flex-shrink:0">Áo khoác đông</div><div class="tab" onclick="apTab(this,'hoodie')" style="flex-shrink:0">Hoodie</div><div class="tab" onclick="apTab(this,'sweater')" style="flex-shrink:0">Sweater</div><div class="tab" onclick="apTab(this,'tshirt')" style="flex-shrink:0">T-shirt</div><div class="tab" onclick="apTab(this,'chan-vay')" style="flex-shrink:0">Chân váy</div><div class="tab" onclick="apTab(this,'do-di-bien')" style="flex-shrink:0">Đồ đi biển</div><div class="tab" onclick="apTab(this,'phu-kien')" style="flex-shrink:0">Phụ kiện</div><div class="tab" onclick="apTab(this,'quan')" style="flex-shrink:0">Quần</div><div class="tab" onclick="apTab(this,'ao-len')" style="flex-shrink:0">Áo len</div><div class="tab" onclick="apTab(this,'ao-parka')" style="flex-shrink:0">Áo Parka</div><div class="tab" onclick="apTab(this,'giay')" style="flex-shrink:0">Giày</div><div class="tab" onclick="apTab(this,'dep')" style="flex-shrink:0">Dép</div><div class="tab" onclick="apTab(this,'so-mi')" style="flex-shrink:0">Sơ mi</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" id="apt-pay" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
-</div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.top</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.top/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div> </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="sheet-status-bar" id="vouchers-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
+</div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="sheet-status-bar" id="channels-sync-bar" style="margin-bottom:14px"></div> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.top</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.top/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div> </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="sheet-status-bar" id="vouchers-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
 </div> <div id="adp-viplist" class="ad-page"> <div class="ad-topbar"><h1>Khách hàng VIP</h1></div> <div class="sheet-status-bar" id="vip-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Upload danh sách SĐT VIP</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">Upload file .txt hoặc .csv — mỗi số điện thoại 1 dòng. Khách hàng có SĐT trong danh sách sẽ tự động được nhận diện VIP và giảm 10% khi thanh toán.</div> <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px"> <input type="file" id="vip-file-input" accept=".txt,.csv" onchange="loadVipFile()" style="display:none"> <button class="btn btn-pk" onclick="document.getElementById('vip-file-input').click()">📁 Upload file SĐT</button> <button class="btn" onclick="addVipManual()">+ Thêm thủ công</button> <button class="btn" onclick="testVipMe()" title="Thêm SĐT của bạn để test">🧪 Test với SĐT của tôi</button> <button class="btn" style="color:var(--re)" onclick="clearVip()">🗑 Xóa tất cả</button> </div> <div class="af" style="margin-bottom:12px"> <label>Hoặc dán danh sách SĐT (mỗi số 1 dòng)</label> <textarea id="vip-paste-area" rows="5" placeholder="0912345678&#10;0987654321&#10;0909090909..." style="font-family:monospace;font-size:12px"></textarea> <button class="btn btn-pk" style="margin-top:8px" onclick="parseVipPaste()">Áp dụng danh sách</button> </div> <div class="ad-sec-head" style="margin-top:16px"><h2>Danh sách hiện tại (<span id="vip-count">0</span> SĐT)</h2></div> <div id="vip-list-el" style="font-family:monospace;font-size:12px;max-height:300px;overflow-y:auto;background:var(--bg);border-radius:8px;padding:12px;line-height:2;color:var(--text)"></div> </div> </div>
-</div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>🔑 GitHub (lưu sản phẩm)</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
+</div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="sheet-status-bar" id="settings-sync-bar" style="margin-bottom:14px"></div> <div class="ad-section"><div class="ad-sec-head"><h2>🔑 GitHub (lưu sản phẩm)</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
               <strong>Cách lấy token:</strong> github.com/settings/personal-access-tokens → <em>Generate new token (Fine-grained)</em>. Repository access: chỉ chọn repo chứa GitHub Pages. Permissions: <code>Contents = Read and write</code>. Token chỉ lưu trên máy này (localStorage), không có trong file HTML public.
               </div> <div class="af"><label>GitHub Personal Access Token</label><input id="cfg-gh-token" type="password" autocomplete="new-password" placeholder="github_pat_..." onfocus="if(this.dataset.masked==='1'){this.value='';this.dataset.masked='';}"></div> <div id="gh-token-status" style="font-size:12px;margin-bottom:12px;min-height:18px"></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveGithubToken()">Lưu token</button> <button class="btn" onclick="testGithubConnection()">🔌 Test kết nối</button> <button class="btn" onclick="clearGithubToken()" style="color:var(--re)">🗑 Xóa token</button> </div> <div id="gh-test-result" style="font-size:12px;margin-top:10px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
                 Mỗi đơn hàng mới sẽ tự động gửi tin nhắn vào Telegram của bạn ngay lập tức.<br> <strong>Cách lấy Token:</strong> Tìm @BotFather trên Telegram → /newbot → copy Token<br> <strong>Cách lấy Chat ID:</strong> Mở bot → gõ /start → vào <code>api.telegram.org/bot[TOKEN]/getUpdates</code> → tìm "id"
@@ -4019,7 +4019,7 @@ function clearVip(){
   saveVipToGithub().then(ok=>showToast(ok?'✅ Đã commit xóa list VIP':'✅ Đã xóa list (local)'));
 }
 
-function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();renderDashStats();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers'){renderVoucherList();setTimeout(initVouchersSyncBar,50);}if(pg==='viplist'){renderVipList();setTimeout(initVipSyncBar,50);}if(pg==='reviews'){renderTestiAdmin();}if(pg==='channels'){setTimeout(initChannelsUI,50);}if(pg==='settings'){setTimeout(initGithubTokenUI,50);setTimeout(initSettingsUI,50);}}
+function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();renderDashStats();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers'){renderVoucherList();setTimeout(initVouchersSyncBar,50);}if(pg==='viplist'){renderVipList();setTimeout(initVipSyncBar,50);}if(pg==='reviews'){renderTestiAdmin();}if(pg==='channels'){setTimeout(initChannelsUI,50);setTimeout(initChannelsSyncBar,50);}if(pg==='settings'){setTimeout(initGithubTokenUI,50);setTimeout(initSettingsUI,50);setTimeout(initSettingsSyncBar,50);}}
 
 /* Cập nhật UI trang Settings từ config đã lưu */
 function initSettingsUI(){
@@ -4282,8 +4282,28 @@ function saveProd(){
   }).catch(e => showToast('⚠️ Lỗi GitHub: ' + e.message));
 }
 /* ══ CHANNELS ══ */
-function saveZalo(){const v=document.getElementById('cfg-zalo').value.trim();if(!v){showToast('Nhập số Zalo!');return;}SHOP_CONFIG.zalo=v;try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}const d=document.getElementById('zalo-disp');const s=document.getElementById('zalo-st');if(d){const p=v.replace(/\D/g,'');d.textContent=p?'zalo.me/'+p:v;}if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('✅ Đã lưu Zalo!');}
-function saveFB(){const v=document.getElementById('cfg-fb').value.trim();if(!v){showToast('Nhập link Facebook!');return;}SHOP_CONFIG.fb=v;try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}const d=document.getElementById('fb-disp');const s=document.getElementById('fb-st');if(d)d.textContent=v;if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('✅ Đã lưu Facebook!');}
+function saveZalo(){
+  const v=document.getElementById('cfg-zalo').value.trim();
+  if(!v){showToast('Nhập số Zalo!');return;}
+  SHOP_CONFIG.zalo=v;
+  try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}
+  const d=document.getElementById('zalo-disp');const s=document.getElementById('zalo-st');
+  if(d){const p=v.replace(/\D/g,'');d.textContent=p?'zalo.me/'+p:v;}
+  if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}
+  showToast('✅ Đã lưu Zalo' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
+  if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync Zalo lên GitHub'); });
+}
+function saveFB(){
+  const v=document.getElementById('cfg-fb').value.trim();
+  if(!v){showToast('Nhập link Facebook!');return;}
+  SHOP_CONFIG.fb=v;
+  try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}
+  const d=document.getElementById('fb-disp');const s=document.getElementById('fb-st');
+  if(d)d.textContent=v;
+  if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}
+  showToast('✅ Đã lưu Facebook' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
+  if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync Facebook lên GitHub'); });
+}
 function saveTelegramCfg(){
   const token = document.getElementById('cfg-tg-token')?.value.trim();
   const chatId = document.getElementById('cfg-tg-chatid')?.value.trim();
@@ -4291,7 +4311,9 @@ function saveTelegramCfg(){
   TELEGRAM_CONFIG.token = token;
   TELEGRAM_CONFIG.chatId = chatId;
   try{localStorage.setItem('telegram_cfg',JSON.stringify({token,chatId,enabled:TELEGRAM_CONFIG.enabled}));}catch(e){}
-  showToast('✅ Đã lưu cấu hình Telegram!');
+  showToast('✅ Đã lưu Telegram (token chỉ ở máy này, chatId sync GitHub)');
+  // Chỉ sync chatId + enabled lên GitHub, token KHÔNG bao giờ rời khỏi máy
+  if(GH_CONFIG.enabled) saveSettingsToGithub();
 }
 
 function toggleTelegram(btn){
@@ -4301,6 +4323,7 @@ function toggleTelegram(btn){
   if(status) status.textContent = TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt';
   try{localStorage.setItem('telegram_cfg',JSON.stringify({token:TELEGRAM_CONFIG.token,chatId:TELEGRAM_CONFIG.chatId,enabled:TELEGRAM_CONFIG.enabled}));}catch(e){}
   showToast(TELEGRAM_CONFIG.enabled?'✅ Đã bật thông báo Telegram':'⏸ Đã tắt thông báo Telegram');
+  if(GH_CONFIG.enabled) saveSettingsToGithub();
 }
 
 function testTelegram(){
@@ -4339,7 +4362,8 @@ function saveBankCfg(){
   if(!n||!no||!owner){showToast('Vui lòng điền đầy đủ!');return;}
   BANK_CONFIG.bankName=n;BANK_CONFIG.accountNo=no;BANK_CONFIG.accountName=owner;
   try{localStorage.setItem('bank_cfg',JSON.stringify(BANK_CONFIG));}catch(e){}
-  showToast('✅ Đã lưu thông tin ngân hàng!');
+  showToast('✅ Đã lưu ngân hàng' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
+  if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync ngân hàng lên GitHub'); });
 }
 function saveMomoCfg(){
   const ph=document.getElementById('cfg-momo-phone')?.value.trim();
@@ -4347,7 +4371,8 @@ function saveMomoCfg(){
   if(!ph){showToast('Vui lòng nhập SĐT MoMo!');return;}
   MOMO_CONFIG.phone=ph;MOMO_CONFIG.name=nm||MOMO_CONFIG.name;
   try{localStorage.setItem('momo_cfg',JSON.stringify(MOMO_CONFIG));}catch(e){}
-  showToast('✅ Đã lưu cấu hình MoMo!');
+  showToast('✅ Đã lưu MoMo' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
+  if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync MoMo lên GitHub'); });
 }
 
 /* ══ GOOGLE SHEET CONFIG ══ */
@@ -4359,7 +4384,8 @@ function saveSheetCfg(){
   }
   SHEET_CONFIG.webhookUrl=url;
   try{localStorage.setItem('sheet_cfg',JSON.stringify(SHEET_CONFIG));}catch(e){}
-  showToast('✅ Đã lưu URL Google Sheet!');
+  showToast('✅ Đã lưu URL Google Sheet' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
+  if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync Google Sheet lên GitHub'); });
 }
 function toggleSheet(btn){
   if(!SHEET_CONFIG.webhookUrl && !SHEET_CONFIG.enabled){
@@ -4371,6 +4397,7 @@ function toggleSheet(btn){
   if(status) status.textContent=SHEET_CONFIG.enabled?'Đang bật':'Đang tắt';
   try{localStorage.setItem('sheet_cfg',JSON.stringify(SHEET_CONFIG));}catch(e){}
   showToast(SHEET_CONFIG.enabled?'✅ Đã bật đồng bộ Google Sheet':'⏸ Đã tắt đồng bộ Google Sheet');
+  if(GH_CONFIG.enabled) saveSettingsToGithub();
 }
 function testSheetWebhook(){
   const url=document.getElementById('cfg-sheet-url')?.value.trim()||SHEET_CONFIG.webhookUrl;
@@ -5014,6 +5041,89 @@ async function saveVipToGithub(){
   } catch(e){ console.warn('saveVip:', e); return false; }
 }
 
+/* ── SETTINGS (Zalo/FB/Bank/MoMo/Sheet/Telegram-flag) ──
+   LƯU Ý: Token nhạy cảm (Telegram bot token, GitHub PAT) KHÔNG bao giờ commit lên GitHub public.
+   Chỉ commit thông tin có thể public: kênh bán, thông tin TK ngân hàng (vốn để khách chuyển khoản),
+   Sheet Webhook URL (vốn endpoint public), và cờ enabled của Telegram. */
+async function loadSettingsFromGithub(){
+  if (GH_CONFIG.owner.startsWith('YOUR_')) return false;
+  const data = await _ghRead('settings.json', null);
+  if (!data || typeof data !== 'object') return false;
+  // Apply settings vào các CONFIG trong RAM
+  if (data.shop){
+    SHOP_CONFIG.zalo = data.shop.zalo || SHOP_CONFIG.zalo;
+    SHOP_CONFIG.fb   = data.shop.fb   || SHOP_CONFIG.fb;
+  }
+  if (data.bank){
+    BANK_CONFIG.bankName    = data.bank.bankName    || BANK_CONFIG.bankName;
+    BANK_CONFIG.accountNo   = data.bank.accountNo   || BANK_CONFIG.accountNo;
+    BANK_CONFIG.accountName = data.bank.accountName || BANK_CONFIG.accountName;
+  }
+  if (data.momo){
+    MOMO_CONFIG.phone = data.momo.phone || MOMO_CONFIG.phone;
+    MOMO_CONFIG.name  = data.momo.name  || MOMO_CONFIG.name;
+  }
+  if (data.sheet){
+    SHEET_CONFIG.webhookUrl = data.sheet.webhookUrl || '';
+    SHEET_CONFIG.enabled    = !!data.sheet.enabled;
+  }
+  if (data.telegram){
+    // Chỉ đồng bộ flag enabled + chatId (không nhạy cảm) — token vẫn ở mỗi máy
+    if (typeof data.telegram.enabled === 'boolean') TELEGRAM_CONFIG.enabled = data.telegram.enabled;
+    if (data.telegram.chatId) TELEGRAM_CONFIG.chatId = data.telegram.chatId;
+  }
+  // Lưu lại localStorage để cache (giữ nguyên cấu trúc cũ)
+  try { localStorage.setItem('shop_cfg',     JSON.stringify(SHOP_CONFIG)); } catch(e){}
+  try { localStorage.setItem('bank_cfg',     JSON.stringify(BANK_CONFIG)); } catch(e){}
+  try { localStorage.setItem('momo_cfg',     JSON.stringify(MOMO_CONFIG)); } catch(e){}
+  try { localStorage.setItem('sheet_cfg',    JSON.stringify(SHEET_CONFIG)); } catch(e){}
+  try {
+    // Telegram: giữ token cũ ở localStorage (không bị override), chỉ update flag/chatId
+    const old = JSON.parse(localStorage.getItem('telegram_cfg')||'{}');
+    localStorage.setItem('telegram_cfg', JSON.stringify({
+      token: old.token || TELEGRAM_CONFIG.token || '',
+      chatId: TELEGRAM_CONFIG.chatId,
+      enabled: TELEGRAM_CONFIG.enabled
+    }));
+  } catch(e){}
+  // Refresh UI nếu đang mở trang settings/channels
+  try { if (typeof initSettingsUI === 'function') initSettingsUI(); } catch(e){}
+  try { if (typeof initChannelsUI === 'function') initChannelsUI(); } catch(e){}
+  return true;
+}
+
+async function saveSettingsToGithub(){
+  // Đóng gói các phần PUBLIC, KHÔNG bao gồm token nhạy cảm
+  const payload = {
+    shop: { zalo: SHOP_CONFIG.zalo || '', fb: SHOP_CONFIG.fb || '' },
+    bank: {
+      bankName:    BANK_CONFIG.bankName    || '',
+      accountNo:   BANK_CONFIG.accountNo   || '',
+      accountName: BANK_CONFIG.accountName || ''
+    },
+    momo: { phone: MOMO_CONFIG.phone || '', name: MOMO_CONFIG.name || '' },
+    sheet: { webhookUrl: SHEET_CONFIG.webhookUrl || '', enabled: !!SHEET_CONFIG.enabled },
+    telegram: {
+      // KHÔNG đưa token lên repo
+      chatId:  TELEGRAM_CONFIG.chatId || '',
+      enabled: !!TELEGRAM_CONFIG.enabled
+    },
+    _updatedAt: new Date().toISOString()
+  };
+  if (!GH_CONFIG.enabled){
+    showToast('⚠️ Chưa kết nối GitHub — chỉ lưu trên máy này');
+    return false;
+  }
+  try {
+    await _ghCommit('settings.json', payload, 'update settings');
+    return true;
+  } catch(e){
+    console.warn('saveSettings:', e);
+    showToast('⚠️ Lỗi sync settings: ' + e.message);
+    return false;
+  }
+}
+
 /* Status bar trong Admin → trang Quản lý sản phẩm */
 function initSheetStatus(){
   const bar = document.getElementById('sheet-status-bar');
@@ -5058,6 +5168,8 @@ function renderSyncBar(barId, label, file){
 
 function initVouchersSyncBar(){ renderSyncBar('vouchers-sync-bar', 'Voucher', 'vouchers.json'); }
 function initVipSyncBar(){ renderSyncBar('vip-sync-bar', 'Danh sách VIP', 'vip.json'); }
+function initChannelsSyncBar(){ renderSyncBar('channels-sync-bar', 'Zalo & Facebook', 'settings.json'); }
+function initSettingsSyncBar(){ renderSyncBar('settings-sync-bar', 'Toàn bộ cài đặt', 'settings.json'); }
 
 /* GitHub Token UI — Settings page */
 function initGithubTokenUI(){
@@ -5085,7 +5197,7 @@ function saveGithubToken(){
   inp.dataset.masked = '';
   initGithubTokenUI();
   // Refresh all status bars in case they were already rendered
-  initSheetStatus(); initVouchersSyncBar(); initVipSyncBar();
+  initSheetStatus(); initVouchersSyncBar(); initVipSyncBar(); initChannelsSyncBar(); initSettingsSyncBar();
   showToast(v ? '✅ Đã lưu GitHub token' : '🗑 Đã xóa token');
 }
 
@@ -5095,7 +5207,7 @@ function clearGithubToken(){
   const inp = document.getElementById('cfg-gh-token');
   if (inp){ inp.value = ''; inp.dataset.masked = ''; }
   initGithubTokenUI();
-  initSheetStatus(); initVouchersSyncBar(); initVipSyncBar();
+  initSheetStatus(); initVouchersSyncBar(); initVipSyncBar(); initChannelsSyncBar(); initSettingsSyncBar();
   showToast('🗑 Đã xóa token');
 }
 
@@ -5136,6 +5248,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadTestimonialsFromGithub();
   loadVouchersFromGithub();
   loadVipFromGithub();
+  loadSettingsFromGithub();
 }, { once: true });
 
 </script> <!-- Admin Login Modal -->
