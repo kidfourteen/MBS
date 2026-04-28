@@ -2896,8 +2896,8 @@ function trackPurchase(order) {
    4. Điền vào 2 dòng dưới rồi save file
 */
 const CLOUDINARY = {
-  cloud: 'YOUR_CLOUD_NAME',     // vd: 'dxyz123abc'
-  preset: 'YOUR_UPLOAD_PRESET', // vd: 'mum_shop'
+  cloud: 'dwnqwmxob',
+  preset: 'Mumbigsize.com',
   get enabled(){ return this.cloud !== 'YOUR_CLOUD_NAME'; },
   // Tự động tạo URL thumbnail nhỏ hơn cho danh sách sản phẩm
   thumb(url, w=400){ 
@@ -2917,7 +2917,7 @@ const CLOUDINARY = {
    6. Save file HTML → commit lên GitHub
 */
 const SHEET_CONFIG = {
-  url: '',          // 'https://script.google.com/macros/s/AKfyc.../exec'
+  url: 'https://script.google.com/macros/s/AKfycbyXY4Ov6_M5gXf0QZOo6NIyCerPSziQIpzXVhtYceyAN_xgKPR2N_kRQerfBVvYbMWhGg/exec',
   key: 'MUM_SECRET_2025',   // Phải khớp với SECRET_KEY trong Apps Script
   get enabled(){ return this.url.startsWith('https://script.google.com'); }
 };
