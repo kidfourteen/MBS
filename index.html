@@ -2180,6 +2180,441 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   * { scrollbar-width: none; }
 }
 
+
+/* ══ TESTI v2 CSS ══ */
+
+/* ══ TESTIMONIALS v2 — Dynamic grid ══ */
+.testi-section { background: var(--bg2); padding: 72px 0; border-top: 1.5px solid var(--border); }
+.testi-section-inner { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+/* Grid: 3 cột PC, 2 cột tablet, 1 cột + scroll mobile */
+.testi-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* Card text thủ công */
+.testi-card-v2 {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform .22s, box-shadow .22s;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+}
+.testi-card-v2:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.testi-card-v2::before {
+  content: '❝';
+  position: absolute; top: 10px; right: 16px;
+  font-size: 48px; color: var(--pk-b);
+  font-family: Georgia, serif; line-height: 1;
+  pointer-events: none;
+}
+.tc-stars { color: #F59E0B; font-size: 15px; letter-spacing: 2px; flex-shrink: 0; }
+.tc-text {
+  font-size: 13.5px; color: var(--text2);
+  line-height: 1.85; flex: 1;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tc-user { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.tc-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--grad2); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+  overflow: hidden;
+}
+.tc-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.tc-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.tc-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.tc-hidden-tag {
+  position: absolute; top: 10px; left: 10px;
+  background: #f1f1f1; color: #999;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px; border-radius: 50px;
+}
+
+/* Card Facebook embed */
+.testi-card-fb {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.testi-card-fb:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* FB embed iframe wrapper — fixed height = đồng đều */
+.fb-embed-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 260px;
+  max-height: 380px;
+  background: var(--bg2);
+  overflow: hidden;
+}
+.fb-embed-wrap iframe {
+  width: 100% !important;
+  border: none !important;
+  border-radius: 0 !important;
+  display: block !important;
+}
+/* Overlay mask để cắt bớt phần thừa phía dưới iframe FB */
+.fb-embed-mask {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, #fff);
+  pointer-events: none;
+}
+.fb-embed-footer {
+  padding: 10px 16px 14px;
+  display: flex; align-items: center; gap: 8px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.fb-embed-footer-ic { font-size: 16px; }
+.fb-embed-footer a {
+  font-size: 12px; color: var(--pk); font-weight: 600;
+  text-decoration: none;
+}
+.fb-embed-footer a:hover { text-decoration: underline; }
+
+/* Loading skeleton */
+.fb-skeleton {
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.fb-skel-line {
+  height: 12px; border-radius: 6px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* Fb error fallback */
+.fb-error-card {
+  padding: 24px 20px;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 10px; text-align: center; flex: 1;
+}
+.fb-error-icon { font-size: 32px; }
+.fb-error-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.fb-error-link { font-size: 13px; color: var(--pk); font-weight: 700; text-decoration: none; }
+
+/* Empty state */
+.testi-empty {
+  grid-column: 1/-1;
+  text-align: center; padding: 56px 24px;
+  color: var(--muted); font-size: 14px;
+}
+.testi-empty-icon { font-size: 48px; display: block; margin-bottom: 14px; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .testi-grid-v2 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .testi-section { padding: 40px 0; }
+  .testi-section-inner { padding: 0; }
+  .section-label { padding: 0 16px; }
+
+  /* Mobile: scroll ngang thay vì stack dọc (xem nhiều hơn, UX tốt hơn) */
+  .testi-grid-v2 {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 14px;
+    padding: 4px 16px 16px;
+  }
+  .testi-grid-v2::-webkit-scrollbar { display: none; }
+  .testi-card-v2, .testi-card-fb {
+    flex-shrink: 0;
+    width: 80vw;
+    max-width: 320px;
+    scroll-snap-align: start;
+    height: auto;
+  }
+  .fb-embed-wrap { min-height: 220px; max-height: 300px; }
+
+  /* Scroll dots indicator */
+  .testi-dots {
+    display: flex !important;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 0 16px;
+  }
+  .testi-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border); transition: background .2s, width .2s;
+  }
+  .testi-dot.active { background: var(--pk); width: 18px; border-radius: 3px; }
+}
+@media (min-width: 769px) {
+  .testi-dots { display: none; }
+}
+
+/* ══ ADMIN: tab đánh giá ══ */
+.testi-admin-grid {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.testi-admin-row {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex; align-items: flex-start; gap: 14px;
+  transition: border-color .15s;
+}
+.testi-admin-row:hover { border-color: var(--pk-b); }
+.testi-admin-row.hidden-row { opacity: .55; }
+.testi-type-badge {
+  flex-shrink: 0; padding: 3px 10px;
+  border-radius: 50px; font-size: 10.5px; font-weight: 700;
+  white-space: nowrap;
+}
+.tb-text { background: var(--pk-l); color: var(--pk-d); }
+.tb-fb   { background: var(--fb-l); color: var(--fb); }
+.testi-admin-info { flex: 1; min-width: 0; }
+.testi-admin-name { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.testi-admin-preview {
+  font-size: 12.5px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%;
+}
+.testi-admin-meta { font-size: 11px; color: var(--light); margin-top: 4px; }
+.testi-admin-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.testi-vis-btn {
+  padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+  border: 1.5px solid var(--border); background: var(--bg);
+  cursor: pointer; font-family: var(--font); transition: all .15s;
+}
+.testi-vis-btn.on  { background: var(--gr-l); color: var(--gr); border-color: var(--gr-l); }
+.testi-vis-btn.off { background: #f5f5f5; color: var(--muted); }
+
+
+/* ══ CART+CHECKOUT+PDP FIX v6 ══ */
+
+/* ══════════════════════════════════════════
+   CART DRAWER — CLEAN REWRITE (v6)
+   Override tất cả rule cũ bên trên
+══════════════════════════════════════════ */
+
+/* ── Desktop: slide từ phải ── */
+.cart-overlay-bg {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(2px);
+  z-index: 590;
+}
+.cart-overlay-bg.show { display: block; }
+
+/* Reset hoàn toàn .cart-drawer */
+.cart-drawer {
+  position: fixed !important;
+  /* Desktop default */
+  top: 0 !important;
+  right: -440px !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 400px !important;
+  height: 100dvh !important;
+  background: #fff !important;
+  border-left: 1.5px solid var(--border) !important;
+  border-top: none !important;
+  border-radius: 0 !important;
+  z-index: 600 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: -8px 0 40px rgba(0,0,0,.12) !important;
+  transition: right .3s cubic-bezier(.4,0,.2,1), bottom .3s cubic-bezier(.34,1.1,.64,1) !important;
+  overflow: hidden !important;
+}
+.cart-drawer.open {
+  right: 0 !important;
+  bottom: auto !important;
+}
+
+.cart-head {
+  padding: 18px 20px !important;
+  border-bottom: 1.5px solid var(--border) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  background: #fff !important;
+}
+.cart-head h2 { font-size: 17px !important; font-weight: 800 !important; }
+.cart-close {
+  background: var(--bg2) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: 50% !important;
+  width: 36px !important; height: 36px !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  transition: all .18s !important;
+}
+.cart-close:hover { background: var(--pk-l) !important; color: var(--pk) !important; }
+
+.cart-items {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 12px 20px !important;
+  overscroll-behavior: contain !important;
+}
+.cart-foot {
+  padding: 16px 20px !important;
+  border-top: 1.5px solid var(--border) !important;
+  flex-shrink: 0 !important;
+  background: #fff !important;
+}
+
+/* ── Mobile: bottom sheet ── */
+@media (max-width: 768px) {
+  .cart-drawer {
+    top: auto !important;
+    right: 0 !important;
+    bottom: -100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 88vh !important;
+    max-height: 88vh !important;
+    border-left: none !important;
+    border-top: 1.5px solid var(--border) !important;
+    border-radius: 20px 20px 0 0 !important;
+    box-shadow: 0 -8px 40px rgba(0,0,0,.15) !important;
+    transition: bottom .35s cubic-bezier(.34,1.1,.64,1) !important;
+  }
+  .cart-drawer.open {
+    bottom: 0 !important;
+    right: 0 !important;
+  }
+  .cart-head {
+    padding: 14px 18px 14px !important;
+    position: relative !important;
+  }
+  /* Drag handle */
+  .cart-head::before {
+    content: '' !important;
+    display: block !important;
+    width: 36px !important; height: 4px !important;
+    background: #ddd !important;
+    border-radius: 2px !important;
+    position: absolute !important;
+    top: 8px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .cart-items {
+    padding: 12px 16px !important;
+    /* Quan trọng: overscroll-behavior để không scroll trang nền */
+    overscroll-behavior-y: contain !important;
+  }
+  .cart-foot {
+    padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   CHECKOUT MOBILE — clean
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .checkout-page {
+    grid-template-columns: 1fr !important;
+    padding: 12px 14px 100px !important;
+    max-width: 100% !important;
+    gap: 12px !important;
+  }
+  /* Summary lên trên */
+  .ck-summary {
+    order: -1 !important;
+    position: static !important;
+    top: auto !important;
+    border-radius: 12px !important;
+  }
+  .ck-card { border-radius: 12px !important; padding: 16px 14px !important; }
+
+  /* Input 16px tránh iOS zoom */
+  #scr-checkout input,
+  #scr-checkout select,
+  #scr-checkout textarea {
+    font-size: 16px !important;
+    min-height: 44px !important;
+  }
+
+  /* Confirm button sticky bottom */
+  .ck-confirm-btn {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important; right: 0 !important;
+    border-radius: 0 !important;
+    padding: 16px !important;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    margin: 0 !important;
+    z-index: 400 !important;
+    font-size: 15px !important;
+    box-shadow: 0 -4px 20px rgba(0,0,0,.1) !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   PDP MOBILE — sticky buy bar
+══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pdp-btn-row {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important; right: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    padding: 12px 16px !important;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+    background: rgba(255,255,255,.97) !important;
+    backdrop-filter: blur(8px) !important;
+    border-top: 1.5px solid var(--border) !important;
+    z-index: 400 !important;
+    margin: 0 !important;
+    box-shadow: 0 -4px 16px rgba(0,0,0,.08) !important;
+  }
+  .pdp-btn-add, .pdp-btn-buy {
+    flex: 1 !important;
+    padding: 14px 8px !important;
+    font-size: 13.5px !important;
+    border-radius: 12px !important;
+    min-height: 48px !important;
+  }
+  /* Thêm padding bottom để nội dung không bị che bởi sticky bar */
+  .pdp-buy {
+    padding-bottom: 90px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2187,7 +2622,19 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav"> <div class="pc-nav-link" onclick="goScroll('flash-section')">Flash Sale</div> <div class="pc-nav-link" onclick="goScroll('products-section')">Sản phẩm</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <div class="mob-filter-bar" id="mob-cats"> <div class="mob-chip active" onclick="setCat(this,'all')">Tất cả</div> <div class="mob-chip" onclick="setCat(this,'vay')">Váy đầm</div> <div class="mob-chip" onclick="setCat(this,'ao')">Áo</div> <div class="mob-chip" onclick="setCat(this,'quan')">Quần</div> <div class="mob-chip" onclick="setCat(this,'set')">Bộ set</div> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500K</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500K</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
           Mũm Big Size — thương hiệu thời trang dành riêng cho nàng <strong style="color:var(--pk-d)">55kg đến 120kg</strong>.<br>
           Chúng mình hiểu cơ thể bạn hơn ai hết — từng đường cắt, từng cm vải đều được thiết kế để bạn <strong style="color:var(--pu-d)">tự tin tỏa sáng</strong> mỗi ngày.
-        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">⚡ Flash Sale hôm nay</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-floating-badge"><strong>-40%</strong>Flash<br>Sale</div> <div class="hero-emoji-grid"> <div class="hero-card" onclick="setCatDirect('vay')"><span>👗</span><p>Váy đầm</p></div> <div class="hero-card" onclick="setCatDirect('ao')"><span>👔</span><p>Áo</p></div> <div class="hero-card" onclick="setCatDirect('set')"><span>🎀</span><p>Bộ set</p></div> <div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div> <div class="hero-card"><span>🌸</span><p>Mới về</p></div> <div class="hero-card"><span>💪</span><p>120kg OK!</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner"> <div class="feat-strip-item"><span class="feat-strip-ic">🚚</span><div class="feat-strip-text"><strong>Miễn phí vận chuyển</strong><span>Đơn từ 500k – toàn quốc</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">💪</span><div class="feat-strip-text"><strong>Size lên đến 120kg</strong><span>L, XL, 2XL, 3XL, 4XL, 5XL</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">🔄</span><div class="feat-strip-text"><strong>Đổi size miễn phí</strong><span>Trong vòng 7 ngày nhận hàng</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">✅</span><div class="feat-strip-text"><strong>Cam kết chất lượng</strong><span>Kiểm hàng trước khi giao</span></div></div> </div> </div> <div class="flash-bar" id="flash-section"> <div class="flash-bar-inner"> <div class="flash-head"> <h3>⚡ Flash Sale hôm nay</h3> <div class="countdown" style="margin-left:14px"> <div class="cbox" id="fc-h">02</div><span class="csep">:</span> <div class="cbox" id="fc-m">47</div><span class="csep">:</span> <div class="cbox" id="fc-s">30</div> </div> <div style="margin-left:auto;font-size:12px;color:var(--muted)">Giảm đến 40%</div> </div> <div class="flash-items" id="flash-items"></div> </div> </div> <div class="shop-body" id="products-section"> <aside class="filter-sidebar"> <div class="fs-title">🔍 Lọc sản phẩm</div> <div class="fs-section"> <h4>Danh mục</h4> <div class="cat-list" id="cat-list"> <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div> <div class="cat-item" onclick="setCat(this,'vay')"><span>👗</span>Váy đầm</div> <div class="cat-item" onclick="setCat(this,'ao')"><span>👔</span>Áo</div> <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div> <div class="cat-item" onclick="setCat(this,'set')"><span>🎀</span>Bộ set</div> </div> </div> <div class="fs-section"> <h4>Size</h4> <div class="size-grid" id="sz-grid"> <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div> <div class="sz-btn" onclick="setSz(this,'L')">L</div> <div class="sz-btn" onclick="setSz(this,'XL')">XL</div> <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div> <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div> <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div> <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div> </div> </div> </aside> <div> <div class="prod-area-head"> <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2> <select class="sort-select" onchange="doSort(this.value)"> <option value="default">Mặc định</option> <option value="price-asc">Giá tăng dần</option> <option value="price-desc">Giá giảm dần</option> <option value="sold">Bán chạy nhất</option> </select> </div> <div class="prod-grid" id="prod-grid"></div> </div> </div> <!-- Challenge Section --> <div class="challenge-section reveal"> <div class="challenge-inner"> <span class="challenge-tag">💪 THÁCH THỨC CÂN NẶNG</span> <h2 class="challenge-h2">Không có size nào<br>là <em>quá lớn</em> với Mũm</h2> <p class="challenge-p">Chúng mình không giới hạn bạn. Dù bạn 55kg hay 120kg, dù vóc dáng nào — Mũm Big Size luôn có outfit xịn đang chờ bạn. Vì vẻ đẹp không có số đo.</p> <div class="challenge-cards"> <div class="challenge-card"> <div class="challenge-card-ic">📏</div> <strong>Size L đến 5XL</strong> <span>Phủ sóng từ 55kg đến 120kg+. Mỗi size được đo chính xác theo vóc dáng Việt Nam.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">✂️</div> <strong>Cắt may riêng cho nàng mũm</strong> <span>Không phải size thường cắt to ra — mà thiết kế từ đầu cho đường cong tự nhiên của bạn.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">🌸</div> <strong>Tự tin là đẹp nhất</strong> <span>Hàng ngàn khách hàng đã tìm lại sự tự tin với thời trang — bạn là người tiếp theo!</span> </div> </div> <button class="challenge-cta" onclick="goScroll('products-section')">Tìm outfit của tôi →</button> </div> </div> <!-- Size visual teaser --> <div class="size-teaser reveal"> <div class="size-teaser-inner"> <div> <span style="display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px">📏 BẢNG SIZE MŨM BIGSIZE</span> <h2 style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px">Phủ sóng <span style="color:var(--pk)">mọi vóc dáng</span></h2> <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">Từ nàng 55kg thanh mảnh đến nàng 120kg đầy đặn — Mũm đều có size vừa vặn. Mỗi sản phẩm đều ghi rõ bảng size chi tiết để bạn chọn chuẩn ngay lần đầu.</p> <button class="btn btn-pk" style="border-radius:50px;padding:11px 24px" onclick="goScroll('products-section')">Xem sản phẩm →</button> </div> <div class="size-bar-list"> <div class="size-bar-row"><span class="size-bar-lbl">L</span><div class="size-bar-track"><div class="size-bar-fill" style="width:40%"></div></div><span class="size-bar-kg">55 – 65 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:55%"></div></div><span class="size-bar-kg">65 – 75 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">2XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:68%"></div></div><span class="size-bar-kg">75 – 85 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">3XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:78%"></div></div><span class="size-bar-kg">85 – 95 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">4XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:88%"></div></div><span class="size-bar-kg">95 – 105 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">5XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:100%"></div></div><span class="size-bar-kg">105 – 120 kg</span></div> </div> </div> </div> <!-- Testimonials --> <div class="testimonials reveal"> <div class="testimonials-inner"> <div class="section-label"> <h2>Khách hàng nói gì về <span>Mũm</span>?</h2> <p>Hơn 10.000 nàng đã tin tưởng và yêu thích thương hiệu Mũm Big Size</p> </div> <div class="testi-grid"> <div class="testi-card"> <div class="testi-stars">★★★★★</div> <p class="testi-text">"Mình 92kg, mặc size 3XL vừa khít, đường may đẹp lắm! Váy maxi mặc đi chơi ai cũng hỏi mua ở đâu. Mũm hiểu nàng mũm thật sự!"</p> <div class="testi-user"><div class="testi-avatar">TH</div><div><div class="testi-name">Trần Hà My</div><div class="testi-info">TP.HCM · Đã mua 3 lần</div></div></div> </div> <div class="testi-card"> <div class="testi-stars">★★★★★</div> <p class="testi-text">"Trước giờ mình 105kg không tìm được quần vừa, thử size 4XL của Mũm là vừa liền. Chất vải mát mẻ, giá cả hợp lý nữa. Ủng hộ shop dài dài!"</p> <div class="testi-user"><div class="testi-avatar">NL</div><div><div class="testi-name">Nguyễn Lan Anh</div><div class="testi-info">Hà Nội · Đã mua 5 lần</div></div></div> </div> <div class="testi-card"> <div class="testi-stars">★★★★★</div> <p class="testi-text">"Mình đặt qua Zalo, shop tư vấn size nhiệt tình, giao hàng nhanh. Bộ set linen mặc đi làm cả tuần không chán. Cảm ơn Mũm đã cho mình tự tin hơn!"</p> <div class="testi-user"><div class="testi-avatar">PB</div><div><div class="testi-name">Phạm Bảo Châu</div><div class="testi-info">Đà Nẵng · Đã mua 4 lần</div></div></div> </div> </div> </div> </div> <footer class="site-footer"> <div class="site-footer-inner"> <div><div class="logo-full" style="margin-bottom:10px"><img class="brand-logo" alt="Mũm Big Size" style="height:52px;width:auto;object-fit:contain;display:block"></div><p style="font-size:13px;color:var(--muted);line-height:1.7">Thương hiệu thời trang bigsize dành cho phụ nữ Việt. Size S–5XL, đẹp cho mọi vóc dáng.</p></div> <div><div style="font-size:13px;font-weight:700;margin-bottom:10px">Liên hệ</div><div style="font-size:13px;color:var(--muted);line-height:2">📱 <a href="https://www.facebook.com/mumbigsize.top/" style="color:var(--fb)" target="_blank">facebook.com/mumbigsize.top</a><br>💬 Zalo: Cấu hình trong Admin<br>📍 TP. Hồ Chí Minh</div></div> <div><div style="font-size:13px;font-weight:700;margin-bottom:10px">Chính sách</div><div style="font-size:13px;color:var(--muted);line-height:2">🚚 Miễn phí ship từ 500k<br>🔄 Đổi size trong 7 ngày<br>✅ Hàng chất lượng cam kết</div></div> </div> <div style="max-width:var(--max);margin:20px auto 0;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);text-align:center">© 2025 Mũm Bigsize – Love Your Size</div> </footer>
+        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">⚡ Flash Sale hôm nay</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-floating-badge"><strong>-40%</strong>Flash<br>Sale</div> <div class="hero-emoji-grid"> <div class="hero-card" onclick="setCatDirect('vay')"><span>👗</span><p>Váy đầm</p></div> <div class="hero-card" onclick="setCatDirect('ao')"><span>👔</span><p>Áo</p></div> <div class="hero-card" onclick="setCatDirect('set')"><span>🎀</span><p>Bộ set</p></div> <div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div> <div class="hero-card"><span>🌸</span><p>Mới về</p></div> <div class="hero-card"><span>💪</span><p>120kg OK!</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner"> <div class="feat-strip-item"><span class="feat-strip-ic">🚚</span><div class="feat-strip-text"><strong>Miễn phí vận chuyển</strong><span>Đơn từ 500k – toàn quốc</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">💪</span><div class="feat-strip-text"><strong>Size lên đến 120kg</strong><span>L, XL, 2XL, 3XL, 4XL, 5XL</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">🔄</span><div class="feat-strip-text"><strong>Đổi size miễn phí</strong><span>Trong vòng 7 ngày nhận hàng</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">✅</span><div class="feat-strip-text"><strong>Cam kết chất lượng</strong><span>Kiểm hàng trước khi giao</span></div></div> </div> </div> <div class="flash-bar" id="flash-section"> <div class="flash-bar-inner"> <div class="flash-head"> <h3>⚡ Flash Sale hôm nay</h3> <div class="countdown" style="margin-left:14px"> <div class="cbox" id="fc-h">02</div><span class="csep">:</span> <div class="cbox" id="fc-m">47</div><span class="csep">:</span> <div class="cbox" id="fc-s">30</div> </div> <div style="margin-left:auto;font-size:12px;color:var(--muted)">Giảm đến 40%</div> </div> <div class="flash-items" id="flash-items"></div> </div> </div> <div class="shop-body" id="products-section"> <aside class="filter-sidebar"> <div class="fs-title">🔍 Lọc sản phẩm</div> <div class="fs-section"> <h4>Danh mục</h4> <div class="cat-list" id="cat-list"> <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div> <div class="cat-item" onclick="setCat(this,'vay')"><span>👗</span>Váy đầm</div> <div class="cat-item" onclick="setCat(this,'ao')"><span>👔</span>Áo</div> <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div> <div class="cat-item" onclick="setCat(this,'set')"><span>🎀</span>Bộ set</div> </div> </div> <div class="fs-section"> <h4>Size</h4> <div class="size-grid" id="sz-grid"> <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div> <div class="sz-btn" onclick="setSz(this,'L')">L</div> <div class="sz-btn" onclick="setSz(this,'XL')">XL</div> <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div> <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div> <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div> <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div> </div> </div> </aside> <div> <div class="prod-area-head"> <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2> <select class="sort-select" onchange="doSort(this.value)"> <option value="default">Mặc định</option> <option value="price-asc">Giá tăng dần</option> <option value="price-desc">Giá giảm dần</option> <option value="sold">Bán chạy nhất</option> </select> </div> <div class="prod-grid" id="prod-grid"></div> </div> </div> <!-- Challenge Section --> <div class="challenge-section reveal"> <div class="challenge-inner"> <span class="challenge-tag">💪 THÁCH THỨC CÂN NẶNG</span> <h2 class="challenge-h2">Không có size nào<br>là <em>quá lớn</em> với Mũm</h2> <p class="challenge-p">Chúng mình không giới hạn bạn. Dù bạn 55kg hay 120kg, dù vóc dáng nào — Mũm Big Size luôn có outfit xịn đang chờ bạn. Vì vẻ đẹp không có số đo.</p> <div class="challenge-cards"> <div class="challenge-card"> <div class="challenge-card-ic">📏</div> <strong>Size L đến 5XL</strong> <span>Phủ sóng từ 55kg đến 120kg+. Mỗi size được đo chính xác theo vóc dáng Việt Nam.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">✂️</div> <strong>Cắt may riêng cho nàng mũm</strong> <span>Không phải size thường cắt to ra — mà thiết kế từ đầu cho đường cong tự nhiên của bạn.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">🌸</div> <strong>Tự tin là đẹp nhất</strong> <span>Hàng ngàn khách hàng đã tìm lại sự tự tin với thời trang — bạn là người tiếp theo!</span> </div> </div> <button class="challenge-cta" onclick="goScroll('products-section')">Tìm outfit của tôi →</button> </div> </div> <!-- Size visual teaser --> <div class="size-teaser reveal"> <div class="size-teaser-inner"> <div> <span style="display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px">📏 BẢNG SIZE MŨM BIGSIZE</span> <h2 style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px">Phủ sóng <span style="color:var(--pk)">mọi vóc dáng</span></h2> <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">Từ nàng 55kg thanh mảnh đến nàng 120kg đầy đặn — Mũm đều có size vừa vặn. Mỗi sản phẩm đều ghi rõ bảng size chi tiết để bạn chọn chuẩn ngay lần đầu.</p> <button class="btn btn-pk" style="border-radius:50px;padding:11px 24px" onclick="goScroll('products-section')">Xem sản phẩm →</button> </div> <div class="size-bar-list"> <div class="size-bar-row"><span class="size-bar-lbl">L</span><div class="size-bar-track"><div class="size-bar-fill" style="width:40%"></div></div><span class="size-bar-kg">55 – 65 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:55%"></div></div><span class="size-bar-kg">65 – 75 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">2XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:68%"></div></div><span class="size-bar-kg">75 – 85 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">3XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:78%"></div></div><span class="size-bar-kg">85 – 95 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">4XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:88%"></div></div><span class="size-bar-kg">95 – 105 kg</span></div> <div class="size-bar-row"><span class="size-bar-lbl">5XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:100%"></div></div><span class="size-bar-kg">105 – 120 kg</span></div> </div> </div> </div> <!-- Testimonials v2 — dynamic -->
+<div class="testi-section reveal">
+  <div class="testi-section-inner">
+    <div class="section-label">
+      <h2>Khách hàng nói gì về <span>Mũm</span>?</h2>
+      <p>Hơn 10.000 nàng đã tin tưởng và yêu thích thương hiệu Mũm Big Size</p>
+    </div>
+    <div class="testi-grid-v2" id="testi-grid"></div>
+    <div class="testi-dots" id="testi-dots"></div>
+  </div>
+</div>
+
+<footer class="site-footer"> <div class="site-footer-inner"> <div><div class="logo-full" style="margin-bottom:10px"><img class="brand-logo" alt="Mũm Big Size" style="height:52px;width:auto;object-fit:contain;display:block"></div><p style="font-size:13px;color:var(--muted);line-height:1.7">Thương hiệu thời trang bigsize dành cho phụ nữ Việt. Size S–5XL, đẹp cho mọi vóc dáng.</p></div> <div><div style="font-size:13px;font-weight:700;margin-bottom:10px">Liên hệ</div><div style="font-size:13px;color:var(--muted);line-height:2">📱 <a href="https://www.facebook.com/mumbigsize.top/" style="color:var(--fb)" target="_blank">facebook.com/mumbigsize.top</a><br>💬 Zalo: Cấu hình trong Admin<br>📍 TP. Hồ Chí Minh</div></div> <div><div style="font-size:13px;font-weight:700;margin-bottom:10px">Chính sách</div><div style="font-size:13px;color:var(--muted);line-height:2">🚚 Miễn phí ship từ 500k<br>🔄 Đổi size trong 7 ngày<br>✅ Hàng chất lượng cam kết</div></div> </div> <div style="max-width:var(--max);margin:20px auto 0;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);text-align:center">© 2025 Mũm Bigsize – Love Your Size</div> </footer>
 </div> <!-- Cart bg + drawer -->
 <div class="cart-overlay-bg" id="cart-bg" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer"> <div class="cart-head"><h2>🛒 Giỏ hàng</h2><button class="cart-close" onclick="closeCart()">×</button></div> <div class="cart-items" id="cart-items-el"></div> <div class="cart-foot" id="cart-foot-el"></div>
@@ -2200,12 +2647,108 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 </div> <!-- ══════════ SUCCESS ══════════ -->
 <div id="scr-success" class="screen"> <header class="pc-header"><div class="pc-header-inner"><div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" style="height:44px;width:auto;object-fit:contain;display:block"></div></div></header> <div class="success-page"> <div style="font-size:72px;margin-bottom:18px">🎉</div> <h2 style="font-size:26px;font-weight:700;color:var(--pk-d);margin-bottom:10px">Đặt hàng thành công!</h2> <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7">Mũm sẽ xác nhận và liên hệ bạn trong 24h.<br>Cảm ơn bạn đã tin tưởng Mũm Bigsize! 🌸</p> <button class="btn btn-pk" style="padding:13px 36px;font-size:15px;border-radius:12px" onclick="backShop()">← Tiếp tục mua sắm</button> </div>
 </div> <!-- ══════════ ADMIN ══════════ -->
-<div id="scr-admin" class="screen"> <div class="admin-wrap"> <aside class="ad-sidebar"> <div class="ad-logo-box"><div style="margin-bottom:4px"><img class="brand-logo" alt="Mũm" style="height:36px;width:auto;object-fit:contain;display:block"></div><div class="n" style="font-size:11px;margin-top:2px">Admin Panel</div><div class="s">Quản lý cửa hàng</div></div> <button class="ad-back" onclick="backShop()">← Về trang shop</button> <div> <div class="ad-sep">Tổng quan</div> <div class="ad-nav-it active" onclick="adPage('dashboard',this)"><span>📊</span>Dashboard</div> <div class="ad-sep">Quản lý</div> <div class="ad-nav-it" onclick="adPage('products',this)"><span>👗</span>Sản phẩm</div> <div class="ad-nav-it" onclick="adPage('orders',this)"><span>📦</span>Đơn hàng</div> <div class="ad-sep">Kênh bán</div> <div class="ad-nav-it" onclick="adPage('channels',this)"><span>🔗</span>Zalo & Facebook</div> <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val">24</div><div class="stat-sub sub-up">↑ 12% hôm qua</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" style="font-size:20px">18.4tr</div><div class="stat-sub sub-up">↑ 8% tháng trước</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" style="color:var(--am)">6</div><div class="stat-sub sub-dn">3 Zalo · 3 FB</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'vay')">Váy đầm</div><div class="tab" onclick="apTab(this,'ao')">Áo</div><div class="tab" onclick="apTab(this,'quan')">Quần</div><div class="tab" onclick="apTab(this,'set')">Bộ set</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
+<div id="scr-admin" class="screen"> <div class="admin-wrap"> <aside class="ad-sidebar"> <div class="ad-logo-box"><div style="margin-bottom:4px"><img class="brand-logo" alt="Mũm" style="height:36px;width:auto;object-fit:contain;display:block"></div><div class="n" style="font-size:11px;margin-top:2px">Admin Panel</div><div class="s">Quản lý cửa hàng</div></div> <button class="ad-back" onclick="backShop()">← Về trang shop</button> <div> <div class="ad-sep">Tổng quan</div> <div class="ad-nav-it active" onclick="adPage('dashboard',this)"><span>📊</span>Dashboard</div> <div class="ad-sep">Quản lý</div> <div class="ad-nav-it" onclick="adPage('products',this)"><span>👗</span>Sản phẩm</div> <div class="ad-nav-it" onclick="adPage('orders',this)"><span>📦</span>Đơn hàng</div> <div class="ad-sep">Kênh bán</div> <div class="ad-nav-it" onclick="adPage('channels',this)"><span>🔗</span>Zalo & Facebook</div> <div class="ad-nav-it" onclick="adPage('reviews',this)"><span>⭐</span>Đánh giá</div>
+              <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val">24</div><div class="stat-sub sub-up">↑ 12% hôm qua</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" style="font-size:20px">18.4tr</div><div class="stat-sub sub-up">↑ 8% tháng trước</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" style="color:var(--am)">6</div><div class="stat-sub sub-dn">3 Zalo · 3 FB</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'vay')">Váy đầm</div><div class="tab" onclick="apTab(this,'ao')">Áo</div><div class="tab" onclick="apTab(this,'quan')">Quần</div><div class="tab" onclick="apTab(this,'set')">Bộ set</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
 </div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.top</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.top/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div> </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
 </div> <div id="adp-viplist" class="ad-page"> <div class="ad-topbar"><h1>Khách hàng VIP</h1></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Upload danh sách SĐT VIP</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">Upload file .txt hoặc .csv — mỗi số điện thoại 1 dòng. Khách hàng có SĐT trong danh sách sẽ tự động được nhận diện VIP và giảm 10% khi thanh toán.</div> <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px"> <input type="file" id="vip-file-input" accept=".txt,.csv" onchange="loadVipFile()" style="display:none"> <button class="btn btn-pk" onclick="document.getElementById('vip-file-input').click()">📁 Upload file SĐT</button> <button class="btn" onclick="addVipManual()">+ Thêm thủ công</button> <button class="btn" onclick="testVipMe()" title="Thêm SĐT của bạn để test">🧪 Test với SĐT của tôi</button> <button class="btn" style="color:var(--re)" onclick="clearVip()">🗑 Xóa tất cả</button> </div> <div class="af" style="margin-bottom:12px"> <label>Hoặc dán danh sách SĐT (mỗi số 1 dòng)</label> <textarea id="vip-paste-area" rows="5" placeholder="0912345678&#10;0987654321&#10;0909090909..." style="font-family:monospace;font-size:12px"></textarea> <button class="btn btn-pk" style="margin-top:8px" onclick="parseVipPaste()">Áp dụng danh sách</button> </div> <div class="ad-sec-head" style="margin-top:16px"><h2>Danh sách hiện tại (<span id="vip-count">0</span> SĐT)</h2></div> <div id="vip-list-el" style="font-family:monospace;font-size:12px;max-height:300px;overflow-y:auto;background:var(--bg);border-radius:8px;padding:12px;line-height:2;color:var(--text)"></div> </div> </div>
 </div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
                 Mỗi đơn hàng mới sẽ tự động gửi tin nhắn vào Telegram của bạn ngay lập tức.<br> <strong>Cách lấy Token:</strong> Tìm @BotFather trên Telegram → /newbot → copy Token<br> <strong>Cách lấy Chat ID:</strong> Mở bot → gõ /start → vào <code>api.telegram.org/bot[TOKEN]/getUpdates</code> → tìm "id"
-              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle ${TELEGRAM_CONFIG.enabled?'on':'off'}" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">${TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt'}</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value="${TELEGRAM_CONFIG.token}"></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value="${TELEGRAM_CONFIG.chatId}"></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> </main> </div>
+              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle ${TELEGRAM_CONFIG.enabled?'on':'off'}" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">${TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt'}</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value="${TELEGRAM_CONFIG.token}"></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value="${TELEGRAM_CONFIG.chatId}"></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
+<div id="adp-reviews" class="ad-page">
+  <div class="ad-topbar">
+    <h1>⭐ Quản lý đánh giá</h1>
+    <button class="btn btn-pk" onclick="openAddTesti()">+ Thêm đánh giá</button>
+  </div>
+  <div class="ad-content">
+    <div class="ad-section">
+      <div class="ad-sec-head">
+        <h2>Danh sách đánh giá (<span id="testi-count">0</span>)</h2>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span style="font-size:12px;color:var(--muted)">Kéo để sắp xếp</span>
+        </div>
+      </div>
+      <div style="padding:18px">
+        <div class="info-box info-zl" style="margin-bottom:16px">
+          💡 Hỗ trợ 2 loại đánh giá: <strong>Text thủ công</strong> (nhập tay) và <strong>Facebook embed</strong> (nhúng link bài post public từ Facebook). Tắt hiển thị để ẩn tạm thời mà không xóa.
+        </div>
+        <div class="testi-admin-grid" id="testi-admin-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal thêm/sửa đánh giá -->
+<div id="testi-modal" class="modal-overlay" style="display:none">
+  <div class="modal-box" style="max-width:560px;width:90%">
+    <div class="modal-head">
+      <h2 id="testi-modal-title">Thêm đánh giá</h2>
+      <button class="modal-close" onclick="closeTestiModal()">×</button>
+    </div>
+    <div style="padding:20px">
+      <!-- Loại đánh giá -->
+      <div class="af" style="margin-bottom:16px">
+        <label>Loại đánh giá</label>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;flex:1;transition:all .15s" id="type-text-lbl">
+            <input type="radio" name="testi-type" value="text" checked onchange="switchTestiType('text')" style="accent-color:var(--pk)">
+            <span>✍️</span>
+            <div><strong style="font-size:13px">Text thủ công</strong><div style="font-size:11.5px;color:var(--muted)">Nhập tên, nội dung</div></div>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;padding:10px 16px;border:1.5px solid var(--border);border-radius:10px;flex:1;transition:all .15s" id="type-fb-lbl">
+            <input type="radio" name="testi-type" value="fb" onchange="switchTestiType('fb')" style="accent-color:var(--pk)">
+            <span>📘</span>
+            <div><strong style="font-size:13px">Facebook embed</strong><div style="font-size:11.5px;color:var(--muted)">Link bài post public</div></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Form text -->
+      <div id="testi-form-text">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="af"><label>Tên khách hàng *</label><input id="tf-name" placeholder="VD: Trần Hà My"></div>
+          <div class="af"><label>Địa điểm</label><input id="tf-location" placeholder="VD: TP.HCM"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="af">
+            <label>Số sao</label>
+            <select id="tf-stars">
+              <option value="5">★★★★★ (5 sao)</option>
+              <option value="4">★★★★☆ (4 sao)</option>
+              <option value="3">★★★☆☆ (3 sao)</option>
+            </select>
+          </div>
+          <div class="af"><label>Đã mua (lần)</label><input type="number" id="tf-purchases" placeholder="VD: 3" min="1"></div>
+        </div>
+        <div class="af"><label>URL ảnh đại diện (để trống dùng chữ cái)</label><input id="tf-avatar" placeholder="https://..."></div>
+        <div class="af"><label>Nội dung đánh giá *</label><textarea id="tf-text" rows="4" placeholder="Nội dung đánh giá của khách hàng..."></textarea></div>
+        <div class="af"><label>Ngày (hiển thị)</label><input id="tf-date" placeholder="VD: 2 ngày trước"></div>
+      </div>
+
+      <!-- Form Facebook -->
+      <div id="testi-form-fb" style="display:none">
+        <div class="info-box info-fb" style="margin-bottom:14px">
+          📌 Bài post Facebook phải để chế độ <strong>Public</strong>. Sao chép link bài post (nút chia sẻ → Sao chép liên kết).
+        </div>
+        <div class="af">
+          <label>Link bài post Facebook *</label>
+          <input id="tf-fburl" placeholder="https://www.facebook.com/permalink.php?story_fbid=...">
+        </div>
+        <div class="af"><label>Tên hiển thị (tên khách hoặc mô tả ngắn)</label><input id="tf-fbname" placeholder="VD: Khách Hà Nội chia sẻ"></div>
+        <div style="margin-top:10px">
+          <button class="btn" onclick="previewFbEmbed()" style="font-size:13px">👁 Xem thử embed</button>
+        </div>
+        <div id="fb-preview-wrap" style="margin-top:12px;border-radius:10px;overflow:hidden;border:1px solid var(--border);display:none"></div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="btn btn-pk" onclick="saveTestimonial()" style="flex:1">Lưu đánh giá</button>
+        <button class="btn" onclick="closeTestiModal()">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main> </div>
 </div> <!-- Add/Edit Product Modal -->
 <div class="ad-overlay" id="prod-modal" onclick="if(event.target===this)closeProdModal()"> <div class="ad-modal"> <div class="ad-modal-head"><h3 id="pm-title">Thêm sản phẩm mới</h3><button style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:16px" onclick="closeProdModal()">×</button></div> <div class="ad-modal-body"> <!-- Image upload --> <div class="af"> <label>Ảnh sản phẩm (tối đa 5 ảnh, tỉ lệ 1:1)</label> <!-- Cloudinary status bar -->
 <div id="cloudinary-status" style="margin-bottom:14px;padding:12px 16px;border-radius:10px;font-size:12.5px;display:flex;align-items:center;gap:10px"> <span id="cld-dot" style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#ccc"></span> <div> <strong id="cld-title">Cloudinary chưa cài</strong> <div id="cld-sub" style="color:var(--muted);margin-top:2px">Ảnh upload chỉ lưu tạm — khách không xem được. 
@@ -2338,6 +2881,40 @@ let products=[
   {id:11,name:'Quần palazzo hoa nhí',price:249,old:320,emoji:'👖',cat:'quan',sizes:['XL','2XL','3XL','4XL'],colors:['#F4C0D1','#fff'],status:'on',sold:430,images:[],tags:[],desc:'Quần palazzo hoa nhí – bay bổng và duyên dáng.'},
   {id:12,name:'Bộ set linen mùa hè',price:449,old:560,emoji:'🎀',cat:'set',sizes:['L','XL','2XL','3XL'],colors:['#fff','#F4C0D1','#5DCAA5'],status:'on',sold:289,images:[],tags:['mới về'],desc:'Bộ set linen mùa hè – mát mẻ thoáng khí, sang trọng đơn giản.'},
 ];
+
+/* ══ TESTIMONIALS DATA ══ */
+let testimonials = [
+  {
+    id: 1, type: 'text',
+    name: 'Trần Hà My', location: 'TP.HCM', purchases: 3,
+    stars: 5,
+    text: 'Mình 92kg, mặc size 3XL vừa khít, đường may đẹp lắm! Váy maxi mặc đi chơi ai cũng hỏi mua ở đâu. Mũm hiểu nàng mũm thật sự!',
+    avatar: '', // URL ảnh hoặc để trống dùng chữ cái
+    date: '2 ngày trước',
+    visible: true
+  },
+  {
+    id: 2, type: 'text',
+    name: 'Nguyễn Lan Anh', location: 'Hà Nội', purchases: 5,
+    stars: 5,
+    text: 'Trước giờ mình 105kg không tìm được quần vừa, thử size 4XL của Mũm là vừa liền. Chất vải mát mẻ, giá cả hợp lý nữa. Ủng hộ shop dài dài!',
+    avatar: '',
+    date: '5 ngày trước',
+    visible: true
+  },
+  {
+    id: 3, type: 'text',
+    name: 'Phạm Bảo Châu', location: 'Đà Nẵng', purchases: 4,
+    stars: 5,
+    text: 'Mình đặt qua Zalo, shop tư vấn size nhiệt tình, giao hàng nhanh. Bộ set linen mặc đi làm cả tuần không chán. Cảm ơn Mũm đã cho mình tự tin hơn!',
+    avatar: '',
+    date: '1 tuần trước',
+    visible: true
+  }
+];
+/* Lấy ID mới nhất cho testimonial */
+function nextTestiId(){ return testimonials.length ? Math.max(...testimonials.map(t=>t.id))+1 : 1; }
+
 /* ══ SHOP CONFIG (edit in Admin > Kênh bán) ══ */
 /* ══ TELEGRAM CONFIG ══ */
 const TELEGRAM_CONFIG = {
@@ -2609,7 +3186,7 @@ function setCat(el,c){
       if(oc.includes("'"+c+"'"))x.classList.add('active');
     });
   }
-  renderShop();
+  renderShop();renderTestimonials();
 }
 function setCatDirect(c){setCat(null,c);goScroll('products-section');}
 function setSz(el,s){szF=s;document.querySelectorAll('#sz-grid .sz-btn').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderShop();}
@@ -2717,30 +3294,35 @@ function pdpOrderFB(){
 
 /* ══ CART ══ */
 function openCart(){
-  document.getElementById('cart-bg').classList.add('show');
-  document.getElementById('cart-drawer').classList.add('open');
-  document.body.style.overflow='hidden'; // Chặn scroll khi cart mở
-}
-function _openCart_original(){
-  renderCart();
+  renderCart(); // PHẢI gọi renderCart() trước khi show
   const drawer=document.getElementById('cart-drawer');
   const bg=document.getElementById('cart-bg');
-  if(drawer)drawer.classList.add('open');
-  if(bg)bg.classList.add('show');
+  if(drawer) drawer.classList.add('open');
+  if(bg) bg.classList.add('show');
+  document.body.style.overflow='hidden';
 }
 function closeCart(){
-  document.getElementById('cart-bg').classList.remove('show');
-  document.getElementById('cart-drawer').classList.remove('open');
-  document.body.style.overflow=''; // Bỏ lock scroll
+  const drawer=document.getElementById('cart-drawer');
+  const bg=document.getElementById('cart-bg');
+  if(drawer) drawer.classList.remove('open');
+  if(bg) bg.classList.remove('show');
+  document.body.style.overflow='';
 }
-function _closeCart_original(){document.getElementById('cart-drawer').classList.remove('open');document.getElementById('cart-bg').classList.remove('show');}
+/* _closeCart_original removed - merged into closeCart() */
 
 function quickAdd(id){
   const p=products.find(x=>x.id===id);if(!p)return;
-  const ex=cart.find(i=>i.id===p.id&&i.size===p.sizes[0]);
-  if(ex)ex.qty++;else cart.push({...p,size:p.sizes[0],qty:1});
-  updBadge();
-  showCartToast(p,1,p.sizes?.[0]||'');
+  if(p.sizes&&p.sizes.length===1){
+    // Chỉ 1 size → add thẳng
+    const ex=cart.find(i=>i.id===p.id&&i.size===p.sizes[0]);
+    if(ex)ex.qty++;else cart.push({...p,size:p.sizes[0],qty:1});
+    updBadge();
+    showCartToast(p,1,p.sizes[0]);
+  } else {
+    // Nhiều size → mở trang chi tiết để chọn
+    openDetail(id);
+    showToast('Hãy chọn size phù hợp với bạn nhé! 💕');
+  }
 }
 
 function updBadge(){
@@ -2828,7 +3410,7 @@ function goCheckout(){
     cart.map(it=>`<div class="sum-row"><span>${it.name} x${it.qty}</span><span>${it.price*it.qty}k</span></div>`).join('')+
     `<div class="sum-row"><span>Phí vận chuyển</span><span>${ship===0?'<span style="color:var(--gr);font-weight:600">Miễn phí</span>':ship+'k'}</span></div>`+
     `<div class="sum-row total"><span>Tổng thanh toán</span><span style="color:var(--pk-d)">${total}k</span></div>`;
-  showScr('scr-checkout');
+  showScr('scr-checkout');window.scrollTo(0,0);
 }
 
 function validateCheckout(){
@@ -3070,7 +3652,7 @@ function testVipMe(){
 }
 function clearVip(){if(!confirm('Xóa toàn bộ danh sách VIP?'))return;vipPhones=[];renderVipList();showToast('Đã xóa danh sách VIP!');}
 
-function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers')renderVoucherList();if(pg==='viplist')renderVipList();}
+function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers')renderVoucherList();if(pg==='viplist')renderVipList();if(pg==='reviews'){renderTestiAdmin();}}
 function apTab(el,c){adPF=c;document.querySelectorAll('#apt .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAProd();}
 let adPayFilter='all';
 function aoTab(el,s){adOF=s;document.querySelectorAll('#aot .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAOrds(s);}
@@ -3419,6 +4001,315 @@ function initCloudinaryStatus(){
       + ' rồi điền cloud/preset vào đầu file JS.';
   }
 }
+
+
+
+/* ════════ TESTIMONIALS ENGINE ════════ */
+
+/* Render grid ngoài shop */
+function renderTestimonials(){
+  const grid = document.getElementById('testi-grid');
+  if(!grid) return;
+  const visible = testimonials.filter(t => t.visible !== false);
+  if(!visible.length){
+    grid.innerHTML = '<div class="testi-empty"><span class="testi-empty-icon">💬</span>Chưa có đánh giá nào. Thêm trong Admin → Đánh giá.</div>';
+    return;
+  }
+  grid.innerHTML = visible.map(t => t.type === 'fb' ? renderFbCard(t) : renderTextCard(t)).join('');
+  // Load Facebook SDK nếu có FB embed
+  if(visible.some(t => t.type === 'fb')) loadFbSDK();
+  // Scroll dots mobile
+  initTestiDots();
+}
+
+function renderTextCard(t){
+  const initials = (t.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const stars = '★'.repeat(t.stars||5) + '☆'.repeat(5-(t.stars||5));
+  const avatarHTML = t.avatar
+    ? `<img src="${t.avatar}" alt="${t.name}" onerror="this.parentNode.innerHTML='${initials}'">`
+    : initials;
+  return `<div class="testi-card-v2">
+    <div class="tc-stars">${stars}</div>
+    <p class="tc-text">${escHtml(t.text||'')}</p>
+    <div class="tc-user">
+      <div class="tc-avatar">${avatarHTML}</div>
+      <div>
+        <div class="tc-name">${escHtml(t.name||'')}</div>
+        <div class="tc-meta">${t.location||''}${t.purchases?` · Đã mua ${t.purchases} lần`:''}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderFbCard(t){
+  const fbUrl = t.fbUrl || '';
+  const embedUrl = getFbEmbedUrl(fbUrl);
+  const displayName = t.name || 'Đánh giá từ Facebook';
+  return `<div class="testi-card-fb" data-fb-id="${t.id}">
+    <div class="fb-embed-wrap" id="fb-wrap-${t.id}">
+      <div class="fb-skeleton">
+        <div class="fb-skel-line" style="width:60%;height:14px"></div>
+        <div class="fb-skel-line" style="width:90%"></div>
+        <div class="fb-skel-line" style="width:80%"></div>
+        <div class="fb-skel-line" style="width:70%"></div>
+        <div class="fb-skel-line" style="width:50%;height:80px;margin-top:8px"></div>
+      </div>
+    </div>
+    <div class="fb-embed-footer">
+      <span class="fb-embed-footer-ic">📘</span>
+      <a href="${escHtml(fbUrl)}" target="_blank" rel="noopener">${escHtml(displayName)}</a>
+    </div>
+  </div>`;
+}
+
+/* Tạo embed URL từ post URL */
+function getFbEmbedUrl(postUrl){
+  if(!postUrl) return '';
+  const enc = encodeURIComponent(postUrl);
+  return `https://www.facebook.com/plugins/post.php?href=${enc}&show_text=true&width=500`;
+}
+
+/* Load FB SDK và render embed sau khi SDK sẵn sàng */
+function loadFbSDK(){
+  if(document.getElementById('fb-sdk-script')) { renderFbEmbeds(); return; }
+  const s = document.createElement('script');
+  s.id = 'fb-sdk-script';
+  s.async = true;
+  s.defer = true;
+  s.crossOrigin = 'anonymous';
+  s.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0';
+  s.onload = renderFbEmbeds;
+  s.onerror = function(){ renderFbEmbedsFallback(); };
+  document.head.appendChild(s);
+}
+
+/* Render iframe embed vào từng card */
+function renderFbEmbeds(){
+  testimonials.filter(t => t.visible && t.type === 'fb').forEach(t => {
+    const wrap = document.getElementById('fb-wrap-' + t.id);
+    if(!wrap) return;
+    const embedUrl = getFbEmbedUrl(t.fbUrl);
+    if(!embedUrl){ renderFbError(wrap, t.fbUrl); return; }
+    const iframe = document.createElement('iframe');
+    iframe.src = embedUrl;
+    iframe.width = '500';
+    iframe.height = '350';
+    iframe.style.cssText = 'border:none;overflow:hidden;width:100%;max-height:350px';
+    iframe.allow = 'autoplay;clipboard-write;encrypted-media;picture-in-picture;web-share';
+    iframe.onload = function(){ wrap.innerHTML = ''; wrap.appendChild(iframe); };
+    iframe.onerror = function(){ renderFbError(wrap, t.fbUrl); };
+    // Set timeout 8s fallback
+    const timer = setTimeout(function(){ if(wrap.querySelector('.fb-skeleton')) renderFbError(wrap, t.fbUrl); }, 8000);
+    iframe.onload = function(){ clearTimeout(timer); wrap.innerHTML = ''; wrap.appendChild(iframe); };
+    document.body.appendChild(iframe); // Preload trick
+    setTimeout(function(){
+      if(wrap.querySelector('.fb-skeleton')){
+        wrap.innerHTML = '';
+        wrap.appendChild(iframe);
+        iframe.remove && iframe.remove();
+        wrap.appendChild(iframe);
+      }
+    }, 300);
+  });
+}
+
+function renderFbEmbedsFallback(){
+  testimonials.filter(t => t.visible && t.type === 'fb').forEach(t => {
+    const wrap = document.getElementById('fb-wrap-' + t.id);
+    if(wrap && wrap.querySelector('.fb-skeleton')) renderFbError(wrap, t.fbUrl);
+  });
+}
+
+function renderFbError(wrap, url){
+  wrap.innerHTML = `<div class="fb-error-card">
+    <span class="fb-error-icon">📘</span>
+    <div class="fb-error-text">Không thể tải nội dung Facebook tự động.<br>Vui lòng xem trực tiếp bài viết.</div>
+    <a class="fb-error-link" href="${escHtml(url||'')}" target="_blank" rel="noopener">Xem bài viết →</a>
+  </div>`;
+}
+
+/* Scroll dots mobile */
+function initTestiDots(){
+  const grid = document.getElementById('testi-grid');
+  const dotsEl = document.getElementById('testi-dots');
+  if(!grid || !dotsEl) return;
+  const cards = grid.children;
+  if(cards.length <= 1 || window.innerWidth > 768){ dotsEl.innerHTML=''; return; }
+  dotsEl.innerHTML = Array.from(cards).map((_,i) =>
+    `<div class="testi-dot${i===0?' active':''}" onclick="scrollTestiTo(${i})"></div>`
+  ).join('');
+  grid.onscroll = function(){
+    const idx = Math.round(grid.scrollLeft / (grid.scrollWidth / cards.length));
+    dotsEl.querySelectorAll('.testi-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  };
+}
+function scrollTestiTo(idx){
+  const grid = document.getElementById('testi-grid');
+  if(!grid) return;
+  const card = grid.children[idx];
+  if(card) card.scrollIntoView({behavior:'smooth', block:'nearest', inline:'start'});
+}
+
+/* Escape HTML */
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ════════ ADMIN: Testimonials CRUD ════════ */
+let teEditId = null;
+
+function renderTestiAdmin(){
+  const el = document.getElementById('testi-admin-list');
+  const cnt = document.getElementById('testi-count');
+  if(!el) return;
+  if(cnt) cnt.textContent = testimonials.length;
+  if(!testimonials.length){
+    el.innerHTML = '<div style="padding:24px;text-align:center;color:var(--muted)">Chưa có đánh giá nào. Nhấn "+ Thêm đánh giá" để bắt đầu.</div>';
+    return;
+  }
+  el.innerHTML = testimonials.map((t,idx) => {
+    const preview = t.type === 'fb'
+      ? (t.fbUrl || 'Facebook link chưa điền')
+      : (t.text || '').slice(0, 80) + ((t.text||'').length > 80 ? '…' : '');
+    const badge = t.type === 'fb'
+      ? '<span class="testi-type-badge tb-fb">📘 Facebook</span>'
+      : '<span class="testi-type-badge tb-text">✍️ Text</span>';
+    const visLabel = t.visible !== false ? 'Đang hiện' : 'Đang ẩn';
+    const visClass = t.visible !== false ? 'on' : 'off';
+    return `<div class="testi-admin-row${t.visible===false?' hidden-row':''}">
+      ${badge}
+      <div class="testi-admin-info">
+        <div class="testi-admin-name">${escHtml(t.name||'Không tên')}</div>
+        <div class="testi-admin-preview">${escHtml(preview)}</div>
+        <div class="testi-admin-meta">${t.type==='text'?`${'★'.repeat(t.stars||5)} · ${t.location||''}`:''}</div>
+      </div>
+      <div class="testi-admin-actions">
+        <button class="testi-vis-btn ${visClass}" onclick="toggleTestiVis(${t.id})">${visLabel}</button>
+        <button class="rib" onclick="editTesti(${t.id})">✏️</button>
+        <button class="rib del" onclick="delTesti(${t.id})">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openAddTesti(){
+  teEditId = null;
+  document.getElementById('testi-modal-title').textContent = 'Thêm đánh giá';
+  ['tf-name','tf-location','tf-avatar','tf-text','tf-date','tf-fburl','tf-fbname'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  const tfp = document.getElementById('tf-purchases');
+  if(tfp) tfp.value = '';
+  document.querySelector('input[name="testi-type"][value="text"]').checked = true;
+  switchTestiType('text');
+  document.getElementById('fb-preview-wrap').style.display = 'none';
+  document.getElementById('testi-modal').style.display = 'flex';
+}
+
+function editTesti(id){
+  const t = testimonials.find(x => x.id === id);
+  if(!t) return;
+  teEditId = id;
+  document.getElementById('testi-modal-title').textContent = 'Sửa đánh giá';
+  if(t.type === 'fb'){
+    document.querySelector('input[name="testi-type"][value="fb"]').checked = true;
+    switchTestiType('fb');
+    const u=document.getElementById('tf-fburl'); if(u) u.value = t.fbUrl||'';
+    const n=document.getElementById('tf-fbname'); if(n) n.value = t.name||'';
+  } else {
+    document.querySelector('input[name="testi-type"][value="text"]').checked = true;
+    switchTestiType('text');
+    const fields = {
+      'tf-name': t.name||'', 'tf-location': t.location||'',
+      'tf-avatar': t.avatar||'', 'tf-text': t.text||'',
+      'tf-date': t.date||'', 'tf-purchases': t.purchases||''
+    };
+    Object.entries(fields).forEach(([id,val])=>{ const el=document.getElementById(id); if(el) el.value=val; });
+    const sf = document.getElementById('tf-stars');
+    if(sf) sf.value = String(t.stars||5);
+  }
+  document.getElementById('fb-preview-wrap').style.display = 'none';
+  document.getElementById('testi-modal').style.display = 'flex';
+}
+
+function closeTestiModal(){
+  document.getElementById('testi-modal').style.display = 'none';
+  teEditId = null;
+}
+
+function switchTestiType(type){
+  document.getElementById('testi-form-text').style.display = type==='text' ? 'block' : 'none';
+  document.getElementById('testi-form-fb').style.display  = type==='fb'   ? 'block' : 'none';
+  // Highlight selected
+  ['type-text-lbl','type-fb-lbl'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    const val = el.querySelector('input').value;
+    el.style.borderColor = val===type ? 'var(--pk)' : 'var(--border)';
+    el.style.background  = val===type ? 'var(--pk-l)' : '';
+  });
+}
+
+function previewFbEmbed(){
+  const url = (document.getElementById('tf-fburl')||{}).value||'';
+  const wrap = document.getElementById('fb-preview-wrap');
+  if(!url||!wrap){ showToast('Nhập link Facebook trước!'); return; }
+  const embedUrl = getFbEmbedUrl(url);
+  wrap.style.display = 'block';
+  wrap.innerHTML = `<iframe src="${escHtml(embedUrl)}" width="500" height="300"
+    style="border:none;width:100%;display:block"
+    allow="autoplay;clipboard-write;encrypted-media;picture-in-picture;web-share"></iframe>`;
+}
+
+function saveTestimonial(){
+  const type = document.querySelector('input[name="testi-type"]:checked').value;
+  let dat;
+  if(type === 'fb'){
+    const fbUrl = (document.getElementById('tf-fburl')||{}).value.trim();
+    const fbName = (document.getElementById('tf-fbname')||{}).value.trim();
+    if(!fbUrl){ showToast('Vui lòng nhập link Facebook!'); return; }
+    dat = { type:'fb', fbUrl, name: fbName||'Đánh giá Facebook', visible: true };
+  } else {
+    const name = (document.getElementById('tf-name')||{}).value.trim();
+    const text = (document.getElementById('tf-text')||{}).value.trim();
+    if(!name||!text){ showToast('Vui lòng nhập tên và nội dung!'); return; }
+    dat = {
+      type:'text', name, visible: true,
+      location: (document.getElementById('tf-location')||{}).value.trim(),
+      stars: parseInt((document.getElementById('tf-stars')||{}).value)||5,
+      purchases: parseInt((document.getElementById('tf-purchases')||{}).value)||0,
+      avatar: (document.getElementById('tf-avatar')||{}).value.trim(),
+      text, date: (document.getElementById('tf-date')||{}).value.trim()
+    };
+  }
+  if(teEditId !== null){
+    const i = testimonials.findIndex(t=>t.id===teEditId);
+    if(i>=0) testimonials[i] = {...testimonials[i], ...dat};
+    showToast('Đã cập nhật đánh giá!');
+  } else {
+    testimonials.push({id: nextTestiId(), ...dat});
+    showToast('Đã thêm đánh giá!');
+  }
+  closeTestiModal();
+  renderTestiAdmin();
+  renderTestimonials();
+}
+
+function delTesti(id){
+  if(!confirm('Xóa đánh giá này?')) return;
+  testimonials = testimonials.filter(t=>t.id!==id);
+  renderTestiAdmin();
+  renderTestimonials();
+  showToast('Đã xóa!');
+}
+
+function toggleTestiVis(id){
+  const t = testimonials.find(x=>x.id===id);
+  if(!t) return;
+  t.visible = t.visible === false ? true : false;
+  renderTestiAdmin();
+  renderTestimonials();
+  showToast(t.visible ? 'Đã hiện đánh giá!' : 'Đã ẩn đánh giá!');
+}
+/* ════════ END TESTIMONIALS ENGINE ════════ */
 
 </script> <!-- Admin Login Modal -->
 <div id="admin-login-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center"> <div style="background:#fff;border-radius:16px;padding:36px;width:340px;border:1px solid var(--border);position:relative"> <button onclick="closeAdminLogin()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button> <div style="text-align:center;margin-bottom:24px"> <div style="font-size:32px;margin-bottom:8px">🔐</div> <div style="font-size:17px;font-weight:700;color:var(--text)">Đăng nhập Admin</div> <div style="font-size:12px;color:var(--muted);margin-top:4px">Chỉ dành cho quản trị viên</div> </div> <div style="margin-bottom:14px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Tên đăng nhập</label> <input id="login-user" type="text" placeholder="Nhập username" autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> </div> <div style="margin-bottom:20px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Mật khẩu</label> <div style="position:relative"> <input id="login-pass" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" style="width:100%;padding:10px 40px 10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> <button onclick="togglePassVis()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)" id="pass-eye">👁</button> </div> </div> <div id="login-err" style="display:none;background:var(--re-l);color:var(--re);font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:600">❌ Sai tên đăng nhập hoặc mật khẩu</div> <button onclick="doLogin()" style="width:100%;padding:13px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)">Đăng nhập</button> <div id="login-attempts" style="text-align:center;font-size:11px;color:var(--muted);margin-top:10px"></div> </div>
