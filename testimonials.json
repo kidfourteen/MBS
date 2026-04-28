@@ -1,17 +1,5 @@
 [
   {
-    "id": 1,
-    "type": "text",
-    "name": "Trần Hà My",
-    "location": "TP.HCM",
-    "purchases": 3,
-    "stars": 5,
-    "text": "Mình 92kg, mặc size 3XL vừa khít, đường may đẹp lắm! Váy maxi mặc đi chơi ai cũng hỏi mua ở đâu. Mũm hiểu nàng mũm thật sự!",
-    "avatar": "",
-    "date": "2 ngày trước",
-    "visible": true
-  },
-  {
     "id": 2,
     "type": "text",
     "name": "Nguyễn Lan Anh",
