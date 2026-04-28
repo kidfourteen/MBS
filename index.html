@@ -544,22 +544,6 @@ a{text-decoration:none;color:inherit}
 @keyframes cartPop{0%{transform:scale(1)}40%{transform:scale(1.18)}100%{transform:scale(1)}}
 .cart-pop{animation:cartPop .35s ease}
 
-let _delToastT;
-function showDeleteToast(name){
-  let el=document.getElementById('del-toast');
-  if(!el){
-    el=document.createElement('div');
-    el.id='del-toast';
-    el.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#333;color:#fff;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;z-index:901;opacity:0;transition:all .22s cubic-bezier(.34,1.56,.64,1);pointer-events:none;white-space:nowrap;display:flex;align-items:center;gap:8px';
-    document.body.appendChild(el);
-  }
-  el.innerHTML=`🗑 Đã xóa <span style="opacity:.7;font-weight:400">${name}</span>`;
-  el.style.opacity='1';
-  el.style.transform='translateX(-50%) translateY(0)';
-  clearTimeout(_delToastT);
-  _delToastT=setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(-50%) translateY(20px)';},2000);
-}
-
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
@@ -2742,16 +2726,16 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div id="scr-success" class="screen"> <header class="pc-header"><div class="pc-header-inner"><div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" style="height:44px;width:auto;object-fit:contain;display:block"></div></div></header> <div class="success-page"> <div style="font-size:72px;margin-bottom:18px">🎉</div> <h2 style="font-size:26px;font-weight:700;color:var(--pk-d);margin-bottom:10px">Đặt hàng thành công!</h2> <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7">Mũm sẽ xác nhận và liên hệ bạn trong 24h.<br>Cảm ơn bạn đã tin tưởng Mũm Bigsize! 🌸</p> <button class="btn btn-pk" style="padding:13px 36px;font-size:15px;border-radius:12px" onclick="backShop()">← Tiếp tục mua sắm</button> </div>
 </div> <!-- ══════════ ADMIN ══════════ -->
 <div id="scr-admin" class="screen"> <div class="admin-wrap"> <aside class="ad-sidebar"> <div class="ad-logo-box"><div style="margin-bottom:4px"><img class="brand-logo" alt="Mũm" style="height:36px;width:auto;object-fit:contain;display:block"></div><div class="n" style="font-size:11px;margin-top:2px">Admin Panel</div><div class="s">Quản lý cửa hàng</div></div> <button class="ad-back" onclick="backShop()">← Về trang shop</button> <div> <div class="ad-sep">Tổng quan</div> <div class="ad-nav-it active" onclick="adPage('dashboard',this)"><span>📊</span>Dashboard</div> <div class="ad-sep">Quản lý</div> <div class="ad-nav-it" onclick="adPage('products',this)"><span>👗</span>Sản phẩm</div> <div class="ad-nav-it" onclick="adPage('orders',this)"><span>📦</span>Đơn hàng</div> <div class="ad-sep">Kênh bán</div> <div class="ad-nav-it" onclick="adPage('channels',this)"><span>🔗</span>Zalo & Facebook</div> <div class="ad-nav-it" onclick="adPage('reviews',this)"><span>⭐</span>Đánh giá</div>
-              <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val">24</div><div class="stat-sub sub-up">↑ 12% hôm qua</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" style="font-size:20px">18.4tr</div><div class="stat-sub sub-up">↑ 8% tháng trước</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" style="color:var(--am)">6</div><div class="stat-sub sub-dn">3 Zalo · 3 FB</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><div style="display:flex;gap:8px"><button class="btn" onclick="loadProductsFromSheet(true).then(()=>{renderAProd();showToast('Đã tải lại từ GitHub!');})" title="Tải lại từ GitHub">🔄 Sync GitHub</button><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div></div> <div class="ad-content">
+              <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val" id="ad-stat-today">0</div><div class="stat-sub" style="color:var(--muted)" id="ad-stat-today-sub">đơn mới</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" id="ad-stat-rev" style="font-size:20px">0k</div><div class="stat-sub" style="color:var(--muted)">đã thanh toán</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" id="ad-stat-pending" style="color:var(--am)">0</div><div class="stat-sub" style="color:var(--muted)">đơn cần xác nhận</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><div style="display:flex;gap:8px"><button class="btn" onclick="loadProductsFromSheet(true).then(()=>{renderAProd();showToast('Đã tải lại từ GitHub!');})" title="Tải lại từ GitHub">🔄 Sync GitHub</button><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div></div> <div class="ad-content">
 <div class="sheet-status-bar" id="sheet-status-bar"></div>
- <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt" style="overflow-x:auto;flex-wrap:nowrap"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'ao-chong-nang')" style="flex-shrink:0">Áo chống nắng</div><div class="tab" onclick="apTab(this,'ao-gio')" style="flex-shrink:0">Áo gió</div><div class="tab" onclick="apTab(this,'ao-khoac-dong')" style="flex-shrink:0">Áo khoác đông</div><div class="tab" onclick="apTab(this,'hoodie')" style="flex-shrink:0">Hoodie</div><div class="tab" onclick="apTab(this,'sweater')" style="flex-shrink:0">Sweater</div><div class="tab" onclick="apTab(this,'tshirt')" style="flex-shrink:0">T-shirt</div><div class="tab" onclick="apTab(this,'chan-vay')" style="flex-shrink:0">Chân váy</div><div class="tab" onclick="apTab(this,'do-di-bien')" style="flex-shrink:0">Đồ đi biển</div><div class="tab" onclick="apTab(this,'phu-kien')" style="flex-shrink:0">Phụ kiện</div><div class="tab" onclick="apTab(this,'quan')" style="flex-shrink:0">Quần</div><div class="tab" onclick="apTab(this,'ao-len')" style="flex-shrink:0">Áo len</div><div class="tab" onclick="apTab(this,'ao-parka')" style="flex-shrink:0">Áo Parka</div><div class="tab" onclick="apTab(this,'giay')" style="flex-shrink:0">Giày</div><div class="tab" onclick="apTab(this,'dep')" style="flex-shrink:0">Dép</div><div class="tab" onclick="apTab(this,'so-mi')" style="flex-shrink:0">Sơ mi</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
+ <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt" style="overflow-x:auto;flex-wrap:nowrap"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'ao-chong-nang')" style="flex-shrink:0">Áo chống nắng</div><div class="tab" onclick="apTab(this,'ao-gio')" style="flex-shrink:0">Áo gió</div><div class="tab" onclick="apTab(this,'ao-khoac-dong')" style="flex-shrink:0">Áo khoác đông</div><div class="tab" onclick="apTab(this,'hoodie')" style="flex-shrink:0">Hoodie</div><div class="tab" onclick="apTab(this,'sweater')" style="flex-shrink:0">Sweater</div><div class="tab" onclick="apTab(this,'tshirt')" style="flex-shrink:0">T-shirt</div><div class="tab" onclick="apTab(this,'chan-vay')" style="flex-shrink:0">Chân váy</div><div class="tab" onclick="apTab(this,'do-di-bien')" style="flex-shrink:0">Đồ đi biển</div><div class="tab" onclick="apTab(this,'phu-kien')" style="flex-shrink:0">Phụ kiện</div><div class="tab" onclick="apTab(this,'quan')" style="flex-shrink:0">Quần</div><div class="tab" onclick="apTab(this,'ao-len')" style="flex-shrink:0">Áo len</div><div class="tab" onclick="apTab(this,'ao-parka')" style="flex-shrink:0">Áo Parka</div><div class="tab" onclick="apTab(this,'giay')" style="flex-shrink:0">Giày</div><div class="tab" onclick="apTab(this,'dep')" style="flex-shrink:0">Dép</div><div class="tab" onclick="apTab(this,'so-mi')" style="flex-shrink:0">Sơ mi</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" id="apt-pay" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
 </div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.top</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.top/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div> </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="sheet-status-bar" id="vouchers-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
 </div> <div id="adp-viplist" class="ad-page"> <div class="ad-topbar"><h1>Khách hàng VIP</h1></div> <div class="sheet-status-bar" id="vip-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Upload danh sách SĐT VIP</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">Upload file .txt hoặc .csv — mỗi số điện thoại 1 dòng. Khách hàng có SĐT trong danh sách sẽ tự động được nhận diện VIP và giảm 10% khi thanh toán.</div> <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px"> <input type="file" id="vip-file-input" accept=".txt,.csv" onchange="loadVipFile()" style="display:none"> <button class="btn btn-pk" onclick="document.getElementById('vip-file-input').click()">📁 Upload file SĐT</button> <button class="btn" onclick="addVipManual()">+ Thêm thủ công</button> <button class="btn" onclick="testVipMe()" title="Thêm SĐT của bạn để test">🧪 Test với SĐT của tôi</button> <button class="btn" style="color:var(--re)" onclick="clearVip()">🗑 Xóa tất cả</button> </div> <div class="af" style="margin-bottom:12px"> <label>Hoặc dán danh sách SĐT (mỗi số 1 dòng)</label> <textarea id="vip-paste-area" rows="5" placeholder="0912345678&#10;0987654321&#10;0909090909..." style="font-family:monospace;font-size:12px"></textarea> <button class="btn btn-pk" style="margin-top:8px" onclick="parseVipPaste()">Áp dụng danh sách</button> </div> <div class="ad-sec-head" style="margin-top:16px"><h2>Danh sách hiện tại (<span id="vip-count">0</span> SĐT)</h2></div> <div id="vip-list-el" style="font-family:monospace;font-size:12px;max-height:300px;overflow-y:auto;background:var(--bg);border-radius:8px;padding:12px;line-height:2;color:var(--text)"></div> </div> </div>
 </div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>🔑 GitHub (lưu sản phẩm)</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
               <strong>Cách lấy token:</strong> github.com/settings/personal-access-tokens → <em>Generate new token (Fine-grained)</em>. Repository access: chỉ chọn repo chứa GitHub Pages. Permissions: <code>Contents = Read and write</code>. Token chỉ lưu trên máy này (localStorage), không có trong file HTML public.
               </div> <div class="af"><label>GitHub Personal Access Token</label><input id="cfg-gh-token" type="password" autocomplete="new-password" placeholder="github_pat_..." onfocus="if(this.dataset.masked==='1'){this.value='';this.dataset.masked='';}"></div> <div id="gh-token-status" style="font-size:12px;margin-bottom:12px;min-height:18px"></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveGithubToken()">Lưu token</button> <button class="btn" onclick="testGithubConnection()">🔌 Test kết nối</button> <button class="btn" onclick="clearGithubToken()" style="color:var(--re)">🗑 Xóa token</button> </div> <div id="gh-test-result" style="font-size:12px;margin-top:10px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
                 Mỗi đơn hàng mới sẽ tự động gửi tin nhắn vào Telegram của bạn ngay lập tức.<br> <strong>Cách lấy Token:</strong> Tìm @BotFather trên Telegram → /newbot → copy Token<br> <strong>Cách lấy Chat ID:</strong> Mở bot → gõ /start → vào <code>api.telegram.org/bot[TOKEN]/getUpdates</code> → tìm "id"
-              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle ${TELEGRAM_CONFIG.enabled?'on':'off'}" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">${TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt'}</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value="${TELEGRAM_CONFIG.token}"></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value="${TELEGRAM_CONFIG.chatId}"></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
+              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle off" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value=""></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value=""></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
 <div id="adp-reviews" class="ad-page">
   <div class="ad-topbar">
     <h1>⭐ Quản lý đánh giá</h1>
@@ -3088,6 +3072,31 @@ const MOMO_CONFIG={
   phone:'0966875212',
   name:'HOANG THI HANH'
 };
+/* Shop config — dùng khi khách đặt hàng qua Zalo/FB từ trang shop (chưa vào Admin) */
+const SHOP_CONFIG={
+  zalo:'',  // số Zalo hoặc link OA, lưu qua Admin → Channels
+  fb:'https://www.facebook.com/mumbigsize.top/'
+};
+
+/* Load tất cả config từ localStorage khi khởi động */
+(function loadConfigsFromStorage(){
+  try{
+    const b = JSON.parse(localStorage.getItem('bank_cfg')||'null');
+    if(b){ BANK_CONFIG.bankName=b.bankName||BANK_CONFIG.bankName; BANK_CONFIG.accountNo=b.accountNo||BANK_CONFIG.accountNo; BANK_CONFIG.accountName=b.accountName||BANK_CONFIG.accountName; }
+  }catch(e){}
+  try{
+    const m = JSON.parse(localStorage.getItem('momo_cfg')||'null');
+    if(m){ MOMO_CONFIG.phone=m.phone||MOMO_CONFIG.phone; MOMO_CONFIG.name=m.name||MOMO_CONFIG.name; }
+  }catch(e){}
+  try{
+    const s = JSON.parse(localStorage.getItem('shop_cfg')||'null');
+    if(s){ SHOP_CONFIG.zalo=s.zalo||SHOP_CONFIG.zalo; SHOP_CONFIG.fb=s.fb||SHOP_CONFIG.fb; }
+  }catch(e){}
+  try{
+    const t = JSON.parse(localStorage.getItem('telegram_cfg')||'null');
+    if(t){ TELEGRAM_CONFIG.token=t.token||''; TELEGRAM_CONFIG.chatId=t.chatId||''; TELEGRAM_CONFIG.enabled=!!t.enabled; }
+  }catch(e){}
+})();
 
 /* ══ VOUCHER & VIP ══ */
 let vouchers = [
@@ -3172,10 +3181,10 @@ function updateCkSummary(){
 }
 
 let orders=[
-  {id:'#2401',name:'Nguyễn Thị Lan',phone:'0912345678',product:'Váy maxi hoa nhí',size:'2XL',total:259,payMethod:'cod',payStatus:'pending',status:'new',time:'5 phút trước',addr:'TP.HCM',note:''},
+  {id:'#2401',name:'Nguyễn Thị Lan',phone:'0912345678',product:'Váy maxi hoa nhí',size:'2XL',total:259,payMethod:'cod',payStatus:'awaiting',status:'new',time:'5 phút trước',addr:'TP.HCM',note:''},
   {id:'#2400',name:'Trần Bảo Châu',phone:'0987654321',product:'Đầm wrap body midi',size:'XL',total:329,payMethod:'bank',payStatus:'paid',status:'proc',time:'22 phút trước',addr:'TP.HCM',note:''},
   {id:'#2399',name:'Lê Thùy Dung',phone:'0909090909',product:'Bộ set áo + chân váy',size:'3XL',total:389,payMethod:'momo',payStatus:'paid',status:'done',time:'1 giờ trước',addr:'HN',note:''},
-  {id:'#2398',name:'Phạm Thu Hà',phone:'0911223344',product:'Quần suông ống rộng',size:'4XL',total:225,payMethod:'cod',payStatus:'pending',status:'done',time:'2 giờ trước',addr:'ĐN',note:''},
+  {id:'#2398',name:'Phạm Thu Hà',phone:'0911223344',product:'Quần suông ống rộng',size:'4XL',total:225,payMethod:'cod',payStatus:'awaiting',status:'done',time:'2 giờ trước',addr:'ĐN',note:''},
 ];
 let cart=[], curProd=null, curSize='', curQty=1;
 let catF='all', szF='all', sortF='default', searchQ='';
@@ -3308,8 +3317,22 @@ function backShop(){showScr('scr-shop');}
 function closeCheckout(){showScr('scr-shop');openCart();}
 
 /* ══ CONFIG ══ */
-function getZalo(){const v=(document.getElementById('cfg-zalo')||{}).value||'';const p=v.replace(/\D/g,'');return p?'https://zalo.me/'+p:'https://zalo.me/';}
-function getFB(){return(document.getElementById('cfg-fb')||{}).value||'https://www.facebook.com/mumbigsize.top/';}
+function getZalo(){
+  // Ưu tiên giá trị input trong Admin (nếu đang mở), fallback về SHOP_CONFIG (đã load từ localStorage)
+  const inp=document.getElementById('cfg-zalo');
+  const v=(inp&&inp.value)||SHOP_CONFIG.zalo||'';
+  if(!v) return 'https://zalo.me/';
+  // Nếu là link đầy đủ thì giữ nguyên
+  if(/^https?:\/\//i.test(v)) return v;
+  if(/^zalo\.me\//i.test(v)) return 'https://'+v;
+  // Nếu là số điện thoại
+  const p=v.replace(/\D/g,'');
+  return p?'https://zalo.me/'+p:'https://zalo.me/';
+}
+function getFB(){
+  const inp=document.getElementById('cfg-fb');
+  return (inp&&inp.value)||SHOP_CONFIG.fb||'https://www.facebook.com/mumbigsize.top/';
+}
 
 /* ══ HELPERS ══ */
 function imgOrEmoji(p,size=''){
@@ -3683,7 +3706,7 @@ function buildOrderData(){
     items:[...cart],
     subtotal:tot,ship,discount,total,vipDisc,voucherDisc,voucherCode:appliedVoucher?.code||null,
     payMethod:currentPayMethod,
-    payStatus:'pending',
+    payStatus:'awaiting',
     status:'new',
     time:'Vừa xong',
   };
@@ -3709,7 +3732,7 @@ function openCOD(){
 function closeCOD(){document.getElementById('cod-modal').classList.remove('show');}
 function confirmCOD(){
   closeCOD();
-  pendingOrderData.payStatus='pending';
+  pendingOrderData.payStatus='awaiting';
   saveOrder(pendingOrderData);
   cart=[];updBadge();showScr('scr-success');
 }
@@ -3797,7 +3820,22 @@ let fs=30,fm=47,fh=2;
 setInterval(()=>{fs--;if(fs<0){fs=59;fm--;}if(fm<0){fm=59;fh--;}if(fh<0)fh=0;['h','m','s'].forEach((id,i)=>{const el=document.getElementById('fc-'+id);if(el)el.textContent=String([fh,fm,fs][i]).padStart(2,'0');});},1000);
 
 /* ══ ADMIN ══ */
-function renderAdmin(){renderAProd();renderAOrds('all');renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}
+function renderAdmin(){
+  renderAProd();renderAOrds('all');renderDashOrds();
+  const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;
+  renderDashStats();
+}
+function renderDashStats(){
+  // Đơn hôm nay (đơn có time chứa "phút" hoặc "giờ" hoặc "Vừa xong")
+  const todayOrds = orders.filter(o => /Vừa xong|phút|giờ/.test(o.time||'')).length;
+  // Doanh thu: tổng total các đơn đã paid
+  const rev = orders.filter(o=>o.payStatus==='paid').reduce((s,o)=>s+(o.total||0),0);
+  // Chờ xử lý: đơn status='new' hoặc payStatus='awaiting'
+  const pending = orders.filter(o => o.status==='new' || o.payStatus==='awaiting').length;
+  const e1=document.getElementById('ad-stat-today'); if(e1) e1.textContent=todayOrds;
+  const e2=document.getElementById('ad-stat-rev'); if(e2) e2.textContent = rev>=1000 ? (rev/1000).toFixed(1)+'tr' : rev+'k';
+  const e3=document.getElementById('ad-stat-pending'); if(e3) e3.textContent=pending;
+}
 /* ══ ADMIN: VOUCHER ══ */
 let editVoucherIdx = null;
 function renderVoucherList(){
@@ -3910,13 +3948,38 @@ function clearVip(){
   saveVipToGithub().then(ok=>showToast(ok?'✅ Đã commit xóa list VIP':'✅ Đã xóa list (local)'));
 }
 
-function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers'){renderVoucherList();setTimeout(initVouchersSyncBar,50);}if(pg==='viplist'){renderVipList();setTimeout(initVipSyncBar,50);}if(pg==='reviews'){renderTestiAdmin();}if(pg==='settings')setTimeout(initGithubTokenUI,50);}
+function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();renderDashStats();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers'){renderVoucherList();setTimeout(initVouchersSyncBar,50);}if(pg==='viplist'){renderVipList();setTimeout(initVipSyncBar,50);}if(pg==='reviews'){renderTestiAdmin();}if(pg==='channels'){setTimeout(initChannelsUI,50);}if(pg==='settings'){setTimeout(initGithubTokenUI,50);setTimeout(initSettingsUI,50);}}
+
+/* Cập nhật UI trang Settings từ config đã lưu */
+function initSettingsUI(){
+  const tgT=document.getElementById('cfg-tg-token'); if(tgT) tgT.value=TELEGRAM_CONFIG.token||'';
+  const tgC=document.getElementById('cfg-tg-chatid'); if(tgC) tgC.value=TELEGRAM_CONFIG.chatId||'';
+  const tgB=document.getElementById('tg-toggle'); if(tgB) tgB.className='toggle '+(TELEGRAM_CONFIG.enabled?'on':'off');
+  const tgS=document.getElementById('tg-status'); if(tgS) tgS.textContent=TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt';
+  const bN=document.getElementById('cfg-bank-name'); if(bN) bN.value=BANK_CONFIG.bankName||'';
+  const bNo=document.getElementById('cfg-bank-no'); if(bNo) bNo.value=BANK_CONFIG.accountNo||'';
+  const bO=document.getElementById('cfg-bank-owner'); if(bO) bO.value=BANK_CONFIG.accountName||'';
+  const mP=document.getElementById('cfg-momo-phone'); if(mP) mP.value=MOMO_CONFIG.phone||'';
+  const mN=document.getElementById('cfg-momo-name'); if(mN) mN.value=MOMO_CONFIG.name||'';
+}
+
+/* Cập nhật UI trang Channels từ SHOP_CONFIG đã lưu */
+function initChannelsUI(){
+  const z=document.getElementById('cfg-zalo'); if(z) z.value=SHOP_CONFIG.zalo||'';
+  const f=document.getElementById('cfg-fb'); if(f) f.value=SHOP_CONFIG.fb||'https://www.facebook.com/mumbigsize.top/';
+  const zd=document.getElementById('zalo-disp'); const zs=document.getElementById('zalo-st');
+  if(SHOP_CONFIG.zalo){
+    if(zd){const p=SHOP_CONFIG.zalo.replace(/\D/g,'');zd.textContent=p?'zalo.me/'+p:SHOP_CONFIG.zalo;}
+    if(zs){zs.textContent='Đã kết nối';zs.className='ch-dot conn';}
+  }
+  const fd=document.getElementById('fb-disp'); if(fd) fd.textContent=SHOP_CONFIG.fb||'';
+}
 function apTab(el,c){adPF=c;document.querySelectorAll('#apt .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAProd();}
 let adPayFilter='all';
 function aoTab(el,s){adOF=s;document.querySelectorAll('#aot .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAOrds(s);}
 function filterPayStatus(el,s){
   adPayFilter=s;
-  document.querySelectorAll('.tab-bar:nth-child(2) .tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('#apt-pay .tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   renderAOrds(adOF);
 }
@@ -3933,7 +3996,7 @@ function getPayStatusBadge(s){
 }
 function markPayPaid(idx){
   if(orders[idx])orders[idx].payStatus='paid';
-  renderAOrds(adOF);renderDashOrds();showToast('Đã đánh dấu đã thanh toán!');
+  renderAOrds(adOF);renderDashOrds();renderDashStats();showToast('Đã đánh dấu đã thanh toán!');
 }
 function renderAOrds(f){
   const el=document.getElementById('ad-ords');if(!el)return;
@@ -4145,14 +4208,15 @@ function saveProd(){
   }).catch(e => showToast('⚠️ Lỗi GitHub: ' + e.message));
 }
 /* ══ CHANNELS ══ */
-function saveZalo(){const v=document.getElementById('cfg-zalo').value.trim();if(!v){showToast('Nhập số Zalo!');return;}const d=document.getElementById('zalo-disp');const s=document.getElementById('zalo-st');if(d)d.textContent='zalo.me/'+v.replace(/\D/g,'');if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('Đã lưu Zalo!');}
-function saveFB(){const d=document.getElementById('fb-disp');const s=document.getElementById('fb-st');if(d)d.textContent=getFB();if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('Đã lưu Facebook!');}
+function saveZalo(){const v=document.getElementById('cfg-zalo').value.trim();if(!v){showToast('Nhập số Zalo!');return;}SHOP_CONFIG.zalo=v;try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}const d=document.getElementById('zalo-disp');const s=document.getElementById('zalo-st');if(d){const p=v.replace(/\D/g,'');d.textContent=p?'zalo.me/'+p:v;}if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('✅ Đã lưu Zalo!');}
+function saveFB(){const v=document.getElementById('cfg-fb').value.trim();if(!v){showToast('Nhập link Facebook!');return;}SHOP_CONFIG.fb=v;try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}const d=document.getElementById('fb-disp');const s=document.getElementById('fb-st');if(d)d.textContent=v;if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('✅ Đã lưu Facebook!');}
 function saveTelegramCfg(){
   const token = document.getElementById('cfg-tg-token')?.value.trim();
   const chatId = document.getElementById('cfg-tg-chatid')?.value.trim();
   if(!token||!chatId){showToast('Vui lòng điền đầy đủ Token và Chat ID!');return;}
   TELEGRAM_CONFIG.token = token;
   TELEGRAM_CONFIG.chatId = chatId;
+  try{localStorage.setItem('telegram_cfg',JSON.stringify({token,chatId,enabled:TELEGRAM_CONFIG.enabled}));}catch(e){}
   showToast('✅ Đã lưu cấu hình Telegram!');
 }
 
@@ -4161,6 +4225,7 @@ function toggleTelegram(btn){
   btn.className = 'toggle '+(TELEGRAM_CONFIG.enabled?'on':'off');
   const status = document.getElementById('tg-status');
   if(status) status.textContent = TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt';
+  try{localStorage.setItem('telegram_cfg',JSON.stringify({token:TELEGRAM_CONFIG.token,chatId:TELEGRAM_CONFIG.chatId,enabled:TELEGRAM_CONFIG.enabled}));}catch(e){}
   showToast(TELEGRAM_CONFIG.enabled?'✅ Đã bật thông báo Telegram':'⏸ Đã tắt thông báo Telegram');
 }
 
@@ -4184,6 +4249,7 @@ function testTelegram(){
       if(resultEl) resultEl.innerHTML='<span style="color:var(--gr)">✅ Gửi thành công! Kiểm tra Telegram của bạn.</span>';
       TELEGRAM_CONFIG.token=token;
       TELEGRAM_CONFIG.chatId=chatId;
+      try{localStorage.setItem('telegram_cfg',JSON.stringify({token,chatId,enabled:TELEGRAM_CONFIG.enabled}));}catch(e){}
     } else {
       if(resultEl) resultEl.innerHTML='<span style="color:var(--re)">❌ Lỗi: '+(d.description||'Token hoặc Chat ID không đúng')+'</span>';
     }
@@ -4198,14 +4264,16 @@ function saveBankCfg(){
   const owner=document.getElementById('cfg-bank-owner')?.value.trim().toUpperCase();
   if(!n||!no||!owner){showToast('Vui lòng điền đầy đủ!');return;}
   BANK_CONFIG.bankName=n;BANK_CONFIG.accountNo=no;BANK_CONFIG.accountName=owner;
-  showToast('Đã lưu thông tin ngân hàng!');
+  try{localStorage.setItem('bank_cfg',JSON.stringify(BANK_CONFIG));}catch(e){}
+  showToast('✅ Đã lưu thông tin ngân hàng!');
 }
 function saveMomoCfg(){
   const ph=document.getElementById('cfg-momo-phone')?.value.trim();
   const nm=document.getElementById('cfg-momo-name')?.value.trim().toUpperCase();
   if(!ph){showToast('Vui lòng nhập SĐT MoMo!');return;}
   MOMO_CONFIG.phone=ph;MOMO_CONFIG.name=nm||MOMO_CONFIG.name;
-  showToast('Đã lưu cấu hình MoMo!');
+  try{localStorage.setItem('momo_cfg',JSON.stringify(MOMO_CONFIG));}catch(e){}
+  showToast('✅ Đã lưu cấu hình MoMo!');
 }
 
 /* ══ TOAST ══ */
@@ -4332,11 +4400,12 @@ function renderTestimonials(){
 }
 
 function renderTextCard(t){
-  const initials = (t.name||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+  const initials = (t.name||'?').split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase();
+  const safeInitials = escHtml(initials);
   const stars = '★'.repeat(t.stars||5) + '☆'.repeat(5-(t.stars||5));
   const avatarHTML = t.avatar
-    ? `<img src="${t.avatar}" alt="${t.name}" onerror="this.parentNode.innerHTML='${initials}'">`
-    : initials;
+    ? `<img src="${escHtml(t.avatar)}" alt="${escHtml(t.name||'')}" onerror="this.outerHTML='${safeInitials.replace(/'/g,'&#39;')}'">`
+    : safeInitials;
   return `<div class="testi-card-v2">
     <div class="tc-stars">${stars}</div>
     <p class="tc-text">${escHtml(t.text||'')}</p>
@@ -4722,12 +4791,12 @@ async function _ghRead(path, fallback){
   } catch(e){ console.warn('_ghRead ' + path + ':', e); return fallback; }
 }
 
-/* Lưu (thêm/sửa) — merge vào products rồi commit cả mảng */
+/* Lưu (thêm/sửa) — products đã được merge bên ngoài (saveProd), chỉ cần commit */
 async function apiSaveProduct(product){
   if (!GH_CONFIG.enabled) return { ok: true, local: true };
   try {
-    const i = products.findIndex(p => p.id === product.id);
-    if (i >= 0) products[i] = { ...products[i], ...product }; else products.push(product);
+    // products[] đã được cập nhật từ saveProd() trước khi gọi hàm này.
+    // Chỉ cần commit nguyên mảng products.
     await _ghCommit(GH_CONFIG.path, products, `save: ${product.name || product.id}`);
     return { ok: true };
   } catch(e){
@@ -4736,11 +4805,11 @@ async function apiSaveProduct(product){
   }
 }
 
-/* Xóa */
+/* Xóa — products đã được filter bên ngoài (delProd), chỉ commit */
 async function apiDeleteProduct(id){
   if (!GH_CONFIG.enabled) return { ok: true, local: true };
   try {
-    products = products.filter(p => p.id !== id);
+    // products[] đã được filter từ delProd() trước khi gọi hàm này
     await _ghCommit(GH_CONFIG.path, products, `delete: ${id}`);
     return { ok: true };
   } catch(e){
@@ -4931,7 +5000,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }, { once: true });
 
 </script> <!-- Admin Login Modal -->
-<div id="admin-login-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center"> <div style="background:#fff;border-radius:16px;padding:36px;width:340px;border:1px solid var(--border);position:relative"> <button onclick="closeAdminLogin()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button> <div style="text-align:center;margin-bottom:24px"> <div style="font-size:32px;margin-bottom:8px">🔐</div> <div style="font-size:17px;font-weight:700;color:var(--text)">Đăng nhập Admin</div> <div style="font-size:12px;color:var(--muted);margin-top:4px">Chỉ dành cho quản trị viên</div> </div> <div style="margin-bottom:14px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Tên đăng nhập</label> <input id="login-user" type="text" placeholder="Nhập username" autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> </div> <div style="margin-bottom:20px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Mật khẩu</label> <div style="position:relative"> <input id="login-pass" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" style="width:100%;padding:10px 40px 10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> <button onclick="togglePassVis()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)" id="pass-eye">👁</button> </div> </div> <div id="login-err" style="display:none;background:var(--re-l);color:var(--re);font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:600">❌ Sai tên đăng nhập hoặc mật khẩu</div> <button onclick="doLogin()" style="width:100%;padding:13px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)">Đăng nhập</button> <div id="login-attempts" style="text-align:center;font-size:11px;color:var(--muted);margin-top:10px"></div> </div>
+<div id="admin-login-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:16px"> <div style="background:#fff;border-radius:16px;padding:32px 28px;width:100%;max-width:340px;border:1px solid var(--border);position:relative;box-sizing:border-box"> <button onclick="closeAdminLogin()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button> <div style="text-align:center;margin-bottom:24px"> <div style="font-size:32px;margin-bottom:8px">🔐</div> <div style="font-size:17px;font-weight:700;color:var(--text)">Đăng nhập Admin</div> <div style="font-size:12px;color:var(--muted);margin-top:4px">Chỉ dành cho quản trị viên</div> </div> <div style="margin-bottom:14px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Tên đăng nhập</label> <input id="login-user" type="text" placeholder="Nhập username" autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> </div> <div style="margin-bottom:20px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Mật khẩu</label> <div style="position:relative"> <input id="login-pass" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" style="width:100%;padding:10px 40px 10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> <button onclick="togglePassVis()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)" id="pass-eye">👁</button> </div> </div> <div id="login-err" style="display:none;background:var(--re-l);color:var(--re);font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:600">❌ Sai tên đăng nhập hoặc mật khẩu</div> <button onclick="doLogin()" style="width:100%;padding:13px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)">Đăng nhập</button> <div id="login-attempts" style="text-align:center;font-size:11px;color:var(--muted);margin-top:10px"></div> </div>
 </div> <!-- ══ COD POPUP ══ -->
 <div class="pay-modal-bg" id="cod-modal"> <div class="pay-modal"> <div class="pay-modal-head"> <h3>💵 Xác nhận đặt hàng COD</h3> <button class="pay-modal-close" onclick="closeCOD()">×</button> </div> <div class="pay-modal-body"> <div class="cod-check-anim"> <div class="cod-icon">✅</div> <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Đơn hàng của bạn sẽ được xử lý!</div> <div style="font-size:13px;color:var(--muted)">Shop sẽ liên hệ xác nhận trong 30 phút</div> </div> <div class="cod-info-box" id="cod-order-info"></div> <div style="font-size:12px;color:var(--muted);background:var(--bg);border-radius:8px;padding:10px 12px;margin-bottom:14px;line-height:1.7">
         📌 Bạn <strong>không cần trả tiền trước</strong>. Khi nhận hàng, shipper sẽ thu tiền mặt theo đúng số tiền trên đơn.
