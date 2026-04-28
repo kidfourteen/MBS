@@ -2735,7 +2735,27 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
               <strong>Cách lấy token:</strong> github.com/settings/personal-access-tokens → <em>Generate new token (Fine-grained)</em>. Repository access: chỉ chọn repo chứa GitHub Pages. Permissions: <code>Contents = Read and write</code>. Token chỉ lưu trên máy này (localStorage), không có trong file HTML public.
               </div> <div class="af"><label>GitHub Personal Access Token</label><input id="cfg-gh-token" type="password" autocomplete="new-password" placeholder="github_pat_..." onfocus="if(this.dataset.masked==='1'){this.value='';this.dataset.masked='';}"></div> <div id="gh-token-status" style="font-size:12px;margin-bottom:12px;min-height:18px"></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveGithubToken()">Lưu token</button> <button class="btn" onclick="testGithubConnection()">🔌 Test kết nối</button> <button class="btn" onclick="clearGithubToken()" style="color:var(--re)">🗑 Xóa token</button> </div> <div id="gh-test-result" style="font-size:12px;margin-top:10px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
                 Mỗi đơn hàng mới sẽ tự động gửi tin nhắn vào Telegram của bạn ngay lập tức.<br> <strong>Cách lấy Token:</strong> Tìm @BotFather trên Telegram → /newbot → copy Token<br> <strong>Cách lấy Chat ID:</strong> Mở bot → gõ /start → vào <code>api.telegram.org/bot[TOKEN]/getUpdates</code> → tìm "id"
-              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle off" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value=""></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value=""></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
+              </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle off" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value=""></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value=""></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📊 Đồng bộ đơn hàng vào Google Sheet</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px"> Mỗi khi có đơn mới, hệ thống tự động ghi vào Google Sheet. Bạn xem được đơn hàng từ <strong>điện thoại / máy tính bất cứ đâu</strong> qua app Google Sheets. <br><br> <strong>Cách setup (làm 1 lần, ~3 phút):</strong><br> 1. Tạo 1 Google Sheet mới tại <a href="https://sheets.new" target="_blank" style="color:var(--pk);font-weight:600">sheets.new</a><br> 2. Vào <strong>Tiện ích mở rộng → Apps Script</strong><br> 3. Xóa code cũ, dán code dưới đây vào, đổi tên file thành "Code.gs"<br> 4. Bấm <strong>Triển khai → Triển khai mới → Loại: Ứng dụng web</strong><br> 5. Chọn "Thực thi với tư cách: Tôi" và "Ai có quyền truy cập: Bất kỳ ai"<br> 6. Copy URL Web App, dán vào ô bên dưới và bấm Lưu </div> <details style="margin-bottom:14px;background:var(--bg);border-radius:8px;padding:10px 14px"> <summary style="cursor:pointer;font-weight:600;font-size:13px">📋 Xem code Apps Script (click để mở)</summary> <textarea readonly onclick="this.select()" style="width:100%;height:280px;margin-top:10px;font-family:monospace;font-size:11.5px;padding:10px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text);resize:vertical">// ===== MUM BIGSIZE - Order Webhook =====
+// Triển khai → Triển khai mới → Ứng dụng web
+// Thực thi: Tôi  |  Ai có quyền truy cập: Bất kỳ ai
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  // Tạo header lần đầu nếu sheet trống
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(['Mã đơn','Thời gian','Tên KH','SĐT','Địa chỉ','Ghi chú','Sản phẩm','Tạm tính (k)','Ship (k)','Giảm VIP (k)','Mã voucher','Giảm voucher (k)','Tổng (k)','Thanh toán','Trạng thái TT','Trạng thái đơn']);
+    sheet.getRange(1,1,1,16).setFontWeight('bold').setBackground('#fce4f5');
+    sheet.setFrozenRows(1);
+  }
+  const p = e.parameter;
+  sheet.appendRow([
+    p.id||'', p.time||'', p.name||'', p.phone||'', p.address||'', p.note||'',
+    p.items||'', Number(p.subtotal||0), Number(p.ship||0), Number(p.vipDisc||0),
+    p.voucherCode||'', Number(p.voucherDisc||0), Number(p.total||0),
+    p.payMethod||'', p.payStatus||'', p.status||'Mới'
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+}
+function doGet(){ return ContentService.createTextOutput('OK - Mum Bigsize Webhook'); }</textarea> </details> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật đồng bộ vào Google Sheet</span> <button id="sheet-toggle" class="toggle off" onclick="toggleSheet(this)"></button> <span id="sheet-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div class="af"><label>URL Web App (dán URL từ bước 6)</label><input id="cfg-sheet-url" placeholder="https://script.google.com/macros/s/AKfyc.../exec" value=""></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveSheetCfg()">Lưu URL</button> <button class="btn" onclick="testSheetWebhook()">📤 Gửi đơn test vào Sheet</button> <button class="btn" onclick="openSheetURL()">📋 Mở Sheet</button> </div> <div id="sheet-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
 <div id="adp-reviews" class="ad-page">
   <div class="ad-topbar">
     <h1>⭐ Quản lý đánh giá</h1>
@@ -3062,6 +3082,44 @@ function sendTelegramNotification(order) {
   }).catch(e=>console.error('Telegram failed:', e));
 }
 
+/* Gửi đơn hàng lên Google Sheet thông qua Apps Script Web App webhook.
+   - Dùng mode 'no-cors' + form-urlencoded để Apps Script nhận được body mà không cần CORS preflight.
+   - Apps Script sẽ append đơn vào row mới của sheet. */
+function sendOrderToSheet(order){
+  if (!SHEET_CONFIG.enabled || !SHEET_CONFIG.webhookUrl) return;
+  const payLabels = {cod:'COD',bank:'Chuyển khoản',momo:'MoMo'};
+  const statusLabels = {pending:'Chờ xác nhận',awaiting:'Chờ xác nhận',paid:'Đã thanh toán',failed:'Thất bại'};
+  const items = (order.items||[]).map(i=>`${i.name} (Size ${i.size}) x${i.qty}`).join(' | ');
+  const payload = {
+    id: order.id||'',
+    time: new Date().toLocaleString('vi-VN', {timeZone:'Asia/Ho_Chi_Minh'}),
+    name: order.name||'',
+    phone: order.phone||'',
+    address: ((order.addr||'') + (order.city?', '+order.city:'')).trim().replace(/^,\s*/,''),
+    note: order.note||'',
+    items: items,
+    subtotal: order.subtotal||0,
+    ship: order.ship||0,
+    vipDisc: order.vipDisc||0,
+    voucherCode: order.voucherCode||'',
+    voucherDisc: order.voucherDisc||0,
+    total: order.total||0,
+    payMethod: payLabels[order.payMethod]||order.payMethod||'',
+    payStatus: statusLabels[order.payStatus]||order.payStatus||'',
+    status: 'Mới'
+  };
+  // Dùng FormData/urlencoded để tránh preflight CORS với Apps Script
+  const body = new URLSearchParams();
+  Object.keys(payload).forEach(k => body.append(k, String(payload[k])));
+  fetch(SHEET_CONFIG.webhookUrl, {
+    method: 'POST',
+    mode: 'no-cors',  // Apps Script không hỗ trợ CORS đầy đủ; no-cors cho phép gửi nhưng không đọc response
+    body: body
+  }).catch(e => console.error('Sheet webhook failed:', e));
+  // Note: với mode 'no-cors', không thể đọc response → coi như đã gửi thành công.
+  // Nếu cần xác nhận, có thể setup thêm doGet để verify.
+}
+
 const BANK_CONFIG={
   bankName:'TECHCOMBANK',
   accountNo:'2009222222',
@@ -3076,6 +3134,13 @@ const MOMO_CONFIG={
 const SHOP_CONFIG={
   zalo:'',  // số Zalo hoặc link OA, lưu qua Admin → Channels
   fb:'https://www.facebook.com/mumbigsize.top/'
+};
+
+/* Cấu hình Google Sheets — admin tạo 1 Apps Script Web App rồi dán URL vào đây
+   qua Admin → Cài đặt → Google Sheets. Mỗi khi có đơn, web sẽ POST đơn lên Sheet. */
+const SHEET_CONFIG={
+  webhookUrl:'',  // URL Apps Script Web App (https://script.google.com/macros/s/.../exec)
+  enabled:false
 };
 
 /* Load tất cả config từ localStorage khi khởi động */
@@ -3095,6 +3160,10 @@ const SHOP_CONFIG={
   try{
     const t = JSON.parse(localStorage.getItem('telegram_cfg')||'null');
     if(t){ TELEGRAM_CONFIG.token=t.token||''; TELEGRAM_CONFIG.chatId=t.chatId||''; TELEGRAM_CONFIG.enabled=!!t.enabled; }
+  }catch(e){}
+  try{
+    const sh = JSON.parse(localStorage.getItem('sheet_cfg')||'null');
+    if(sh){ SHEET_CONFIG.webhookUrl=sh.webhookUrl||''; SHEET_CONFIG.enabled=!!sh.enabled; }
   }catch(e){}
 })();
 
@@ -3813,6 +3882,8 @@ function saveOrder(o){
   }
   // Gửi thông báo Telegram
   sendTelegramNotification(o);
+  // Gửi đơn lên Google Sheet (admin xem được từ bất cứ đâu)
+  sendOrderToSheet(o);
 }
 
 /* ══ COUNTDOWN ══ */
@@ -3961,6 +4032,9 @@ function initSettingsUI(){
   const bO=document.getElementById('cfg-bank-owner'); if(bO) bO.value=BANK_CONFIG.accountName||'';
   const mP=document.getElementById('cfg-momo-phone'); if(mP) mP.value=MOMO_CONFIG.phone||'';
   const mN=document.getElementById('cfg-momo-name'); if(mN) mN.value=MOMO_CONFIG.name||'';
+  const shU=document.getElementById('cfg-sheet-url'); if(shU) shU.value=SHEET_CONFIG.webhookUrl||'';
+  const shB=document.getElementById('sheet-toggle'); if(shB) shB.className='toggle '+(SHEET_CONFIG.enabled?'on':'off');
+  const shS=document.getElementById('sheet-status'); if(shS) shS.textContent=SHEET_CONFIG.enabled?'Đang bật':'Đang tắt';
 }
 
 /* Cập nhật UI trang Channels từ SHOP_CONFIG đã lưu */
@@ -4274,6 +4348,71 @@ function saveMomoCfg(){
   MOMO_CONFIG.phone=ph;MOMO_CONFIG.name=nm||MOMO_CONFIG.name;
   try{localStorage.setItem('momo_cfg',JSON.stringify(MOMO_CONFIG));}catch(e){}
   showToast('✅ Đã lưu cấu hình MoMo!');
+}
+
+/* ══ GOOGLE SHEET CONFIG ══ */
+function saveSheetCfg(){
+  const url=document.getElementById('cfg-sheet-url')?.value.trim();
+  if(!url){showToast('Vui lòng nhập URL Web App!');return;}
+  if(!/^https:\/\/script\.google\.com\//.test(url)){
+    showToast('❌ URL phải bắt đầu bằng https://script.google.com/');return;
+  }
+  SHEET_CONFIG.webhookUrl=url;
+  try{localStorage.setItem('sheet_cfg',JSON.stringify(SHEET_CONFIG));}catch(e){}
+  showToast('✅ Đã lưu URL Google Sheet!');
+}
+function toggleSheet(btn){
+  if(!SHEET_CONFIG.webhookUrl && !SHEET_CONFIG.enabled){
+    showToast('⚠️ Vui lòng nhập URL Web App và bấm Lưu trước!');return;
+  }
+  SHEET_CONFIG.enabled=!SHEET_CONFIG.enabled;
+  btn.className='toggle '+(SHEET_CONFIG.enabled?'on':'off');
+  const status=document.getElementById('sheet-status');
+  if(status) status.textContent=SHEET_CONFIG.enabled?'Đang bật':'Đang tắt';
+  try{localStorage.setItem('sheet_cfg',JSON.stringify(SHEET_CONFIG));}catch(e){}
+  showToast(SHEET_CONFIG.enabled?'✅ Đã bật đồng bộ Google Sheet':'⏸ Đã tắt đồng bộ Google Sheet');
+}
+function testSheetWebhook(){
+  const url=document.getElementById('cfg-sheet-url')?.value.trim()||SHEET_CONFIG.webhookUrl;
+  const resultEl=document.getElementById('sheet-test-result');
+  if(!url){showToast('Vui lòng nhập URL Web App trước!');return;}
+  if(resultEl) resultEl.innerHTML='<span style="color:var(--muted)">Đang gửi đơn test...</span>';
+  const testOrder = {
+    id: '#TEST'+Date.now().toString().slice(-4),
+    name: 'Khách Test',
+    phone: '0900000000',
+    addr: 'Số 1 đường Test',
+    city: 'TP.HCM',
+    note: 'Đơn test từ Admin Panel',
+    items: [{name:'Sản phẩm test', size:'2XL', qty:1, price:100}],
+    subtotal: 100,
+    ship: 30,
+    vipDisc: 0,
+    voucherCode: '',
+    voucherDisc: 0,
+    total: 130,
+    payMethod: 'cod',
+    payStatus: 'awaiting'
+  };
+  // Tạm bật để gửi test
+  const wasEnabled = SHEET_CONFIG.enabled;
+  const wasUrl = SHEET_CONFIG.webhookUrl;
+  SHEET_CONFIG.webhookUrl = url;
+  SHEET_CONFIG.enabled = true;
+  sendOrderToSheet(testOrder);
+  SHEET_CONFIG.enabled = wasEnabled;
+  SHEET_CONFIG.webhookUrl = wasUrl || url;
+  // mode 'no-cors' nên không thể đọc kết quả → báo "đã gửi"
+  setTimeout(()=>{
+    if(resultEl) resultEl.innerHTML='<span style="color:var(--gr)">✅ Đã gửi đơn test. Kiểm tra Google Sheet để xem có dòng "#TEST" mới không.</span>';
+  }, 1500);
+}
+function openSheetURL(){
+  const url=document.getElementById('cfg-sheet-url')?.value.trim()||SHEET_CONFIG.webhookUrl;
+  if(!url){showToast('Vui lòng nhập URL Web App trước!');return;}
+  // Apps Script URL không phải URL Sheet, nên hướng dẫn user
+  showToast('💡 Mở Google Drive → tìm Sheet đã tạo để xem đơn hàng');
+  window.open('https://drive.google.com/drive/recent','_blank');
 }
 
 /* ══ TOAST ══ */
