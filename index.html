@@ -167,6 +167,19 @@ a{text-decoration:none;color:inherit}
 .mob-chip{flex:0 0 auto;padding:6px 14px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);white-space:nowrap;font-family:var(--font);transition:all .2s}
 .mob-chip.active{background:var(--pk);color:#fff;border-color:var(--pk)}
 
+/* Top nav with dropdown */
+.nav-item-wrap{position:relative}
+.nav-dd{position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.12);min-width:200px;padding:6px 0;display:none;z-index:1100;max-height:70vh;overflow-y:auto}
+.nav-dd.open{display:block}
+.nav-dd-it{padding:9px 16px;font-size:13px;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:8px;font-weight:500}
+.nav-dd-it:hover{background:var(--pk-l);color:var(--pk)}
+.nav-dd-it.active{color:var(--pk);font-weight:700}
+.nav-caret{font-size:9px;margin-left:4px;transition:transform .2s}
+.nav-item-wrap.open .nav-caret{transform:rotate(180deg)}
+.mob-menu-btn{display:none;background:#fff;border:1px solid var(--border);padding:8px 14px;border-radius:9px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;font-family:var(--font);align-items:center;gap:6px}
+.mob-menu-bar{display:none;padding:10px 14px;background:#fff;border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:90}
+.mob-menu-bar .nav-dd{position:fixed;top:auto;left:14px;right:14px;width:auto;max-height:60vh}
+
 .cart-overlay-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:590}
 .cart-overlay-bg.show{display:block}
 .cart-drawer{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:var(--card);border-left:1px solid var(--border);z-index:600;transition:right .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
@@ -419,7 +432,9 @@ a{text-decoration:none;color:inherit}
   .shop-body{grid-template-columns:1fr;padding:16px}
   .filter-sidebar{display:none}
   .prod-grid{grid-template-columns:1fr 1fr}
-  .mob-filter-bar{display:flex!important}
+  .mob-filter-bar{display:none!important}
+  .mob-menu-bar{display:flex!important}
+  .mob-menu-btn{display:flex}
   .checkout-page{grid-template-columns:1fr;padding:16px}
   .ck-summary{position:static}
   .fr{grid-template-columns:1fr}
@@ -2479,14 +2494,211 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 .sheet-status-bar p { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.6; }
 .sheet-status-bar a { color: var(--pk); font-weight: 600; text-decoration: none; }
 
+/* ══ Category count badge ══ */
+.cat-count{font-size:11px;color:var(--muted);margin-left:auto;background:var(--bg);padding:1px 8px;border-radius:10px;font-weight:600}
+.cat-item.active .cat-count{background:#fff;color:var(--pk)}
+.cat-item{display:flex;align-items:center;gap:8px}
+
+/* ══════════════════════════════════════════════ */
+/* ════════════ MOBILE UX/UI OPTIMIZATION ════════ */
+/* ══════════════════════════════════════════════ */
+
+/* Mobile bottom navigation (fixed) — primary mobile UX pattern for e-commerce */
+.mob-bnav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:6px 0 calc(6px + env(safe-area-inset-bottom));z-index:200;box-shadow:0 -2px 8px rgba(0,0,0,.06)}
+.mob-bnav-inner{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
+.mob-bnav-it{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 4px;font-size:10px;color:var(--muted);font-weight:600;cursor:pointer;text-decoration:none;background:none;border:0;font-family:var(--font);min-height:48px;position:relative;-webkit-tap-highlight-color:rgba(233,30,140,.1)}
+.mob-bnav-it span.bn-ic{font-size:20px;margin-bottom:2px;line-height:1}
+.mob-bnav-it.active{color:var(--pk)}
+.mob-bnav-it .bn-badge{position:absolute;top:4px;right:24%;background:var(--pk);color:#fff;font-size:10px;font-weight:700;border-radius:10px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px;line-height:1}
+
+/* Sticky mobile search header */
+.mob-search-bar{display:none;position:sticky;top:0;background:#fff;padding:10px 14px;z-index:90;border-bottom:1px solid var(--border);align-items:center;gap:10px}
+.mob-search-bar input{flex:1;border:1px solid var(--border);background:var(--bg);border-radius:24px;padding:10px 16px;font-size:13px;outline:none;font-family:var(--font);min-height:40px}
+.mob-search-bar input:focus{border-color:var(--pk)}
+.mob-search-bar .mob-cart-btn{background:var(--pk);color:#fff;border:0;border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0}
+.mob-search-bar .mob-cart-btn .mob-cart-num{position:absolute;top:-4px;right:-4px;background:var(--re);color:#fff;font-size:10px;font-weight:700;border-radius:10px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* Mobile-only display rules */
+@media(max-width:768px){
+  /* Hide desktop header and old menu bar — replace with mobile-friendly patterns */
+  .pc-header{display:none!important}
+  .mob-search-bar{display:flex!important}
+  .mob-bnav{display:block!important}
+  body{padding-bottom:64px} /* room for bottom nav */
+
+  /* Mobile menu bar: keep but make compact and only show categories shortcut */
+  .mob-menu-bar{display:flex!important;padding:8px 12px;gap:6px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+  .mob-menu-bar::-webkit-scrollbar{display:none}
+  .mob-menu-btn{padding:8px 12px;font-size:12px;border-radius:18px;flex-shrink:0;min-height:36px;background:var(--bg);border:1px solid var(--border)}
+  .mob-menu-bar .nav-dd{position:fixed;top:auto;bottom:64px;left:8px;right:8px;width:auto;max-height:65vh;border-radius:16px}
+  .mob-menu-bar .nav-dd-it{padding:14px 18px;font-size:14px;border-bottom:1px solid var(--bg)}
+
+  /* Hero compact: remove visual block, smaller padding */
+  .hero{padding:18px 0!important}
+  .hero-inner{padding:0 14px!important;gap:14px}
+  .hero-h1{font-size:24px!important;line-height:1.2!important;margin-bottom:8px!important}
+  .hero-p{font-size:13px!important;line-height:1.6!important;margin-bottom:14px!important}
+  .hero-tag{font-size:10px!important;padding:4px 10px!important}
+  .hero-btns{gap:8px!important}
+  .hero-btns .btn{padding:11px 18px!important;font-size:13px!important;flex:1;min-height:44px}
+  .hero-stats{display:none!important} /* save vertical space on mobile */
+  .stat-pills{gap:6px}
+
+  /* Compact category cards on hero */
+  .hero-emoji-grid{display:grid;grid-template-columns:repeat(4,1fr)!important;gap:8px!important;padding:0}
+  .hero-card{padding:14px 4px!important;border-radius:12px!important}
+  .hero-card span{font-size:24px!important}
+  .hero-card p{font-size:11px!important;margin-top:4px!important;line-height:1.2!important}
+  .hero-floating-badge{font-size:10px;padding:6px 8px;top:-8px;right:-4px}
+
+  /* Marquee smaller on mobile */
+  .marquee-wrap{padding:7px 0;font-size:11px}
+  .marquee-item{font-size:11px}
+
+  /* Feature strip compact + horizontal scroll */
+  .feature-strip{padding:12px 0}
+  .feature-strip-inner{display:flex;overflow-x:auto;gap:8px;padding:0 14px;scrollbar-width:none}
+  .feature-strip-inner::-webkit-scrollbar{display:none}
+  .feat-strip-item{flex:0 0 auto;padding:10px 12px;border-radius:10px}
+  .feat-strip-ic{font-size:18px}
+  .feat-strip-text strong{font-size:11px}
+  .feat-strip-text span{font-size:10px}
+
+  /* Flash sale compact */
+  .flash-bar{padding:14px 0}
+  .flash-bar-inner{padding:0 12px}
+  .flash-head h3{font-size:15px}
+  .flash-head .countdown{margin-left:6px!important}
+  .cbox{padding:3px 7px!important;font-size:13px!important}
+  .csep{font-size:14px}
+  .flash-items{display:flex;overflow-x:auto;gap:10px;padding:8px 0 4px;scrollbar-width:none;flex-wrap:nowrap}
+  .flash-items::-webkit-scrollbar{display:none}
+  .fi{flex:0 0 140px;width:140px;padding:8px}
+  .fi-img{height:140px}
+  .fi-name{font-size:11px;-webkit-line-clamp:2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;height:30px;line-height:1.4}
+  .fi-price{font-size:14px}
+  .fi-old{font-size:10px}
+
+  /* Product grid: 2 columns, optimized cards */
+  .shop-body{padding:14px!important;gap:0}
+  .prod-grid{grid-template-columns:1fr 1fr!important;gap:10px!important}
+  .prod-area-head{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:14px;padding:0 2px}
+  .prod-area-head h2{font-size:18px}
+  .sort-select{font-size:12px;padding:6px 10px;width:100%}
+
+  /* Optimized product cards on mobile */
+  .prod-card{border-radius:12px;overflow:hidden}
+  .prod-img-wrap{aspect-ratio:1/1;height:auto!important;min-height:0}
+  .prod-img-wrap img{width:100%;height:100%;object-fit:cover}
+  .prod-info{padding:8px 8px 10px!important;gap:4px!important}
+  .prod-name{font-size:12px!important;line-height:1.4!important;-webkit-line-clamp:2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;height:34px}
+  .prod-price-row{gap:5px!important;flex-wrap:wrap}
+  .prod-price{font-size:14px!important;font-weight:800}
+  .prod-old{font-size:11px!important}
+  .prod-card .badge,.prod-card .disc-badge{font-size:9px;padding:2px 6px}
+
+  /* Detail page (PDP) — sticky add-to-cart bar at bottom */
+  .pdp-wrap{padding:12px!important;padding-bottom:80px!important}
+  .pdp-top{grid-template-columns:1fr!important;gap:14px}
+  .pdp-main-img{aspect-ratio:1/1;height:auto!important}
+  .pdp-thumbs{grid-template-columns:repeat(5,1fr)!important;gap:6px!important}
+  .pdp-thumbs > div,.pdp-thumbs img{aspect-ratio:1/1}
+  .pdp-name{font-size:18px!important;margin-bottom:6px!important;line-height:1.3}
+  .pdp-price{font-size:24px!important}
+  .pdp-old{font-size:13px!important}
+  .pdp-save{font-size:11px!important}
+  .pdp-section{padding:14px!important;margin-bottom:12px}
+  .pdp-section h2{font-size:15px}
+  .pdp-content{grid-template-columns:1fr!important;gap:14px}
+
+  /* Sticky bottom buy buttons on PDP — biggest mobile conversion booster */
+  .pdp-btn-row{position:fixed;bottom:64px;left:0;right:0;background:#fff;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--border);margin:0!important;display:grid!important;grid-template-columns:1fr 1fr;gap:8px;z-index:150;box-shadow:0 -3px 10px rgba(0,0,0,.08)}
+  .pdp-btn-add,.pdp-btn-buy{padding:13px 8px!important;font-size:13px!important;min-height:46px;border-radius:10px!important;font-weight:700}
+
+  /* Cart drawer fullscreen mobile */
+  .cart-drawer{width:100%!important;right:-100%!important;height:100vh}
+  .cart-drawer.open{right:0!important}
+  .cart-head{padding:14px}
+  .cart-body{padding:14px}
+  .cart-foot{padding:14px;padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+
+  /* Touch targets ≥44px */
+  button,.btn,.cat-item,.sz-btn,.add-btn,.szc,.ep,.mob-chip,.pdp-qbtn{min-height:42px;display:flex;align-items:center;justify-content:center}
+  input,select,textarea{min-height:42px;font-size:16px!important} /* prevent iOS zoom on focus */
+
+  /* Better cart toast on mobile */
+  .cart-toast{bottom:80px!important;left:12px;right:12px;width:auto;font-size:12px}
+  .cart-toast-img{width:36px;height:36px}
+  .cart-toast-name{font-size:12px}
+  .cart-toast-sub{font-size:10px}
+  .cart-toast-btn{font-size:11px;padding:6px 10px}
+
+  /* Hide secondary content on small mobile to focus on shopping */
+  .challenge-section,.size-teaser{padding:24px 14px!important}
+  .challenge-h2{font-size:20px!important;line-height:1.3}
+  .challenge-cards{grid-template-columns:1fr!important;gap:10px!important}
+  .challenge-card{padding:14px!important}
+  .challenge-cta{padding:13px 28px!important}
+
+  .testi-section{padding:24px 0!important}
+  .testi-grid-v2{grid-template-columns:1fr!important;padding:0 12px!important;gap:10px}
+  .testi-card-v2{padding:16px!important}
+
+  /* Slim footer mobile */
+  .site-footer{padding:24px 14px}
+
+  /* Scroll-up FAB - hide because bottom nav already there */
+  .fab-up{bottom:80px!important;right:12px!important}
+
+  /* Search input bigger touch */
+  #search-inp{font-size:14px;padding:11px 14px}
+
+  /* Address-bar friendly: viewport adapts */
+  .pdp-buy{padding:0!important}
+  .pdp-trust{grid-template-columns:1fr 1fr!important;gap:8px;font-size:11px}
+  .pdp-trust-item{padding:8px;font-size:11px}
+
+  /* Remove heavy emoji rotation on small screens for perf */
+  .hero-emoji-grid{animation:none}
+}
+
+/* Very small mobile (≤380px) — extra compact */
+@media(max-width:380px){
+  .prod-grid{gap:8px!important}
+  .prod-info{padding:6px 6px 8px!important}
+  .prod-name{font-size:11px!important}
+  .prod-price{font-size:13px!important}
+  .hero-emoji-grid{grid-template-columns:repeat(3,1fr)!important}
+  .pdp-trust{grid-template-columns:1fr 1fr}
+  .mob-bnav-it span.bn-ic{font-size:18px}
+  .mob-bnav-it{font-size:9px}
+}
+
 </style>
 </head>
 <body>
-<div id="toast"></div> <!-- ══════════ SHOP ══════════ -->
-<div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav"> <div class="pc-nav-link" onclick="goScroll('flash-section')">Flash Sale</div> <div class="pc-nav-link" onclick="goScroll('products-section')">Sản phẩm</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <div class="mob-filter-bar" id="mob-cats"> <div class="mob-chip active" onclick="setCat(this,'all')">Tất cả</div> <div class="mob-chip" onclick="setCat(this,'ao-chong-nang')">Áo chống nắng</div> <div class="mob-chip" onclick="setCat(this,'ao-gio')">Áo gió</div> <div class="mob-chip" onclick="setCat(this,'ao-khoac-dong')">Áo khoác đông</div> <div class="mob-chip" onclick="setCat(this,'hoodie')">Hoodie</div> <div class="mob-chip" onclick="setCat(this,'sweater')">Sweater</div> <div class="mob-chip" onclick="setCat(this,'tshirt')">T-shirt</div> <div class="mob-chip" onclick="setCat(this,'chan-vay')">Chân váy</div> <div class="mob-chip" onclick="setCat(this,'do-di-bien')">Đồ đi biển</div> <div class="mob-chip" onclick="setCat(this,'phu-kien')">Phụ kiện</div> <div class="mob-chip" onclick="setCat(this,'quan')">Quần</div> <div class="mob-chip" onclick="setCat(this,'ao-len')">Áo len</div> <div class="mob-chip" onclick="setCat(this,'ao-parka')">Áo Parka</div> <div class="mob-chip" onclick="setCat(this,'giay')">Giày</div> <div class="mob-chip" onclick="setCat(this,'dep')">Dép</div> <div class="mob-chip" onclick="setCat(this,'so-mi')">Sơ mi</div> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500K</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500K</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
+<div id="toast"></div>
+<!-- Mobile-only sticky search bar (replaces desktop header on mobile) -->
+<div class="mob-search-bar">
+  <div onclick="logoClick()" style="flex-shrink:0;cursor:pointer"><img class="brand-logo" alt="Mũm" style="height:30px;width:auto;object-fit:contain"></div>
+  <input type="text" placeholder="Tìm sản phẩm..." id="search-inp-mob" oninput="doSearchMob(this.value)">
+  <button class="mob-cart-btn" onclick="openCart()" aria-label="Giỏ hàng">🛒<span class="mob-cart-num" id="cart-count-mob">0</span></button>
+</div>
+<!-- Mobile-only bottom navigation (fixed) -->
+<nav class="mob-bnav" id="mob-bnav">
+  <div class="mob-bnav-inner">
+    <button class="mob-bnav-it active" onclick="bnNav('home')"><span class="bn-ic">🏠</span>Trang chủ</button>
+    <button class="mob-bnav-it" onclick="bnNav('cats')"><span class="bn-ic">📋</span>Danh mục</button>
+    <button class="mob-bnav-it" onclick="bnNav('flash')"><span class="bn-ic">⚡</span>Flash Sale</button>
+    <button class="mob-bnav-it" onclick="bnNav('feedback')"><span class="bn-ic">💬</span>Feedback</button>
+    <button class="mob-bnav-it" onclick="openCart()"><span class="bn-ic">🛒</span>Giỏ hàng<span class="bn-badge" id="cart-count-bnav" style="display:none">0</span></button>
+  </div>
+</nav>
+<!-- ══════════ SHOP ══════════ -->
+<div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav" id="pc-nav-bar"> <div class="pc-nav-link" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</div> <div class="nav-item-wrap" id="nav-cats-wrap"> <div class="pc-nav-link" onclick="toggleNavMenu('nav-cats-wrap', event)">Danh mục <span class="nav-caret">▼</span></div> <div class="nav-dd" id="nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <div class="pc-nav-link" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</div> <div class="pc-nav-link" onclick="goScroll('flash-section');closeAllMenus()">⚡ Flash Sale</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <!-- Mobile menu bar (replaces old chip bar) --> <div class="mob-menu-bar" id="mob-menu-bar"> <button class="mob-menu-btn" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</button> <div class="nav-item-wrap" id="mob-nav-cats-wrap"> <button class="mob-menu-btn" onclick="toggleNavMenu('mob-nav-cats-wrap', event)">📋 Danh mục <span class="nav-caret">▼</span></button> <div class="nav-dd" id="mob-nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <button class="mob-menu-btn" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</button> <button class="mob-menu-btn" onclick="goScroll('flash-section');closeAllMenus()">⚡ Flash Sale</button> </div> <div class="mob-filter-bar" id="mob-cats" style="display:none"> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500K</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500K</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero" id="hero-section"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
           Mũm Big Size — thương hiệu thời trang dành riêng cho nàng <strong style="color:var(--pk-d)">55kg đến 120kg</strong>.<br>
           Chúng mình hiểu cơ thể bạn hơn ai hết — từng đường cắt, từng cm vải đều được thiết kế để bạn <strong style="color:var(--pu-d)">tự tin tỏa sáng</strong> mỗi ngày.
-        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">⚡ Flash Sale hôm nay</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-floating-badge"><strong>-40%</strong>Flash<br>Sale</div> <div class="hero-emoji-grid"> <div class="hero-card" onclick="setCatDirect('ao-chong-nang')"><span>🧥</span><p>Chống nắng</p></div><div class="hero-card" onclick="setCatDirect('hoodie')"><span>🦘</span><p>Hoodie</p></div><div class="hero-card" onclick="setCatDirect('ao-gio')"><span>💨</span><p>Áo gió</p></div><div class="hero-card" onclick="setCatDirect('chan-vay')"><span>👗</span><p>Chân váy</p></div><div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div><div class="hero-card" onclick="setCatDirect('giay')"><span>👟</span><p>Giày & Dép</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner"> <div class="feat-strip-item"><span class="feat-strip-ic">🚚</span><div class="feat-strip-text"><strong>Miễn phí vận chuyển</strong><span>Đơn từ 500k – toàn quốc</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">💪</span><div class="feat-strip-text"><strong>Size lên đến 120kg</strong><span>L, XL, 2XL, 3XL, 4XL, 5XL</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">🔄</span><div class="feat-strip-text"><strong>Đổi size miễn phí</strong><span>Trong vòng 7 ngày nhận hàng</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">✅</span><div class="feat-strip-text"><strong>Cam kết chất lượng</strong><span>Kiểm hàng trước khi giao</span></div></div> </div> </div> <div class="flash-bar" id="flash-section"> <div class="flash-bar-inner"> <div class="flash-head"> <h3>⚡ Flash Sale hôm nay</h3> <div class="countdown" style="margin-left:14px"> <div class="cbox" id="fc-h">02</div><span class="csep">:</span> <div class="cbox" id="fc-m">47</div><span class="csep">:</span> <div class="cbox" id="fc-s">30</div> </div> <div style="margin-left:auto;font-size:12px;color:var(--muted)">Giảm đến 40%</div> </div> <div class="flash-items" id="flash-items"></div> </div> </div> <div class="shop-body" id="products-section"> <aside class="filter-sidebar"> <div class="fs-title">🔍 Lọc sản phẩm</div> <div class="fs-section"> <h4>Danh mục</h4> <div class="cat-list" id="cat-list"> <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div> <div class="cat-item" onclick="setCat(this,'ao-chong-nang')"><span>🧥</span>Áo chống nắng</div> <div class="cat-item" onclick="setCat(this,'ao-gio')"><span>💨</span>Áo gió</div> <div class="cat-item" onclick="setCat(this,'ao-khoac-dong')"><span>🧣</span>Áo khoác đông</div> <div class="cat-item" onclick="setCat(this,'hoodie')"><span>🦘</span>Hoodie</div> <div class="cat-item" onclick="setCat(this,'sweater')"><span>🧸</span>Sweater</div> <div class="cat-item" onclick="setCat(this,'tshirt')"><span>👕</span>T-shirt</div> <div class="cat-item" onclick="setCat(this,'chan-vay')"><span>👗</span>Chân váy</div> <div class="cat-item" onclick="setCat(this,'do-di-bien')"><span>🏖️</span>Đồ đi biển</div> <div class="cat-item" onclick="setCat(this,'phu-kien')"><span>👜</span>Phụ kiện</div> <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div> <div class="cat-item" onclick="setCat(this,'ao-len')"><span>🧶</span>Áo len</div> <div class="cat-item" onclick="setCat(this,'ao-parka')"><span>🥼</span>Áo Parka</div> <div class="cat-item" onclick="setCat(this,'giay')"><span>👟</span>Giày</div> <div class="cat-item" onclick="setCat(this,'dep')"><span>🩴</span>Dép</div> <div class="cat-item" onclick="setCat(this,'so-mi')"><span>👔</span>Sơ mi</div> </div> </div> <div class="fs-section"> <h4>Size</h4> <div class="size-grid" id="sz-grid"> <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div> <div class="sz-btn" onclick="setSz(this,'S')">S</div> <div class="sz-btn" onclick="setSz(this,'M')">M</div> <div class="sz-btn" onclick="setSz(this,'L')">L</div> <div class="sz-btn" onclick="setSz(this,'XL')">XL</div> <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div> <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div> <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div> <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div> <div class="sz-btn" onclick="setSz(this,'6XL')">6XL</div> <div class="sz-btn" onclick="setSz(this,'7XL')">7XL</div> </div> </div> </aside> <div> <div class="prod-area-head"> <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2> <select class="sort-select" onchange="doSort(this.value)"> <option value="default">Mặc định</option> <option value="price-asc">Giá tăng dần</option> <option value="price-desc">Giá giảm dần</option> <option value="sold">Bán chạy nhất</option> </select> </div> <div class="prod-grid" id="prod-grid"></div> </div> </div> <!-- Challenge Section --> <div class="challenge-section reveal"> <div class="challenge-inner"> <span class="challenge-tag">💪 THÁCH THỨC CÂN NẶNG</span> <h2 class="challenge-h2">Không có size nào<br>là <em>quá lớn</em> với Mũm</h2> <p class="challenge-p">Chúng mình không giới hạn bạn. Dù bạn 55kg hay 120kg, dù vóc dáng nào — Mũm Big Size luôn có outfit xịn đang chờ bạn. Vì vẻ đẹp không có số đo.</p> <div class="challenge-cards"> <div class="challenge-card"> <div class="challenge-card-ic">📏</div> <strong>Size L đến 5XL</strong> <span>Phủ sóng từ 55kg đến 120kg+. Mỗi size được đo chính xác theo vóc dáng Việt Nam.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">✂️</div> <strong>Cắt may riêng cho nàng mũm</strong> <span>Không phải size thường cắt to ra — mà thiết kế từ đầu cho đường cong tự nhiên của bạn.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">🌸</div> <strong>Tự tin là đẹp nhất</strong> <span>Hàng ngàn khách hàng đã tìm lại sự tự tin với thời trang — bạn là người tiếp theo!</span> </div> </div> <button class="challenge-cta" onclick="goScroll('products-section')">Tìm outfit của tôi →</button> </div> </div> <!-- Size visual teaser --> <div class="size-teaser reveal"> <div class="size-teaser-inner"> <div> <span style="display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px">📏 BẢNG SIZE MŨM BIGSIZE</span> <h2 style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px">Phủ sóng <span style="color:var(--pk)">mọi vóc dáng</span></h2> <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">Từ nàng 55kg thanh mảnh đến nàng 120kg đầy đặn — Mũm đều có size vừa vặn. Mỗi sản phẩm đều ghi rõ bảng size chi tiết để bạn chọn chuẩn ngay lần đầu.</p> <button class="btn btn-pk" style="border-radius:50px;padding:11px 24px" onclick="goScroll('products-section')">Xem sản phẩm →</button> </div> <div class="size-bar-list"> <div class="size-bar-row"><span class="size-bar-lbl">S</span><div class="size-bar-track"><div class="size-bar-fill" style="width:14%"></div></div><span class="size-bar-kg">40 – 48 kg</span></div>
+        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">⚡ Flash Sale hôm nay</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-floating-badge"><strong>-40%</strong>Flash<br>Sale</div> <div class="hero-emoji-grid" id="hero-cat-grid"> <div class="hero-card" onclick="setCatDirect('ao-chong-nang')"><span>🧥</span><p>Chống nắng</p></div><div class="hero-card" onclick="setCatDirect('hoodie')"><span>🦘</span><p>Hoodie</p></div><div class="hero-card" onclick="setCatDirect('ao-gio')"><span>💨</span><p>Áo gió</p></div><div class="hero-card" onclick="setCatDirect('chan-vay')"><span>👗</span><p>Chân váy</p></div><div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div><div class="hero-card" onclick="setCatDirect('giay')"><span>👟</span><p>Giày & Dép</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner"> <div class="feat-strip-item"><span class="feat-strip-ic">🚚</span><div class="feat-strip-text"><strong>Miễn phí vận chuyển</strong><span>Đơn từ 500k – toàn quốc</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">💪</span><div class="feat-strip-text"><strong>Size lên đến 120kg</strong><span>L, XL, 2XL, 3XL, 4XL, 5XL</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">🔄</span><div class="feat-strip-text"><strong>Đổi size miễn phí</strong><span>Trong vòng 7 ngày nhận hàng</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">✅</span><div class="feat-strip-text"><strong>Cam kết chất lượng</strong><span>Kiểm hàng trước khi giao</span></div></div> </div> </div> <div class="flash-bar" id="flash-section"> <div class="flash-bar-inner"> <div class="flash-head"> <h3>⚡ Flash Sale hôm nay</h3> <div class="countdown" style="margin-left:14px"> <div class="cbox" id="fc-h">02</div><span class="csep">:</span> <div class="cbox" id="fc-m">47</div><span class="csep">:</span> <div class="cbox" id="fc-s">30</div> </div> <div style="margin-left:auto;font-size:12px;color:var(--muted)">Giảm đến 40%</div> </div> <div class="flash-items" id="flash-items"></div> </div> </div> <div class="shop-body" id="products-section"> <aside class="filter-sidebar"> <div class="fs-title">🔍 Lọc sản phẩm</div> <div class="fs-section"> <h4>Danh mục</h4> <div class="cat-list" id="cat-list"> <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div> <div class="cat-item" onclick="setCat(this,'ao-chong-nang')"><span>🧥</span>Áo chống nắng</div> <div class="cat-item" onclick="setCat(this,'ao-gio')"><span>💨</span>Áo gió</div> <div class="cat-item" onclick="setCat(this,'ao-khoac-dong')"><span>🧣</span>Áo khoác đông</div> <div class="cat-item" onclick="setCat(this,'hoodie')"><span>🦘</span>Hoodie</div> <div class="cat-item" onclick="setCat(this,'sweater')"><span>🧸</span>Sweater</div> <div class="cat-item" onclick="setCat(this,'tshirt')"><span>👕</span>T-shirt</div> <div class="cat-item" onclick="setCat(this,'chan-vay')"><span>👗</span>Chân váy</div> <div class="cat-item" onclick="setCat(this,'do-di-bien')"><span>🏖️</span>Đồ đi biển</div> <div class="cat-item" onclick="setCat(this,'phu-kien')"><span>👜</span>Phụ kiện</div> <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div> <div class="cat-item" onclick="setCat(this,'ao-len')"><span>🧶</span>Áo len</div> <div class="cat-item" onclick="setCat(this,'ao-parka')"><span>🥼</span>Áo Parka</div> <div class="cat-item" onclick="setCat(this,'giay')"><span>👟</span>Giày</div> <div class="cat-item" onclick="setCat(this,'dep')"><span>🩴</span>Dép</div> <div class="cat-item" onclick="setCat(this,'so-mi')"><span>👔</span>Sơ mi</div> </div> </div> <div class="fs-section"> <h4>Size</h4> <div class="size-grid" id="sz-grid"> <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div> <div class="sz-btn" onclick="setSz(this,'S')">S</div> <div class="sz-btn" onclick="setSz(this,'M')">M</div> <div class="sz-btn" onclick="setSz(this,'L')">L</div> <div class="sz-btn" onclick="setSz(this,'XL')">XL</div> <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div> <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div> <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div> <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div> <div class="sz-btn" onclick="setSz(this,'6XL')">6XL</div> <div class="sz-btn" onclick="setSz(this,'7XL')">7XL</div> </div> </div> </aside> <div> <div class="prod-area-head"> <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2> <select class="sort-select" onchange="doSort(this.value)"> <option value="default">Mặc định</option> <option value="price-asc">Giá tăng dần</option> <option value="price-desc">Giá giảm dần</option> <option value="sold">Bán chạy nhất</option> </select> </div> <div class="prod-grid" id="prod-grid"></div> </div> </div> <!-- Challenge Section --> <div class="challenge-section reveal"> <div class="challenge-inner"> <span class="challenge-tag">💪 THÁCH THỨC CÂN NẶNG</span> <h2 class="challenge-h2">Không có size nào<br>là <em>quá lớn</em> với Mũm</h2> <p class="challenge-p">Chúng mình không giới hạn bạn. Dù bạn 55kg hay 120kg, dù vóc dáng nào — Mũm Big Size luôn có outfit xịn đang chờ bạn. Vì vẻ đẹp không có số đo.</p> <div class="challenge-cards"> <div class="challenge-card"> <div class="challenge-card-ic">📏</div> <strong>Size L đến 5XL</strong> <span>Phủ sóng từ 55kg đến 120kg+. Mỗi size được đo chính xác theo vóc dáng Việt Nam.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">✂️</div> <strong>Cắt may riêng cho nàng mũm</strong> <span>Không phải size thường cắt to ra — mà thiết kế từ đầu cho đường cong tự nhiên của bạn.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">🌸</div> <strong>Tự tin là đẹp nhất</strong> <span>Hàng ngàn khách hàng đã tìm lại sự tự tin với thời trang — bạn là người tiếp theo!</span> </div> </div> <button class="challenge-cta" onclick="goScroll('products-section')">Tìm outfit của tôi →</button> </div> </div> <!-- Size visual teaser --> <div class="size-teaser reveal"> <div class="size-teaser-inner"> <div> <span style="display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px">📏 BẢNG SIZE MŨM BIGSIZE</span> <h2 style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px">Phủ sóng <span style="color:var(--pk)">mọi vóc dáng</span></h2> <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">Từ nàng 55kg thanh mảnh đến nàng 120kg đầy đặn — Mũm đều có size vừa vặn. Mỗi sản phẩm đều ghi rõ bảng size chi tiết để bạn chọn chuẩn ngay lần đầu.</p> <button class="btn btn-pk" style="border-radius:50px;padding:11px 24px" onclick="goScroll('products-section')">Xem sản phẩm →</button> </div> <div class="size-bar-list"> <div class="size-bar-row"><span class="size-bar-lbl">S</span><div class="size-bar-track"><div class="size-bar-fill" style="width:14%"></div></div><span class="size-bar-kg">40 – 48 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">M</span><div class="size-bar-track"><div class="size-bar-fill" style="width:28%"></div></div><span class="size-bar-kg">48 – 55 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">L</span><div class="size-bar-track"><div class="size-bar-fill" style="width:40%"></div></div><span class="size-bar-kg">55 – 65 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:54%"></div></div><span class="size-bar-kg">65 – 75 kg</span></div>
@@ -2496,7 +2708,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div class="size-bar-row"><span class="size-bar-lbl">5XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:88%"></div></div><span class="size-bar-kg">105 – 115 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">6XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:94%"></div></div><span class="size-bar-kg">115 – 120 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">7XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:100%"></div></div><span class="size-bar-kg">120 – 130 kg</span></div> </div> </div> </div> <!-- Testimonials v2 — dynamic -->
-<div class="testi-section reveal">
+<div class="testi-section reveal" id="feedback-section">
   <div class="testi-section-inner">
     <div class="section-label">
       <h2>Khách hàng nói gì về <span>Mũm</span>?</h2>
@@ -2768,9 +2980,9 @@ const CLOUDINARY = {
    - token: NHẬP TRONG ADMIN → SETTINGS, lưu localStorage (không bao giờ vào HTML public)
 */
 const GH_CONFIG = {
-  owner:  'kidfourteen',  // ← sửa thành username GitHub của bạn
-  repo:   'MBS',        // ← sửa thành tên repo chứa GitHub Pages
-  branch: 'main',                  // ← thường là 'main' hoặc 'gh-pages'
+  owner:  'kidfourteen',
+  repo:   'MBS',
+  branch: 'main',
   path:   'products.json',
   get token(){ return localStorage.getItem('gh_token') || ''; },
   set token(v){ v ? localStorage.setItem('gh_token', v) : localStorage.removeItem('gh_token'); },
@@ -2969,12 +3181,86 @@ let cart=[], curProd=null, curSize='', curQty=1;
 let catF='all', szF='all', sortF='default', searchQ='';
 let adPF='all', adOF='all';
 let editId=null, selEmoji='👗', selSizes=[], uploadedImgs=[];
-const catMap={'ao-chong-nang':'Áo chống nắng','ao-gio':'Áo gió','ao-khoac-dong':'Áo khoác đông','hoodie':'Hoodie','sweater':'Sweater','tshirt':'T-shirt','chan-vay':'Chân váy','do-di-bien':'Đồ đi biển','phu-kien':'Phụ kiện','quan':'Quần','ao-len':'Áo len','ao-parka':'Áo Parka','giay':'Giày','dep':'Dép','so-mi':'Sơ mi'};
+/* Master category list - source of truth (slug, name, icon) */
+const CAT_LIST = [
+  {slug:'ao-chong-nang', name:'Áo chống nắng', ic:'🧥'},
+  {slug:'ao-gio',        name:'Áo gió',        ic:'💨'},
+  {slug:'ao-khoac-dong', name:'Áo khoác đông', ic:'🧣'},
+  {slug:'hoodie',        name:'Hoodie',        ic:'🦘'},
+  {slug:'sweater',       name:'Sweater',       ic:'🧸'},
+  {slug:'tshirt',        name:'T-shirt',       ic:'👕'},
+  {slug:'chan-vay',      name:'Chân váy',      ic:'👗'},
+  {slug:'do-di-bien',    name:'Đồ đi biển',    ic:'🏖️'},
+  {slug:'phu-kien',      name:'Phụ kiện',      ic:'👜'},
+  {slug:'quan',          name:'Quần',          ic:'👖'},
+  {slug:'ao-len',        name:'Áo len',        ic:'🧶'},
+  {slug:'ao-parka',      name:'Áo Parka',      ic:'🥼'},
+  {slug:'giay',          name:'Giày',          ic:'👟'},
+  {slug:'dep',           name:'Dép',           ic:'🩴'},
+  {slug:'so-mi',         name:'Sơ mi',         ic:'👔'}
+];
+const catMap = Object.fromEntries(CAT_LIST.map(c => [c.slug, c.name]));
+
+/* Đếm số sản phẩm còn bán theo từng category, return chỉ các cat đang có hàng */
+function getActiveCategories(){
+  if(!products || !products.length) return [];
+  const counts = {};
+  products.forEach(p => {
+    if(p && p.cat && (p.status === 'on' || p.status === 'low')){
+      counts[p.cat] = (counts[p.cat] || 0) + 1;
+    }
+  });
+  // Giữ thứ tự CAT_LIST để menu nhìn ổn định
+  return CAT_LIST.filter(c => counts[c.slug] > 0).map(c => ({...c, count: counts[c.slug]}));
+}
+
+/* Render category vào sidebar + dropdown (cả desktop và mobile) */
+function renderCategories(){
+  const active = getActiveCategories();
+  // Sidebar (desktop)
+  const sidebar = document.getElementById('cat-list');
+  if(sidebar){
+    sidebar.innerHTML = `<div class="cat-item${catF==='all'?' active':''}" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả <span class="cat-count">${products.filter(p=>p.status==='on'||p.status==='low').length}</span></div>`
+      + active.map(c =>
+        `<div class="cat-item${catF===c.slug?' active':''}" onclick="setCat(this,'${c.slug}')"><span>${c.ic}</span>${c.name} <span class="cat-count">${c.count}</span></div>`
+      ).join('');
+  }
+  // Top nav dropdowns (desktop + mobile)
+  ['nav-cats-dd','mob-nav-cats-dd'].forEach(id => {
+    const dd = document.getElementById(id);
+    if(!dd) return;
+    dd.innerHTML = `<div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div>`
+      + active.map(c =>
+        `<div class="nav-dd-it" onclick="setCatDirect('${c.slug}');closeAllMenus()"><span>${c.ic}</span>${c.name}</div>`
+      ).join('');
+  });
+  // Hero cards: filter only existing categories from active
+  const heroGrid = document.getElementById('hero-cat-grid');
+  if(heroGrid){
+    const heroCats = active.slice(0, 6); // Tối đa 6 thẻ trên hero
+    heroGrid.innerHTML = heroCats.length
+      ? heroCats.map(c => `<div class="hero-card" onclick="setCatDirect('${c.slug}')"><span>${c.ic}</span><p>${c.name}</p></div>`).join('')
+      : `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted);font-size:13px">Đang cập nhật sản phẩm 🌸</div>`;
+  }
+}
 const stMap={on:'Đang bán',off:'Ẩn',low:'Sắp hết'};
 
 /* ══ SCREENS ══ */
 const allScr=['scr-shop','scr-detail','scr-checkout','scr-success','scr-admin'];
-function showScr(id){allScr.forEach(s=>document.getElementById(s).classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function showScr(id){
+  allScr.forEach(s=>document.getElementById(s).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  // Mobile bottom nav + sticky search: only on shop and detail screens
+  const showMobBars = (id === 'scr-shop' || id === 'scr-detail');
+  const bnav = document.getElementById('mob-bnav');
+  const searchBar = document.querySelector('.mob-search-bar');
+  if(bnav) bnav.style.display = showMobBars ? '' : 'none';
+  if(searchBar) searchBar.style.display = showMobBars ? '' : 'none';
+  // Show/hide mob menu bar (with categories) only on shop screen
+  const menuBar = document.getElementById('mob-menu-bar');
+  if(menuBar) menuBar.style.display = (id === 'scr-shop') ? '' : 'none';
+}
 let _logoClicks=0,_logoTimer=null;
 function logoClick(){
   backShop();
@@ -3057,6 +3343,7 @@ function getProds(){
   return list;
 }
 function renderShop(){
+  renderCategories(); // re-render category lists each time products change
   const fi=document.getElementById('flash-items');
   fi.innerHTML=products.filter(p=>p.status!=='off').slice(0,8).map(p=>{
     const d=Math.round((1-p.price/p.old)*100);
@@ -3092,6 +3379,65 @@ function setSz(el,s){szF=s;document.querySelectorAll('#sz-grid .sz-btn').forEach
 function doSearch(){searchQ=document.getElementById('search-inp').value;renderShop();}
 function doSort(v){sortF=v;renderShop();}
 function goScroll(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+
+/* Mobile bottom nav: route to sections */
+function bnNav(action){
+  document.querySelectorAll('.mob-bnav-it').forEach(b=>b.classList.remove('active'));
+  if(action==='home'){ goScroll('hero-section'); document.querySelector('.mob-bnav-it:nth-child(1)')?.classList.add('active'); }
+  else if(action==='cats'){
+    // Open the categories dropdown on mobile
+    toggleNavMenu('mob-nav-cats-wrap');
+    document.querySelector('.mob-bnav-it:nth-child(2)')?.classList.add('active');
+    // Make sure user can see it — scroll to top first
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  else if(action==='flash'){ goScroll('flash-section'); document.querySelector('.mob-bnav-it:nth-child(3)')?.classList.add('active'); }
+  else if(action==='feedback'){ goScroll('feedback-section'); document.querySelector('.mob-bnav-it:nth-child(4)')?.classList.add('active'); }
+}
+
+/* Sync mobile search input with desktop searchQ */
+function doSearchMob(val){
+  searchQ = val;
+  const di = document.getElementById('search-inp');
+  if(di) di.value = val;
+  renderShop();
+  // Scroll to products on first character so user sees results
+  if(val.length === 1) goScroll('products-section');
+}
+
+/* Sync cart count to all UI elements (desktop, mobile sticky, bottom nav) */
+function syncCartCount(n){
+  ['cart-count','cart-count2','cart-count-mob','cart-count-bnav'].forEach(id=>{
+    const e = document.getElementById(id);
+    if(!e) return;
+    e.textContent = n;
+    if(id === 'cart-count-bnav') e.style.display = n>0?'flex':'none';
+  });
+}
+
+/* Nav dropdown helpers */
+function toggleNavMenu(wrapId, ev){
+  if(ev) ev.stopPropagation();
+  const wrap = document.getElementById(wrapId);
+  if(!wrap) return;
+  const isOpen = wrap.classList.contains('open');
+  // Close all menus first
+  document.querySelectorAll('.nav-item-wrap.open').forEach(w => w.classList.remove('open'));
+  document.querySelectorAll('.nav-dd.open').forEach(d => d.classList.remove('open'));
+  if(!isOpen){
+    wrap.classList.add('open');
+    const dd = wrap.querySelector('.nav-dd');
+    if(dd) dd.classList.add('open');
+  }
+}
+function closeAllMenus(){
+  document.querySelectorAll('.nav-item-wrap.open').forEach(w => w.classList.remove('open'));
+  document.querySelectorAll('.nav-dd.open').forEach(d => d.classList.remove('open'));
+}
+// Close when clicking outside
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.nav-item-wrap')) closeAllMenus();
+});
 
 /* ══ PRODUCT DETAIL PAGE ══ */
 let pdpCurSize='', pdpCurColor='', pdpQtyVal=1;
@@ -3151,8 +3497,8 @@ function openDetail(id){
     <div class="related-item" onclick="openDetail(${r.id})"> <div class="rel-img">${r.images&&r.images[0]?`<img src="${r.images[0]}" alt="">`:`<span style="font-size:24px">${r.emoji}</span>`}</div> <div class="rel-info"><div class="rel-name">${r.name}</div><div class="rel-price">${r.price}k <span style="color:var(--light);font-size:10px;text-decoration:line-through">${r.old}k</span></div></div> </div>`).join('')||(related.length===0?'<div style="font-size:13px;color:var(--muted);text-align:center;padding:10px">Không có sản phẩm liên quan</div>':'');
 
   showScr('scr-detail');
-  // sync cart badge
-  document.getElementById('cart-count2').textContent=document.getElementById('cart-count').textContent;
+  // sync cart badge to all
+  syncCartCount(cart.reduce((a,i)=>a+i.qty,0));
 }
 function switchThumb(src,el){
   const mainImg=document.getElementById('pdp-main-img');
@@ -3175,7 +3521,7 @@ function pdpAddCart(){
   if(ex)ex.qty+=pdpQtyVal;else cart.push({...curProd,size:pdpCurSize,qty:pdpQtyVal});
   // Cập nhật badge NGAY - không dùng animation override để tránh lag
   const n=cart.reduce((a,i)=>a+i.qty,0);
-  ['cart-count','cart-count2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+  syncCartCount(n);
   const btn=document.querySelector('.pc-cart-btn');
   if(btn){btn.classList.remove('cart-pop');void btn.offsetWidth;btn.classList.add('cart-pop');setTimeout(()=>btn.classList.remove('cart-pop'),400);}
   showCartToast(curProd,pdpQtyVal,pdpCurSize);
@@ -3226,7 +3572,7 @@ function quickAdd(id){
 
 function updBadge(){
   const n=cart.reduce((a,i)=>a+i.qty,0);
-  ['cart-count','cart-count2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+  syncCartCount(n);
   const btn=document.querySelector('.pc-cart-btn');
   if(btn){btn.classList.remove('cart-pop');void btn.offsetWidth;btn.classList.add('cart-pop');setTimeout(()=>btn.classList.remove('cart-pop'),400);}
 }
@@ -3499,10 +3845,15 @@ function saveVoucher(){
   if(minOrder)v.minOrder=minOrder;
   if(editVoucherIdx!==null)vouchers[editVoucherIdx]=v;
   else vouchers.push(v);
-  cancelVoucher();renderVoucherList();showToast('Đã lưu voucher!');
+  cancelVoucher();renderVoucherList();showToast('Đang lưu voucher...');
+  saveVouchersToGithub().then(ok => showToast(ok ? '✅ Đã commit voucher lên GitHub' : '✅ Đã lưu voucher (chưa kết nối GitHub)'));
 }
 function cancelVoucher(){document.getElementById('voucher-form-wrap').style.display='none';editVoucherIdx=null;}
-function deleteVoucher(i){if(!confirm('Xóa voucher này?'))return;vouchers.splice(i,1);renderVoucherList();showToast('Đã xóa!');}
+function deleteVoucher(i){
+  if(!confirm('Xóa voucher này?'))return;
+  vouchers.splice(i,1);renderVoucherList();showToast('Đang xóa...');
+  saveVouchersToGithub().then(ok => showToast(ok ? '✅ Đã commit xóa voucher' : '✅ Đã xóa (chưa kết nối GitHub)'));
+}
 
 /* ══ ADMIN: VIP ══ */
 function renderVipList(){
@@ -3519,14 +3870,15 @@ function parseVipPhones(text){
 function loadVipFile(){
   const f=document.getElementById('vip-file-input').files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=e=>{const phones=parseVipPhones(e.target.result);vipPhones=[...new Set([...vipPhones,...phones])];renderVipList();showToast('Đã thêm '+phones.length+' SĐT VIP!');};
+  r.onload=e=>{const phones=parseVipPhones(e.target.result);vipPhones=[...new Set([...vipPhones,...phones])];renderVipList();showToast('Đã thêm '+phones.length+' SĐT VIP! Đang lưu...');saveVipToGithub().then(ok=>showToast(ok?'✅ Đã commit lên GitHub':'✅ Đã lưu local'));};
   r.readAsText(f);
 }
 function parseVipPaste(){
   const text=document.getElementById('vip-paste-area').value;
   const phones=parseVipPhones(text);
   vipPhones=[...new Set([...vipPhones,...phones])];
-  renderVipList();showToast('Đã thêm '+phones.length+' SĐT!');
+  renderVipList();showToast('Đã thêm '+phones.length+' SĐT! Đang lưu...');
+  saveVipToGithub().then(ok=>showToast(ok?'✅ Đã commit '+phones.length+' SĐT lên GitHub':'✅ Đã lưu local'));
   document.getElementById('vip-paste-area').value='';
 }
 function addVipManual(){
@@ -3534,10 +3886,13 @@ function addVipManual(){
   if(!p)return;
   const clean=p.trim().replace(/[^0-9+]/g,'');
   if(clean.length<9){showToast('SĐT không hợp lệ!');return;}
-  if(!vipPhones.includes(clean)){vipPhones.push(clean);renderVipList();showToast('Đã thêm '+clean);}
+  if(!vipPhones.includes(clean)){vipPhones.push(clean);renderVipList();showToast('Đang lưu '+clean+'...');saveVipToGithub().then(ok=>showToast(ok?'✅ Đã commit '+clean:'✅ Đã lưu '+clean+' (chưa kết nối GitHub)'));}
   else showToast('SĐT đã có trong danh sách!');
 }
-function removeVipPhone(i){vipPhones.splice(i,1);renderVipList();}
+function removeVipPhone(i){
+  vipPhones.splice(i,1);renderVipList();
+  saveVipToGithub();
+}
 function testVipMe(){
   const p=prompt('Nhập SĐT muốn test VIP (SĐT này sẽ được nhận diện VIP ở checkout):','0912345678');
   if(!p)return;
@@ -3545,11 +3900,15 @@ function testVipMe(){
   if(!clean||clean.length<9){showToast('SĐT không hợp lệ!');return;}
   if(!vipPhones.includes(clean)){vipPhones.push(clean);}
   renderVipList();
+  saveVipToGithub();
   showToast('✅ Đã thêm '+clean+' vào VIP. Vào checkout nhập đúng SĐT này!');
-  // Also log to console for debugging
   console.log('vipPhones now:', vipPhones);
 }
-function clearVip(){if(!confirm('Xóa toàn bộ danh sách VIP?'))return;vipPhones=[];renderVipList();showToast('Đã xóa danh sách VIP!');}
+function clearVip(){
+  if(!confirm('Xóa toàn bộ danh sách VIP?'))return;
+  vipPhones=[];renderVipList();showToast('Đang xóa...');
+  saveVipToGithub().then(ok=>showToast(ok?'✅ Đã commit xóa list VIP':'✅ Đã xóa list (local)'));
+}
 
 function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers')renderVoucherList();if(pg==='viplist')renderVipList();if(pg==='reviews'){renderTestiAdmin();}if(pg==='settings')setTimeout(initGithubTokenUI,50);}
 function apTab(el,c){adPF=c;document.querySelectorAll('#apt .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAProd();}
@@ -4012,11 +4371,19 @@ function renderFbCard(t){
   </div>`;
 }
 
-/* Tạo embed URL từ post URL */
+/* Tạo embed URL từ post URL — auto detect type (post/video/photo) */
 function getFbEmbedUrl(postUrl){
   if(!postUrl) return '';
-  const enc = encodeURIComponent(postUrl);
-  return `https://www.facebook.com/plugins/post.php?href=${enc}&show_text=true&width=500`;
+  const url = postUrl.trim();
+  // Validate sơ bộ
+  if(!/facebook\.com\//i.test(url) && !/fb\.watch\//i.test(url)) return '';
+  const enc = encodeURIComponent(url);
+  // Phát hiện video → dùng video plugin
+  if(/\/videos?\//i.test(url) || /\/watch\b/i.test(url) || /fb\.watch\//i.test(url)){
+    return `https://www.facebook.com/plugins/video.php?href=${enc}&show_text=true&width=560`;
+  }
+  // Mặc định post plugin (cũng phù hợp ảnh)
+  return `https://www.facebook.com/plugins/post.php?href=${enc}&show_text=true&width=560`;
 }
 
 /* Load FB SDK và render embed sau khi SDK sẵn sàng */
@@ -4035,36 +4402,32 @@ function loadFbSDK(){
 
 /* Render iframe embed vào từng card */
 function renderFbEmbeds(){
-  testimonials.filter(t => t.visible && t.type === 'fb').forEach(t => {
+  testimonials.filter(t => t.visible !== false && t.type === 'fb').forEach(t => {
     const wrap = document.getElementById('fb-wrap-' + t.id);
     if(!wrap) return;
     const embedUrl = getFbEmbedUrl(t.fbUrl);
     if(!embedUrl){ renderFbError(wrap, t.fbUrl); return; }
     const iframe = document.createElement('iframe');
     iframe.src = embedUrl;
-    iframe.width = '500';
-    iframe.height = '350';
-    iframe.style.cssText = 'border:none;overflow:hidden;width:100%;max-height:350px';
+    iframe.style.cssText = 'border:none;overflow:hidden;width:100%;height:100%;min-height:260px;display:block';
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('frameborder', '0');
     iframe.allow = 'autoplay;clipboard-write;encrypted-media;picture-in-picture;web-share';
-    iframe.onload = function(){ wrap.innerHTML = ''; wrap.appendChild(iframe); };
-    iframe.onerror = function(){ renderFbError(wrap, t.fbUrl); };
-    // Set timeout 8s fallback
-    const timer = setTimeout(function(){ if(wrap.querySelector('.fb-skeleton')) renderFbError(wrap, t.fbUrl); }, 8000);
-    iframe.onload = function(){ clearTimeout(timer); wrap.innerHTML = ''; wrap.appendChild(iframe); };
-    document.body.appendChild(iframe); // Preload trick
-    setTimeout(function(){
-      if(wrap.querySelector('.fb-skeleton')){
-        wrap.innerHTML = '';
-        wrap.appendChild(iframe);
-        iframe.remove && iframe.remove();
-        wrap.appendChild(iframe);
-      }
-    }, 300);
+    iframe.loading = 'lazy';
+    let loaded = false;
+    const timer = setTimeout(() => {
+      if(!loaded && wrap.querySelector('.fb-skeleton')) renderFbError(wrap, t.fbUrl);
+    }, 10000);
+    iframe.onload = () => { loaded = true; clearTimeout(timer); };
+    iframe.onerror = () => { clearTimeout(timer); renderFbError(wrap, t.fbUrl); };
+    // Replace skeleton ngay lập tức — iframe sẽ tự load nội dung
+    wrap.innerHTML = '';
+    wrap.appendChild(iframe);
   });
 }
 
 function renderFbEmbedsFallback(){
-  testimonials.filter(t => t.visible && t.type === 'fb').forEach(t => {
+  testimonials.filter(t => t.visible !== false && t.type === 'fb').forEach(t => {
     const wrap = document.getElementById('fb-wrap-' + t.id);
     if(wrap && wrap.querySelector('.fb-skeleton')) renderFbError(wrap, t.fbUrl);
   });
@@ -4216,6 +4579,9 @@ function saveTestimonial(){
     const fbUrl = (document.getElementById('tf-fburl')||{}).value.trim();
     const fbName = (document.getElementById('tf-fbname')||{}).value.trim();
     if(!fbUrl){ showToast('Vui lòng nhập link Facebook!'); return; }
+    if(!/facebook\.com\//i.test(fbUrl) && !/fb\.watch\//i.test(fbUrl)){
+      showToast('Link không phải Facebook hợp lệ!'); return;
+    }
     dat = { type:'fb', fbUrl, name: fbName||'Đánh giá Facebook', visible: true };
   } else {
     const name = (document.getElementById('tf-name')||{}).value.trim();
@@ -4233,14 +4599,16 @@ function saveTestimonial(){
   if(teEditId !== null){
     const i = testimonials.findIndex(t=>t.id===teEditId);
     if(i>=0) testimonials[i] = {...testimonials[i], ...dat};
-    showToast('Đã cập nhật đánh giá!');
+    showToast('Đang cập nhật...');
   } else {
     testimonials.push({id: nextTestiId(), ...dat});
-    showToast('Đã thêm đánh giá!');
+    showToast('Đang lưu...');
   }
   closeTestiModal();
   renderTestiAdmin();
   renderTestimonials();
+  // Lưu lên GitHub
+  saveTestimonialsToGithub();
 }
 
 function delTesti(id){
@@ -4248,7 +4616,8 @@ function delTesti(id){
   testimonials = testimonials.filter(t=>t.id!==id);
   renderTestiAdmin();
   renderTestimonials();
-  showToast('Đã xóa!');
+  showToast('Đang xóa...');
+  saveTestimonialsToGithub();
 }
 
 function toggleTestiVis(id){
@@ -4257,15 +4626,14 @@ function toggleTestiVis(id){
   t.visible = t.visible === false ? true : false;
   renderTestiAdmin();
   renderTestimonials();
-  showToast(t.visible ? 'Đã hiện đánh giá!' : 'Đã ẩn đánh giá!');
+  showToast(t.visible ? 'Đang hiện...' : 'Đang ẩn...');
+  saveTestimonialsToGithub();
 }
 /* ════════ END TESTIMONIALS ENGINE ════════ */
 
 /* ════════ GITHUB API LAYER ════════ */
-/* Sản phẩm lưu vào products.json trong repo qua GitHub Contents API.
-   Shop đọc trực tiếp file raw → cực nhanh, không cold start, không CORS. */
-
-let _ghSha = null; // SHA của products.json hiện tại (cần khi PUT)
+/* Mỗi loại data lưu 1 file JSON riêng: products.json, testimonials.json, vouchers.json, vip.json
+   Shop đọc raw → cực nhanh, không cold start, không CORS. Admin commit qua API có token. */
 
 /* UTF-8 ↔ base64 (hỗ trợ tiếng Việt + emoji) */
 const _b64Enc = s => btoa(unescape(encodeURIComponent(s)));
@@ -4292,28 +4660,23 @@ function _showShopError(msg){
 async function loadProductsFromSheet(forceRefresh){
   if (GH_CONFIG.owner.startsWith('YOUR_')){ products = []; renderShop(); return false; }
   _showShopSkeleton();
-  try {
-    const url = GH_CONFIG.rawUrl + (forceRefresh ? '?t=' + Date.now() : '');
-    const res = await fetch(url, { cache: forceRefresh ? 'no-store' : 'default' });
-    if (res.status === 404){ products = []; renderShop(); return true; } // file chưa tạo
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    products = Array.isArray(data) ? data : (data.products || []);
-    renderShop();
-    const cnt = document.getElementById('ad-cnt');
-    if (cnt) cnt.textContent = products.filter(p => p.status === 'on').length;
-    return true;
-  } catch(e){
-    products = [];
-    _showShopError('Không tải được sản phẩm: ' + e.message);
+  const data = await _ghRead(GH_CONFIG.path, null);
+  if (data === null){
+    _showShopError('Không tải được sản phẩm.');
     return false;
   }
+  products = Array.isArray(data) ? data : (data.products || []);
+  renderShop();
+  const cnt = document.getElementById('ad-cnt');
+  if (cnt) cnt.textContent = products.filter(p => p.status === 'on').length;
+  return true;
 }
 
-/* Lấy SHA hiện tại của products.json (cần để ghi đè) */
-async function _ghGetSha(){
+/* Lấy SHA hiện tại của file (cần để ghi đè) */
+async function _ghGetSha(path){
   try {
-    const res = await fetch(GH_CONFIG.apiUrl + '?ref=' + GH_CONFIG.branch, {
+    const apiUrl = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/${path}`;
+    const res = await fetch(apiUrl + '?ref=' + GH_CONFIG.branch, {
       headers: { Authorization: 'token ' + GH_CONFIG.token, Accept: 'application/vnd.github+json' }
     });
     if (res.status === 404) return null; // chưa tồn tại → tạo mới
@@ -4322,15 +4685,17 @@ async function _ghGetSha(){
   } catch(e){ console.warn('_ghGetSha:', e); return null; }
 }
 
-/* Commit: ghi đè products.json với mảng mới */
-async function _ghCommit(arr, message){
+/* Commit: ghi đè 1 file JSON bất kỳ trong repo */
+async function _ghCommit(path, data, message){
+  const apiUrl = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/${path}`;
+  const sha = await _ghGetSha(path);
   const body = {
-    message: message || 'update products',
-    content: _b64Enc(JSON.stringify(arr, null, 2)),
+    message: message || ('update ' + path),
+    content: _b64Enc(JSON.stringify(data, null, 2)),
     branch: GH_CONFIG.branch
   };
-  if (_ghSha) body.sha = _ghSha;
-  const res = await fetch(GH_CONFIG.apiUrl, {
+  if (sha) body.sha = sha;
+  const res = await fetch(apiUrl, {
     method: 'PUT',
     headers: {
       Authorization: 'token ' + GH_CONFIG.token,
@@ -4343,19 +4708,27 @@ async function _ghCommit(arr, message){
     const err = await res.json().catch(() => ({}));
     throw new Error(err.message || 'PUT ' + res.status);
   }
-  const j = await res.json();
-  _ghSha = j.content && j.content.sha;
-  return j;
+  return res.json();
+}
+
+/* Đọc 1 file JSON từ repo qua raw URL */
+async function _ghRead(path, fallback){
+  const url = `https://raw.githubusercontent.com/${GH_CONFIG.owner}/${GH_CONFIG.repo}/${GH_CONFIG.branch}/${path}?t=${Date.now()}`;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (res.status === 404) return fallback;
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch(e){ console.warn('_ghRead ' + path + ':', e); return fallback; }
 }
 
 /* Lưu (thêm/sửa) — merge vào products rồi commit cả mảng */
 async function apiSaveProduct(product){
   if (!GH_CONFIG.enabled) return { ok: true, local: true };
   try {
-    _ghSha = await _ghGetSha();
     const i = products.findIndex(p => p.id === product.id);
     if (i >= 0) products[i] = { ...products[i], ...product }; else products.push(product);
-    await _ghCommit(products, `save: ${product.name || product.id}`);
+    await _ghCommit(GH_CONFIG.path, products, `save: ${product.name || product.id}`);
     return { ok: true };
   } catch(e){
     console.error('apiSaveProduct:', e);
@@ -4367,14 +4740,70 @@ async function apiSaveProduct(product){
 async function apiDeleteProduct(id){
   if (!GH_CONFIG.enabled) return { ok: true, local: true };
   try {
-    _ghSha = await _ghGetSha();
     products = products.filter(p => p.id !== id);
-    await _ghCommit(products, `delete: ${id}`);
+    await _ghCommit(GH_CONFIG.path, products, `delete: ${id}`);
     return { ok: true };
   } catch(e){
     console.error('apiDeleteProduct:', e);
     return { ok: false, error: e.message };
   }
+}
+
+/* ── TESTIMONIALS / FEEDBACK ── */
+async function loadTestimonialsFromGithub(){
+  if (GH_CONFIG.owner.startsWith('YOUR_')) return false;
+  const data = await _ghRead('testimonials.json', null);
+  if (Array.isArray(data)){
+    testimonials = data;
+    renderTestimonials();
+    if (document.getElementById('testi-admin-list')) renderTestiAdmin();
+    return true;
+  }
+  return false; // file chưa có → giữ default
+}
+
+async function saveTestimonialsToGithub(){
+  if (!GH_CONFIG.enabled){ showToast('⚠️ Chưa kết nối GitHub — chỉ lưu tạm trong RAM'); return false; }
+  try {
+    await _ghCommit('testimonials.json', testimonials, 'update testimonials');
+    showToast('✅ Đã commit feedback lên GitHub');
+    return true;
+  } catch(e){ showToast('⚠️ Lỗi lưu feedback: ' + e.message); return false; }
+}
+
+/* ── VOUCHERS ── */
+async function loadVouchersFromGithub(){
+  if (GH_CONFIG.owner.startsWith('YOUR_')) return false;
+  const data = await _ghRead('vouchers.json', null);
+  if (Array.isArray(data)){ vouchers = data; if (document.getElementById('voucher-list-el')) renderVoucherList(); return true; }
+  return false;
+}
+
+async function saveVouchersToGithub(){
+  // Lưu localStorage trước (instant) rồi commit GitHub
+  try { localStorage.setItem('vouchers', JSON.stringify(vouchers)); } catch(e){}
+  if (!GH_CONFIG.enabled) return false;
+  try {
+    await _ghCommit('vouchers.json', vouchers, 'update vouchers');
+    return true;
+  } catch(e){ console.warn('saveVouchers:', e); return false; }
+}
+
+/* ── VIP PHONE LIST ── */
+async function loadVipFromGithub(){
+  if (GH_CONFIG.owner.startsWith('YOUR_')) return false;
+  const data = await _ghRead('vip.json', null);
+  if (Array.isArray(data)){ vipPhones = data; if (document.getElementById('vip-list-el')) renderVipList(); return true; }
+  return false;
+}
+
+async function saveVipToGithub(){
+  try { localStorage.setItem('vipPhones', JSON.stringify(vipPhones)); } catch(e){}
+  if (!GH_CONFIG.enabled) return false;
+  try {
+    await _ghCommit('vip.json', vipPhones, 'update vip phones');
+    return true;
+  } catch(e){ console.warn('saveVip:', e); return false; }
 }
 
 /* Status bar trong Admin → trang Quản lý sản phẩm */
@@ -4457,7 +4886,22 @@ async function testGithubConnection(){
 /* ════════ END GITHUB API LAYER ════════ */
 
 /* ══ INIT ══ */
-document.addEventListener('DOMContentLoaded', () => loadProductsFromSheet(true), { once: true });
+document.addEventListener('DOMContentLoaded', () => {
+  // Load vouchers/vip từ localStorage trước (cho tốc độ), rồi sync với GitHub sau
+  try {
+    const v = localStorage.getItem('vouchers');
+    if (v) vouchers = JSON.parse(v);
+  } catch(e){}
+  try {
+    const p = localStorage.getItem('vipPhones');
+    if (p) vipPhones = JSON.parse(p);
+  } catch(e){}
+  // Async load tất cả từ GitHub
+  loadProductsFromSheet(true);
+  loadTestimonialsFromGithub();
+  loadVouchersFromGithub();
+  loadVipFromGithub();
+}, { once: true });
 
 </script> <!-- Admin Login Modal -->
 <div id="admin-login-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center"> <div style="background:#fff;border-radius:16px;padding:36px;width:340px;border:1px solid var(--border);position:relative"> <button onclick="closeAdminLogin()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button> <div style="text-align:center;margin-bottom:24px"> <div style="font-size:32px;margin-bottom:8px">🔐</div> <div style="font-size:17px;font-weight:700;color:var(--text)">Đăng nhập Admin</div> <div style="font-size:12px;color:var(--muted);margin-top:4px">Chỉ dành cho quản trị viên</div> </div> <div style="margin-bottom:14px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Tên đăng nhập</label> <input id="login-user" type="text" placeholder="Nhập username" autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> </div> <div style="margin-bottom:20px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Mật khẩu</label> <div style="position:relative"> <input id="login-pass" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" style="width:100%;padding:10px 40px 10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> <button onclick="togglePassVis()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)" id="pass-eye">👁</button> </div> </div> <div id="login-err" style="display:none;background:var(--re-l);color:var(--re);font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:600">❌ Sai tên đăng nhập hoặc mật khẩu</div> <button onclick="doLogin()" style="width:100%;padding:13px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)">Đăng nhập</button> <div id="login-attempts" style="text-align:center;font-size:11px;color:var(--muted);margin-top:10px"></div> </div>
