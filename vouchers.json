@@ -4,5 +4,11 @@
     "type": "fixed",
     "value": 30,
     "desc": "Miễn phí ship"
+  },
+  {
+    "code": "MUM",
+    "type": "fixed",
+    "value": 50000,
+    "desc": "test"
   }
 ]
