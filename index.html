@@ -2530,12 +2530,14 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div id="scr-success" class="screen"> <header class="pc-header"><div class="pc-header-inner"><div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" style="height:44px;width:auto;object-fit:contain;display:block"></div></div></header> <div class="success-page"> <div style="font-size:72px;margin-bottom:18px">🎉</div> <h2 style="font-size:26px;font-weight:700;color:var(--pk-d);margin-bottom:10px">Đặt hàng thành công!</h2> <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7">Mũm sẽ xác nhận và liên hệ bạn trong 24h.<br>Cảm ơn bạn đã tin tưởng Mũm Bigsize! 🌸</p> <button class="btn btn-pk" style="padding:13px 36px;font-size:15px;border-radius:12px" onclick="backShop()">← Tiếp tục mua sắm</button> </div>
 </div> <!-- ══════════ ADMIN ══════════ -->
 <div id="scr-admin" class="screen"> <div class="admin-wrap"> <aside class="ad-sidebar"> <div class="ad-logo-box"><div style="margin-bottom:4px"><img class="brand-logo" alt="Mũm" style="height:36px;width:auto;object-fit:contain;display:block"></div><div class="n" style="font-size:11px;margin-top:2px">Admin Panel</div><div class="s">Quản lý cửa hàng</div></div> <button class="ad-back" onclick="backShop()">← Về trang shop</button> <div> <div class="ad-sep">Tổng quan</div> <div class="ad-nav-it active" onclick="adPage('dashboard',this)"><span>📊</span>Dashboard</div> <div class="ad-sep">Quản lý</div> <div class="ad-nav-it" onclick="adPage('products',this)"><span>👗</span>Sản phẩm</div> <div class="ad-nav-it" onclick="adPage('orders',this)"><span>📦</span>Đơn hàng</div> <div class="ad-sep">Kênh bán</div> <div class="ad-nav-it" onclick="adPage('channels',this)"><span>🔗</span>Zalo & Facebook</div> <div class="ad-nav-it" onclick="adPage('reviews',this)"><span>⭐</span>Đánh giá</div>
-              <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val">24</div><div class="stat-sub sub-up">↑ 12% hôm qua</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" style="font-size:20px">18.4tr</div><div class="stat-sub sub-up">↑ 8% tháng trước</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" style="color:var(--am)">6</div><div class="stat-sub sub-dn">3 Zalo · 3 FB</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><div style="display:flex;gap:8px"><button class="btn" onclick="loadProductsFromSheet(true).then(()=>{renderAProd();showToast('Đã tải lại từ Sheet!');})" title="Tải lại từ Google Sheet">🔄 Sync Sheet</button><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div></div> <div class="ad-content">
+              <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val">24</div><div class="stat-sub sub-up">↑ 12% hôm qua</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" style="font-size:20px">18.4tr</div><div class="stat-sub sub-up">↑ 8% tháng trước</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" style="color:var(--am)">6</div><div class="stat-sub sub-dn">3 Zalo · 3 FB</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><div style="display:flex;gap:8px"><button class="btn" onclick="loadProductsFromSheet(true).then(()=>{renderAProd();showToast('Đã tải lại từ GitHub!');})" title="Tải lại từ GitHub">🔄 Sync GitHub</button><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div></div> <div class="ad-content">
 <div class="sheet-status-bar" id="sheet-status-bar"></div>
  <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt" style="overflow-x:auto;flex-wrap:nowrap"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'ao-chong-nang')" style="flex-shrink:0">Áo chống nắng</div><div class="tab" onclick="apTab(this,'ao-gio')" style="flex-shrink:0">Áo gió</div><div class="tab" onclick="apTab(this,'ao-khoac-dong')" style="flex-shrink:0">Áo khoác đông</div><div class="tab" onclick="apTab(this,'hoodie')" style="flex-shrink:0">Hoodie</div><div class="tab" onclick="apTab(this,'sweater')" style="flex-shrink:0">Sweater</div><div class="tab" onclick="apTab(this,'tshirt')" style="flex-shrink:0">T-shirt</div><div class="tab" onclick="apTab(this,'chan-vay')" style="flex-shrink:0">Chân váy</div><div class="tab" onclick="apTab(this,'do-di-bien')" style="flex-shrink:0">Đồ đi biển</div><div class="tab" onclick="apTab(this,'phu-kien')" style="flex-shrink:0">Phụ kiện</div><div class="tab" onclick="apTab(this,'quan')" style="flex-shrink:0">Quần</div><div class="tab" onclick="apTab(this,'ao-len')" style="flex-shrink:0">Áo len</div><div class="tab" onclick="apTab(this,'ao-parka')" style="flex-shrink:0">Áo Parka</div><div class="tab" onclick="apTab(this,'giay')" style="flex-shrink:0">Giày</div><div class="tab" onclick="apTab(this,'dep')" style="flex-shrink:0">Dép</div><div class="tab" onclick="apTab(this,'so-mi')" style="flex-shrink:0">Sơ mi</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
 </div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.top</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.top/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div> </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
 </div> <div id="adp-viplist" class="ad-page"> <div class="ad-topbar"><h1>Khách hàng VIP</h1></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Upload danh sách SĐT VIP</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">Upload file .txt hoặc .csv — mỗi số điện thoại 1 dòng. Khách hàng có SĐT trong danh sách sẽ tự động được nhận diện VIP và giảm 10% khi thanh toán.</div> <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px"> <input type="file" id="vip-file-input" accept=".txt,.csv" onchange="loadVipFile()" style="display:none"> <button class="btn btn-pk" onclick="document.getElementById('vip-file-input').click()">📁 Upload file SĐT</button> <button class="btn" onclick="addVipManual()">+ Thêm thủ công</button> <button class="btn" onclick="testVipMe()" title="Thêm SĐT của bạn để test">🧪 Test với SĐT của tôi</button> <button class="btn" style="color:var(--re)" onclick="clearVip()">🗑 Xóa tất cả</button> </div> <div class="af" style="margin-bottom:12px"> <label>Hoặc dán danh sách SĐT (mỗi số 1 dòng)</label> <textarea id="vip-paste-area" rows="5" placeholder="0912345678&#10;0987654321&#10;0909090909..." style="font-family:monospace;font-size:12px"></textarea> <button class="btn btn-pk" style="margin-top:8px" onclick="parseVipPaste()">Áp dụng danh sách</button> </div> <div class="ad-sec-head" style="margin-top:16px"><h2>Danh sách hiện tại (<span id="vip-count">0</span> SĐT)</h2></div> <div id="vip-list-el" style="font-family:monospace;font-size:12px;max-height:300px;overflow-y:auto;background:var(--bg);border-radius:8px;padding:12px;line-height:2;color:var(--text)"></div> </div> </div>
-</div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
+</div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="ad-section"><div class="ad-sec-head"><h2>🔑 GitHub (lưu sản phẩm)</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
+              <strong>Cách lấy token:</strong> github.com/settings/personal-access-tokens → <em>Generate new token (Fine-grained)</em>. Repository access: chỉ chọn repo chứa GitHub Pages. Permissions: <code>Contents = Read and write</code>. Token chỉ lưu trên máy này (localStorage), không có trong file HTML public.
+              </div> <div class="af"><label>GitHub Personal Access Token</label><input id="cfg-gh-token" type="password" autocomplete="new-password" placeholder="github_pat_..." onfocus="if(this.dataset.masked==='1'){this.value='';this.dataset.masked='';}"></div> <div id="gh-token-status" style="font-size:12px;margin-bottom:12px;min-height:18px"></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveGithubToken()">Lưu token</button> <button class="btn" onclick="testGithubConnection()">🔌 Test kết nối</button> <button class="btn" onclick="clearGithubToken()" style="color:var(--re)">🗑 Xóa token</button> </div> <div id="gh-test-result" style="font-size:12px;margin-top:10px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>📱 Thông báo Telegram</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
                 Mỗi đơn hàng mới sẽ tự động gửi tin nhắn vào Telegram của bạn ngay lập tức.<br> <strong>Cách lấy Token:</strong> Tìm @BotFather trên Telegram → /newbot → copy Token<br> <strong>Cách lấy Chat ID:</strong> Mở bot → gõ /start → vào <code>api.telegram.org/bot[TOKEN]/getUpdates</code> → tìm "id"
               </div> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật thông báo Telegram</span> <button id="tg-toggle" class="toggle ${TELEGRAM_CONFIG.enabled?'on':'off'}" onclick="toggleTelegram(this)"></button> <span id="tg-status" style="font-size:12px;color:var(--muted)">${TELEGRAM_CONFIG.enabled?'Đang bật':'Đang tắt'}</span> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Bot Token</label><input id="cfg-tg-token" placeholder="123456789:ABC-xyz..." value="${TELEGRAM_CONFIG.token}"></div> <div class="af"><label>Chat ID</label><input id="cfg-tg-chatid" placeholder="Số ID của bạn" value="${TELEGRAM_CONFIG.chatId}"></div> </div> <div style="display:flex;gap:8px;margin-top:4px"> <button class="btn btn-pk" onclick="saveTelegramCfg()">Lưu cấu hình</button> <button class="btn" onclick="testTelegram()">📤 Gửi tin nhắn test</button> </div> <div id="tg-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Thông tin cửa hàng</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Tên shop</label><input value="Mũm Bigsize"></div><div class="af"><label>Số điện thoại</label><input value="0912 345 678"></div></div> <div class="af"><label>Địa chỉ</label><input value="TP. Hồ Chí Minh"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><div class="af"><label>Phí ship (đ)</label><input type="number" value="30000"></div><div class="af"><label>Miễn ship từ (đ)</label><input type="number" value="500000"></div></div> <button class="btn btn-pk" onclick="showToast('Đã lưu!')">Lưu cài đặt</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🏦 Thanh toán chuyển khoản</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">VietQR tự động tạo QR từ thông tin bên dưới — khách quét là thanh toán ngay, không cần cài app riêng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Ngân hàng</label><input id="cfg-bank-name" value="TECHCOMBANK" placeholder="VD: VIETCOMBANK, ACB, MB..."></div> <div class="af"><label>Số tài khoản</label><input id="cfg-bank-no" value="2009222222"></div> </div> <div class="af"><label>Tên chủ tài khoản (IN HOA)</label><input id="cfg-bank-owner" value="HOANG THI HANH"></div> <button class="btn btn-pk" onclick="saveBankCfg()">Lưu thông tin ngân hàng</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>🍑 Thanh toán MoMo</h2></div> <div style="padding:18px"> <div class="info-box" style="background:#fce4ec;color:#880e4f;margin-bottom:14px">Khách quét QR MoMo hoặc nhấn "Mở app MoMo". Sau khi thanh toán, admin xác nhận trong trang Đơn hàng.</div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Số điện thoại MoMo</label><input id="cfg-momo-phone" value="0966875212"></div> <div class="af"><label>Tên hiển thị</label><input id="cfg-momo-name" value="HOANG THI HANH"></div> </div> <button class="btn btn-pk" onclick="saveMomoCfg()">Lưu cấu hình MoMo</button> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
 <div id="adp-reviews" class="ad-page">
@@ -2761,22 +2763,23 @@ const CLOUDINARY = {
 };
 
 /* ══ DATA ══ */
-/* ══ GOOGLE SHEET CONFIG ══
-   Setup (5 phút):
-   1. Mở script.google.com → New project
-   2. Dán toàn bộ nội dung file apps-script.gs vào
-   3. Đổi SECRET_KEY trong .gs cho khớp với key bên dưới
-   4. Deploy → Web App → Execute as: Me → Access: Anyone
-   5. Copy URL dán vào SHEET_CONFIG.url bên dưới
-   6. Save file HTML → commit lên GitHub
+/* ══ GITHUB CONFIG — sản phẩm lưu vào products.json trong repo ══
+   - owner/repo/branch: hardcoded vì là thông tin public, không nhạy cảm
+   - token: NHẬP TRONG ADMIN → SETTINGS, lưu localStorage (không bao giờ vào HTML public)
 */
-const SHEET_CONFIG = {
-  url: 'https://script.google.com/macros/s/AKfycbyqsky03J94wCyuXWorgnBDhCkM6M2ff9EgTfkUeomUqgGPBMc4RpYXN78pDVopsWsKzg/exec',
-  key: 'MUM_SECRET_2025',   // Phải khớp với SECRET_KEY trong Apps Script
-  get enabled(){ return this.url.startsWith('https://script.google.com'); }
+const GH_CONFIG = {
+  owner:  'YOUR_GITHUB_USERNAME',  // ← sửa thành username GitHub của bạn
+  repo:   'YOUR_REPO_NAME',        // ← sửa thành tên repo chứa GitHub Pages
+  branch: 'main',                  // ← thường là 'main' hoặc 'gh-pages'
+  path:   'products.json',
+  get token(){ return localStorage.getItem('gh_token') || ''; },
+  set token(v){ v ? localStorage.setItem('gh_token', v) : localStorage.removeItem('gh_token'); },
+  get enabled(){ return !!this.token && !this.owner.startsWith('YOUR_'); },
+  get rawUrl(){ return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.path}`; },
+  get apiUrl(){ return `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.path}`; }
 };
 
-/* Sản phẩm — load từ Sheet khi khởi động */
+/* Sản phẩm — load từ products.json trong repo khi khởi động */
 let products = [];
 
 let testimonials = [
@@ -3548,7 +3551,7 @@ function testVipMe(){
 }
 function clearVip(){if(!confirm('Xóa toàn bộ danh sách VIP?'))return;vipPhones=[];renderVipList();showToast('Đã xóa danh sách VIP!');}
 
-function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers')renderVoucherList();if(pg==='viplist')renderVipList();if(pg==='reviews'){renderTestiAdmin();}}
+function adPage(pg,el){document.querySelectorAll('.ad-page').forEach(p=>p.classList.remove('active'));document.getElementById('adp-'+pg).classList.add('active');document.querySelectorAll('.ad-nav-it').forEach(n=>n.classList.remove('active'));if(el)el.classList.add('active');if(pg==='products'){renderAProd();setTimeout(initCloudinaryStatus,50);setTimeout(initSheetStatus,60);}if(pg==='orders')renderAOrds(adOF);if(pg==='dashboard'){renderDashOrds();const e=document.getElementById('ad-cnt');if(e)e.textContent=products.filter(p=>p.status==='on').length;}if(pg==='vouchers')renderVoucherList();if(pg==='viplist')renderVipList();if(pg==='reviews'){renderTestiAdmin();}if(pg==='settings')setTimeout(initGithubTokenUI,50);}
 function apTab(el,c){adPF=c;document.querySelectorAll('#apt .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAProd();}
 let adPayFilter='all';
 function aoTab(el,s){adOF=s;document.querySelectorAll('#aot .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAOrds(s);}
@@ -3727,12 +3730,9 @@ function delProd(id){
   renderAProd(); renderShop();
   showToast('Đang xóa...');
   apiDeleteProduct(id).then(r => {
-    if(r && r.ok) {
-      showToast(r.local ? 'Đã xóa (chưa kết nối Sheet)' : '✅ Đã xóa khỏi Sheet!');
-    } else {
-      showToast('⚠️ Xóa Sheet thất bại — đã xóa tạm trong phiên này');
-    }
-  }).catch(() => showToast('⚠️ Không kết nối được Sheet'));
+    if(r && r.ok) showToast(r.local ? 'Đã xóa (chưa kết nối GitHub)' : '✅ Đã commit xóa lên GitHub');
+    else showToast('⚠️ Xóa GitHub thất bại: ' + (r && r.error || 'không rõ'));
+  }).catch(() => showToast('⚠️ Không kết nối được GitHub'));
 }
 function closeProdModal(){document.getElementById('prod-modal').classList.remove('show');}
 function pickEp(el,e){selEmoji=e;document.querySelectorAll('.ep').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');}
@@ -3766,33 +3766,24 @@ function saveProd(){
     products.push(dat);
   }
   closeProdModal();
-  // Cập nhật UI tạm thời ngay để admin thấy sản phẩm vừa lưu
-  renderAProd();
-  renderShop();
+  // Cập nhật UI tạm ngay
+  renderAProd(); renderShop();
   const e=document.getElementById('ad-cnt');
   if(e)e.textContent=products.filter(p=>p.status==='on').length;
 
-  // Gọi API lưu lên Sheet, sau đó ép trang đọc lại từ Sheet để khách nhìn thấy dữ liệu thật
-  apiSaveProduct(dat).then(async r => {
+  // Commit lên GitHub (apiSaveProduct đã merge vào products)
+  apiSaveProduct(dat).then(r => {
     if (r && r.ok) {
       showToast(r.local
-        ? (isEdit ? 'Đã cập nhật (chưa kết nối Sheet)' : 'Đã thêm (chưa kết nối Sheet)')
-        : (isEdit ? '✅ Đã cập nhật lên Sheet! Đang đồng bộ lại...' : '✅ Đã thêm lên Sheet! Đang đồng bộ lại...'));
-
-      // Apps Script ghi Sheet bất đồng bộ; chờ ngắn rồi force reload, bỏ qua cache 5 phút
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      _productsCache = null;
-      _productsCacheTime = 0;
-      await loadProductsFromSheet(true);
+        ? (isEdit ? 'Đã cập nhật (chưa kết nối GitHub)' : 'Đã thêm (chưa kết nối GitHub)')
+        : (isEdit ? '✅ Đã commit cập nhật lên GitHub' : '✅ Đã commit sản phẩm mới lên GitHub'));
       renderAProd();
       const cnt=document.getElementById('ad-cnt');
       if(cnt)cnt.textContent=products.filter(p=>p.status==='on').length;
-
-      if(!r.local) showToast('✅ Đã đồng bộ sản phẩm từ Sheet!');
     } else {
-      showToast('⚠️ Lưu Sheet thất bại — kiểm tra kết nối');
+      showToast('⚠️ Commit GitHub thất bại: ' + (r && r.error || 'không rõ'));
     }
-  }).catch(e => showToast('⚠️ Lỗi kết nối Sheet: ' + e.message));
+  }).catch(e => showToast('⚠️ Lỗi GitHub: ' + e.message));
 }
 /* ══ CHANNELS ══ */
 function saveZalo(){const v=document.getElementById('cfg-zalo').value.trim();if(!v){showToast('Nhập số Zalo!');return;}const d=document.getElementById('zalo-disp');const s=document.getElementById('zalo-st');if(d)d.textContent='zalo.me/'+v.replace(/\D/g,'');if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}showToast('Đã lưu Zalo!');}
@@ -4270,237 +4261,203 @@ function toggleTestiVis(id){
 }
 /* ════════ END TESTIMONIALS ENGINE ════════ */
 
-/* ════════ GOOGLE SHEET API LAYER ════════ */
+/* ════════ GITHUB API LAYER ════════ */
+/* Sản phẩm lưu vào products.json trong repo qua GitHub Contents API.
+   Shop đọc trực tiếp file raw → cực nhanh, không cold start, không CORS. */
 
-/* Fetch sản phẩm từ Sheet khi load trang */
-/* Cache products 5 phút để tránh fetch lại liên tục */
-let _productsCache = null;
-let _productsCacheTime = 0;
-const CACHE_TTL = 5 * 60 * 1000; // 5 phút
+let _ghSha = null; // SHA của products.json hiện tại (cần khi PUT)
 
-async function loadProductsFromSheet(forceRefresh) {
-  // Dùng cache nếu còn hạn và không force refresh
-  if (!forceRefresh && _productsCache && (Date.now() - _productsCacheTime < CACHE_TTL)) {
-    products = _productsCache;
+/* UTF-8 ↔ base64 (hỗ trợ tiếng Việt + emoji) */
+const _b64Enc = s => btoa(unescape(encodeURIComponent(s)));
+
+function _showShopSkeleton(){
+  const grid = document.getElementById('prod-grid');
+  if (!grid || products.length) return;
+  const sk = `<div class="prod-card" style="pointer-events:none">
+    <div class="prod-img-wrap" style="background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite"></div>
+    <div class="prod-info" style="gap:8px">
+      <div style="height:14px;border-radius:6px;background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;width:80%"></div>
+      <div style="height:12px;border-radius:6px;background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;width:50%"></div>
+      <div style="height:18px;border-radius:6px;background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;width:40%"></div>
+    </div></div>`;
+  grid.innerHTML = sk.repeat(window.innerWidth < 768 ? 4 : 8);
+}
+
+function _showShopError(msg){
+  const grid = document.getElementById('prod-grid');
+  if (grid) grid.innerHTML = `<div class="shop-error"><span class="shop-error-icon">😔</span><p>${msg}</p><button class="btn btn-pk" onclick="loadProductsFromSheet(true)">🔄 Thử lại</button></div>`;
+}
+
+/* Load sản phẩm — đọc trực tiếp file raw (public, không cần token) */
+async function loadProductsFromSheet(forceRefresh){
+  if (GH_CONFIG.owner.startsWith('YOUR_')){ products = []; renderShop(); return false; }
+  _showShopSkeleton();
+  try {
+    const url = GH_CONFIG.rawUrl + (forceRefresh ? '?t=' + Date.now() : '');
+    const res = await fetch(url, { cache: forceRefresh ? 'no-store' : 'default' });
+    if (res.status === 404){ products = []; renderShop(); return true; } // file chưa tạo
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    products = Array.isArray(data) ? data : (data.products || []);
     renderShop();
-    const cnt=document.getElementById('ad-cnt');
-    if(cnt)cnt.textContent=products.filter(p=>p.status==='on').length;
+    const cnt = document.getElementById('ad-cnt');
+    if (cnt) cnt.textContent = products.filter(p => p.status === 'on').length;
     return true;
-  }
-  if (!SHEET_CONFIG.enabled) {
-    // Chưa config → shop trống, hiện hướng dẫn
+  } catch(e){
     products = [];
-    renderShop();
+    _showShopError('Không tải được sản phẩm: ' + e.message);
     return false;
   }
-  // Hiện skeleton cards ngay lập tức (tốt hơn spinner)
-  const grid = document.getElementById('prod-grid');
-  if (grid && !products.length) {
-    const skeletonCard = `<div class="prod-card" style="pointer-events:none">
-      <div class="prod-img-wrap" style="background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite"></div>
-      <div class="prod-info" style="gap:8px">
-        <div style="height:14px;border-radius:6px;background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;width:80%"></div>
-        <div style="height:12px;border-radius:6px;background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;width:50%"></div>
-        <div style="height:18px;border-radius:6px;background:linear-gradient(90deg,#f5eaf2 25%,#eedde9 50%,#f5eaf2 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;width:40%"></div>
-      </div>
-    </div>`;
-    grid.innerHTML = skeletonCard.repeat(window.innerWidth < 768 ? 4 : 8);
-  }
+}
 
-  // Dùng JSONP để tránh CORS hoàn toàn (Apps Script không hỗ trợ CORS headers thực sự)
-  return new Promise(resolve => {
-    const cbName = 'sheetCb_' + Date.now();
-    const url = SHEET_CONFIG.url + '?callback=' + cbName + '&t=' + Date.now();
-    const timeout = setTimeout(() => {
-      if (window[cbName]) {
-        delete window[cbName];
-        const tag = document.getElementById('jsonp-' + cbName);
-        if (tag) tag.remove();
-        products = [];
-        const grid = document.getElementById('prod-grid');
-        if (grid) grid.innerHTML = `
-          <div class="shop-error">
-            <span class="shop-error-icon">😔</span>
-            <p>Không thể tải sản phẩm. Sheet chưa phản hồi (timeout 15s).<br>
-            <small>Kiểm tra Apps Script đã deploy chưa?</small></p>
-            <button class="btn btn-pk" onclick="loadProductsFromSheet(true)">🔄 Thử lại</button>
-          </div>`;
-        resolve(false);
-      }
-    }, 15000);
+/* Lấy SHA hiện tại của products.json (cần để ghi đè) */
+async function _ghGetSha(){
+  try {
+    const res = await fetch(GH_CONFIG.apiUrl + '?ref=' + GH_CONFIG.branch, {
+      headers: { Authorization: 'token ' + GH_CONFIG.token, Accept: 'application/vnd.github+json' }
+    });
+    if (res.status === 404) return null; // chưa tồn tại → tạo mới
+    if (!res.ok) throw new Error('GET sha: ' + res.status);
+    return (await res.json()).sha;
+  } catch(e){ console.warn('_ghGetSha:', e); return null; }
+}
 
-    window[cbName] = function(data) {
-      clearTimeout(timeout);
-      delete window[cbName];
-      const tag = document.getElementById('jsonp-' + cbName);
-      if (tag) tag.remove();
-      if (data && data.ok) {
-        products = data.products || [];
-        _productsCache = products;
-        _productsCacheTime = Date.now();
-        renderShop();
-        const cnt=document.getElementById('ad-cnt');
-        if(cnt)cnt.textContent=products.filter(p=>p.status==='on').length;
-        resolve(true);
-      } else {
-        products = [];
-        const grid = document.getElementById('prod-grid');
-        if (grid) grid.innerHTML = `
-          <div class="shop-error">
-            <span class="shop-error-icon">😔</span>
-            <p>Lỗi từ Sheet: ${(data && data.error) || 'Không rõ'}</p>
-            <button class="btn btn-pk" onclick="loadProductsFromSheet(true)">🔄 Thử lại</button>
-          </div>`;
-        resolve(false);
-      }
-    };
-
-    const script = document.createElement('script');
-    script.id = 'jsonp-' + cbName;
-    script.src = url;
-    script.onerror = function() {
-      clearTimeout(timeout);
-      delete window[cbName];
-      this.remove();
-      products = [];
-      const grid = document.getElementById('prod-grid');
-      if (grid) grid.innerHTML = `
-        <div class="shop-error">
-          <span class="shop-error-icon">😔</span>
-          <p>Không kết nối được Sheet.<br><small>Kiểm tra URL Apps Script trong SHEET_CONFIG.</small></p>
-          <button class="btn btn-pk" onclick="loadProductsFromSheet(true)">🔄 Thử lại</button>
-        </div>`;
-      resolve(false);
-    };
-    document.head.appendChild(script);
+/* Commit: ghi đè products.json với mảng mới */
+async function _ghCommit(arr, message){
+  const body = {
+    message: message || 'update products',
+    content: _b64Enc(JSON.stringify(arr, null, 2)),
+    branch: GH_CONFIG.branch
+  };
+  if (_ghSha) body.sha = _ghSha;
+  const res = await fetch(GH_CONFIG.apiUrl, {
+    method: 'PUT',
+    headers: {
+      Authorization: 'token ' + GH_CONFIG.token,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
   });
+  if (!res.ok){
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || 'PUT ' + res.status);
+  }
+  const j = await res.json();
+  _ghSha = j.content && j.content.sha;
+  return j;
 }
 
-/* Gọi API lưu sản phẩm (thêm hoặc cập nhật) */
-async function apiSaveProduct(product) {
-  if (!SHEET_CONFIG.enabled) return { ok: true, local: true };
-  // Dùng no-cors: không đọc được response nhưng Sheet vẫn nhận được data
+/* Lưu (thêm/sửa) — merge vào products rồi commit cả mảng */
+async function apiSaveProduct(product){
+  if (!GH_CONFIG.enabled) return { ok: true, local: true };
   try {
-    await fetch(SHEET_CONFIG.url, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({ action: 'save', key: SHEET_CONFIG.key, product })
-    });
-    // Xóa cache để lần load sau fetch lại từ Sheet
-    _productsCache = null;
-    _productsCacheTime = 0;
+    _ghSha = await _ghGetSha();
+    const i = products.findIndex(p => p.id === product.id);
+    if (i >= 0) products[i] = { ...products[i], ...product }; else products.push(product);
+    await _ghCommit(products, `save: ${product.name || product.id}`);
     return { ok: true };
-  } catch(e) {
-    console.error('apiSaveProduct error:', e);
+  } catch(e){
+    console.error('apiSaveProduct:', e);
     return { ok: false, error: e.message };
   }
 }
 
-/* Gọi API xóa sản phẩm */
-async function apiDeleteProduct(id) {
-  if (!SHEET_CONFIG.enabled) return { ok: true, local: true };
+/* Xóa */
+async function apiDeleteProduct(id){
+  if (!GH_CONFIG.enabled) return { ok: true, local: true };
   try {
-    await fetch(SHEET_CONFIG.url, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({ action: 'delete', key: SHEET_CONFIG.key, id })
-    });
-    _productsCache = null;
-    _productsCacheTime = 0;
+    _ghSha = await _ghGetSha();
+    products = products.filter(p => p.id !== id);
+    await _ghCommit(products, `delete: ${id}`);
     return { ok: true };
-  } catch(e) {
+  } catch(e){
+    console.error('apiDeleteProduct:', e);
     return { ok: false, error: e.message };
   }
 }
 
-/* Seed dữ liệu mẫu lên Sheet (dùng 1 lần để kickstart) */
-async function seedSampleProducts() {
-  if (!SHEET_CONFIG.enabled) { showToast('Chưa cài Sheet URL!'); return; }
-  if (!confirm('Upload 12 sản phẩm mẫu lên Google Sheet? Chỉ nên làm khi Sheet đang trống.')) return;
-  showToast('Đang upload...');
-  const sampleProducts = [
-    {id:1,name:'Váy maxi hoa nhí bigsize',price:259,old:350,emoji:'👗',cat:'chan-vay',sizes:['L','XL','2XL','3XL'],colors:['#F4C0D1','#AFA9EC','#fff'],status:'on',sold:1200,images:[],tags:['hot','sale'],desc:'Váy maxi hoa nhí – thiết kế riêng cho nàng bigsize, ôm vừa phải tôn đường cong tự nhiên.'},
-    {id:2,name:'Áo sơ mi lụa tay bồng',price:189,old:260,emoji:'👔',cat:'tshirt',sizes:['XL','2XL','3XL','4XL'],colors:['#fff','#F4C0D1','#5DCAA5'],status:'on',sold:856,images:[],tags:['mới về'],desc:'Áo sơ mi lụa tay bồng – thanh lịch và nữ tính.'},
-    {id:3,name:'Đầm wrap body midi',price:329,old:420,emoji:'👘',cat:'chan-vay',sizes:['L','XL','2XL'],colors:['#7F77DD','#D4537E','#2C2C2A'],status:'on',sold:2100,images:[],tags:['hot','bán chạy'],desc:'Đầm wrap body midi – ôm nhẹ tôn vóc dáng.'},
-    {id:4,name:'Áo croptop tay phồng',price:149,old:200,emoji:'🩱',cat:'tshirt',sizes:['L','XL','2XL','3XL'],colors:['#F4C0D1','#fff','#B5D4F4'],status:'low',sold:643,images:[],tags:['sale'],desc:'Áo croptop tay phồng – trendy và dễ phối đồ.'},
-    {id:5,name:'Bộ set áo + chân váy',price:389,old:490,emoji:'🎀',cat:'hoodie',sizes:['XL','2XL','3XL','4XL'],colors:['#FBEAF0','#EEEDFE'],status:'on',sold:412,images:[],tags:['hot'],desc:'Bộ set áo + chân váy – outfit hoàn chỉnh.'},
-    {id:6,name:'Quần suông ống rộng',price:225,old:290,emoji:'👖',cat:'quan',sizes:['XL','2XL','3XL','4XL','5XL'],colors:['#2C2C2A','#888780','#D4537E'],status:'on',sold:987,images:[],tags:[],desc:'Quần suông ống rộng – thoải mái cả ngày.'},
-  ];
-  try {
-    await fetch(SHEET_CONFIG.url, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({ action: 'seed', key: SHEET_CONFIG.key, products: sampleProducts })
-    });
-    // no-cors không đọc response, chờ 2s rồi load lại
-    showToast('⏳ Đang upload...');
-    await new Promise(r => setTimeout(r, 2000));
-    _productsCache = null;
-    _productsCacheTime = 0;
-    await loadProductsFromSheet(true);
-    showToast('✅ Đã upload sản phẩm mẫu lên Sheet!');
-  } catch(err) {
-    showToast('Lỗi kết nối: ' + err.message);
-  }
-}
-
-/* Status bar trong Admin */
-function initSheetStatus() {
+/* Status bar trong Admin → trang Quản lý sản phẩm */
+function initSheetStatus(){
   const bar = document.getElementById('sheet-status-bar');
   if (!bar) return;
-  if (SHEET_CONFIG.enabled) {
+  if (GH_CONFIG.enabled){
     bar.style.background = '#e8f5e9';
     bar.style.borderColor = '#c8e6c9';
-    bar.innerHTML = `
-      <div class="sheet-status-dot" style="background:#4caf50"></div>
-      <div>
-        <strong>✅ Google Sheet đã kết nối</strong>
-        <p>Mọi thay đổi sản phẩm sẽ được lưu vĩnh viễn. Khách hàng sẽ thấy ngay.<br>
-        <a href="${SHEET_CONFIG.url}" target="_blank">Mở Sheet →</a></p>
-      </div>`;
+    bar.innerHTML = `<div class="sheet-status-dot" style="background:#4caf50"></div>
+      <div><strong>✅ GitHub đã kết nối</strong>
+      <p>Sản phẩm lưu vào <code>${GH_CONFIG.path}</code> trong <strong>${GH_CONFIG.owner}/${GH_CONFIG.repo}</strong>. GitHub Pages rebuild ~30s sau commit.<br>
+      <a href="https://github.com/${GH_CONFIG.owner}/${GH_CONFIG.repo}/blob/${GH_CONFIG.branch}/${GH_CONFIG.path}" target="_blank">Xem file →</a></p></div>`;
   } else {
     bar.style.background = '#fff8e1';
     bar.style.borderColor = '#ffe082';
-    bar.innerHTML = `
-      <div class="sheet-status-dot" style="background:#ff9800"></div>
-      <div>
-        <strong>⚠️ Chưa kết nối Google Sheet</strong>
-        <p>Sản phẩm chỉ lưu tạm trong RAM — mất khi reload. Xem hướng dẫn setup trong file HTML phần SHEET_CONFIG.<br>
-        <a href="https://script.google.com" target="_blank">Mở Apps Script →</a></p>
-        <button class="btn btn-pk" style="margin-top:8px;font-size:12px;padding:6px 14px" onclick="seedSampleProducts()">📤 Upload sản phẩm mẫu lên Sheet</button>
-      </div>`;
+    const needRepo = GH_CONFIG.owner.startsWith('YOUR_');
+    bar.innerHTML = `<div class="sheet-status-dot" style="background:#ff9800"></div>
+      <div><strong>⚠️ Chưa cấu hình GitHub</strong>
+      <p>${needRepo ? 'Hardcode <code>owner</code> và <code>repo</code> trong <code>GH_CONFIG</code>.' : 'Vào <strong>Cài đặt → GitHub</strong> để nhập Personal Access Token.'} Sản phẩm hiện chỉ lưu tạm trong RAM.</p></div>`;
   }
 }
-/* ════════ END SHEET API LAYER ════════ */
 
-
-/* ══ Apps Script warm-up: giảm cold start lần sau ══ */
-(function() {
-  // Sau 30s (khi user đang đọc), ping script để giữ ấm
-  setTimeout(function() {
-    if (SHEET_CONFIG.enabled) {
-      // JSONP ping để warm up Apps Script
-      var _s = document.createElement('script');
-      _s.src = SHEET_CONFIG.url + '?callback=_pingCb&t=' + Date.now();
-      window._pingCb = function(){ delete window._pingCb; _s.remove(); };
-      _s.onerror = function(){ _s.remove(); };
-      document.head.appendChild(_s);
-    }
-  }, 30000);
-})();
-
-
-/* ══ INIT: load sản phẩm sau khi toàn bộ API/cache đã được khai báo ══ */
-(function initProductsAfterApiReady(){
-  function start(){
-    loadProductsFromSheet(true);
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start, { once: true });
+/* GitHub Token UI — Settings page */
+function initGithubTokenUI(){
+  const inp = document.getElementById('cfg-gh-token');
+  const st = document.getElementById('gh-token-status');
+  if (!inp || !st) return;
+  const tok = GH_CONFIG.token;
+  if (tok){
+    inp.value = '••••••••' + tok.slice(-4);
+    inp.dataset.masked = '1';
+    st.textContent = '✅ Đã lưu token (' + tok.length + ' ký tự)';
+    st.style.color = '#2e7d32';
   } else {
-    start();
+    st.textContent = '⚠️ Chưa có token — sản phẩm sẽ không lưu được lên GitHub';
+    st.style.color = '#e65100';
   }
-})();
+}
+
+function saveGithubToken(){
+  const inp = document.getElementById('cfg-gh-token');
+  if (!inp) return;
+  let v = inp.value.trim();
+  if (inp.dataset.masked === '1' && v.startsWith('••••••••')) return;
+  GH_CONFIG.token = v;
+  inp.dataset.masked = '';
+  initGithubTokenUI();
+  showToast(v ? '✅ Đã lưu GitHub token' : '🗑 Đã xóa token');
+}
+
+function clearGithubToken(){
+  if (!confirm('Xóa token khỏi máy này?')) return;
+  GH_CONFIG.token = '';
+  const inp = document.getElementById('cfg-gh-token');
+  if (inp){ inp.value = ''; inp.dataset.masked = ''; }
+  initGithubTokenUI();
+  showToast('🗑 Đã xóa token');
+}
+
+async function testGithubConnection(){
+  const res = document.getElementById('gh-test-result');
+  if (!GH_CONFIG.token){ if (res){ res.textContent = '⚠️ Chưa nhập token'; res.style.color = '#e65100'; } return; }
+  if (GH_CONFIG.owner.startsWith('YOUR_')){ if (res){ res.textContent = '⚠️ Chưa hardcode owner/repo trong GH_CONFIG'; res.style.color = '#e65100'; } return; }
+  if (res){ res.textContent = '⏳ Đang kiểm tra...'; res.style.color = 'var(--muted)'; }
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}`, {
+      headers: { Authorization: 'token ' + GH_CONFIG.token, Accept: 'application/vnd.github+json' }
+    });
+    if (!r.ok){
+      const e = await r.json().catch(() => ({}));
+      throw new Error(e.message || 'HTTP ' + r.status);
+    }
+    const j = await r.json();
+    if (res){ res.textContent = `✅ Kết nối OK với ${j.full_name} (${j.private ? 'private' : 'public'})`; res.style.color = '#2e7d32'; }
+  } catch(e){
+    if (res){ res.textContent = '❌ Lỗi: ' + e.message; res.style.color = '#c62828'; }
+  }
+}
+/* ════════ END GITHUB API LAYER ════════ */
+
+/* ══ INIT ══ */
+document.addEventListener('DOMContentLoaded', () => loadProductsFromSheet(true), { once: true });
 
 </script> <!-- Admin Login Modal -->
 <div id="admin-login-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center"> <div style="background:#fff;border-radius:16px;padding:36px;width:340px;border:1px solid var(--border);position:relative"> <button onclick="closeAdminLogin()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted)">×</button> <div style="text-align:center;margin-bottom:24px"> <div style="font-size:32px;margin-bottom:8px">🔐</div> <div style="font-size:17px;font-weight:700;color:var(--text)">Đăng nhập Admin</div> <div style="font-size:12px;color:var(--muted);margin-top:4px">Chỉ dành cho quản trị viên</div> </div> <div style="margin-bottom:14px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Tên đăng nhập</label> <input id="login-user" type="text" placeholder="Nhập username" autocomplete="off" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> </div> <div style="margin-bottom:20px"> <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:5px">Mật khẩu</label> <div style="position:relative"> <input id="login-pass" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password" style="width:100%;padding:10px 40px 10px 12px;border:1px solid var(--border);border-radius:9px;font-size:14px;font-family:var(--font);outline:none;background:var(--bg)" oninput="clearLoginErr()" onkeydown="if(event.key==='Enter')doLogin()"> <button onclick="togglePassVis()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted)" id="pass-eye">👁</button> </div> </div> <div id="login-err" style="display:none;background:var(--re-l);color:var(--re);font-size:12px;padding:8px 12px;border-radius:8px;margin-bottom:14px;text-align:center;font-weight:600">❌ Sai tên đăng nhập hoặc mật khẩu</div> <button onclick="doLogin()" style="width:100%;padding:13px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font)">Đăng nhập</button> <div id="login-attempts" style="text-align:center;font-size:11px;color:var(--muted);margin-top:10px"></div> </div>
