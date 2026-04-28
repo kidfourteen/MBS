@@ -2771,7 +2771,7 @@ const CLOUDINARY = {
    6. Save file HTML → commit lên GitHub
 */
 const SHEET_CONFIG = {
-  url: 'https://script.google.com/macros/s/AKfycbyqsky03J94wCyuXWorgnBDhCkM6M2ff9EgTfkUeomUqgGPBMc4RpYXN78pDVopsWsKzg/exec',
+  url: 'https://script.google.com/macros/s/AKfycbyXY4Ov6_M5gXf0QZOo6NIyCerPSziQIpzXVhtYceyAN_xgKPR2N_kRQerfBVvYbMWhGg/exec',
   key: 'MUM_SECRET_2025',   // Phải khớp với SECRET_KEY trong Apps Script
   get enabled(){ return this.url.startsWith('https://script.google.com'); }
 };
@@ -3726,9 +3726,16 @@ function delProd(id){
   products = products.filter(p => p.id !== id);
   renderAProd(); renderShop();
   showToast('Đang xóa...');
-  apiDeleteProduct(id).then(r => {
+  apiDeleteProduct(id).then(async r => {
     if(r && r.ok) {
-      showToast(r.local ? 'Đã xóa (chưa kết nối Sheet)' : '✅ Đã xóa khỏi Sheet!');
+      if(r.local){
+        showToast('Đã xóa (chưa kết nối Sheet)');
+      } else {
+        showToast('⏳ Đang đồng bộ...');
+        await new Promise(res => setTimeout(res, 2500));
+        await loadProductsFromSheet(true);
+        showToast('✅ Đã xóa khỏi Sheet!');
+      }
     } else {
       showToast('⚠️ Xóa Sheet thất bại — đã xóa tạm trong phiên này');
     }
@@ -3767,11 +3774,17 @@ function saveProd(){
   }
   closeProdModal();
   // Gọi API lưu lên Sheet (async — không block UI)
-  apiSaveProduct(dat).then(r => {
+  apiSaveProduct(dat).then(async r => {
     if (r && r.ok) {
-      showToast(r.local
-        ? (isEdit ? 'Đã cập nhật (chưa kết nối Sheet)' : 'Đã thêm (chưa kết nối Sheet)')
-        : (isEdit ? '✅ Đã cập nhật lên Sheet!' : '✅ Đã thêm lên Sheet!'));
+      if (r.local) {
+        showToast(isEdit ? 'Đã cập nhật (chưa kết nối Sheet)' : 'Đã thêm (chưa kết nối Sheet)');
+      } else {
+        showToast('⏳ Đang đồng bộ lên Sheet...');
+        // Chờ Apps Script cold start xử lý xong rồi fetch lại
+        await new Promise(res => setTimeout(res, 2500));
+        await loadProductsFromSheet(true);
+        showToast(isEdit ? '✅ Đã cập nhật lên Sheet!' : '✅ Đã thêm sản phẩm lên Sheet!');
+      }
     } else {
       showToast('⚠️ Lưu Sheet thất bại — kiểm tra kết nối');
     }
