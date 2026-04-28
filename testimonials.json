@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "type": "text",
+    "name": "Trần Hà My",
+    "location": "TP.HCM",
+    "purchases": 3,
+    "stars": 5,
+    "text": "Mình 92kg, mặc size 3XL vừa khít, đường may đẹp lắm! Váy maxi mặc đi chơi ai cũng hỏi mua ở đâu. Mũm hiểu nàng mũm thật sự!",
+    "avatar": "",
+    "date": "2 ngày trước",
+    "visible": true
+  },
+  {
+    "id": 2,
+    "type": "text",
+    "name": "Nguyễn Lan Anh",
+    "location": "Hà Nội",
+    "purchases": 5,
+    "stars": 5,
+    "text": "Trước giờ mình 105kg không tìm được quần vừa, thử size 4XL của Mũm là vừa liền. Chất vải mát mẻ, giá cả hợp lý nữa. Ủng hộ shop dài dài!",
+    "avatar": "",
+    "date": "5 ngày trước",
+    "visible": true
+  },
+  {
+    "id": 3,
+    "type": "text",
+    "name": "Phạm Bảo Châu",
+    "location": "Đà Nẵng",
+    "purchases": 4,
+    "stars": 5,
+    "text": "Mình đặt qua Zalo, shop tư vấn size nhiệt tình, giao hàng nhanh. Bộ set linen mặc đi làm cả tuần không chán. Cảm ơn Mũm đã cho mình tự tin hơn!",
+    "avatar": "",
+    "date": "1 tuần trước",
+    "visible": true
+  },
+  {
+    "id": 4,
+    "type": "fb",
+    "fbUrl": "https://www.facebook.com/mumbigsize.top/posts/pfbid022WoEw6qLmaxFDcjcYHiskjSfRsdvyzcnjUysnH5RZ9ZMjKLLpk4DYxwBYXNqcr7Ul",
+    "name": "A chia sẻ",
+    "visible": true
+  }
+]
