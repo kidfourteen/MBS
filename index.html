@@ -3229,7 +3229,7 @@ function setCat(el,c){
       if(oc.includes("'"+c+"'"))x.classList.add('active');
     });
   }
-  loadProductsFromSheet();renderTestimonials(); // Products loaded async from Sheet
+  renderShop(); // Chỉ filter lại, không fetch lại từ Sheet
 }
 function setCatDirect(c){setCat(null,c);goScroll('products-section');}
 function setSz(el,s){szF=s;document.querySelectorAll('#sz-grid .sz-btn').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderShop();}
@@ -4001,7 +4001,7 @@ function showToast(msg,duration){
 }
 
 /* ══ INIT ══ */
-renderShop();
+loadProductsFromSheet(); // Fetch từ Google Sheet khi trang load
 
 /* Cart Toast */
 let _cartToastT;
@@ -4422,7 +4422,10 @@ async function loadProductsFromSheet() {
   if (grid) grid.innerHTML = '<div class="shop-loading"><div class="shop-loading-spinner"></div><p>Đang tải sản phẩm...</p></div>';
 
   try {
-    const res  = await fetch(SHEET_CONFIG.url + '?t=' + Date.now());
+    const res  = await fetch(SHEET_CONFIG.url + '?t=' + Date.now(), {
+      method: 'GET',
+      redirect: 'follow',  // Apps Script redirect về URL thật
+    });
     const data = await res.json();
     if (data.ok) {
       products = data.products;
@@ -4434,11 +4437,12 @@ async function loadProductsFromSheet() {
   } catch(err) {
     console.error('Load products failed:', err);
     products = [];
+    console.error('Sheet fetch error:', err);
     const grid = document.getElementById('prod-grid');
     if (grid) grid.innerHTML = `
       <div class="shop-error">
         <span class="shop-error-icon">😔</span>
-        <p>Không thể tải sản phẩm.<br>Vui lòng thử lại sau.</p>
+        <p>Không thể tải sản phẩm.<br><small style="color:#aaa">${err.message}</small></p>
         <button class="btn btn-pk" onclick="loadProductsFromSheet()">🔄 Thử lại</button>
       </div>`;
   }
@@ -4449,6 +4453,7 @@ async function apiSaveProduct(product) {
   if (!SHEET_CONFIG.enabled) return { ok: true, local: true };
   const res  = await fetch(SHEET_CONFIG.url, {
     method: 'POST',
+    redirect: 'follow',
     body: JSON.stringify({ action: 'save', key: SHEET_CONFIG.key, product })
   });
   return res.json();
@@ -4459,6 +4464,7 @@ async function apiDeleteProduct(id) {
   if (!SHEET_CONFIG.enabled) return { ok: true, local: true };
   const res = await fetch(SHEET_CONFIG.url, {
     method: 'POST',
+    redirect: 'follow',
     body: JSON.stringify({ action: 'delete', key: SHEET_CONFIG.key, id })
   });
   return res.json();
@@ -4480,6 +4486,7 @@ async function seedSampleProducts() {
   try {
     const res = await fetch(SHEET_CONFIG.url, {
       method: 'POST',
+      redirect: 'follow',
       body: JSON.stringify({ action: 'seed', key: SHEET_CONFIG.key, products: sampleProducts })
     });
     const data = await res.json();
