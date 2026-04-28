@@ -1,12 +1,5 @@
 [
   {
-    "code": "MUM50K",
-    "type": "fixed",
-    "value": 50,
-    "desc": "Giảm 50k đơn từ 200k",
-    "minOrder": 200
-  },
-  {
     "code": "SHIP",
     "type": "fixed",
     "value": 30,
