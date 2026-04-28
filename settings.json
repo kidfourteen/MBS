@@ -4,11 +4,11 @@
     "fb": "https://www.facebook.com/mumbigsize.top/"
   },
   "shopInfo": {
-    "name": "Mũm Bigsize",
-    "phone": "0912 345 678",
+    "name": "Mũm",
+    "phone": "0868488884",
     "address": "TP. Hồ Chí Minh",
-    "shipFee": 30000,
-    "freeFrom": 500000
+    "shipFee": 20000,
+    "freeFrom": 400000
   },
   "bank": {
     "bankName": "TECHCOMBANK",
@@ -28,5 +28,5 @@
     "chatId": "-1003747002472",
     "enabled": true
   },
-  "_updatedAt": "2026-04-28T16:12:54.294Z"
+  "_updatedAt": "2026-04-28T16:19:03.667Z"
 }
