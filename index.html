@@ -301,9 +301,9 @@ a{text-decoration:none;color:inherit}
 .nav-caret{font-size:9px;margin-left:4px;transition:transform .2s}
 .nav-item-wrap.open .nav-caret{transform:rotate(180deg)}
 .mob-menu-btn{display:none;background:#fff;border:1px solid var(--border);padding:8px 14px;border-radius:9px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;font-family:var(--font);align-items:center;gap:6px}
-.mob-menu-bar{display:none;padding:10px 14px;background:#fff;border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:90}
+.mob-menu-bar{display:none;padding:10px 14px;background:#fff;border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:wrap}
 /* Mob category chips bar - hiển thị danh mục dạng tag scroll ngang */
-.mob-cat-chips{display:none;padding:10px 12px;background:linear-gradient(180deg,#fff 0%,#fdf6fb 100%);border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:sticky;top:54px;z-index:89}
+.mob-cat-chips{display:none;padding:10px 12px;background:linear-gradient(180deg,#fff 0%,#fdf6fb 100%);border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .mob-cat-chips::-webkit-scrollbar{display:none}
 .mob-chip{padding:8px 14px;background:#fff;border:1.5px solid var(--border);border-radius:18px;font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;font-family:var(--font);white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:all .15s;min-height:36px}
 .mob-chip span{font-size:14px}
@@ -2869,13 +2869,15 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   body{padding-bottom:64px} /* room for bottom nav */
 
   /* Mobile menu bar: 3 nút chính (Trang chủ | Feedback | Collection) - căn đều */
-  .mob-menu-bar{display:flex!important;padding:8px 10px;gap:6px;flex-wrap:nowrap;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:90;align-items:center;justify-content:space-between}
+  /* KHÔNG sticky để tránh chồng đè khi scroll xuống các section khác */
+  .mob-menu-bar{display:flex!important;padding:8px 10px;gap:6px;flex-wrap:nowrap;background:#fff;border-bottom:1px solid var(--border);position:relative;top:auto;z-index:auto;align-items:center;justify-content:space-between}
   .mob-menu-btn{padding:8px 12px;font-size:12.5px;font-weight:600;border-radius:18px;flex:1;min-height:38px;background:#fff;border:1.5px solid var(--border);color:var(--text);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:all .15s;white-space:nowrap}
   .mob-menu-btn:hover, .mob-menu-btn.active{background:var(--pk-l);border-color:var(--pk-b);color:var(--pk-d)}
   .mob-menu-btn:active{transform:scale(.97)}
 
   /* Mobile category chips bar - hiển thị danh mục dạng tag scroll ngang DƯỚI mob-menu-bar */
-  .mob-cat-chips{display:flex!important}
+  /* KHÔNG sticky - sẽ scroll theo content, tránh đè feature strip */
+  .mob-cat-chips{display:flex!important;position:relative!important;top:auto!important;z-index:auto!important}
 
   /* Hero compact: remove visual block, smaller padding */
   .hero{padding:18px 0!important}
@@ -2908,18 +2910,81 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   .feat-strip-text strong{font-size:11px}
   .feat-strip-text span{font-size:10px}
 
-  /* Mũm Collection - mobile compact, tên + giá căn giữa, ẨN giá cũ */
+  /* Mũm Collection - mobile: card vuông tràn viền, ảnh 1:1, tên + giá căn giữa */
   .flash-bar{padding:14px 0}
   .flash-bar-inner{padding:0 12px}
   .flash-head{flex-wrap:wrap;gap:6px!important;padding:10px 0 8px!important}
   .flash-head h3{font-size:15px;width:100%}
   .flash-head > div:last-child{font-size:11px!important;margin-left:0!important}
-  .flash-items{display:flex;overflow-x:auto;gap:10px;padding:8px 0 4px;scrollbar-width:none;flex-wrap:nowrap}
+  .flash-items{display:flex;overflow-x:auto;gap:12px;padding:6px 0 14px;scrollbar-width:none;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
   .flash-items::-webkit-scrollbar{display:none}
-  .fi{flex:0 0 150px;width:150px;padding:0;display:flex;flex-direction:column}
-  .fi-img{height:150px}
-  .fi-name{font-size:12px;-webkit-line-clamp:2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;height:34px;line-height:1.4;text-align:center;padding:8px 8px 4px;font-weight:600}
-  .fi-price{font-size:15px;font-weight:800;color:var(--pk-d);text-align:center;padding:0 8px 12px;display:block}
+  /* Card chiếm width cố định, có background card + border + shadow như sản phẩm grid */
+  .fi{
+    flex:0 0 160px!important;
+    width:160px!important;
+    padding:0!important;
+    display:flex!important;
+    flex-direction:column!important;
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+    text-align:center;
+  }
+  /* Ảnh tràn viền card - bỏ width cố định, dùng aspect-ratio 1:1 */
+  .fi-img{
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:1/1!important;
+    border:none!important;
+    border-radius:0!important;
+    margin-bottom:0!important;
+    background:var(--bg)!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    overflow:hidden!important;
+    position:relative!important;
+  }
+  .fi-img img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    position:absolute!important;
+    inset:0!important;
+    display:block!important;
+  }
+  /* Badge -%  + HOT vẫn hiển thị nhưng to hơn 1 chút cho mobile */
+  .fi .disc-badge{top:8px!important;left:8px!important;font-size:10px!important;padding:3px 9px!important}
+  .fi .top-banner-tag{top:8px!important;right:8px!important;font-size:10px!important;padding:3px 9px!important}
+  /* Tên sản phẩm: căn giữa, 2 dòng max */
+  .fi-name{
+    font-size:13px!important;
+    font-weight:600!important;
+    color:var(--text)!important;
+    text-align:center!important;
+    padding:10px 10px 4px!important;
+    margin:0!important;
+    line-height:1.4!important;
+    -webkit-line-clamp:2;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    min-height:38px;
+    white-space:normal!important;
+  }
+  /* Giá: căn giữa, đậm hồng */
+  .fi-price{
+    font-size:15px!important;
+    font-weight:800!important;
+    color:var(--pk-d)!important;
+    text-align:center!important;
+    padding:0 10px 14px!important;
+    margin:0!important;
+    display:block!important;
+  }
   /* Ẩn giá cũ trên mobile (giảm thông tin thừa, không gian gọn hơn) */
   .fi-old{display:none!important}
 
