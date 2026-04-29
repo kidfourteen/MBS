@@ -245,6 +245,8 @@ a{text-decoration:none;color:inherit}
 .fi-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .fi:hover .fi-img{transform:scale(1.04)}
 .disc-badge{position:absolute;top:5px;left:5px;background:var(--pk);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;z-index:1}
+.top-banner-tag{position:absolute;top:5px;right:5px;background:linear-gradient(135deg,#ff6b9d 0%,#c44dff 100%);color:#fff;font-size:9px;font-weight:800;padding:3px 8px;border-radius:10px;z-index:2;letter-spacing:.4px;box-shadow:0 2px 6px rgba(196,77,255,.35);animation:hotPulse 2s ease-in-out infinite}
+@keyframes hotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .fi-name{font-size:11px;color:var(--text);font-weight:500;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fi-price{color:var(--pk-d);font-size:13px;font-weight:700}
 .fi-old{color:var(--light);font-size:10px;text-decoration:line-through;margin-left:3px}
@@ -640,7 +642,8 @@ a{text-decoration:none;color:inherit}
 .feat-strip-item{display:flex;align-items:center;gap:12px;padding:18px 16px;border-right:1px solid var(--border);transition:background .2s}
 .feat-strip-item:last-child{border-right:none}
 .feat-strip-item:hover{background:var(--pk-l)}
-.feat-strip-ic{font-size:24px;flex-shrink:0}
+.feat-strip-ic{font-size:24px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px}
+.feat-strip-ic svg{width:36px;height:36px;display:block}
 .feat-strip-text strong{display:block;font-size:13px;font-weight:700;color:var(--text)}
 .feat-strip-text span{font-size:11px;color:var(--muted)}
 
@@ -654,7 +657,8 @@ a{text-decoration:none;color:inherit}
 .challenge-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}
 .challenge-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:24px;text-align:center;transition:all .25s;backdrop-filter:blur(4px)}
 .challenge-card:hover{background:rgba(255,255,255,.18);transform:translateY(-4px)}
-.challenge-card-ic{font-size:36px;margin-bottom:10px}
+.challenge-card-ic{font-size:36px;margin-bottom:10px;display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px}
+.challenge-card-ic svg{width:56px;height:56px;display:block}
 .challenge-card strong{display:block;color:#fff;font-size:15px;font-weight:700;margin-bottom:6px}
 .challenge-card span{color:rgba(255,255,255,.75);font-size:12px;line-height:1.6}
 .challenge-cta{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--pk-d);padding:14px 32px;border-radius:50px;font-size:15px;font-weight:800;cursor:pointer;border:none;font-family:var(--font);transition:all .2s;animation:pulse 2.5s ease-in-out infinite}
@@ -2194,12 +2198,23 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   #scr-checkout .mob-search-bar,
   #scr-checkout .mob-filter-bar { display: none !important; }
 
-  /* ══ Header checkout - compact ══ */
+  /* ══ Header checkout - compact, ✕ thoát NỔI BẬT để khách dễ thấy ══ */
   #scr-checkout .ck-header { padding-top: var(--safe-top); }
-  #scr-checkout .ck-header .pc-header-inner { height: 52px !important; padding: 0 12px !important; gap: 10px !important; }
+  #scr-checkout .ck-header .pc-header-inner { height: 54px !important; padding: 0 12px !important; gap: 8px !important; }
   #scr-checkout .ck-header .brand-logo { height: 28px !important; }
-  #scr-checkout .ck-back-btn,
-  #scr-checkout .ck-exit-btn { width: 36px !important; height: 36px !important; font-size: 16px !important; border-radius: 9px !important; }
+  #scr-checkout .ck-back-btn { width: 38px !important; height: 38px !important; font-size: 17px !important; border-radius: 10px !important; background: var(--bg) !important; }
+  /* ✕ thoát NỔI BẬT - màu đỏ nhạt để khách biết là nút thoát */
+  #scr-checkout .ck-exit-btn {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 16px !important;
+    border-radius: 10px !important;
+    background: #ffe8e8 !important;
+    border-color: #ffb3b3 !important;
+    color: #d32f2f !important;
+    font-weight: 700 !important;
+  }
+  #scr-checkout .ck-exit-btn:active { background: #ffd0d0 !important; }
   #scr-checkout .ck-header-step { font-size: 13px !important; padding: 4px 10px !important; }
 
   /* ══ Layout 1 cột, padding-bottom đủ chỗ cho sticky bar ══ */
@@ -2841,12 +2856,42 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   .mob-bnav{display:block!important}
   body{padding-bottom:64px} /* room for bottom nav */
 
-  /* Mobile menu bar: keep but make compact and only show categories shortcut */
-  .mob-menu-bar{display:flex!important;padding:8px 12px;gap:6px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+  /* Mobile menu bar: căn đẹp, các nút cân bằng, dropdown danh mục đầy đủ */
+  .mob-menu-bar{display:flex!important;padding:8px 10px;gap:6px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:90;align-items:center}
   .mob-menu-bar::-webkit-scrollbar{display:none}
-  .mob-menu-btn{padding:8px 12px;font-size:12px;border-radius:18px;flex-shrink:0;min-height:36px;background:var(--bg);border:1px solid var(--border)}
-  .mob-menu-bar .nav-dd{position:fixed;top:auto;bottom:64px;left:8px;right:8px;width:auto;max-height:65vh;border-radius:16px}
-  .mob-menu-bar .nav-dd-it{padding:14px 18px;font-size:14px;border-bottom:1px solid var(--bg)}
+  .mob-menu-btn{padding:8px 14px;font-size:12.5px;font-weight:600;border-radius:18px;flex-shrink:0;min-height:36px;background:#fff;border:1.5px solid var(--border);color:var(--text);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+  .mob-menu-btn:hover, .mob-menu-btn.active{background:var(--pk-l);border-color:var(--pk-b);color:var(--pk-d)}
+  .mob-menu-bar .nav-item-wrap{flex-shrink:0;position:relative}
+
+  /* Dropdown danh mục mobile - hiển thị từ trên xuống ngay dưới nút */
+  .mob-menu-bar .nav-dd{
+    position:fixed!important;
+    top:96px!important; /* dưới mob-menu-bar */
+    bottom:auto!important;
+    left:10px!important;
+    right:10px!important;
+    width:auto!important;
+    max-height:calc(100vh - 120px)!important;
+    overflow-y:auto!important;
+    border-radius:16px!important;
+    box-shadow:0 12px 40px rgba(0,0,0,.18)!important;
+    z-index:1100!important;
+    display:none;
+    background:#fff;
+    border:1px solid var(--border);
+    padding:8px 0;
+  }
+  .mob-menu-bar .nav-dd.open{display:block!important}
+  .mob-menu-bar .nav-dd-it{padding:13px 18px!important;font-size:14px!important;border-bottom:1px solid var(--bg);min-height:48px;display:flex;align-items:center;gap:10px}
+  .mob-menu-bar .nav-dd-it:last-child{border-bottom:none}
+  .mob-menu-bar .nav-dd-it span{font-size:18px;width:24px;text-align:center}
+
+  /* Backdrop khi mobile menu open */
+  body.mob-menu-open::after{
+    content:'';position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:1099;
+    animation:fadeIn .2s
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
   /* Hero compact: remove visual block, smaller padding */
   .hero{padding:18px 0!important}
@@ -3004,16 +3049,95 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   <div class="mob-bnav-inner">
     <button class="mob-bnav-it active" onclick="bnNav('home')"><span class="bn-ic">🏠</span>Trang chủ</button>
     <button class="mob-bnav-it" onclick="bnNav('cats')"><span class="bn-ic">📋</span>Danh mục</button>
-    <button class="mob-bnav-it" onclick="bnNav('flash')"><span class="bn-ic">⚡</span>Flash Sale</button>
+    <button class="mob-bnav-it" onclick="bnNav('flash')"><span class="bn-ic">🌸</span>Collection</button>
     <button class="mob-bnav-it" onclick="bnNav('feedback')"><span class="bn-ic">💬</span>Feedback</button>
     <button class="mob-bnav-it" onclick="openCart()"><span class="bn-ic">🛒</span>Giỏ hàng<span class="bn-badge" id="cart-count-bnav" style="display:none">0</span></button>
   </div>
 </nav>
 <!-- ══════════ SHOP ══════════ -->
-<div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav" id="pc-nav-bar"> <div class="pc-nav-link" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</div> <div class="nav-item-wrap" id="nav-cats-wrap"> <div class="pc-nav-link" onclick="toggleNavMenu('nav-cats-wrap', event)">Danh mục <span class="nav-caret">▼</span></div> <div class="nav-dd" id="nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <div class="pc-nav-link" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</div> <div class="pc-nav-link" onclick="goScroll('flash-section');closeAllMenus()">⚡ Flash Sale</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <!-- Mobile menu bar (replaces old chip bar) --> <div class="mob-menu-bar" id="mob-menu-bar"> <button class="mob-menu-btn" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</button> <div class="nav-item-wrap" id="mob-nav-cats-wrap"> <button class="mob-menu-btn" onclick="toggleNavMenu('mob-nav-cats-wrap', event)">📋 Danh mục <span class="nav-caret">▼</span></button> <div class="nav-dd" id="mob-nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <button class="mob-menu-btn" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</button> <button class="mob-menu-btn" onclick="goScroll('flash-section');closeAllMenus()">⚡ Flash Sale</button> </div> <div class="mob-filter-bar" id="mob-cats" style="display:none"> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">⚡ FLASH SALE MỖI NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero" id="hero-section"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
+<div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav" id="pc-nav-bar"> <div class="pc-nav-link" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</div> <div class="nav-item-wrap" id="nav-cats-wrap"> <div class="pc-nav-link" onclick="toggleNavMenu('nav-cats-wrap', event)">Danh mục <span class="nav-caret">▼</span></div> <div class="nav-dd" id="nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <div class="pc-nav-link" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</div> <div class="pc-nav-link" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <!-- Mobile menu bar (replaces old chip bar) --> <div class="mob-menu-bar" id="mob-menu-bar"> <button class="mob-menu-btn" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</button> <div class="nav-item-wrap" id="mob-nav-cats-wrap"> <button class="mob-menu-btn" onclick="toggleNavMenu('mob-nav-cats-wrap', event)">📋 Danh mục <span class="nav-caret">▼</span></button> <div class="nav-dd" id="mob-nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <button class="mob-menu-btn" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</button> <button class="mob-menu-btn" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</button> </div> <div class="mob-filter-bar" id="mob-cats" style="display:none"> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero" id="hero-section"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
           Mũm Big Size — thương hiệu thời trang dành riêng cho nàng <strong style="color:var(--pk-d)">55kg đến 120kg</strong>.<br>
           Chúng mình hiểu cơ thể bạn hơn ai hết — từng đường cắt, từng cm vải đều được thiết kế để bạn <strong style="color:var(--pu-d)">tự tin tỏa sáng</strong> mỗi ngày.
-        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">⚡ Flash Sale hôm nay</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-emoji-grid" id="hero-cat-grid"> <div class="hero-card" onclick="setCatDirect('ao-chong-nang')"><span>🧥</span><p>Chống nắng</p></div><div class="hero-card" onclick="setCatDirect('hoodie')"><span>🦘</span><p>Hoodie</p></div><div class="hero-card" onclick="setCatDirect('ao-gio')"><span>💨</span><p>Áo gió</p></div><div class="hero-card" onclick="setCatDirect('chan-vay')"><span>👗</span><p>Chân váy</p></div><div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div><div class="hero-card" onclick="setCatDirect('giay')"><span>👟</span><p>Giày & Dép</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner"> <div class="feat-strip-item"><span class="feat-strip-ic">🚚</span><div class="feat-strip-text"><strong>Miễn phí vận chuyển</strong><span>Đơn từ 500.000đ – toàn quốc</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">💪</span><div class="feat-strip-text"><strong>Size lên đến 120kg</strong><span>L, XL, 2XL, 3XL, 4XL, 5XL</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">🔄</span><div class="feat-strip-text"><strong>Đổi size miễn phí</strong><span>Trong vòng 7 ngày nhận hàng</span></div></div> <div class="feat-strip-item"><span class="feat-strip-ic">✅</span><div class="feat-strip-text"><strong>Cam kết chất lượng</strong><span>Kiểm hàng trước khi giao</span></div></div> </div> </div> <div class="flash-bar" id="flash-section"> <div class="flash-bar-inner"> <div class="flash-head"> <h3>⚡ Flash Sale hôm nay</h3> <div class="countdown" style="margin-left:14px"> <div class="cbox" id="fc-h">02</div><span class="csep">:</span> <div class="cbox" id="fc-m">47</div><span class="csep">:</span> <div class="cbox" id="fc-s">30</div> </div> <div style="margin-left:auto;font-size:12px;color:var(--muted)">Giảm đến 40%</div> </div> <div class="flash-items" id="flash-items"></div> </div> </div> <div class="shop-body" id="products-section"> <aside class="filter-sidebar"> <div class="fs-title">🔍 Lọc sản phẩm</div> <div class="fs-section"> <h4>Danh mục</h4> <div class="cat-list" id="cat-list"> <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div> <div class="cat-item" onclick="setCat(this,'ao-chong-nang')"><span>🧥</span>Áo chống nắng</div> <div class="cat-item" onclick="setCat(this,'ao-gio')"><span>💨</span>Áo gió</div> <div class="cat-item" onclick="setCat(this,'ao-khoac-dong')"><span>🧣</span>Áo khoác đông</div> <div class="cat-item" onclick="setCat(this,'hoodie')"><span>🦘</span>Hoodie</div> <div class="cat-item" onclick="setCat(this,'sweater')"><span>🧸</span>Sweater</div> <div class="cat-item" onclick="setCat(this,'tshirt')"><span>👕</span>T-shirt</div> <div class="cat-item" onclick="setCat(this,'chan-vay')"><span>👗</span>Chân váy</div> <div class="cat-item" onclick="setCat(this,'do-di-bien')"><span>🏖️</span>Đồ đi biển</div> <div class="cat-item" onclick="setCat(this,'phu-kien')"><span>👜</span>Phụ kiện</div> <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div> <div class="cat-item" onclick="setCat(this,'ao-len')"><span>🧶</span>Áo len</div> <div class="cat-item" onclick="setCat(this,'ao-parka')"><span>🥼</span>Áo Parka</div> <div class="cat-item" onclick="setCat(this,'giay')"><span>👟</span>Giày</div> <div class="cat-item" onclick="setCat(this,'dep')"><span>🩴</span>Dép</div> <div class="cat-item" onclick="setCat(this,'so-mi')"><span>👔</span>Sơ mi</div> </div> </div> <div class="fs-section"> <h4>Size</h4> <div class="size-grid" id="sz-grid"> <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div> <div class="sz-btn" onclick="setSz(this,'S')">S</div> <div class="sz-btn" onclick="setSz(this,'M')">M</div> <div class="sz-btn" onclick="setSz(this,'L')">L</div> <div class="sz-btn" onclick="setSz(this,'XL')">XL</div> <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div> <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div> <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div> <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div> <div class="sz-btn" onclick="setSz(this,'6XL')">6XL</div> <div class="sz-btn" onclick="setSz(this,'7XL')">7XL</div> </div> </div> </aside> <div> <div class="prod-area-head"> <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2> <select class="sort-select" onchange="doSort(this.value)"> <option value="default">Mặc định</option> <option value="price-asc">Giá tăng dần</option> <option value="price-desc">Giá giảm dần</option> <option value="sold">Bán chạy nhất</option> </select> </div> <div class="prod-grid" id="prod-grid"></div> </div> </div> <!-- Challenge Section --> <div class="challenge-section reveal"> <div class="challenge-inner"> <span class="challenge-tag">💪 THÁCH THỨC CÂN NẶNG</span> <h2 class="challenge-h2">Không có size nào<br>là <em>quá lớn</em> với Mũm</h2> <p class="challenge-p">Chúng mình không giới hạn bạn. Dù bạn 55kg hay 120kg, dù vóc dáng nào — Mũm Big Size luôn có outfit xịn đang chờ bạn. Vì vẻ đẹp không có số đo.</p> <div class="challenge-cards"> <div class="challenge-card"> <div class="challenge-card-ic">📏</div> <strong>Size L đến 5XL</strong> <span>Phủ sóng từ 55kg đến 120kg+. Mỗi size được đo chính xác theo vóc dáng Việt Nam.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">✂️</div> <strong>Cắt may riêng cho nàng mũm</strong> <span>Không phải size thường cắt to ra — mà thiết kế từ đầu cho đường cong tự nhiên của bạn.</span> </div> <div class="challenge-card"> <div class="challenge-card-ic">🌸</div> <strong>Tự tin là đẹp nhất</strong> <span>Hàng ngàn khách hàng đã tìm lại sự tự tin với thời trang — bạn là người tiếp theo!</span> </div> </div> <button class="challenge-cta" onclick="goScroll('products-section')">Tìm outfit của tôi →</button> </div> </div> <!-- Size visual teaser --> <div class="size-teaser reveal"> <div class="size-teaser-inner"> <div> <span style="display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px">📏 BẢNG SIZE MŨM BIGSIZE</span> <h2 style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px">Phủ sóng <span style="color:var(--pk)">mọi vóc dáng</span></h2> <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">Từ nàng 55kg thanh mảnh đến nàng 120kg đầy đặn — Mũm đều có size vừa vặn. Mỗi sản phẩm đều ghi rõ bảng size chi tiết để bạn chọn chuẩn ngay lần đầu.</p> <button class="btn btn-pk" style="border-radius:50px;padding:11px 24px" onclick="goScroll('products-section')">Xem sản phẩm →</button> </div> <div class="size-bar-list"> <div class="size-bar-row"><span class="size-bar-lbl">S</span><div class="size-bar-track"><div class="size-bar-fill" style="width:14%"></div></div><span class="size-bar-kg">40 – 48 kg</span></div>
+        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">🌸 Xem Collection 2026</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-emoji-grid" id="hero-cat-grid"> <div class="hero-card" onclick="setCatDirect('ao-chong-nang')"><span>🧥</span><p>Chống nắng</p></div><div class="hero-card" onclick="setCatDirect('hoodie')"><span>🦘</span><p>Hoodie</p></div><div class="hero-card" onclick="setCatDirect('ao-gio')"><span>💨</span><p>Áo gió</p></div><div class="hero-card" onclick="setCatDirect('chan-vay')"><span>👗</span><p>Chân váy</p></div><div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div><div class="hero-card" onclick="setCatDirect('giay')"><span>👟</span><p>Giày & Dép</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner">
+  <div class="feat-strip-item"><span class="feat-strip-ic">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="url(#fs1)"/>
+      <path d="M7 18.5V13a1 1 0 0 1 1-1h10v9H8a1 1 0 0 1-1-1Zm14-9h2.5l3 4.5V21h-2a2 2 0 0 1-4 0h-1V9.5h1.5Z" fill="#fff"/>
+      <circle cx="11" cy="22" r="2" fill="#fff" stroke="#E91E8C" stroke-width="1.5"/>
+      <circle cx="23" cy="22" r="2" fill="#fff" stroke="#E91E8C" stroke-width="1.5"/>
+      <defs><linearGradient id="fs1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FF6B9D"/><stop offset="1" stop-color="#E91E8C"/></linearGradient></defs>
+    </svg>
+  </span><div class="feat-strip-text"><strong>Miễn phí vận chuyển</strong><span>Đơn từ 500.000đ – toàn quốc</span></div></div>
+  <div class="feat-strip-item"><span class="feat-strip-ic">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="url(#fs2)"/>
+      <path d="M16 7c-1.66 0-3 1.34-3 3 0 1.66 1.34 3 3 3s3-1.34 3-3c0-1.66-1.34-3-3-3Zm-4.5 7.5c-.83 0-1.5.67-1.5 1.5v6h2v-4.5h.5v9h2v-5h2v5h2v-9h.5V22h2v-6c0-.83-.67-1.5-1.5-1.5h-7Z" fill="#fff"/>
+      <circle cx="9" cy="11" r="2" fill="#fff"/>
+      <circle cx="23" cy="11" r="2" fill="#fff"/>
+      <defs><linearGradient id="fs2" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FFB3D1"/><stop offset="1" stop-color="#E91E8C"/></linearGradient></defs>
+    </svg>
+  </span><div class="feat-strip-text"><strong>Size lên đến 120kg</strong><span>L, XL, 2XL, 3XL, 4XL, 5XL</span></div></div>
+  <div class="feat-strip-item"><span class="feat-strip-ic">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="url(#fs3)"/>
+      <path d="M22.5 11.5a8 8 0 1 0 1.5 4.5h-2a6 6 0 1 1-1.07-3.43l-2.43 2.43h6V9l-2 2.5Z" fill="#fff"/>
+      <defs><linearGradient id="fs3" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#E91E8C"/><stop offset="1" stop-color="#9C27B0"/></linearGradient></defs>
+    </svg>
+  </span><div class="feat-strip-text"><strong>Đổi size miễn phí</strong><span>Trong vòng 7 ngày nhận hàng</span></div></div>
+  <div class="feat-strip-item"><span class="feat-strip-ic">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="url(#fs4)"/>
+      <path d="M16 6 8 9.5v6c0 4.5 3.4 8.7 8 10 4.6-1.3 8-5.5 8-10v-6L16 6Z" fill="#fff"/>
+      <path d="m13 16 2.5 2.5L20 14" stroke="#E91E8C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <defs><linearGradient id="fs4" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#FF6B9D"/><stop offset="1" stop-color="#C44DFF"/></linearGradient></defs>
+    </svg>
+  </span><div class="feat-strip-text"><strong>Cam kết chất lượng</strong><span>Kiểm hàng trước khi giao</span></div></div>
+</div> </div> <div class="flash-bar" id="flash-section"> <div class="flash-bar-inner"> <div class="flash-head"> <h3>🌸 Mũm Collection Summer 2026</h3> <div style="margin-left:auto;font-size:12px;color:var(--muted);font-weight:600">Bộ sưu tập hè – Top sản phẩm bán chạy</div> </div> <div class="flash-items" id="flash-items"></div> </div> </div> <div class="shop-body" id="products-section"> <aside class="filter-sidebar"> <div class="fs-title">🔍 Lọc sản phẩm</div> <div class="fs-section"> <h4>Danh mục</h4> <div class="cat-list" id="cat-list"> <div class="cat-item active" onclick="setCat(this,'all')"><span>🏷️</span>Tất cả</div> <div class="cat-item" onclick="setCat(this,'ao-chong-nang')"><span>🧥</span>Áo chống nắng</div> <div class="cat-item" onclick="setCat(this,'ao-gio')"><span>💨</span>Áo gió</div> <div class="cat-item" onclick="setCat(this,'ao-khoac-dong')"><span>🧣</span>Áo khoác đông</div> <div class="cat-item" onclick="setCat(this,'hoodie')"><span>🦘</span>Hoodie</div> <div class="cat-item" onclick="setCat(this,'sweater')"><span>🧸</span>Sweater</div> <div class="cat-item" onclick="setCat(this,'tshirt')"><span>👕</span>T-shirt</div> <div class="cat-item" onclick="setCat(this,'chan-vay')"><span>👗</span>Chân váy</div> <div class="cat-item" onclick="setCat(this,'do-di-bien')"><span>🏖️</span>Đồ đi biển</div> <div class="cat-item" onclick="setCat(this,'phu-kien')"><span>👜</span>Phụ kiện</div> <div class="cat-item" onclick="setCat(this,'quan')"><span>👖</span>Quần</div> <div class="cat-item" onclick="setCat(this,'ao-len')"><span>🧶</span>Áo len</div> <div class="cat-item" onclick="setCat(this,'ao-parka')"><span>🥼</span>Áo Parka</div> <div class="cat-item" onclick="setCat(this,'giay')"><span>👟</span>Giày</div> <div class="cat-item" onclick="setCat(this,'dep')"><span>🩴</span>Dép</div> <div class="cat-item" onclick="setCat(this,'so-mi')"><span>👔</span>Sơ mi</div> </div> </div> <div class="fs-section"> <h4>Size</h4> <div class="size-grid" id="sz-grid"> <div class="sz-btn active" onclick="setSz(this,'all')">Tất cả</div> <div class="sz-btn" onclick="setSz(this,'S')">S</div> <div class="sz-btn" onclick="setSz(this,'M')">M</div> <div class="sz-btn" onclick="setSz(this,'L')">L</div> <div class="sz-btn" onclick="setSz(this,'XL')">XL</div> <div class="sz-btn" onclick="setSz(this,'2XL')">2XL</div> <div class="sz-btn" onclick="setSz(this,'3XL')">3XL</div> <div class="sz-btn" onclick="setSz(this,'4XL')">4XL</div> <div class="sz-btn" onclick="setSz(this,'5XL')">5XL</div> <div class="sz-btn" onclick="setSz(this,'6XL')">6XL</div> <div class="sz-btn" onclick="setSz(this,'7XL')">7XL</div> </div> </div> </aside> <div> <div class="prod-area-head"> <h2>Sản phẩm <span>nổi bật</span> <span id="prod-count-txt" style="font-size:13px;font-weight:400;color:var(--muted)"></span></h2> <select class="sort-select" onchange="doSort(this.value)"> <option value="default">Mặc định</option> <option value="price-asc">Giá tăng dần</option> <option value="price-desc">Giá giảm dần</option> <option value="sold">Bán chạy nhất</option> </select> </div> <div class="prod-grid" id="prod-grid"></div> </div> </div> <!-- Challenge Section --> <div class="challenge-section reveal"> <div class="challenge-inner"> <span class="challenge-tag">💪 THÁCH THỨC CÂN NẶNG</span> <h2 class="challenge-h2">Không có size nào<br>là <em>quá lớn</em> với Mũm</h2> <p class="challenge-p">Chúng mình không giới hạn bạn. Dù bạn 55kg hay 120kg, dù vóc dáng nào — Mũm Big Size luôn có outfit xịn đang chờ bạn. Vì vẻ đẹp không có số đo.</p> <div class="challenge-cards">
+  <div class="challenge-card">
+    <div class="challenge-card-ic">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="28" fill="url(#cc1)"/>
+        <rect x="11" y="22" width="34" height="12" rx="3" fill="#fff"/>
+        <path d="M16 22v6m4-6v8m4-8v6m4-6v8m4-8v6m4-6v8m4-8v6" stroke="#E91E8C" stroke-width="1.8" stroke-linecap="round"/>
+        <defs><linearGradient id="cc1" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#FF6B9D"/><stop offset="1" stop-color="#E91E8C"/></linearGradient></defs>
+      </svg>
+    </div>
+    <strong>Size L đến 5XL</strong>
+    <span>Phủ sóng từ 55kg đến 120kg+. Mỗi size được đo chính xác theo vóc dáng Việt Nam.</span>
+  </div>
+  <div class="challenge-card">
+    <div class="challenge-card-ic">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="28" fill="url(#cc2)"/>
+        <circle cx="20" cy="36" r="5" fill="#fff" stroke="#fff" stroke-width="2"/>
+        <circle cx="36" cy="36" r="5" fill="#fff" stroke="#fff" stroke-width="2"/>
+        <circle cx="20" cy="36" r="2" fill="#E91E8C"/>
+        <circle cx="36" cy="36" r="2" fill="#E91E8C"/>
+        <path d="M22 33 38 17m-4 16L18 17" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <defs><linearGradient id="cc2" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#FFB3D1"/><stop offset="1" stop-color="#E91E8C"/></linearGradient></defs>
+      </svg>
+    </div>
+    <strong>Cắt may riêng cho nàng mũm</strong>
+    <span>Không phải size thường cắt to ra — mà thiết kế từ đầu cho đường cong tự nhiên của bạn.</span>
+  </div>
+  <div class="challenge-card">
+    <div class="challenge-card-ic">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="28" cy="28" r="28" fill="url(#cc3)"/>
+        <g transform="translate(28 28)">
+          <path d="M0-9c-3 0-5 2.5-5 5.5C-5-1-2 .5 0 .5c2 0 5-1.5 5-4 0-3-2-5.5-5-5.5Z" fill="#fff"/>
+          <path d="M9 0c0-3-2.5-5-5.5-5C1-5-.5-2-.5 0c0 2 1.5 5 4 5 3 0 5.5-2 5.5-5Z" fill="#fff"/>
+          <path d="M0 9c3 0 5-2.5 5-5.5C5 1 2-.5 0-.5c-2 0-5 1.5-5 4 0 3 2 5.5 5 5.5Z" fill="#fff"/>
+          <path d="M-9 0c0 3 2.5 5 5.5 5C-1 5 .5 2 .5 0c0-2-1.5-5-4-5-3 0-5.5 2-5.5 5Z" fill="#fff"/>
+          <circle r="3" fill="#E91E8C"/>
+        </g>
+        <defs><linearGradient id="cc3" x1="0" y1="0" x2="56" y2="56"><stop stop-color="#E91E8C"/><stop offset="1" stop-color="#C44DFF"/></linearGradient></defs>
+      </svg>
+    </div>
+    <strong>Tự tin là đẹp nhất</strong>
+    <span>Hàng ngàn khách hàng đã tìm lại sự tự tin với thời trang — bạn là người tiếp theo!</span>
+  </div>
+</div> <button class="challenge-cta" onclick="goScroll('products-section')">Tìm outfit của tôi →</button> </div> </div> <!-- Size visual teaser --> <div class="size-teaser reveal"> <div class="size-teaser-inner"> <div> <span style="display:inline-block;background:var(--pk);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px">📏 BẢNG SIZE MŨM BIGSIZE</span> <h2 style="font-size:26px;font-weight:800;color:var(--text);margin-bottom:10px">Phủ sóng <span style="color:var(--pk)">mọi vóc dáng</span></h2> <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">Từ nàng 55kg thanh mảnh đến nàng 120kg đầy đặn — Mũm đều có size vừa vặn. Mỗi sản phẩm đều ghi rõ bảng size chi tiết để bạn chọn chuẩn ngay lần đầu.</p> <button class="btn btn-pk" style="border-radius:50px;padding:11px 24px" onclick="goScroll('products-section')">Xem sản phẩm →</button> </div> <div class="size-bar-list"> <div class="size-bar-row"><span class="size-bar-lbl">S</span><div class="size-bar-track"><div class="size-bar-fill" style="width:14%"></div></div><span class="size-bar-kg">40 – 48 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">M</span><div class="size-bar-track"><div class="size-bar-fill" style="width:28%"></div></div><span class="size-bar-kg">48 – 55 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">L</span><div class="size-bar-track"><div class="size-bar-fill" style="width:40%"></div></div><span class="size-bar-kg">55 – 65 kg</span></div>
 <div class="size-bar-row"><span class="size-bar-lbl">XL</span><div class="size-bar-track"><div class="size-bar-fill" style="width:54%"></div></div><span class="size-bar-kg">65 – 75 kg</span></div>
@@ -3068,7 +3192,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
       <h4 class="footer-h4">Hỗ trợ</h4>
       <ul class="footer-ul">
         <li><a onclick="goScroll('feedback-section');closeAllMenus()">Đánh giá khách hàng</a></li>
-        <li><a onclick="goScroll('flash-section');closeAllMenus()">Flash Sale hôm nay</a></li>
+        <li><a onclick="goScroll('flash-section');closeAllMenus()">BST Hè 2026</a></li>
         <li><a onclick="openCart()">Giỏ hàng</a></li>
         <li><a href="#" onclick="return false">Hướng dẫn chọn size</a></li>
         <li><a href="#" onclick="return false">Chính sách đổi trả</a></li>
@@ -3222,7 +3346,7 @@ function doPost(e) {
   ]);
   return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
 }
-function doGet(){ return ContentService.createTextOutput('OK - Mum Bigsize Webhook'); }</textarea> </details> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật đồng bộ vào Google Sheet</span> <button id="sheet-toggle" class="toggle off" onclick="toggleSheet(this)"></button> <span id="sheet-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div class="af"><label>URL Web App (dán URL từ bước 6)</label><input id="cfg-sheet-url" placeholder="https://script.google.com/macros/s/AKfyc.../exec" value=""></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveSheetCfg()">Lưu URL</button> <button class="btn" onclick="testSheetWebhook()">📤 Gửi đơn test vào Sheet</button> <button class="btn" onclick="openSheetURL()">📋 Mở Sheet</button> </div> <div id="sheet-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Flash Sale</div><div style="font-size:11px;color:var(--muted)">Hiển thị banner flash sale</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
+function doGet(){ return ContentService.createTextOutput('OK - Mum Bigsize Webhook'); }</textarea> </details> <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"> <span style="font-size:13px;font-weight:600">Bật đồng bộ vào Google Sheet</span> <button id="sheet-toggle" class="toggle off" onclick="toggleSheet(this)"></button> <span id="sheet-status" style="font-size:12px;color:var(--muted)">Đang tắt</span> </div> <div class="af"><label>URL Web App (dán URL từ bước 6)</label><input id="cfg-sheet-url" placeholder="https://script.google.com/macros/s/AKfyc.../exec" value=""></div> <div style="display:flex;gap:8px;flex-wrap:wrap"> <button class="btn btn-pk" onclick="saveSheetCfg()">Lưu URL</button> <button class="btn" onclick="testSheetWebhook()">📤 Gửi đơn test vào Sheet</button> <button class="btn" onclick="openSheetURL()">📋 Mở Sheet</button> </div> <div id="sheet-test-result" style="font-size:12px;margin-top:8px;min-height:18px"></div> </div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Tính năng</h2></div> <div style="padding:18px;display:flex;flex-direction:column;gap:14px"> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Thông báo đơn mới</div><div style="font-size:11px;color:var(--muted)">Alert khi có đơn qua Zalo/FB</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> <div style="display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:13px;font-weight:600">Hiển thị Collection</div><div style="font-size:11px;color:var(--muted)">Bộ sưu tập hiện tại trên trang chủ</div></div><button class="toggle on" onclick="this.classList.toggle('on');this.classList.toggle('off')"></button></div> </div> </div> </div> </div> 
 <div id="adp-reviews" class="ad-page">
   <div class="ad-topbar">
     <h1>⭐ Quản lý đánh giá</h1>
@@ -3323,7 +3447,16 @@ function doGet(){ return ContentService.createTextOutput('OK - Mum Bigsize Webho
 <div id="cloudinary-status" style="margin-bottom:14px;padding:12px 16px;border-radius:10px;font-size:12.5px;display:flex;align-items:center;gap:10px"> <span id="cld-dot" style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:#ccc"></span> <div> <strong id="cld-title">Cloudinary chưa cài</strong> <div id="cld-sub" style="color:var(--muted);margin-top:2px">Ảnh upload chỉ lưu tạm — khách không xem được. 
       Xem hướng dẫn trong file HTML phần CLOUDINARY CONFIG.</div> </div>
 </div>
-<div class="img-upload-grid" id="img-upload-grid"> <div class="img-slot" id="slot-0" onclick="triggerUpload(0)"> <input type="file" accept="image/*" onchange="handleImgUpload(0,this)"> <span class="add-icon">📷</span><span class="add-txt">Ảnh chính</span> </div> <div class="img-slot" id="slot-1" onclick="triggerUpload(1)"> <input type="file" accept="image/*" onchange="handleImgUpload(1,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 2</span> </div> <div class="img-slot" id="slot-2" onclick="triggerUpload(2)"> <input type="file" accept="image/*" onchange="handleImgUpload(2,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 3</span> </div> <div class="img-slot" id="slot-3" onclick="triggerUpload(3)"> <input type="file" accept="image/*" onchange="handleImgUpload(3,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 4</span> </div> <div class="img-slot" id="slot-4" onclick="triggerUpload(4)"> <input type="file" accept="image/*" onchange="handleImgUpload(4,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 5</span> </div> </div> <div style="font-size:11px;color:var(--muted);margin-top:6px">💡 Click ô để chọn ảnh. Ảnh đầu là ảnh đại diện. <span id="img-cloud-hint" style="color:var(--am);font-weight:600"></span></div> </div> <!-- Fallback emoji --> <div class="af"> <label>Icon dự phòng (nếu chưa có ảnh)</label> <div class="emoji-pick" id="ep-pick"> <div class="ep sel" onclick="pickEp(this,'👗')">👗</div><div class="ep" onclick="pickEp(this,'👔')">👔</div> <div class="ep" onclick="pickEp(this,'👖')">👖</div><div class="ep" onclick="pickEp(this,'👘')">👘</div> <div class="ep" onclick="pickEp(this,'🩱')">🩱</div><div class="ep" onclick="pickEp(this,'🎀')">🎀</div> <div class="ep" onclick="pickEp(this,'🌸')">🌸</div><div class="ep" onclick="pickEp(this,'🧶')">🧶</div> </div> </div> <div class="af"><label>Tên sản phẩm</label><input id="ap-name" placeholder="VD: Váy maxi hoa nhí bigsize"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"> <div class="af"><label>Giá bán (nghìn đ)</label><input id="ap-price" type="number" placeholder="259"></div> <div class="af"><label>Giá gốc (nghìn đ)</label><input id="ap-old" type="number" placeholder="350"></div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"> <div class="af"><label>Danh mục</label><select id="ap-cat"><option value="ao-chong-nang">Áo chống nắng</option><option value="ao-gio">Áo gió</option><option value="ao-khoac-dong">Áo khoác đông</option><option value="hoodie">Hoodie</option><option value="sweater">Sweater</option><option value="tshirt">T-shirt</option><option value="chan-vay">Chân váy</option><option value="do-di-bien">Đồ đi biển</option><option value="phu-kien">Phụ kiện</option><option value="quan">Quần</option><option value="ao-len">Áo len</option><option value="ao-parka">Áo Parka</option><option value="giay">Giày</option><option value="dep">Dép</option><option value="so-mi">Sơ mi</option></select></div> <div class="af"><label>Trạng thái</label><select id="ap-st"><option value="on">Đang bán</option><option value="off">Ẩn</option><option value="low">Sắp hết</option></select></div> </div> <div class="af"><label>Size có sẵn</label><div class="sz-checks" id="ap-sizes"><div class="szc" onclick="togSz(this,'S')">S</div><div class="szc" onclick="togSz(this,'M')">M</div><div class="szc" onclick="togSz(this,'L')">L</div><div class="szc" onclick="togSz(this,'XL')">XL</div><div class="szc" onclick="togSz(this,'2XL')">2XL</div><div class="szc" onclick="togSz(this,'3XL')">3XL</div><div class="szc" onclick="togSz(this,'4XL')">4XL</div><div class="szc" onclick="togSz(this,'5XL')">5XL</div><div class="szc" onclick="togSz(this,'6XL')">6XL</div><div class="szc" onclick="togSz(this,'7XL')">7XL</div></div></div> <div class="af"><label>Màu sắc (mã hex, phân cách phẩy)</label><input id="ap-colors" placeholder="#F4C0D1, #AFA9EC, #ffffff"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"> <div class="af"><label>Số đã bán (hiển thị)</label><input id="ap-sold" type="number" placeholder="0"></div> <div class="af"><label>Tags (phân cách phẩy)</label><input id="ap-tags" placeholder="sale, mới về, hot"></div> </div> <div class="af"> <label>Mô tả chi tiết sản phẩm</label> <textarea id="ap-desc" style="height:140px" placeholder="Nhập mô tả chi tiết sản phẩm. Nội dung này sẽ hiển thị đầy đủ trên trang sản phẩm như một landing page.&#10;&#10;Ví dụ:&#10;- Chất liệu: Vải lụa cao cấp, mát mẻ thoáng khí&#10;- Kiểu dáng: Dáng suông, phù hợp nhiều dịp&#10;- Hướng dẫn bảo quản: Giặt máy 30°C, không sấy"></textarea> </div> </div> <div class="ad-modal-foot"><button class="btn" onclick="closeProdModal()">Hủy</button><button class="btn btn-pk" onclick="saveProd()">Lưu sản phẩm</button></div> </div>
+<div class="img-upload-grid" id="img-upload-grid"> <div class="img-slot" id="slot-0" onclick="triggerUpload(0)"> <input type="file" accept="image/*" onchange="handleImgUpload(0,this)"> <span class="add-icon">📷</span><span class="add-txt">Ảnh chính</span> </div> <div class="img-slot" id="slot-1" onclick="triggerUpload(1)"> <input type="file" accept="image/*" onchange="handleImgUpload(1,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 2</span> </div> <div class="img-slot" id="slot-2" onclick="triggerUpload(2)"> <input type="file" accept="image/*" onchange="handleImgUpload(2,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 3</span> </div> <div class="img-slot" id="slot-3" onclick="triggerUpload(3)"> <input type="file" accept="image/*" onchange="handleImgUpload(3,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 4</span> </div> <div class="img-slot" id="slot-4" onclick="triggerUpload(4)"> <input type="file" accept="image/*" onchange="handleImgUpload(4,this)"> <span class="add-icon">+</span><span class="add-txt">Ảnh 5</span> </div> </div> <div style="font-size:11px;color:var(--muted);margin-top:6px">💡 Click ô để chọn ảnh. Ảnh đầu là ảnh đại diện. <span id="img-cloud-hint" style="color:var(--am);font-weight:600"></span></div> </div> <!-- Fallback emoji --> <div class="af"> <label>Icon dự phòng (nếu chưa có ảnh)</label> <div class="emoji-pick" id="ep-pick"> <div class="ep sel" onclick="pickEp(this,'👗')">👗</div><div class="ep" onclick="pickEp(this,'👔')">👔</div> <div class="ep" onclick="pickEp(this,'👖')">👖</div><div class="ep" onclick="pickEp(this,'👘')">👘</div> <div class="ep" onclick="pickEp(this,'🩱')">🩱</div><div class="ep" onclick="pickEp(this,'🎀')">🎀</div> <div class="ep" onclick="pickEp(this,'🌸')">🌸</div><div class="ep" onclick="pickEp(this,'🧶')">🧶</div> </div> </div> <div class="af"><label>Tên sản phẩm</label><input id="ap-name" placeholder="VD: Váy maxi hoa nhí bigsize"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"> <div class="af"><label>Giá bán (nghìn đ)</label><input id="ap-price" type="number" placeholder="259"></div> <div class="af"><label>Giá gốc (nghìn đ)</label><input id="ap-old" type="number" placeholder="350"></div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"> <div class="af"><label>Danh mục</label><select id="ap-cat"><option value="ao-chong-nang">Áo chống nắng</option><option value="ao-gio">Áo gió</option><option value="ao-khoac-dong">Áo khoác đông</option><option value="hoodie">Hoodie</option><option value="sweater">Sweater</option><option value="tshirt">T-shirt</option><option value="chan-vay">Chân váy</option><option value="do-di-bien">Đồ đi biển</option><option value="phu-kien">Phụ kiện</option><option value="quan">Quần</option><option value="ao-len">Áo len</option><option value="ao-parka">Áo Parka</option><option value="giay">Giày</option><option value="dep">Dép</option><option value="so-mi">Sơ mi</option></select></div> <div class="af"><label>Trạng thái</label><select id="ap-st"><option value="on">Đang bán</option><option value="off">Ẩn</option><option value="low">Sắp hết</option></select></div> </div> <div class="af"><label>Size có sẵn</label><div class="sz-checks" id="ap-sizes"><div class="szc" onclick="togSz(this,'S')">S</div><div class="szc" onclick="togSz(this,'M')">M</div><div class="szc" onclick="togSz(this,'L')">L</div><div class="szc" onclick="togSz(this,'XL')">XL</div><div class="szc" onclick="togSz(this,'2XL')">2XL</div><div class="szc" onclick="togSz(this,'3XL')">3XL</div><div class="szc" onclick="togSz(this,'4XL')">4XL</div><div class="szc" onclick="togSz(this,'5XL')">5XL</div><div class="szc" onclick="togSz(this,'6XL')">6XL</div><div class="szc" onclick="togSz(this,'7XL')">7XL</div></div></div> <div class="af"><label>Màu sắc (mã hex, phân cách phẩy)</label><input id="ap-colors" placeholder="#F4C0D1, #AFA9EC, #ffffff"></div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"> <div class="af"><label>Số đã bán (hiển thị)</label><input id="ap-sold" type="number" placeholder="0"></div> <div class="af"><label>Tags (phân cách phẩy)</label><input id="ap-tags" placeholder="sale, mới về, hot"></div> </div>
+<div class="af">
+  <label style="display:flex;align-items:center;gap:10px;cursor:pointer;background:linear-gradient(90deg,#fce4f5,#f3e8ff);border:2px dashed var(--pk-b);border-radius:10px;padding:12px 14px;margin-top:6px">
+    <input type="checkbox" id="ap-top-banner" style="width:18px;height:18px;accent-color:var(--pk);cursor:pointer">
+    <div style="flex:1">
+      <div style="font-size:13px;font-weight:700;color:var(--pk-d)">🌸 Hiển thị trên Top Banner Collection</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">Sản phẩm sẽ xuất hiện trong "Mũm Collection Summer 2026" ở trang chủ</div>
+    </div>
+  </label>
+</div> <div class="af"> <label>Mô tả chi tiết sản phẩm</label> <textarea id="ap-desc" style="height:140px" placeholder="Nhập mô tả chi tiết sản phẩm. Nội dung này sẽ hiển thị đầy đủ trên trang sản phẩm như một landing page.&#10;&#10;Ví dụ:&#10;- Chất liệu: Vải lụa cao cấp, mát mẻ thoáng khí&#10;- Kiểu dáng: Dáng suông, phù hợp nhiều dịp&#10;- Hướng dẫn bảo quản: Giặt máy 30°C, không sấy"></textarea> </div> </div> <div class="ad-modal-foot"><button class="btn" onclick="closeProdModal()">Hủy</button><button class="btn btn-pk" onclick="saveProd()">Lưu sản phẩm</button></div> </div>
 </div> <script>
 /* ══ P0 ENHANCEMENTS ══ */
 /* Logo base64 — deferred to avoid blocking first paint */
@@ -3534,7 +3667,7 @@ function sendTelegramNotification(order) {
     `💳 Thanh toán: ${payLabels[order.payMethod]||order.payMethod}`,
     `📊 Trạng thái: ${statusLabels[order.payStatus]||order.payStatus}`,
     '━━━━━━━━━━━━━━━━━━',
-    '⚡ Vào Admin để xác nhận đơn!'
+    '🌸 Vào Admin để xác nhận đơn!'
   ].filter(Boolean).join('\n');
 
   fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.token}/sendMessage`, {
@@ -4067,10 +4200,22 @@ function getProds(){
 function renderShop(){
   renderCategories(); // re-render category lists each time products change
   const fi=document.getElementById('flash-items');
-  fi.innerHTML=products.filter(p=>p.status!=='off').slice(0,8).map(p=>{
+  // Lọc các sản phẩm có topBanner = true (admin đã đánh dấu hiển thị trên Collection banner)
+  // Nếu chưa có sản phẩm nào được đánh dấu, fallback hiển thị 8 sản phẩm bán chạy nhất
+  let bannerList = products.filter(p => p.status !== 'off' && p.topBanner === true);
+  if (bannerList.length === 0) {
+    bannerList = products.filter(p => p.status !== 'off')
+      .sort((a,b) => (b.sold||0) - (a.sold||0))
+      .slice(0, 8);
+  } else {
+    bannerList = bannerList.slice(0, 12); // tối đa 12 sản phẩm trên banner
+  }
+  fi.innerHTML = bannerList.map(p=>{
     const d=Math.round((1-p.price/p.old)*100);
     const imgHtml=p.images&&p.images[0]?`<img src="${p.images[0]}" alt="">`:'';
-    return`<div class="fi" onclick="openDetail(${p.id})"><div class="fi-img">${imgHtml}<span style="font-size:44px;position:relative;z-index:0${imgHtml?';display:none':''}">${p.emoji}</span><span class="disc-badge">-${d}%</span></div><div class="fi-name">${p.name}</div><span class="fi-price">${formatVND(p.price)}đ</span><span class="fi-old">${formatVND(p.old)}đ</span></div>`;
+    const badge = d>0 ? `<span class="disc-badge">-${d}%</span>` : '';
+    const topTag = p.topBanner ? `<span class="top-banner-tag">🌸 HOT</span>` : '';
+    return`<div class="fi" onclick="openDetail(${p.id})"><div class="fi-img">${imgHtml}<span style="font-size:44px;position:relative;z-index:0${imgHtml?';display:none':''}">${p.emoji}</span>${badge}${topTag}</div><div class="fi-name">${p.name}</div><span class="fi-price">${formatVND(p.price)}đ</span>${p.old>p.price?`<span class="fi-old">${formatVND(p.old)}đ</span>`:''}</div>`;
   }).join('');
   const grid=document.getElementById('prod-grid');
   const list=getProds();
@@ -4139,26 +4284,33 @@ function syncCartCount(n){
 
 /* Nav dropdown helpers */
 function toggleNavMenu(wrapId, ev){
-  if(ev) ev.stopPropagation();
+  if(ev) { ev.stopPropagation(); ev.preventDefault(); }
   const wrap = document.getElementById(wrapId);
   if(!wrap) return;
   const isOpen = wrap.classList.contains('open');
   // Close all menus first
   document.querySelectorAll('.nav-item-wrap.open').forEach(w => w.classList.remove('open'));
   document.querySelectorAll('.nav-dd.open').forEach(d => d.classList.remove('open'));
+  document.body.classList.remove('mob-menu-open');
   if(!isOpen){
     wrap.classList.add('open');
     const dd = wrap.querySelector('.nav-dd');
     if(dd) dd.classList.add('open');
+    // Backdrop chỉ cho mobile
+    if(window.innerWidth <= 768) document.body.classList.add('mob-menu-open');
   }
 }
 function closeAllMenus(){
   document.querySelectorAll('.nav-item-wrap.open').forEach(w => w.classList.remove('open'));
   document.querySelectorAll('.nav-dd.open').forEach(d => d.classList.remove('open'));
+  document.body.classList.remove('mob-menu-open');
 }
-// Close when clicking outside
+// Close when clicking outside menu OR clicking backdrop
 document.addEventListener('click', function(e){
-  if(!e.target.closest('.nav-item-wrap')) closeAllMenus();
+  // Click vào nút menu chính → ignore (toggleNavMenu sẽ xử lý)
+  if(e.target.closest('.nav-item-wrap')) return;
+  // Click bất kỳ chỗ nào khác → đóng menu
+  closeAllMenus();
 });
 
 /* ══ PRODUCT DETAIL PAGE ══ */
@@ -4733,7 +4885,7 @@ function filterPayStatus(el,s){
   el.classList.add('active');
   renderAOrds(adOF);
 }
-function renderAProd(){const tb=document.getElementById('ad-ptb');if(!tb)return;const list=adPF==='all'?products:products.filter(p=>p.cat===adPF);tb.innerHTML=list.map(p=>`<tr><td><div style="display:flex;align-items:center;gap:10px"><div class="p-thumb">${p.images&&p.images[0]?`<img src="${p.images[0]}" alt="">`:`${p.emoji}`}</div><div><div style="font-size:13px;font-weight:600">${p.name}</div><div style="font-size:11px;color:var(--muted)">Đã bán ${p.sold.toLocaleString()}</div></div></div></td><td style="font-size:12px;color:var(--muted)">${catMap[p.cat]}</td><td><div style="font-size:13px;font-weight:700;color:var(--pk-d)">${formatVND(p.price)}đ</div><div style="font-size:10px;color:var(--light);text-decoration:line-through">${formatVND(p.old)}đ</div></td><td style="font-size:11px;color:var(--muted)">${p.sizes.join(', ')}</td><td><span class="badge badge-${p.status}">${stMap[p.status]}</span></td><td><div style="display:flex;gap:5px"><button class="rib" onclick="editProd(${p.id})">✏️</button><button class="rib del" onclick="delProd(${p.id})">🗑️</button></div></td></tr>`).join('');}
+function renderAProd(){const tb=document.getElementById('ad-ptb');if(!tb)return;const list=adPF==='all'?products:products.filter(p=>p.cat===adPF);tb.innerHTML=list.map(p=>`<tr><td><div style="display:flex;align-items:center;gap:10px"><div class="p-thumb">${p.images&&p.images[0]?`<img src="${p.images[0]}" alt="">`:`${p.emoji}`}</div><div><div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px">${p.name}${p.topBanner?'<span style="background:var(--grad);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;letter-spacing:.3px">🌸 HOT</span>':''}</div><div style="font-size:11px;color:var(--muted)">Đã bán ${p.sold.toLocaleString()}</div></div></div></td><td style="font-size:12px;color:var(--muted)">${catMap[p.cat]}</td><td><div style="font-size:13px;font-weight:700;color:var(--pk-d)">${formatVND(p.price)}đ</div><div style="font-size:10px;color:var(--light);text-decoration:line-through">${formatVND(p.old)}đ</div></td><td style="font-size:11px;color:var(--muted)">${p.sizes.join(', ')}</td><td><span class="badge badge-${p.status}">${stMap[p.status]}</span></td><td><div style="display:flex;gap:5px"><button class="rib" onclick="editProd(${p.id})">✏️</button><button class="rib del" onclick="delProd(${p.id})">🗑️</button></div></td></tr>`).join('');}
 function getPayMethodBadge(m){
   const map={cod:'<span class="pay-method-badge pm-cod">💵 COD</span>',bank:'<span class="pay-method-badge pm-bank">🏦 Ngân hàng</span>',momo:'<span class="pay-method-badge pm-momo">🍑 MoMo</span>'};
   return map[m]||'<span class="pay-method-badge">?</span>';
@@ -4872,6 +5024,7 @@ function openAddProd(){
   document.getElementById('pm-title').textContent='Thêm sản phẩm mới';
   ['ap-name','ap-price','ap-old','ap-desc','ap-sold','ap-colors','ap-tags'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
   document.getElementById('ap-cat').value='ao-chong-nang';document.getElementById('ap-st').value='on';
+  const tb=document.getElementById('ap-top-banner'); if(tb) tb.checked=false;
   document.querySelectorAll('.ep').forEach(e=>e.classList.toggle('sel',e.textContent==='👗'));
   document.querySelectorAll('.szc').forEach(s=>s.classList.remove('sel'));
   resetImgSlots();
@@ -4886,6 +5039,7 @@ function editProd(id){
   document.getElementById('ap-sold').value=p.sold;document.getElementById('ap-colors').value=(p.colors||[]).join(', ');
   document.getElementById('ap-tags').value=(p.tags||[]).join(', ');
   document.getElementById('ap-desc').value=p.desc||'';
+  const tb=document.getElementById('ap-top-banner'); if(tb) tb.checked = !!p.topBanner;
   document.querySelectorAll('.ep').forEach(e=>e.classList.toggle('sel',e.textContent===p.emoji));
   document.querySelectorAll('.szc').forEach(s=>s.classList.toggle('sel',p.sizes.includes(s.textContent)));
   resetImgSlots();
@@ -4929,7 +5083,8 @@ function saveProd(){
     sold: parseInt(document.getElementById('ap-sold').value)||0,
     images: uploadedImgs.filter(Boolean),  // URL Cloudinary hoặc base64 fallback
     tags: document.getElementById('ap-tags').value.split(',').map(t=>t.trim()).filter(Boolean),
-    desc: document.getElementById('ap-desc').value.trim()
+    desc: document.getElementById('ap-desc').value.trim(),
+    topBanner: document.getElementById('ap-top-banner')?.checked || false  // Hiển thị trên Top Banner Collection
   };
   if(isEdit){
     const i=products.findIndex(p=>p.id===currentEditId);
