@@ -422,9 +422,23 @@ a{text-decoration:none;color:inherit}
 
 /* ══ CHECKOUT PAGE - Desktop optimized ══ */
 .checkout-page{max-width:1100px;margin:0 auto;padding:20px 28px 40px;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
+.ck-col-left{display:flex;flex-direction:column;gap:0}
+.ck-col-right{position:sticky;top:80px}
 .ck-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.03);transition:box-shadow .15s}
 .ck-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .ck-card h3{font-size:13px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+
+/* ══ Voucher block trong summary box ══ */
+.ck-voucher-block{margin-bottom:0}
+.ck-voucher-lbl{display:block;font-size:12px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+.ck-voucher-row{display:flex;gap:8px;align-items:flex-start}
+.ck-voucher-row input{flex:1;width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:var(--font);outline:none;background:var(--bg);transition:all .15s}
+.ck-voucher-row input:focus{border-color:var(--pk);background:var(--card);box-shadow:0 0 0 3px rgba(233,30,140,.08)}
+.ck-voucher-btn{padding:9px 16px;background:var(--grad);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);white-space:nowrap;transition:all .15s}
+.ck-voucher-btn:hover{opacity:.92;transform:translateY(-1px)}
+.ck-voucher-msg{font-size:12px;margin-top:6px;min-height:0;color:var(--gr);font-weight:600}
+.ck-voucher-msg:empty{margin-top:0}
+.ck-summary-divider{height:1px;background:var(--border);margin:14px 0}
 
 /* ══ CHECKOUT HEADER - 3 vùng: Back | Title | Exit ══ */
 .ck-header{background:var(--card);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04);position:sticky;top:0;z-index:90}
@@ -744,7 +758,7 @@ a{text-decoration:none;color:inherit}
 .pay-radio-info span{font-size:11px;color:var(--muted);line-height:1.4;display:block;margin-top:2px}
 .pay-badge{display:inline-block;background:var(--gr-l);color:var(--gr);font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;vertical-align:middle}
 
-.ck-summary-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;position:sticky;top:80px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.ck-summary-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
 .ck-summary-head{font-size:14px;font-weight:700;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);color:var(--text);display:flex;align-items:center;gap:6px}
 .ck-trust-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6;padding-top:10px;border-top:1px dashed var(--border)}
 .ck-confirm-btn{width:100%;padding:15px;background:var(--grad);color:#fff;border:none;border-radius:12px;font-size:15.5px;font-weight:800;cursor:pointer;font-family:var(--font);margin-top:14px;letter-spacing:.3px;transition:all .2s;box-shadow:0 4px 14px rgba(233,30,140,.3)}
@@ -752,7 +766,7 @@ a{text-decoration:none;color:inherit}
 .ck-confirm-btn:active{transform:translateY(0)}
 
 /* Mobile sticky confirm bar - chứa tổng tiền + nút đặt hàng */
-.ck-mobile-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:10px 14px;padding-bottom:calc(10px + var(--safe-bottom));z-index:95;box-shadow:0 -6px 24px rgba(0,0,0,.12);align-items:center;gap:12px}
+.ck-mobile-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--border);padding:10px 14px;padding-bottom:calc(10px + var(--safe-bottom));z-index:300;box-shadow:0 -6px 24px rgba(0,0,0,.15);align-items:center;gap:12px}
 /* Bar này chỉ thuộc trang checkout - ẩn khi không ở scr-checkout */
 #scr-checkout:not(.active) .ck-mobile-bar,
 .screen:not(#scr-checkout) .ck-mobile-bar { display: none !important; }
@@ -2164,11 +2178,23 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 }
 
 @media (max-width: 768px) {
-  /* Ẩn các thanh không liên quan khi ở trang checkout - tránh đè confirm btn */
-  #scr-checkout ~ .mob-menu-bar,
-  body:has(#scr-checkout.active) .mob-menu-bar { display: none !important; }
-  #scr-checkout .mob-menu-bar { display: none !important; }
+  /* ══ ẨN HOÀN TOÀN UI shop khi đang ở screen checkout ══
+     Body có class .on-checkout (set bởi showScr) khi đang ở scr-checkout.
+     Ẩn: search bar, menu bar, marquee ribbon, filter bar — tránh chiếm chỗ confirm bar. */
+  body.on-checkout #scr-shop .pc-search,
+  body.on-checkout .marquee-wrap,
+  body.on-checkout .mob-menu-bar,
+  body.on-checkout .mob-search-bar,
+  body.on-checkout .mob-filter-bar,
+  body.on-checkout #mob-bnav { display: none !important; }
+  /* Trong scr-checkout không có những UI trên, đảm bảo nếu có thì ẩn */
+  #scr-checkout .pc-search,
+  #scr-checkout .mob-menu-bar,
+  #scr-checkout .marquee-wrap,
+  #scr-checkout .mob-search-bar,
+  #scr-checkout .mob-filter-bar { display: none !important; }
 
+  /* ══ Header checkout - compact ══ */
   #scr-checkout .ck-header { padding-top: var(--safe-top); }
   #scr-checkout .ck-header .pc-header-inner { height: 52px !important; padding: 0 12px !important; gap: 10px !important; }
   #scr-checkout .ck-header .brand-logo { height: 28px !important; }
@@ -2176,15 +2202,18 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   #scr-checkout .ck-exit-btn { width: 36px !important; height: 36px !important; font-size: 16px !important; border-radius: 9px !important; }
   #scr-checkout .ck-header-step { font-size: 13px !important; padding: 4px 10px !important; }
 
+  /* ══ Layout 1 cột, padding-bottom đủ chỗ cho sticky bar ══ */
   .checkout-page {
     grid-template-columns: 1fr !important;
-    padding: 10px 12px 92px !important; /* bottom padding cho confirm bar */
+    padding: 10px 12px 100px !important; /* bottom padding chỗ cho mobile bar ~ 80px */
     gap: 10px !important;
     max-width: 100% !important;
   }
+  .ck-col-left, .ck-col-right { display: contents !important; }
+  /* Ck-col-right không sticky trên mobile */
+
   .ck-card { padding: 13px 13px !important; margin-bottom: 9px !important; border-radius: 12px !important; }
   .ck-card h3 { font-size: 12px !important; margin-bottom: 10px !important; padding-bottom: 8px !important; }
-
   .ck-card input,
   .ck-card select,
   .ck-card textarea {
@@ -2198,27 +2227,27 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   /* Mobile: Họ tên và SĐT chia 2 cột */
   .fr { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
 
-  /* Summary box hiển thị TRÊN form (trước khi nhập) để khách thấy tổng tiền ngay */
-  .ck-summary, .ck-summary-box {
-    position: static !important;
-    order: -1;
+  /* ══ Mobile order: Form trước, Summary box (voucher + tóm tắt) sau pay method ══ */
+  .ck-summary-box {
     border-radius: 12px !important;
     padding: 13px 14px !important;
     margin-bottom: 0 !important;
   }
-  /* Ẩn confirm desktop và trust note trong summary box - dùng sticky bar mobile */
+  /* Ẩn nút confirm desktop và trust note - dùng sticky bar mobile */
   .ck-confirm-desktop { display: none !important; }
   .ck-summary-box .ck-trust-note { display: none !important; }
   .ck-summary-head { font-size: 13px !important; margin-bottom: 8px !important; padding-bottom: 6px !important; }
-  /* Summary chỉ hiển thị 2 dòng đầu (header + total) trên mobile để gọn */
-  .ck-summary .ck-items { max-height: 140px; overflow-y: auto; }
+  .ck-voucher-lbl { font-size: 11.5px !important; margin-bottom: 6px !important; }
+  .ck-voucher-row input { padding: 10px 12px !important; font-size: 14px !important; min-height: 42px; }
+  .ck-voucher-btn { padding: 10px 14px !important; font-size: 13px !important; }
+  .ck-summary-divider { margin: 12px 0 !important; }
 
   .pay-radio-item { padding: 10px 11px !important; gap: 10px !important; border-radius: 10px !important; }
   .pay-radio-ic { font-size: 22px !important; }
   .pay-radio-info strong { font-size: 13px !important; }
   .pay-radio-info span { font-size: 11px !important; line-height: 1.45 !important; }
 
-  /* ══ STICKY MOBILE BAR – không đè menu, hiển thị tổng tiền + nút ══ */
+  /* ══ STICKY MOBILE BAR – luôn dính đáy, hiển thị tổng tiền + nút ══ */
   .ck-mobile-bar { display: flex !important; }
   /* Ẩn confirm-btn cũ, dùng mobile bar */
   .ck-confirm-btn:not(.ck-mob-confirm-btn) {
@@ -3091,9 +3120,64 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <tr><td><strong>6XL</strong></td><td>115–120 kg</td><td>132–140 cm</td><td>122–132 cm</td><td>136–144 cm</td></tr>
 <tr><td><strong>7XL</strong></td><td>120–130 kg</td><td>140–148 cm</td><td>132–142 cm</td><td>144–152 cm</td></tr> </tbody> </table> </div> <!-- Reviews --> <div class="pdp-section"> <h2>⭐ Đánh giá khách hàng</h2> <div class="review-summary"> <div class="review-score"><div class="big">4.9</div><div style="color:#EF9F27;font-size:16px;margin:4px 0">★★★★★</div><div style="font-size:12px;color:var(--muted)">1,247 đánh giá</div></div> <div class="review-bars"> <div class="rbar-row"><span class="rbar-lbl">5</span><div class="rbar-track"><div class="rbar-fill" style="width:88%"></div></div><span style="font-size:11px;color:var(--muted)">88%</span></div> <div class="rbar-row"><span class="rbar-lbl">4</span><div class="rbar-track"><div class="rbar-fill" style="width:9%"></div></div><span style="font-size:11px;color:var(--muted)">9%</span></div> <div class="rbar-row"><span class="rbar-lbl">3</span><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><span style="font-size:11px;color:var(--muted)">2%</span></div> <div class="rbar-row"><span class="rbar-lbl">2</span><div class="rbar-track"><div class="rbar-fill" style="width:1%"></div></div><span style="font-size:11px;color:var(--muted)">1%</span></div> </div> </div> <div id="review-list"> <div class="review-item"><div class="ri-header"><div class="ri-avatar">LT</div><div><div class="ri-name">Lê Thị Thảo</div><div style="color:#EF9F27;font-size:12px">★★★★★</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">2 ngày trước</div></div><div class="ri-text">Mình mua size 2XL, nặng 78kg. Vải mềm lắm, mặc vào rất thoải mái. Đường may tỉ mỉ, nhìn sang hơn hình nhiều. Chắc chắn sẽ mua thêm!</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div> <div class="review-item"><div class="ri-header"><div class="ri-avatar">NH</div><div><div class="ri-name">Nguyễn Hà My</div><div style="color:#EF9F27;font-size:12px">★★★★★</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">5 ngày trước</div></div><div class="ri-text">Shop giao hàng nhanh, đóng gói cẩn thận. Size chuẩn theo bảng, mình 85kg mua 3XL vừa đẹp. Màu đẹp y hình, chất liệu mát mẻ phù hợp thời tiết miền Nam.</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div> <div class="review-item"><div class="ri-header"><div class="ri-avatar">PB</div><div><div class="ri-name">Phạm Bảo Châu</div><div style="color:#EF9F27;font-size:12px">★★★★☆</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">1 tuần trước</div></div><div class="ri-text">Sản phẩm đẹp, vải tốt. Trừ 1 sao vì giao hơi chậm 1 ngày so với dự kiến. Nhưng chất lượng thì 10/10, sẽ ủng hộ shop tiếp!</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div> </div> </div> </div> <!-- Right sidebar --> <div class="pdp-sidebar"> <div class="pdp-sidebar-card"> <h3>🔥 Sản phẩm liên quan</h3> <div id="pdp-related"></div> </div> <div class="pdp-sidebar-card" style="position:sticky;top:80px"> <h3>📦 Thông tin giao hàng</h3> <div style="display:flex;flex-direction:column;gap:10px"> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🚚</span><div><div style="font-size:13px;font-weight:600">Giao hàng toàn quốc</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Miễn phí ship đơn từ 500.000đ. Ship trong 2–4 ngày.</div></div></div> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🔄</span><div><div style="font-size:13px;font-weight:600">Đổi trả dễ dàng</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Đổi size miễn phí trong 7 ngày nếu không vừa.</div></div></div> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">💳</span><div><div style="font-size:13px;font-weight:600">Thanh toán linh hoạt</div><div style="font-size:12px;color:var(--muted);margin-top:2px">COD, chuyển khoản, MoMo, ZaloPay.</div></div></div> </div> </div> </div> </div> </div>
 </div> <!-- ══════════ CHECKOUT ══════════ -->
-<div id="scr-checkout" class="screen"> <header class="pc-header ck-header"> <div class="pc-header-inner"> <button class="ck-back-btn" onclick="closeCheckout()" title="Quay lại giỏ hàng" aria-label="Quay lại giỏ hàng">←</button> <div class="ck-header-title"> <div onclick="exitCheckout()" style="cursor:pointer;display:flex;align-items:center;gap:8px"><img class="brand-logo" alt="Mũm Big Size" style="height:32px;width:auto;object-fit:contain"></div> <div class="ck-header-step">Thanh toán</div> </div> <button class="ck-exit-btn" onclick="exitCheckout()" title="Thoát (đã lưu thông tin)" aria-label="Thoát">✕</button> </div> </header> <div class="checkout-page"> <div> <div class="ck-card"> <h3>Thông tin giao hàng</h3> <div class="fr"> <div class="fg"><label>Họ và tên</label><input id="ck-name" placeholder="Nguyễn Thị Lan"></div> <div class="fg"><label>Số điện thoại</label> <input type="tel" id="ck-phone" placeholder="0912 345 678" oninput="checkVip()" onpaste="setTimeout(checkVip,10)" onchange="checkVip()" onblur="checkVip()"> <div id="vip-badge" style="display:none;margin-top:6px;background:linear-gradient(90deg,#f5a623,#e91e8c);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;align-items:center;gap:6px;width:fit-content">
-            🌟 Khách hàng VIP — Giảm thêm 10%!
-          </div> </div> </div> <div class="fg"><label>Tỉnh / Thành phố</label> <select id="ck-city"></select> </div> <div class="fg"><label>Địa chỉ</label><input id="ck-addr" placeholder="Số nhà, tên đường, phường/xã"></div></div> <div class="fg"><label>Ghi chú</label><textarea id="ck-note" placeholder="Giao giờ hành chính, gọi trước..."></textarea></div> </div> <div class="ck-card"> <h3>🎟 Mã giảm giá</h3> <div style="display:flex;gap:8px;align-items:flex-start"> <div style="flex:1"><input id="voucher-input" placeholder="Nhập mã voucher..." style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:9px;font-size:13px;font-family:var(--font);outline:none" onkeydown="if(event.key==='Enter')applyVoucher()"></div> <button onclick="applyVoucher()" style="padding:9px 16px;background:var(--grad);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font);white-space:nowrap">Áp dụng</button> </div> <div id="voucher-msg" style="font-size:12px;margin-top:5px;min-height:16px"></div> </div> <div class="ck-card"> <h3>Phương thức thanh toán</h3> <div class="pay-radio-group" id="pay-radio-group"> <label class="pay-radio-item selected" onclick="selectPayMethod(this,'cod')"> <input type="radio" name="paymethod" value="cod" checked> <span class="pay-radio-ic">💵</span> <div class="pay-radio-info"> <strong>Thanh toán khi nhận hàng (COD)</strong> <span>Kiểm tra hàng trước khi trả tiền. Phí ship 30.000đ, miễn ship đơn từ 500.000đ.</span> </div> </label> <label class="pay-radio-item" onclick="selectPayMethod(this,'bank')"> <input type="radio" name="paymethod" value="bank"> <span class="pay-radio-ic">🏦</span> <div class="pay-radio-info"> <strong>Chuyển khoản qua VietQR <span class="pay-badge" style="background:var(--gr-l);color:var(--gr)">-20.000đ</span></strong> <span>Quét QR bằng <strong>app ngân hàng, MoMo, ZaloPay</strong>... Giảm trực tiếp 20.000đ.</span> </div> </label> </div> </div> </div> <div> <div class="ck-summary-box"> <div class="ck-summary-head">📦 Tóm tắt đơn hàng</div> <div id="ck-summary-items"></div> <button class="ck-confirm-btn ck-confirm-desktop" onclick="handleConfirmOrder()">Xác nhận đặt hàng →</button> <div class="ck-trust-note">🔒 Thông tin được bảo mật an toàn<br>Đơn hàng được xác nhận trong 30 phút</div> </div>
+<div id="scr-checkout" class="screen"> <header class="pc-header ck-header"> <div class="pc-header-inner"> <button class="ck-back-btn" onclick="closeCheckout()" title="Quay lại giỏ hàng" aria-label="Quay lại giỏ hàng">←</button> <div class="ck-header-title"> <div onclick="exitCheckout()" style="cursor:pointer;display:flex;align-items:center;gap:8px"><img class="brand-logo" alt="Mũm Big Size" style="height:32px;width:auto;object-fit:contain"></div> <div class="ck-header-step">Thanh toán</div> </div> <button class="ck-exit-btn" onclick="exitCheckout()" title="Thoát (đã lưu thông tin)" aria-label="Thoát">✕</button> </div> </header> <div class="checkout-page"> <!-- ══ CỘT TRÁI: Form thông tin + Phương thức TT ══ -->
+<div class="ck-col-left">
+  <div class="ck-card"> <h3>Thông tin giao hàng</h3>
+    <div class="fr">
+      <div class="fg"><label>Họ và tên</label><input id="ck-name" placeholder="Nguyễn Thị Lan"></div>
+      <div class="fg"><label>Số điện thoại</label>
+        <input type="tel" id="ck-phone" placeholder="0912 345 678" oninput="checkVip()" onpaste="setTimeout(checkVip,10)" onchange="checkVip()" onblur="checkVip()">
+        <div id="vip-badge" style="display:none;margin-top:6px;background:linear-gradient(90deg,#f5a623,#e91e8c);color:#fff;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;align-items:center;gap:6px;width:fit-content">
+          🌟 Khách hàng VIP — Giảm thêm 10%!
+        </div>
+      </div>
+    </div>
+    <div class="fg"><label>Tỉnh / Thành phố</label> <select id="ck-city"></select> </div>
+    <div class="fg"><label>Địa chỉ</label><input id="ck-addr" placeholder="Số nhà, tên đường, phường/xã"></div>
+    <div class="fg"><label>Ghi chú</label><textarea id="ck-note" placeholder="Giao giờ hành chính, gọi trước..."></textarea></div>
+  </div>
+  <div class="ck-card"> <h3>Phương thức thanh toán</h3>
+    <div class="pay-radio-group" id="pay-radio-group">
+      <label class="pay-radio-item selected" onclick="selectPayMethod(this,'cod')">
+        <input type="radio" name="paymethod" value="cod" checked>
+        <span class="pay-radio-ic">💵</span>
+        <div class="pay-radio-info">
+          <strong>Thanh toán khi nhận hàng (COD)</strong>
+          <span>Kiểm tra hàng trước khi trả tiền. Phí ship 30.000đ, miễn ship đơn từ 500.000đ.</span>
+        </div>
+      </label>
+      <label class="pay-radio-item" onclick="selectPayMethod(this,'bank')">
+        <input type="radio" name="paymethod" value="bank">
+        <span class="pay-radio-ic">🏦</span>
+        <div class="pay-radio-info">
+          <strong>Chuyển khoản qua VietQR <span class="pay-badge" style="background:var(--gr-l);color:var(--gr)">-20.000đ</span></strong>
+          <span>Quét QR bằng <strong>app ngân hàng, MoMo, ZaloPay</strong>... Giảm trực tiếp 20.000đ.</span>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CỘT PHẢI: Mã giảm giá + Tóm tắt đơn hàng + Nút xác nhận (sticky) ══ -->
+<div class="ck-col-right">
+  <div class="ck-summary-box">
+    <!-- Voucher input ngay đầu -->
+    <div class="ck-voucher-block">
+      <label class="ck-voucher-lbl">🎟 Mã giảm giá</label>
+      <div class="ck-voucher-row">
+        <input id="voucher-input" placeholder="Nhập mã voucher..." onkeydown="if(event.key==='Enter')applyVoucher()">
+        <button onclick="applyVoucher()" class="ck-voucher-btn">Áp dụng</button>
+      </div>
+      <div id="voucher-msg" class="ck-voucher-msg"></div>
+    </div>
+    <div class="ck-summary-divider"></div>
+    <!-- Tóm tắt đơn hàng -->
+    <div class="ck-summary-head">📦 Tóm tắt đơn hàng</div>
+    <div id="ck-summary-items"></div>
+    <button class="ck-confirm-btn ck-confirm-desktop" onclick="handleConfirmOrder()">Xác nhận đặt hàng →</button>
+    <div class="ck-trust-note">🔒 Thông tin được bảo mật an toàn<br>Đơn hàng được xác nhận trong 30 phút</div>
+  </div>
+</div>
 
 <!-- Sticky bottom bar cho mobile - hiển thị tổng tiền + nút confirm -->
 <div class="ck-mobile-bar" id="ck-mobile-bar">
@@ -3102,7 +3186,9 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
     <span class="ck-mob-total-val" id="ck-mob-total-val">0đ</span>
   </div>
   <button class="ck-mob-confirm-btn" onclick="handleConfirmOrder()">Đặt hàng →</button>
-</div> </div> </div>
+</div>
+
+</div>
 </div> <!-- ══════════ SUCCESS ══════════ -->
 <div id="scr-success" class="screen"> <header class="pc-header"><div class="pc-header-inner"><div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" style="height:44px;width:auto;object-fit:contain;display:block"></div></div></header> <div class="success-page"> <div style="font-size:72px;margin-bottom:18px">🎉</div> <h2 style="font-size:26px;font-weight:700;color:var(--pk-d);margin-bottom:10px">Đặt hàng thành công!</h2> <p style="font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.7">Mũm sẽ xác nhận và liên hệ bạn trong 24h.<br>Cảm ơn bạn đã tin tưởng Mũm Bigsize! 🌸</p> <button class="btn btn-pk" style="padding:13px 36px;font-size:15px;border-radius:12px" onclick="backShop()">← Tiếp tục mua sắm</button> </div>
 </div> <!-- ══════════ ADMIN ══════════ -->
@@ -3790,6 +3876,8 @@ function showScr(id){
   // Show/hide mob menu bar (with categories) only on shop screen
   const menuBar = document.getElementById('mob-menu-bar');
   if(menuBar) menuBar.style.display = (id === 'scr-shop') ? '' : 'none';
+  // Toggle class body để ẩn UI shop khi đang ở checkout (CSS :has() fallback)
+  document.body.classList.toggle('on-checkout', id === 'scr-checkout');
 }
 let _logoClicks=0,_logoTimer=null;
 function logoClick(){
