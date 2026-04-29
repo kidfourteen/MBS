@@ -302,6 +302,13 @@ a{text-decoration:none;color:inherit}
 .nav-item-wrap.open .nav-caret{transform:rotate(180deg)}
 .mob-menu-btn{display:none;background:#fff;border:1px solid var(--border);padding:8px 14px;border-radius:9px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;font-family:var(--font);align-items:center;gap:6px}
 .mob-menu-bar{display:none;padding:10px 14px;background:#fff;border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:90}
+/* Mob category chips bar - hiển thị danh mục dạng tag scroll ngang */
+.mob-cat-chips{display:none;padding:10px 12px;background:linear-gradient(180deg,#fff 0%,#fdf6fb 100%);border-bottom:1px solid var(--border);gap:8px;align-items:center;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:sticky;top:54px;z-index:89}
+.mob-cat-chips::-webkit-scrollbar{display:none}
+.mob-chip{padding:8px 14px;background:#fff;border:1.5px solid var(--border);border-radius:18px;font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;font-family:var(--font);white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:all .15s;min-height:36px}
+.mob-chip span{font-size:14px}
+.mob-chip:hover{border-color:var(--pk-b);background:var(--pk-l)}
+.mob-chip.active{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 3px 10px rgba(233,30,140,.3)}
 .mob-menu-bar .nav-dd{position:fixed;top:auto;left:14px;right:14px;width:auto;max-height:60vh}
 
 .cart-overlay-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:590}
@@ -775,6 +782,9 @@ a{text-decoration:none;color:inherit}
 #scr-checkout:not(.active) .ck-mobile-bar,
 .screen:not(#scr-checkout) .ck-mobile-bar { display: none !important; }
 .ck-mob-total{display:flex;flex-direction:column;flex:1;min-width:0}
+.ck-mob-back-btn{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-size:20px;font-weight:700;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.ck-mob-back-btn:hover{background:var(--pk-l);border-color:var(--pk-b);color:var(--pk-d)}
+.ck-mob-back-btn:active{transform:scale(.95)}
 .ck-mob-total-lbl{font-size:11px;color:var(--muted);font-weight:500;line-height:1.2}
 .ck-mob-total-val{font-size:18px;font-weight:800;color:var(--pk-d);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ck-mob-confirm-btn{padding:12px 20px;background:var(--grad);color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:800;cursor:pointer;font-family:var(--font);box-shadow:0 4px 12px rgba(233,30,140,.3);white-space:nowrap;flex-shrink:0;transition:all .15s}
@@ -2188,12 +2198,14 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   body.on-checkout #scr-shop .pc-search,
   body.on-checkout .marquee-wrap,
   body.on-checkout .mob-menu-bar,
+  body.on-checkout .mob-cat-chips,
   body.on-checkout .mob-search-bar,
   body.on-checkout .mob-filter-bar,
   body.on-checkout #mob-bnav { display: none !important; }
   /* Trong scr-checkout không có những UI trên, đảm bảo nếu có thì ẩn */
   #scr-checkout .pc-search,
   #scr-checkout .mob-menu-bar,
+  #scr-checkout .mob-cat-chips,
   #scr-checkout .marquee-wrap,
   #scr-checkout .mob-search-bar,
   #scr-checkout .mob-filter-bar { display: none !important; }
@@ -2856,42 +2868,14 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   .mob-bnav{display:block!important}
   body{padding-bottom:64px} /* room for bottom nav */
 
-  /* Mobile menu bar: căn đẹp, các nút cân bằng, dropdown danh mục đầy đủ */
-  .mob-menu-bar{display:flex!important;padding:8px 10px;gap:6px;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:90;align-items:center}
-  .mob-menu-bar::-webkit-scrollbar{display:none}
-  .mob-menu-btn{padding:8px 14px;font-size:12.5px;font-weight:600;border-radius:18px;flex-shrink:0;min-height:36px;background:#fff;border:1.5px solid var(--border);color:var(--text);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+  /* Mobile menu bar: 3 nút chính (Trang chủ | Feedback | Collection) - căn đều */
+  .mob-menu-bar{display:flex!important;padding:8px 10px;gap:6px;flex-wrap:nowrap;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:90;align-items:center;justify-content:space-between}
+  .mob-menu-btn{padding:8px 12px;font-size:12.5px;font-weight:600;border-radius:18px;flex:1;min-height:38px;background:#fff;border:1.5px solid var(--border);color:var(--text);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:all .15s;white-space:nowrap}
   .mob-menu-btn:hover, .mob-menu-btn.active{background:var(--pk-l);border-color:var(--pk-b);color:var(--pk-d)}
-  .mob-menu-bar .nav-item-wrap{flex-shrink:0;position:relative}
+  .mob-menu-btn:active{transform:scale(.97)}
 
-  /* Dropdown danh mục mobile - hiển thị từ trên xuống ngay dưới nút */
-  .mob-menu-bar .nav-dd{
-    position:fixed!important;
-    top:96px!important; /* dưới mob-menu-bar */
-    bottom:auto!important;
-    left:10px!important;
-    right:10px!important;
-    width:auto!important;
-    max-height:calc(100vh - 120px)!important;
-    overflow-y:auto!important;
-    border-radius:16px!important;
-    box-shadow:0 12px 40px rgba(0,0,0,.18)!important;
-    z-index:1100!important;
-    display:none;
-    background:#fff;
-    border:1px solid var(--border);
-    padding:8px 0;
-  }
-  .mob-menu-bar .nav-dd.open{display:block!important}
-  .mob-menu-bar .nav-dd-it{padding:13px 18px!important;font-size:14px!important;border-bottom:1px solid var(--bg);min-height:48px;display:flex;align-items:center;gap:10px}
-  .mob-menu-bar .nav-dd-it:last-child{border-bottom:none}
-  .mob-menu-bar .nav-dd-it span{font-size:18px;width:24px;text-align:center}
-
-  /* Backdrop khi mobile menu open */
-  body.mob-menu-open::after{
-    content:'';position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:1099;
-    animation:fadeIn .2s
-  }
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  /* Mobile category chips bar - hiển thị danh mục dạng tag scroll ngang DƯỚI mob-menu-bar */
+  .mob-cat-chips{display:flex!important}
 
   /* Hero compact: remove visual block, smaller padding */
   .hero{padding:18px 0!important}
@@ -2924,20 +2908,20 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   .feat-strip-text strong{font-size:11px}
   .feat-strip-text span{font-size:10px}
 
-  /* Flash sale compact */
+  /* Mũm Collection - mobile compact, tên + giá căn giữa, ẨN giá cũ */
   .flash-bar{padding:14px 0}
   .flash-bar-inner{padding:0 12px}
-  .flash-head h3{font-size:15px}
-  .flash-head .countdown{margin-left:6px!important}
-  .cbox{padding:3px 7px!important;font-size:13px!important}
-  .csep{font-size:14px}
+  .flash-head{flex-wrap:wrap;gap:6px!important;padding:10px 0 8px!important}
+  .flash-head h3{font-size:15px;width:100%}
+  .flash-head > div:last-child{font-size:11px!important;margin-left:0!important}
   .flash-items{display:flex;overflow-x:auto;gap:10px;padding:8px 0 4px;scrollbar-width:none;flex-wrap:nowrap}
   .flash-items::-webkit-scrollbar{display:none}
-  .fi{flex:0 0 140px;width:140px;padding:8px}
-  .fi-img{height:140px}
-  .fi-name{font-size:11px;-webkit-line-clamp:2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;height:30px;line-height:1.4}
-  .fi-price{font-size:14px}
-  .fi-old{font-size:10px}
+  .fi{flex:0 0 150px;width:150px;padding:0;display:flex;flex-direction:column}
+  .fi-img{height:150px}
+  .fi-name{font-size:12px;-webkit-line-clamp:2;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;height:34px;line-height:1.4;text-align:center;padding:8px 8px 4px;font-weight:600}
+  .fi-price{font-size:15px;font-weight:800;color:var(--pk-d);text-align:center;padding:0 8px 12px;display:block}
+  /* Ẩn giá cũ trên mobile (giảm thông tin thừa, không gian gọn hơn) */
+  .fi-old{display:none!important}
 
   /* Product grid: 2 columns, optimized cards */
   .shop-body{padding:14px!important;gap:0}
@@ -3055,7 +3039,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   </div>
 </nav>
 <!-- ══════════ SHOP ══════════ -->
-<div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav" id="pc-nav-bar"> <div class="pc-nav-link" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</div> <div class="nav-item-wrap" id="nav-cats-wrap"> <div class="pc-nav-link" onclick="toggleNavMenu('nav-cats-wrap', event)">Danh mục <span class="nav-caret">▼</span></div> <div class="nav-dd" id="nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <div class="pc-nav-link" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</div> <div class="pc-nav-link" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <!-- Mobile menu bar (replaces old chip bar) --> <div class="mob-menu-bar" id="mob-menu-bar"> <button class="mob-menu-btn" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</button> <div class="nav-item-wrap" id="mob-nav-cats-wrap"> <button class="mob-menu-btn" onclick="toggleNavMenu('mob-nav-cats-wrap', event)">📋 Danh mục <span class="nav-caret">▼</span></button> <div class="nav-dd" id="mob-nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <button class="mob-menu-btn" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</button> <button class="mob-menu-btn" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</button> </div> <div class="mob-filter-bar" id="mob-cats" style="display:none"> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero" id="hero-section"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
+<div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav" id="pc-nav-bar"> <div class="pc-nav-link" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</div> <div class="nav-item-wrap" id="nav-cats-wrap"> <div class="pc-nav-link" onclick="toggleNavMenu('nav-cats-wrap', event)">Danh mục <span class="nav-caret">▼</span></div> <div class="nav-dd" id="nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <div class="pc-nav-link" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</div> <div class="pc-nav-link" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <!-- Mobile menu bar: 3 NÚT CHÍNH (Trang chủ | Feedback | Collection) --> <div class="mob-menu-bar" id="mob-menu-bar"> <button class="mob-menu-btn" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</button> <button class="mob-menu-btn" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</button> <button class="mob-menu-btn" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</button> </div> <!-- Mobile category chips bar - hiển thị danh mục dạng tag scroll ngang --> <div class="mob-cat-chips" id="mob-cat-chips"></div> <div class="mob-filter-bar" id="mob-cats" style="display:none"> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 120KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero" id="hero-section"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">✨ NEW COLLECTION 2025 – BIGSIZE VIỆT NAM</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
           Mũm Big Size — thương hiệu thời trang dành riêng cho nàng <strong style="color:var(--pk-d)">55kg đến 120kg</strong>.<br>
           Chúng mình hiểu cơ thể bạn hơn ai hết — từng đường cắt, từng cm vải đều được thiết kế để bạn <strong style="color:var(--pu-d)">tự tin tỏa sáng</strong> mỗi ngày.
         </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">🌸 Xem Collection 2026</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-emoji-grid" id="hero-cat-grid"> <div class="hero-card" onclick="setCatDirect('ao-chong-nang')"><span>🧥</span><p>Chống nắng</p></div><div class="hero-card" onclick="setCatDirect('hoodie')"><span>🦘</span><p>Hoodie</p></div><div class="hero-card" onclick="setCatDirect('ao-gio')"><span>💨</span><p>Áo gió</p></div><div class="hero-card" onclick="setCatDirect('chan-vay')"><span>👗</span><p>Chân váy</p></div><div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div><div class="hero-card" onclick="setCatDirect('giay')"><span>👟</span><p>Giày & Dép</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner">
@@ -3303,8 +3287,9 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   </div>
 </div>
 
-<!-- Sticky bottom bar cho mobile - hiển thị tổng tiền + nút confirm -->
+<!-- Sticky bottom bar cho mobile - hiển thị tổng tiền + nút back + confirm -->
 <div class="ck-mobile-bar" id="ck-mobile-bar">
+  <button class="ck-mob-back-btn" onclick="closeCheckout()" title="Quay lại giỏ hàng" aria-label="Quay lại giỏ hàng">←</button>
   <div class="ck-mob-total">
     <span class="ck-mob-total-lbl">Tổng cộng</span>
     <span class="ck-mob-total-val" id="ck-mob-total-val">0đ</span>
@@ -3974,8 +3959,8 @@ function renderCategories(){
         `<div class="cat-item${catF===c.slug?' active':''}" onclick="setCat(this,'${c.slug}')"><span>${c.ic}</span>${c.name} <span class="cat-count">${c.count}</span></div>`
       ).join('');
   }
-  // Top nav dropdowns (desktop + mobile)
-  ['nav-cats-dd','mob-nav-cats-dd'].forEach(id => {
+  // Top nav dropdowns (desktop only - mobile dropdown đã bị bỏ)
+  ['nav-cats-dd'].forEach(id => {
     const dd = document.getElementById(id);
     if(!dd) return;
     dd.innerHTML = `<div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div>`
@@ -3983,6 +3968,19 @@ function renderCategories(){
         `<div class="nav-dd-it" onclick="setCatDirect('${c.slug}');closeAllMenus()"><span>${c.ic}</span>${c.name}</div>`
       ).join('');
   });
+  // Mobile category chips bar - dạng tag scroll ngang, click trực tiếp không cần dropdown
+  const mobChips = document.getElementById('mob-cat-chips');
+  if(mobChips){
+    if(active.length === 0){
+      mobChips.innerHTML = '';
+      mobChips.style.display = 'none';
+    } else {
+      mobChips.innerHTML = `<button class="mob-chip${catF==='all'?' active':''}" onclick="setCatChip(this,'all')"><span>🏷️</span>Tất cả</button>`
+        + active.map(c =>
+          `<button class="mob-chip${catF===c.slug?' active':''}" onclick="setCatChip(this,'${c.slug}')"><span>${c.ic}</span>${c.name}</button>`
+        ).join('');
+    }
+  }
   // Hero cards: filter only existing categories from active
   const heroGrid = document.getElementById('hero-cat-grid');
   if(heroGrid){
@@ -3991,6 +3989,14 @@ function renderCategories(){
       ? heroCats.map(c => `<div class="hero-card" onclick="setCatDirect('${c.slug}')"><span>${c.ic}</span><p>${c.name}</p></div>`).join('')
       : `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted);font-size:13px">Đang cập nhật sản phẩm 🌸</div>`;
   }
+}
+
+/* Click chip danh mục mobile - set catF, scroll xuống section sản phẩm, update active */
+function setCatChip(el, c){
+  document.querySelectorAll('.mob-chip').forEach(x => x.classList.remove('active'));
+  if(el) el.classList.add('active');
+  setCat(null, c);
+  goScroll('products-section');
 }
 const stMap={on:'Đang bán',off:'Ẩn',low:'Sắp hết'};
 
@@ -4009,6 +4015,8 @@ function showScr(id){
   // Show/hide mob menu bar (with categories) only on shop screen
   const menuBar = document.getElementById('mob-menu-bar');
   if(menuBar) menuBar.style.display = (id === 'scr-shop') ? '' : 'none';
+  const chipsBar = document.getElementById('mob-cat-chips');
+  if(chipsBar) chipsBar.style.display = (id === 'scr-shop') ? '' : 'none';
   // Toggle class body để ẩn UI shop khi đang ở checkout (CSS :has() fallback)
   document.body.classList.toggle('on-checkout', id === 'scr-checkout');
 }
@@ -4252,11 +4260,9 @@ function bnNav(action){
   document.querySelectorAll('.mob-bnav-it').forEach(b=>b.classList.remove('active'));
   if(action==='home'){ goScroll('hero-section'); document.querySelector('.mob-bnav-it:nth-child(1)')?.classList.add('active'); }
   else if(action==='cats'){
-    // Open the categories dropdown on mobile
-    toggleNavMenu('mob-nav-cats-wrap');
-    document.querySelector('.mob-bnav-it:nth-child(2)')?.classList.add('active');
-    // Make sure user can see it — scroll to top first
+    // Scroll lên đầu để khách thấy thanh chips danh mục
     window.scrollTo({top:0, behavior:'smooth'});
+    document.querySelector('.mob-bnav-it:nth-child(2)')?.classList.add('active');
   }
   else if(action==='flash'){ goScroll('flash-section'); document.querySelector('.mob-bnav-it:nth-child(3)')?.classList.add('active'); }
   else if(action==='feedback'){ goScroll('feedback-section'); document.querySelector('.mob-bnav-it:nth-child(4)')?.classList.add('active'); }
