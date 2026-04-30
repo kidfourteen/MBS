@@ -1,6 +1,6 @@
 [
   {
-    "id": 1777537953931,
+    "id": 1777520313425,
     "name": "Áo chống nắng B19",
     "price": 299,
     "old": 349,
@@ -9,8 +9,8 @@
     "sizes": [
       "S",
       "M",
-      "L",
       "XL",
+      "L",
       "2XL",
       "3XL",
       "4XL",
@@ -23,42 +23,43 @@
         "name": "Hồng",
         "hex": "#F8C8DC",
         "images": [
-          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777537849/mum-bigsize/na6xosf5cpezynl96woc.webp"
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777520094/mum-bigsize/zxg6lucbswgn4xmacqjx.webp"
         ]
       },
       {
         "name": "Đen",
         "hex": "#1A1A1A",
         "images": [
-          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777537865/mum-bigsize/oeuug4cq9n1frhhzygxa.webp"
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777520115/mum-bigsize/c5s5npzigjtpmucymbfb.webp"
         ]
       },
       {
         "name": "Xanh ngọc",
         "hex": "#A8DDD3",
         "images": [
-          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777537873/mum-bigsize/v00yroonzml36oettoxp.webp"
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777520109/mum-bigsize/atfhrgywm8xls3aieb0l.webp"
         ]
       },
       {
         "name": "Xám",
         "hex": "#B8B8B8",
         "images": [
-          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777537879/mum-bigsize/f80jqpmmhjsaq5ujaxdb.webp"
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777538034/mum-bigsize/wi6ope2ejm0iqr8ifo7g.webp"
         ]
       },
       {
         "name": "Xanh than",
         "hex": "#2C3E50",
         "images": [
-          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777537886/mum-bigsize/oewchzb64yvnbbpdwqrs.webp"
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1777538043/mum-bigsize/qzvejwdwx7joxxjqion9.webp"
         ]
       }
     ],
     "status": "on",
     "sold": 15,
     "tags": [
-      "sale"
+      "sale",
+      "hot"
     ],
     "desc": "Hàng 2 lớp, \nChất thun băng lạnh Hàn 𝐌𝐄̂̀𝐌 - 𝐌𝐈̣𝐍 - 𝐌𝐀́𝐓 𝐓𝐀𝐘.\nĐược dệt bằng công nghệ SUNSTOP dòng COOL-AIR có khả năng chống tia UV và ngăn chặn bức sáng nhiệt mạnh.\nCo giãn 4 chiều, k bị xù lông, bai nhão hay phai màu ngay cả khi giặt máy chế độ nhanh hay giặt nước nóng",
     "topBanner": true
