@@ -380,7 +380,46 @@ a{text-decoration:none;color:inherit}
 .pdp-old{font-size:18px;color:var(--light);text-decoration:line-through}
 .pdp-save{background:var(--re-l);color:var(--re);font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
 .pdp-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
-.pdp-sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pdp-sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+/* Size info badge - hiện khi khách chọn size */
+.pdp-size-info{
+  background:linear-gradient(135deg,#fff5fa 0%,#fbf3ff 100%);
+  border:1.5px solid var(--pk-b);
+  border-radius:11px;
+  padding:11px 14px;
+  margin-bottom:20px;
+  font-size:13px;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  animation:sizeInfoSlide .25s ease-out;
+  line-height:1.5
+}
+.pdp-size-info-ic{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--grad);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;flex-shrink:0;
+  box-shadow:0 2px 6px rgba(233,30,140,.3);
+  letter-spacing:.3px
+}
+.pdp-size-info-content{flex:1;min-width:0}
+.pdp-size-info-content strong{color:var(--pk-d);font-weight:700}
+.pdp-size-info-content .info-detail{
+  font-size:11.5px;color:var(--muted);margin-top:3px;
+  display:flex;flex-wrap:wrap;gap:4px 12px
+}
+.pdp-size-info-content .info-detail span{display:inline-flex;align-items:center;gap:3px}
+@keyframes sizeInfoSlide{
+  from{opacity:0;transform:translateY(-4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media (max-width: 768px){
+  .pdp-size-info{padding:9px 11px;margin-bottom:14px;font-size:12.5px;gap:8px}
+  .pdp-size-info-ic{width:30px;height:30px;font-size:12px}
+  .pdp-size-info-content .info-detail{font-size:11px;gap:3px 8px}
+}
 .pdp-sopt{padding:9px 18px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--font)}
 .pdp-sopt:hover{border-color:var(--pu)}
 .pdp-sopt.sel{background:var(--pu);color:#fff;border-color:var(--pu)}
@@ -3316,7 +3355,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div class="cart-overlay-bg" id="cart-bg" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer"> <div class="cart-head"><h2>🛒 Giỏ hàng</h2><button class="cart-close" onclick="closeCart()">×</button></div> <div class="cart-items" id="cart-items-el"></div> <div class="cart-foot" id="cart-foot-el"></div>
 </div> <!-- ══════════ PRODUCT DETAIL (LANDING PAGE) ══════════ -->
-<div id="scr-detail" class="screen"> <header class="pc-header"> <div class="pdp-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" width="132" height="44" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <nav class="pc-nav"> <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button> </nav> <div style="display:flex;gap:8px;margin-left:12px"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button> </div> </div> </header> <div class="pdp-wrap"> <!-- Breadcrumb --> <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px"> <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span> <span>›</span><span id="pdp-cat-crumb"></span> <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span> </div> <!-- Top: gallery + buy --> <div class="pdp-top"> <div class="pdp-gallery"> <div class="pdp-main-img" id="pdp-main-img"> <span class="pdp-main-emoji" id="pdp-main-emoji"></span> </div> <div class="pdp-thumbs" id="pdp-thumbs"></div> </div> <div class="pdp-buy"> <div class="pdp-badge-row" id="pdp-badges"></div> <div class="pdp-name" id="pdp-name"></div> <div class="pdp-rating"> <span class="pdp-stars">★★★★★</span> <span style="font-size:13px;font-weight:600">4.9</span> <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span> <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span> </div> <div class="pdp-price-row"> <span class="pdp-price" id="pdp-price"></span> <span class="pdp-old" id="pdp-old"></span> <span class="pdp-save" id="pdp-save"></span> </div> <div class="pdp-label">Chọn size</div> <div class="pdp-sizes" id="pdp-sizes"></div> <div class="pdp-label">Màu sắc</div> <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div> <div class="pdp-label">Số lượng</div> <div class="pdp-qty-row" style="margin-bottom:24px"> <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button> <span class="pdp-qty-num" id="pdp-qty">1</span> <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button> </div> <div class="pdp-btn-row"> <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button> <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button> </div> <div class="pdp-trust"> <div class="pdp-trust-item">🚚 Miễn phí ship từ 500.000đ</div> <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div> <div class="pdp-trust-item">✅ Hàng chất lượng</div> <div class="pdp-trust-item">💳 COD toàn quốc</div> </div> </div> </div> <!-- Content: description + reviews + related --> <div class="pdp-content"> <div class="pdp-main-content"> <!-- Description --> <div class="pdp-section"> <h2>📋 Mô tả sản phẩm</h2> <div class="pdp-desc-text" id="pdp-desc-text"></div> <div class="pdp-features" id="pdp-features"> <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div> <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div> <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div> <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div> </div> </div> <!-- Size guide --> <div class="pdp-section"> <h2>📏 Bảng size chi tiết</h2> <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p> <table class="size-table"> <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead> <tbody> <tr><td><strong>S</strong></td><td>40–48 kg</td><td>78–84 cm</td><td>62–68 cm</td><td>84–90 cm</td></tr>
+<div id="scr-detail" class="screen"> <header class="pc-header"> <div class="pdp-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" width="132" height="44" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <nav class="pc-nav"> <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button> </nav> <div style="display:flex;gap:8px;margin-left:12px"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button> </div> </div> </header> <div class="pdp-wrap"> <!-- Breadcrumb --> <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px"> <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span> <span>›</span><span id="pdp-cat-crumb"></span> <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span> </div> <!-- Top: gallery + buy --> <div class="pdp-top"> <div class="pdp-gallery"> <div class="pdp-main-img" id="pdp-main-img"> <span class="pdp-main-emoji" id="pdp-main-emoji"></span> </div> <div class="pdp-thumbs" id="pdp-thumbs"></div> </div> <div class="pdp-buy"> <div class="pdp-badge-row" id="pdp-badges"></div> <div class="pdp-name" id="pdp-name"></div> <div class="pdp-rating"> <span class="pdp-stars">★★★★★</span> <span style="font-size:13px;font-weight:600">4.9</span> <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span> <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span> </div> <div class="pdp-price-row"> <span class="pdp-price" id="pdp-price"></span> <span class="pdp-old" id="pdp-old"></span> <span class="pdp-save" id="pdp-save"></span> </div> <div class="pdp-label">Chọn size</div> <div class="pdp-sizes" id="pdp-sizes"></div> <div class="pdp-size-info" id="pdp-size-info" style="display:none"></div> <div class="pdp-label">Màu sắc</div> <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div> <div class="pdp-label">Số lượng</div> <div class="pdp-qty-row" style="margin-bottom:24px"> <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button> <span class="pdp-qty-num" id="pdp-qty">1</span> <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button> </div> <div class="pdp-btn-row"> <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button> <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button> </div> <div class="pdp-trust"> <div class="pdp-trust-item">🚚 Miễn phí ship từ 500.000đ</div> <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div> <div class="pdp-trust-item">✅ Hàng chất lượng</div> <div class="pdp-trust-item">💳 COD toàn quốc</div> </div> </div> </div> <!-- Content: description + reviews + related --> <div class="pdp-content"> <div class="pdp-main-content"> <!-- Description --> <div class="pdp-section"> <h2>📋 Mô tả sản phẩm</h2> <div class="pdp-desc-text" id="pdp-desc-text"></div> <div class="pdp-features" id="pdp-features"> <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div> <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div> <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div> <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div> </div> </div> <!-- Size guide --> <div class="pdp-section"> <h2>📏 Bảng size chi tiết</h2> <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p> <table class="size-table"> <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead> <tbody> <tr><td><strong>S</strong></td><td>40–48 kg</td><td>78–84 cm</td><td>62–68 cm</td><td>84–90 cm</td></tr>
 <tr><td><strong>M</strong></td><td>48–55 kg</td><td>84–90 cm</td><td>68–74 cm</td><td>90–96 cm</td></tr>
 <tr><td><strong>L</strong></td><td>55–65 kg</td><td>90–96 cm</td><td>74–80 cm</td><td>96–102 cm</td></tr>
 <tr><td><strong>XL</strong></td><td>65–75 kg</td><td>96–102 cm</td><td>80–88 cm</td><td>102–108 cm</td></tr>
@@ -3698,6 +3737,22 @@ const GH_CONFIG = {
   get enabled(){ return !!this.token && !this.owner.startsWith('YOUR_'); },
   get rawUrl(){ return `https://raw.githubusercontent.com/${this.owner}/${this.repo}/${this.branch}/${this.path}`; },
   get apiUrl(){ return `https://api.github.com/repos/${this.owner}/${this.repo}/contents/${this.path}`; }
+};
+
+/* ══ SIZE TABLE ══
+   Dữ liệu bảng size (lấy từ bảng size hiển thị trong PDP).
+   Khi khách chọn size, sẽ hiện thông tin tương ứng dưới hàng size để dễ chọn. */
+const SIZE_TABLE = {
+  'S':   { weight: '40–48 kg',   bust: '78–84 cm',   waist: '62–68 cm',   hip: '84–90 cm' },
+  'M':   { weight: '48–55 kg',   bust: '84–90 cm',   waist: '68–74 cm',   hip: '90–96 cm' },
+  'L':   { weight: '55–65 kg',   bust: '90–96 cm',   waist: '74–80 cm',   hip: '96–102 cm' },
+  'XL':  { weight: '65–75 kg',   bust: '96–102 cm',  waist: '80–88 cm',   hip: '102–108 cm' },
+  '2XL': { weight: '75–85 kg',   bust: '102–108 cm', waist: '88–96 cm',   hip: '108–114 cm' },
+  '3XL': { weight: '85–95 kg',   bust: '108–116 cm', waist: '96–104 cm',  hip: '114–120 cm' },
+  '4XL': { weight: '95–105 kg',  bust: '116–124 cm', waist: '104–112 cm', hip: '120–128 cm' },
+  '5XL': { weight: '105–115 kg', bust: '124–132 cm', waist: '112–122 cm', hip: '128–136 cm' },
+  '6XL': { weight: '115–120 kg', bust: '132–140 cm', waist: '122–132 cm', hip: '136–144 cm' },
+  '7XL': { weight: '120–130 kg', bust: '140–148 cm', waist: '132–142 cm', hip: '144–152 cm' }
 };
 
 /* ══ COLOR PRESETS ══
@@ -4529,6 +4584,8 @@ function openDetail(id){
   // Sizes
   document.getElementById('pdp-sizes').innerHTML=p.sizes.map(s=>
     `<div class="pdp-sopt${s===pdpCurSize?' sel':''}" onclick="pdpSelSz(this,'${s}')">${s}</div>`).join('');
+  // Tự hiện size info cho size mặc định (size đầu tiên)
+  renderSizeInfo(pdpCurSize);
 
   // Colors - dùng object {name, hex, images} thay vì hex thuần
   const colorsArr = Array.isArray(p.colors) ? p.colors : [];
@@ -4597,7 +4654,37 @@ function switchThumb(src,el){
   document.querySelectorAll('.pdp-thumb').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
 }
-function pdpSelSz(el,s){pdpCurSize=s;document.querySelectorAll('.pdp-sopt').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
+function pdpSelSz(el,s){
+  pdpCurSize=s;
+  document.querySelectorAll('.pdp-sopt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  // Hiển thị info size đã chọn dưới hàng size
+  renderSizeInfo(s);
+}
+
+/* Render dòng thông tin size đã chọn (cân nặng + số đo) - dùng tone hồng website */
+function renderSizeInfo(size){
+  const box = document.getElementById('pdp-size-info');
+  if (!box) return;
+  const info = SIZE_TABLE[size];
+  if (!info) {
+    box.style.display = 'none';
+    box.innerHTML = '';
+    return;
+  }
+  box.style.display = 'flex';
+  box.innerHTML = `
+    <span class="pdp-size-info-ic">${size}</span>
+    <div class="pdp-size-info-content">
+      <div>Size <strong>${size}</strong> phù hợp với <strong>${info.weight}</strong></div>
+      <div class="info-detail">
+        <span>📏 Ngực: <strong>${info.bust}</strong></span>
+        <span>📐 Eo: <strong>${info.waist}</strong></span>
+        <span>📊 Mông: <strong>${info.hip}</strong></span>
+      </div>
+    </div>
+  `;
+}
 
 /* Khi user chọn màu: highlight viền + đổi gallery sang ảnh của màu đó */
 function pdpSelCol(el, colorIdx){
