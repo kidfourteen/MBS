@@ -672,6 +672,23 @@ a{text-decoration:none;color:inherit}
 .success-page{max-width:500px;margin:80px auto;text-align:center;padding:24px}
 
 .site-footer{background:var(--card);border-top:1px solid var(--border);padding:32px 24px;margin-top:20px}
+
+/* ══ FACEBOOK FANPAGE EMBED SECTION (Phương án 1) ══ */
+.fb-page-section{background:linear-gradient(135deg,#fff5fa 0%,#fbf3ff 100%);padding:60px 24px;border-top:1.5px solid var(--border)}
+.fb-page-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:center}
+.fb-page-head{padding:0}
+.fb-page-tag{display:inline-block;background:#1877F2;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
+.fb-page-head h2{font-size:28px;font-weight:800;color:var(--text);margin-bottom:12px;line-height:1.2}
+.fb-page-head p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;max-width:440px}
+.fb-page-embed-wrap{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:6px;box-shadow:0 4px 24px rgba(0,0,0,.06);min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.fb-page-loading{font-size:13px;color:var(--muted);text-align:center;padding:40px 20px}
+@media (max-width: 768px){
+  .fb-page-section{padding:40px 14px}
+  .fb-page-inner{grid-template-columns:1fr;gap:24px}
+  .fb-page-head h2{font-size:21px}
+  .fb-page-head p{font-size:13px;max-width:100%}
+  .fb-page-embed-wrap{min-height:380px;width:100%}
+}
 .site-footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 
 @media(max-width:900px){
@@ -3282,6 +3299,22 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   </div>
 </div>
 
+<!-- ══ FACEBOOK FANPAGE EMBED (Phương án 1) ══
+     Hiển thị nếu admin đã cấu hình fbPageId trong Settings.
+     Lazy-load: chỉ inject SDK khi user scroll tới (tiết kiệm performance). -->
+<div class="fb-page-section" id="fb-page-section" style="display:none">
+  <div class="fb-page-inner">
+    <div class="fb-page-head">
+      <span class="fb-page-tag">📘 KẾT NỐI VỚI MŨM</span>
+      <h2>Theo dõi Fanpage của chúng tôi</h2>
+      <p>Cập nhật mẫu mới mỗi tuần, voucher giảm giá độc quyền và mini game tặng quà 🌸</p>
+    </div>
+    <div class="fb-page-embed-wrap" id="fb-page-embed-wrap">
+      <!-- Page Plugin sẽ được inject vào đây -->
+    </div>
+  </div>
+</div>
+
 <footer class="site-footer">
   <div class="site-footer-inner">
     <!-- Cột 1: Brand + slogan -->
@@ -3445,7 +3478,59 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
               <div class="ad-sep">Hệ thống</div> <div class="ad-nav-it" onclick="adPage('vouchers',this)"><span>🎟</span>Voucher</div> <div class="ad-nav-it" onclick="adPage('viplist',this)"><span>🌟</span>Khách VIP</div> <div class="ad-nav-it" onclick="adPage('settings',this)"><span>⚙️</span>Cài đặt</div> </div> </aside> <main class="ad-main"> <div id="adp-dashboard" class="ad-page active"> <div class="ad-topbar"><h1>Dashboard</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Facebook</button></div></div> <div class="ad-content"> <div class="stats-grid"> <div class="stat-card"><div class="stat-lbl">Đơn hôm nay</div><div class="stat-val" id="ad-stat-today">0</div><div class="stat-sub" style="color:var(--muted)" id="ad-stat-today-sub">đơn mới</div></div> <div class="stat-card"><div class="stat-lbl">Doanh thu tháng</div><div class="stat-val" id="ad-stat-rev" style="font-size:20px">0đ</div><div class="stat-sub" style="color:var(--muted)">đã thanh toán</div></div> <div class="stat-card"><div class="stat-lbl">Sản phẩm đang bán</div><div class="stat-val" id="ad-cnt">0</div><div class="stat-sub" style="color:var(--muted)">sản phẩm</div></div> <div class="stat-card"><div class="stat-lbl">Chờ xử lý</div><div class="stat-val" id="ad-stat-pending" style="color:var(--am)">0</div><div class="stat-sub" style="color:var(--muted)">đơn cần xác nhận</div></div> </div> <div class="ad-section"><div class="ad-sec-head"><h2>Đơn mới nhất</h2><button class="btn" onclick="adPage('orders',null)">Xem tất cả</button></div><div id="dash-ords"></div></div> <div class="ad-section"><div class="ad-sec-head"><h2>Kênh bán hôm nay</h2></div> <div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div style="background:var(--zl-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--zl);font-weight:700;margin-bottom:6px">ZALO OA</div><div style="font-size:22px;font-weight:700;color:#0C447C">14 đơn</div><button class="btn btn-zl" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getZalo(),'_blank')">Mở Zalo →</button></div> <div style="background:var(--fb-l);border-radius:var(--rs);padding:16px"><div style="font-size:11px;color:var(--fb);font-weight:700;margin-bottom:6px">FACEBOOK PAGE</div><div style="font-size:22px;font-weight:700;color:#0C447C">10 đơn</div><button class="btn btn-fb" style="width:100%;justify-content:center;margin-top:10px" onclick="window.open(getFB(),'_blank')">Mở Facebook →</button></div> </div> </div> </div> </div> <div id="adp-products" class="ad-page"> <div class="ad-topbar"><h1>Quản lý sản phẩm</h1><div style="display:flex;gap:8px"><button class="btn" onclick="loadProductsFromSheet(true).then(()=>{renderAProd();showToast('Đã tải lại từ GitHub!');})" title="Tải lại từ GitHub">🔄 Sync GitHub</button><button class="btn btn-pk" onclick="openAddProd()">+ Thêm sản phẩm</button></div></div> <div class="ad-content">
 <div class="sheet-status-bar" id="sheet-status-bar"></div>
  <div class="ad-section"> <div class="ad-sec-head"><div class="tab-bar" id="apt" style="overflow-x:auto;flex-wrap:nowrap"><div class="tab active" onclick="apTab(this,'all')">Tất cả</div><div class="tab" onclick="apTab(this,'ao-chong-nang')" style="flex-shrink:0">Áo chống nắng</div><div class="tab" onclick="apTab(this,'ao-gio')" style="flex-shrink:0">Áo gió</div><div class="tab" onclick="apTab(this,'ao-khoac-dong')" style="flex-shrink:0">Áo khoác đông</div><div class="tab" onclick="apTab(this,'hoodie')" style="flex-shrink:0">Hoodie</div><div class="tab" onclick="apTab(this,'sweater')" style="flex-shrink:0">Sweater</div><div class="tab" onclick="apTab(this,'tshirt')" style="flex-shrink:0">T-shirt</div><div class="tab" onclick="apTab(this,'chan-vay')" style="flex-shrink:0">Chân váy</div><div class="tab" onclick="apTab(this,'do-di-bien')" style="flex-shrink:0">Đồ đi biển</div><div class="tab" onclick="apTab(this,'phu-kien')" style="flex-shrink:0">Phụ kiện</div><div class="tab" onclick="apTab(this,'quan')" style="flex-shrink:0">Quần</div><div class="tab" onclick="apTab(this,'ao-len')" style="flex-shrink:0">Áo len</div><div class="tab" onclick="apTab(this,'ao-parka')" style="flex-shrink:0">Áo Parka</div><div class="tab" onclick="apTab(this,'giay')" style="flex-shrink:0">Giày</div><div class="tab" onclick="apTab(this,'dep')" style="flex-shrink:0">Dép</div><div class="tab" onclick="apTab(this,'so-mi')" style="flex-shrink:0">Sơ mi</div></div></div> <div style="overflow-x:auto"><table class="pt"><thead><tr><th style="width:36%">Sản phẩm</th><th style="width:11%">Danh mục</th><th style="width:12%">Giá</th><th style="width:20%">Size</th><th style="width:12%">Trạng thái</th><th style="width:9%">Thao tác</th></tr></thead><tbody id="ad-ptb"></tbody></table></div> </div> </div> </div> <div id="adp-orders" class="ad-page"> <div class="ad-topbar"><h1>Đơn hàng</h1><div style="display:flex;gap:8px"><button class="btn btn-zl" onclick="window.open(getZalo(),'_blank')">💬 Zalo OA</button><button class="btn btn-fb" onclick="window.open(getFB(),'_blank')">📘 Messenger</button></div></div> <div class="ad-content"> <div class="ad-section"> <div class="ad-sec-head"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"> <div class="tab-bar" id="aot"> <div class="tab active" onclick="aoTab(this,'all')">Tất cả</div> <div class="tab" onclick="aoTab(this,'new')">Mới</div> <div class="tab" onclick="aoTab(this,'proc')">Xử lý</div> <div class="tab" onclick="aoTab(this,'done')">Hoàn thành</div> </div> <div class="tab-bar" id="apt-pay" style="margin-left:8px"> <div class="tab active" onclick="filterPayStatus(this,'all')">Tất cả TT</div> <div class="tab" onclick="filterPayStatus(this,'awaiting')">Chờ xác nhận</div> <div class="tab" onclick="filterPayStatus(this,'paid')">Đã thanh toán</div> </div>
-</div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="sheet-status-bar" id="channels-sync-bar" style="margin-bottom:14px"></div> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.com</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.com/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div> </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="sheet-status-bar" id="vouchers-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
+</div></div> <div id="ad-ords"></div> </div> </div> </div> <div id="adp-channels" class="ad-page"> <div class="ad-topbar"><h1>Zalo & Facebook</h1></div> <div class="ad-content" style="max-width:680px"> <div class="sheet-status-bar" id="channels-sync-bar" style="margin-bottom:14px"></div> <div class="ad-section"><div class="ad-sec-head"><h2>Cấu hình kênh bán hàng</h2></div> <div style="padding:18px"> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🟦 Zalo Official Account</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-zl">💬</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Zalo OA</div><div style="font-size:11px;color:var(--muted)" id="zalo-disp">Chưa cấu hình</div></div><span class="ch-dot disc" id="zalo-st">Chưa kết nối</span></div> <div class="af"><label>Số Zalo hoặc Link OA</label><input id="cfg-zalo" placeholder="0912345678 hoặc zalo.me/tenoa"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-zl" onclick="saveZalo()">Lưu Zalo</button><button class="btn" onclick="window.open(getZalo(),'_blank')">Gửi thử →</button></div> <div class="info-box info-zl">📌 Khi khách đặt qua Zalo, hệ thống mở chat kèm đầy đủ thông tin đơn hàng.</div> <div style="font-size:14px;font-weight:700;margin-bottom:10px">🔵 Facebook Page / Messenger</div> <div class="ch-card-cfg"><div class="ch-ic ch-ic-fb">📘</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">Mũm Bigsize – Facebook</div><div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" id="fb-disp">facebook.com/mumbigsize.com</div></div><span class="ch-dot conn" id="fb-st">Đã kết nối</span></div> <div class="af"><label>Link Facebook Page</label><input id="cfg-fb" value="https://www.facebook.com/mumbigsize.com/"></div> <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn btn-fb" onclick="saveFB()">Lưu Facebook</button><button class="btn" onclick="window.open(getFB(),'_blank')">Mở Messenger →</button></div> <div class="info-box info-fb">📌 Nút "Đặt qua Facebook" mở Messenger với fanpage của bạn.</div>
+
+<!-- Phương án 1: Fanpage Embed (Page Plugin) -->
+<div style="height:1px;background:var(--border);margin:20px 0"></div>
+<div style="font-size:14px;font-weight:700;margin-bottom:10px">📘 Nhúng Fanpage vào website (Page Plugin)</div>
+<div class="info-box info-fb" style="margin-bottom:12px;line-height:1.7">
+  <strong>📌 Page Plugin:</strong> Hiển thị Fanpage của bạn trực tiếp trên website (avatar, số like, posts, nút Like).<br>
+  Khách thấy fanpage có hoạt động → tăng <strong>trust</strong> → dễ ra đơn hơn.
+</div>
+<div class="af">
+  <label>Fanpage ID hoặc username</label>
+  <input id="cfg-fb-page-id" placeholder="VD: mumbigsize.com (lấy từ URL fanpage)">
+  <div style="font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.5">
+    💡 Nếu URL fanpage là <code>facebook.com/<strong>mumbigsize.com</strong></code> thì nhập <code>mumbigsize.com</code><br>
+    Để trống = ẩn Page Plugin trên website.
+  </div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:14px">
+  <button class="btn btn-fb" onclick="saveFbPageId()">Lưu Fanpage ID</button>
+  <button class="btn" onclick="previewFbPagePlugin()">👁 Xem thử</button>
+</div>
+
+<!-- Phương án 4: Facebook Catalog (Product Feed) -->
+<div style="height:1px;background:var(--border);margin:20px 0"></div>
+<div style="font-size:14px;font-weight:700;margin-bottom:10px">🛍️ Facebook Catalog (Bán trên FB Shop)</div>
+<div class="info-box info-fb" style="margin-bottom:12px;line-height:1.7">
+  <strong>📌 Catalog là gì:</strong> Cho phép Facebook đọc danh sách sản phẩm của bạn → tạo <strong>Facebook Shop</strong> trên Fanpage + chạy <strong>Dynamic Product Ads</strong> (ads tự show đúng sản phẩm khách đã xem).<br>
+  Cách hoạt động: Hệ thống generate file <code>feed.csv</code> từ sản phẩm shop → upload lên GitHub → Facebook tự sync mỗi ngày.
+</div>
+<label style="display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px">
+  <input type="checkbox" id="cfg-fb-catalog-enabled" style="width:18px;height:18px;accent-color:var(--pk);cursor:pointer">
+  <div style="flex:1">
+    <div style="font-size:13px;font-weight:700">Bật xuất feed Catalog</div>
+    <div style="font-size:11.5px;color:var(--muted);margin-top:2px">Tự động cập nhật <code>feed.csv</code> trên GitHub khi save sản phẩm</div>
+  </div>
+</label>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+  <button class="btn btn-pk" onclick="saveFbCatalogToggle()">💾 Lưu cấu hình</button>
+  <button class="btn" onclick="downloadFbFeed()">⬇ Tải feed.csv (xem trước)</button>
+  <button class="btn" onclick="syncFbFeedToGithub()">☁ Đẩy feed.csv lên GitHub</button>
+</div>
+<div id="fb-feed-status" style="font-size:12px;color:var(--muted);line-height:1.7;padding:10px;background:var(--bg);border-radius:8px;display:none"></div>
+
+<details style="margin-top:14px">
+  <summary style="cursor:pointer;font-size:12.5px;font-weight:600;color:var(--pk-d)">📚 Hướng dẫn 3 bước setup Facebook Catalog</summary>
+  <ol style="font-size:12px;line-height:1.85;color:var(--text);padding-left:22px;margin-top:10px">
+    <li><strong>Bật toggle phía trên</strong> → Bấm "Đẩy feed.csv lên GitHub" → Hệ thống tạo file <code>feed.csv</code> trong repo.<br>URL feed sẽ là: <code id="fb-feed-url" style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:11px">(load sau khi đã cấu hình GitHub)</code></li>
+    <li><strong>Vào <a href="https://business.facebook.com/commerce" target="_blank" style="color:var(--pk)">Facebook Commerce Manager</a></strong> → "Tạo danh mục" (Create catalog) → chọn <em>Thương mại điện tử</em>.</li>
+    <li><strong>Trong catalog</strong> → "Thêm mục theo cách thủ công / từ URL" (Use a Data Feed) → paste URL <code>feed.csv</code> ở trên → đặt lịch sync hàng ngày.</li>
+  </ol>
+  <div style="font-size:11.5px;color:var(--muted);margin-top:8px;font-style:italic">💡 Sau khi catalog active, vào Fanpage → Settings → "Cửa hàng" để khách thấy sản phẩm trực tiếp trong fanpage.</div>
+</details>
+ </div> </div> </div> </div> <div id="adp-vouchers" class="ad-page"> <div class="ad-topbar"><h1>Quản lý Voucher</h1><button class="btn btn-pk" onclick="openAddVoucher()">+ Tạo voucher</button></div> <div class="sheet-status-bar" id="vouchers-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Danh sách voucher</h2></div> <div style="padding:18px"> <div id="voucher-list-el"></div> </div> </div> <!-- Add voucher form --> <div id="voucher-form-wrap" style="display:none" class="ad-section"> <div class="ad-sec-head"><h2 id="voucher-form-title">Tạo voucher mới</h2></div> <div style="padding:18px"> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label>Mã voucher</label><input id="vf-code" placeholder="VD: MUM20" style="text-transform:uppercase"></div> <div class="af"><label>Loại giảm giá</label> <select id="vf-type" onchange="toggleVoucherType()"> <option value="percent">Giảm % tổng đơn</option> <option value="fixed">Giảm tiền trực tiếp (k)</option> </select> </div> </div> <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"> <div class="af"><label id="vf-value-lbl">Giá trị (%)</label><input type="number" id="vf-value" placeholder="VD: 10" min="1"></div> <div class="af"><label>Đơn tối thiểu (k, để trống = không giới hạn)</label><input type="number" id="vf-minorder" placeholder="VD: 200"></div> </div> <div class="af"><label>Mô tả</label><input id="vf-desc" placeholder="VD: Giảm 10% toàn đơn"></div> <div style="display:flex;gap:8px"> <button class="btn btn-pk" onclick="saveVoucher()">Lưu voucher</button> <button class="btn" onclick="cancelVoucher()">Hủy</button> </div> </div> </div>
 </div> <div id="adp-viplist" class="ad-page"> <div class="ad-topbar"><h1>Khách hàng VIP</h1></div> <div class="sheet-status-bar" id="vip-sync-bar" style="margin:18px 18px 0"></div> <div class="ad-section"> <div class="ad-sec-head"><h2>Upload danh sách SĐT VIP</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">Upload file .txt hoặc .csv — mỗi số điện thoại 1 dòng. Khách hàng có SĐT trong danh sách sẽ tự động được nhận diện VIP và giảm 10% khi thanh toán.</div> <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:16px"> <input type="file" id="vip-file-input" accept=".txt,.csv" onchange="loadVipFile()" style="display:none"> <button class="btn btn-pk" onclick="document.getElementById('vip-file-input').click()">📁 Upload file SĐT</button> <button class="btn" onclick="addVipManual()">+ Thêm thủ công</button> <button class="btn" onclick="testVipMe()" title="Thêm SĐT của bạn để test">🧪 Test với SĐT của tôi</button> <button class="btn" style="color:var(--re)" onclick="clearVip()">🗑 Xóa tất cả</button> </div> <div class="af" style="margin-bottom:12px"> <label>Hoặc dán danh sách SĐT (mỗi số 1 dòng)</label> <textarea id="vip-paste-area" rows="5" placeholder="0912345678&#10;0987654321&#10;0909090909..." style="font-family:monospace;font-size:12px"></textarea> <button class="btn btn-pk" style="margin-top:8px" onclick="parseVipPaste()">Áp dụng danh sách</button> </div> <div class="ad-sec-head" style="margin-top:16px"><h2>Danh sách hiện tại (<span id="vip-count">0</span> SĐT)</h2></div> <div id="vip-list-el" style="font-family:monospace;font-size:12px;max-height:300px;overflow-y:auto;background:var(--bg);border-radius:8px;padding:12px;line-height:2;color:var(--text)"></div> </div> </div>
 </div> <div id="adp-settings" class="ad-page"> <div class="ad-topbar"><h1>Cài đặt</h1></div> <div class="ad-content" style="max-width:680px"> <div class="sheet-status-bar" id="settings-sync-bar" style="margin-bottom:14px"></div> <div class="ad-section"><div class="ad-sec-head"><h2>🔑 GitHub (lưu sản phẩm)</h2></div> <div style="padding:18px"> <div class="info-box info-zl" style="margin-bottom:14px">
               <strong>Cách lấy token:</strong> github.com/settings/personal-access-tokens → <em>Generate new token (Fine-grained)</em>. Repository access: chỉ chọn repo chứa GitHub Pages. Permissions: <code>Contents = Read and write</code>. Token chỉ lưu trên máy này (localStorage), không có trong file HTML public.
@@ -3967,7 +4052,11 @@ const BANK_CONFIG={
 /* Shop config — dùng khi khách đặt hàng qua Zalo/FB từ trang shop (chưa vào Admin) */
 const SHOP_CONFIG={
   zalo:'',  // số Zalo hoặc link OA, lưu qua Admin → Channels
-  fb:'https://www.facebook.com/mumbigsize.com/'
+  fb:'https://www.facebook.com/mumbigsize.com/',
+  // ── Facebook integration (Phương án 1: Fanpage Embed + Phương án 4: Catalog) ──
+  fbPageId:'',           // ID/username Fanpage (vd: "mumbigsize.com") — để embed Page Plugin
+  fbCatalogEnabled:false,// Bật/tắt việc generate feed.csv cho FB Catalog
+  fbPixelId:''           // Pixel ID (Phương án 3 — để dùng sau khi setup Pixel)
 };
 
 /* ══ TIỀN TỆ VIỆT NAM ═══════════════════════════════════════════
@@ -4054,7 +4143,13 @@ const SHEET_CONFIG={
   }catch(e){}
   try{
     const s = JSON.parse(localStorage.getItem('shop_cfg')||'null');
-    if(s){ SHOP_CONFIG.zalo=s.zalo||SHOP_CONFIG.zalo; SHOP_CONFIG.fb=s.fb||SHOP_CONFIG.fb; }
+    if(s){
+      SHOP_CONFIG.zalo=s.zalo||SHOP_CONFIG.zalo;
+      SHOP_CONFIG.fb=s.fb||SHOP_CONFIG.fb;
+      SHOP_CONFIG.fbPageId=s.fbPageId||SHOP_CONFIG.fbPageId;
+      SHOP_CONFIG.fbPixelId=s.fbPixelId||SHOP_CONFIG.fbPixelId;
+      if(typeof s.fbCatalogEnabled==='boolean') SHOP_CONFIG.fbCatalogEnabled=s.fbCatalogEnabled;
+    }
   }catch(e){}
   try{
     const si = JSON.parse(localStorage.getItem('shop_info')||'null');
@@ -5179,6 +5274,13 @@ function initChannelsUI(){
     if(zs){zs.textContent='Đã kết nối';zs.className='ch-dot conn';}
   }
   const fd=document.getElementById('fb-disp'); if(fd) fd.textContent=SHOP_CONFIG.fb||'';
+  // Facebook Page ID + Catalog
+  const fpId = document.getElementById('cfg-fb-page-id');
+  if (fpId) fpId.value = SHOP_CONFIG.fbPageId || '';
+  const fpCat = document.getElementById('cfg-fb-catalog-enabled');
+  if (fpCat) fpCat.checked = !!SHOP_CONFIG.fbCatalogEnabled;
+  // Update URL hint (cần GH config)
+  if (typeof updateFbFeedUrlHint === 'function') updateFbFeedUrlHint();
 }
 function apTab(el,c){adPF=c;document.querySelectorAll('#apt .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderAProd();}
 let adPayFilter='all';
@@ -5588,6 +5690,10 @@ function saveProd(){
       renderAProd();
       const cnt=document.getElementById('ad-cnt');
       if(cnt)cnt.textContent=products.filter(p=>p.status==='on').length;
+      // Auto-sync feed.csv nếu admin đã bật FB Catalog
+      if (SHOP_CONFIG.fbCatalogEnabled && !r.local && typeof syncFbFeedToGithub === 'function') {
+        syncFbFeedToGithub();
+      }
     } else {
       showToast('⚠️ Commit GitHub thất bại: ' + (r && r.error || 'không rõ'));
     }
@@ -5615,7 +5721,274 @@ function saveFB(){
   if(s){s.textContent='Đã kết nối';s.className='ch-dot conn';}
   showToast('✅ Đã lưu Facebook' + (GH_CONFIG.enabled?' — đang sync GitHub...':' (chỉ trên máy này)'));
   if(GH_CONFIG.enabled) saveSettingsToGithub().then(ok=>{ if(ok) showToast('☁️ Đã sync Facebook lên GitHub'); });
+  // Sau khi save FB URL, tự cố gắng infer fbPageId từ URL nếu chưa có
+  if (!SHOP_CONFIG.fbPageId) {
+    const m = v.match(/facebook\.com\/([^\/?#]+)/i);
+    if (m) {
+      const inp = document.getElementById('cfg-fb-page-id');
+      if (inp && !inp.value) inp.value = m[1];
+    }
+  }
 }
+
+/* ══ Phương án 1: Fanpage Page Plugin (Embed) ══
+   Lưu fbPageId, render embed sau khi save (lazy-load FB SDK chỉ khi có ID hợp lệ). */
+function saveFbPageId(){
+  const v = document.getElementById('cfg-fb-page-id')?.value.trim().replace(/^\/+|\/+$/g,'');
+  // Chấp nhận: username (mumbigsize.com), profile.php?id=..., hoặc full URL
+  let pageId = v;
+  if (v.startsWith('http')) {
+    const m = v.match(/facebook\.com\/([^\/?#]+)/i);
+    if (m) pageId = m[1];
+  }
+  SHOP_CONFIG.fbPageId = pageId;
+  try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}
+  showToast(pageId ? '✅ Đã lưu Fanpage ID — refresh trang để xem embed' : '✓ Đã xóa Fanpage ID (ẩn embed)');
+  if(GH_CONFIG.enabled) saveSettingsToGithub();
+  // Re-render embed ngay nếu user đang ở trang shop
+  initFbPageEmbed();
+}
+
+function previewFbPagePlugin(){
+  const v = document.getElementById('cfg-fb-page-id')?.value.trim();
+  if (!v) { showToast('Hãy nhập Fanpage ID trước'); return; }
+  let pageId = v.startsWith('http') ? (v.match(/facebook\.com\/([^\/?#]+)/i)||[,v])[1] : v;
+  window.open(`https://www.facebook.com/${pageId}`, '_blank');
+}
+
+/* Lazy-load FB SDK 1 lần duy nhất, chỉ khi cần */
+let _fbSdkLoaded = false;
+function loadFbSdk(){
+  if (_fbSdkLoaded || window.FB) return Promise.resolve();
+  _fbSdkLoaded = true;
+  return new Promise((resolve) => {
+    // Tạo div root cho FB SDK
+    if (!document.getElementById('fb-root')) {
+      const root = document.createElement('div');
+      root.id = 'fb-root';
+      document.body.appendChild(root);
+    }
+    const script = document.createElement('script');
+    script.async = true;
+    script.defer = true;
+    script.crossOrigin = 'anonymous';
+    script.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0';
+    script.onload = () => resolve();
+    document.body.appendChild(script);
+  });
+}
+
+/* Render Fanpage Page Plugin nếu admin đã cấu hình fbPageId.
+   Chỉ load FB SDK khi user thật sự thấy section (IntersectionObserver). */
+function initFbPageEmbed(){
+  const section = document.getElementById('fb-page-section');
+  const wrap = document.getElementById('fb-page-embed-wrap');
+  if (!section || !wrap) return;
+  if (!SHOP_CONFIG.fbPageId) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  wrap.innerHTML = '<div class="fb-page-loading">⏳ Đang tải Fanpage...</div>';
+  // Lazy-load: chỉ inject SDK khi section xuất hiện trong viewport
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        obs.disconnect();
+        renderFbPagePlugin();
+      }
+    }, { rootMargin: '200px' });
+    obs.observe(section);
+  } else {
+    renderFbPagePlugin(); // Fallback browsers cũ
+  }
+}
+
+function renderFbPagePlugin(){
+  const wrap = document.getElementById('fb-page-embed-wrap');
+  if (!wrap || !SHOP_CONFIG.fbPageId) return;
+  const pageUrl = `https://www.facebook.com/${SHOP_CONFIG.fbPageId}`;
+  // Tính width responsive theo container
+  const w = Math.min(360, wrap.clientWidth - 12);
+  wrap.innerHTML = `<div class="fb-page" data-href="${pageUrl}" data-tabs="timeline" data-width="${w}" data-height="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="${pageUrl}" class="fb-xfbml-parse-ignore"><a href="${pageUrl}">Mũm Big Size</a></blockquote></div>`;
+  loadFbSdk().then(() => {
+    if (window.FB && window.FB.XFBML) window.FB.XFBML.parse(wrap);
+  });
+}
+
+/* ══ Phương án 4: Facebook Catalog Feed Generator ══
+   Generate file feed.csv từ products[] theo format Facebook chấp nhận:
+   id, title, description, availability, condition, price, link, image_link, brand
+   Spec: https://developers.facebook.com/docs/marketing-api/catalog/reference */
+
+/* Slugify tiếng Việt → ASCII (dùng cho URL sản phẩm trong feed) */
+function _slugifyVi(s){
+  if (!s) return '';
+  return String(s)
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/đ/g,'d').replace(/Đ/g,'D')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/^-+|-+$/g,'')
+    .substring(0,80);
+}
+
+/* Escape CSV field theo RFC 4180 (bọc trong "..." nếu có ,/"/newline) */
+function _csvEscape(v){
+  if (v == null) return '';
+  const s = String(v);
+  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g,'""') + '"';
+  return s;
+}
+
+/* Build feed.csv content từ products array */
+function buildFbFeedCsv(){
+  const baseUrl = (typeof location !== 'undefined' && location.origin) ? location.origin : 'https://mumbigsize.com';
+  const headers = ['id','title','description','availability','condition','price','link','image_link','brand','google_product_category','item_group_id'];
+  const rows = [headers.join(',')];
+
+  const valid = products.filter(p => p && p.status !== 'off' && p.price > 0);
+  for (const p of valid) {
+    // Mỗi color variant = 1 dòng (Facebook hỗ trợ item_group_id để gom cùng sản phẩm)
+    const colors = Array.isArray(p.colors) ? p.colors : [];
+    if (colors.length === 0) {
+      // Fallback: 1 dòng nếu sản phẩm không có color
+      const imgs = getProductImages(p);
+      rows.push(_buildFeedRow(p, null, imgs[0], baseUrl));
+      continue;
+    }
+    for (let i = 0; i < colors.length; i++) {
+      const c = colors[i];
+      const imgs = (c && Array.isArray(c.images)) ? c.images.filter(Boolean) : [];
+      const img = imgs[0] || (getProductImages(p)[0]) || '';
+      rows.push(_buildFeedRow(p, c, img, baseUrl));
+    }
+  }
+  return rows.join('\n');
+}
+
+function _buildFeedRow(p, color, imgUrl, baseUrl){
+  const slug = _slugifyVi(p.name);
+  const colorSuffix = color ? ('-' + _slugifyVi(color.name || color.hex)) : '';
+  const id = String(p.id) + (color ? ('-' + (color.hex || color.name || '').replace(/[^a-zA-Z0-9]/g,'')) : '');
+  const title = (p.name || '') + (color ? (' - ' + (color.name || '')) : '');
+  const desc = (p.desc || p.name || 'Sản phẩm bigsize chất lượng cao').substring(0, 4990);
+  const availability = (p.status === 'low') ? 'in stock' : (p.status === 'on' ? 'in stock' : 'out of stock');
+  const price = (p.price * 1000) + ' VND'; // p.price là k (nghìn đồng)
+  const link = `${baseUrl}/?product=${p.id}`; // Sẽ điều chỉnh khi có URL routing riêng
+  const itemGroupId = String(p.id);
+  const fields = [
+    id,
+    title,
+    desc,
+    availability,
+    'new',
+    price,
+    link,
+    imgUrl || '',
+    'Mũm Big Size',
+    "Apparel & Accessories > Clothing", // Google product category mặc định
+    itemGroupId
+  ];
+  return fields.map(_csvEscape).join(',');
+}
+
+function downloadFbFeed(){
+  if (!products || !products.length) { showToast('Chưa có sản phẩm nào!'); return; }
+  const csv = '\ufeff' + buildFbFeedCsv(); // BOM cho Excel đọc UTF-8
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'feed.csv';
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+  showToast('⬇ Đã tải feed.csv (' + products.filter(p=>p.status!=='off').length + ' sản phẩm)');
+}
+
+function saveFbCatalogToggle(){
+  const enabled = document.getElementById('cfg-fb-catalog-enabled')?.checked || false;
+  SHOP_CONFIG.fbCatalogEnabled = enabled;
+  try{localStorage.setItem('shop_cfg',JSON.stringify(SHOP_CONFIG));}catch(e){}
+  showToast(enabled ? '✅ Đã bật xuất feed Catalog' : '✓ Đã tắt xuất feed Catalog');
+  if(GH_CONFIG.enabled) saveSettingsToGithub();
+  // Update URL hint
+  updateFbFeedUrlHint();
+}
+
+function updateFbFeedUrlHint(){
+  const hint = document.getElementById('fb-feed-url');
+  if (!hint) return;
+  if (GH_CONFIG && GH_CONFIG.owner && GH_CONFIG.repo) {
+    const url = `https://raw.githubusercontent.com/${GH_CONFIG.owner}/${GH_CONFIG.repo}/${GH_CONFIG.branch||'main'}/feed.csv`;
+    hint.innerHTML = `<a href="${url}" target="_blank" style="color:var(--pk)">${url}</a>`;
+  } else {
+    hint.textContent = '(Cấu hình GitHub trong Settings → Sync trước)';
+  }
+}
+
+async function syncFbFeedToGithub(){
+  if (!GH_CONFIG.enabled) {
+    showToast('⚠️ Vui lòng cấu hình GitHub Sync trước (Settings → GitHub)');
+    return;
+  }
+  if (!products || !products.length) { showToast('Chưa có sản phẩm nào!'); return; }
+  const csv = '\ufeff' + buildFbFeedCsv();
+  const status = document.getElementById('fb-feed-status');
+  if (status) {
+    status.style.display = 'block';
+    status.textContent = '⏳ Đang đẩy feed.csv lên GitHub...';
+  }
+  try {
+    const ok = await _ghWrite('feed.csv', csv, 'Update feed.csv (Facebook Catalog)');
+    if (ok) {
+      const validCount = products.filter(p=>p.status!=='off').length;
+      showToast('☁ Đã đẩy feed.csv (' + validCount + ' sản phẩm) lên GitHub');
+      if (status) {
+        const url = `https://raw.githubusercontent.com/${GH_CONFIG.owner}/${GH_CONFIG.repo}/${GH_CONFIG.branch||'main'}/feed.csv`;
+        status.innerHTML = `✅ Feed.csv đã sẵn sàng. URL public:<br><a href="${url}" target="_blank" style="color:var(--pk);word-break:break-all">${url}</a><br><br>📌 Paste URL này vào Facebook Commerce Manager → Catalog → Data Feed.`;
+      }
+    } else {
+      showToast('⚠️ Đẩy feed.csv thất bại');
+      if (status) status.textContent = '❌ Đẩy feed.csv thất bại — check console';
+    }
+  } catch(e) {
+    console.error('FB feed sync error:', e);
+    showToast('⚠️ Lỗi: ' + e.message);
+    if (status) status.textContent = '❌ Lỗi: ' + e.message;
+  }
+}
+
+/* Helper ghi file lên GitHub (giống _ghRead nhưng PUT) */
+async function _ghWrite(path, content, commitMsg){
+  if (!GH_CONFIG.enabled || !GH_CONFIG.token) return false;
+  const apiUrl = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/${path}`;
+  // Lấy SHA hiện tại nếu file đã tồn tại (cần để overwrite)
+  let sha = null;
+  try {
+    const head = await fetch(apiUrl + '?ref=' + (GH_CONFIG.branch||'main'), {
+      headers: { Authorization: 'token ' + GH_CONFIG.token, Accept: 'application/vnd.github+json' }
+    });
+    if (head.ok) {
+      const j = await head.json();
+      sha = j.sha;
+    }
+  } catch(e){}
+  // Encode content sang base64 (an toàn với UTF-8)
+  const b64 = btoa(unescape(encodeURIComponent(content)));
+  const body = {
+    message: commitMsg || 'Update ' + path,
+    content: b64,
+    branch: GH_CONFIG.branch || 'main'
+  };
+  if (sha) body.sha = sha;
+  const res = await fetch(apiUrl, {
+    method: 'PUT',
+    headers: { Authorization: 'token ' + GH_CONFIG.token, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return res.ok;
+}
+
 function saveTelegramCfg(){
   const token = document.getElementById('cfg-tg-token')?.value.trim();
   const chatId = document.getElementById('cfg-tg-chatid')?.value.trim();
@@ -6376,6 +6749,9 @@ async function loadSettingsFromGithub(){
   if (data.shop){
     SHOP_CONFIG.zalo = data.shop.zalo || SHOP_CONFIG.zalo;
     SHOP_CONFIG.fb   = data.shop.fb   || SHOP_CONFIG.fb;
+    SHOP_CONFIG.fbPageId  = data.shop.fbPageId  || SHOP_CONFIG.fbPageId;
+    SHOP_CONFIG.fbPixelId = data.shop.fbPixelId || SHOP_CONFIG.fbPixelId;
+    if (typeof data.shop.fbCatalogEnabled === 'boolean') SHOP_CONFIG.fbCatalogEnabled = data.shop.fbCatalogEnabled;
   }
   if (data.bank){
     BANK_CONFIG.bankName    = data.bank.bankName    || BANK_CONFIG.bankName;
@@ -6417,6 +6793,8 @@ async function loadSettingsFromGithub(){
   try { if (typeof initSettingsUI === 'function') initSettingsUI(); } catch(e){}
   try { if (typeof initChannelsUI === 'function') initChannelsUI(); } catch(e){}
   try { if (typeof initShopInfoUI === 'function') initShopInfoUI(); } catch(e){}
+  // Re-render Fanpage embed nếu admin vừa update fbPageId từ GitHub
+  try { if (typeof initFbPageEmbed === 'function') initFbPageEmbed(); } catch(e){}
   return true;
 }
 
@@ -6425,7 +6803,13 @@ async function saveSettingsToGithub(){
   // CẢNH BÁO: Nếu repo public, token Telegram bot sẽ lộ. Người khác có thể dùng token đó để gửi tin nhắn từ bot của bạn.
   // Nếu lo ngại, đổi repo sang private (vẫn truy cập được qua raw URL nhờ PAT).
   const payload = {
-    shop: { zalo: SHOP_CONFIG.zalo || '', fb: SHOP_CONFIG.fb || '' },
+    shop: {
+      zalo: SHOP_CONFIG.zalo || '',
+      fb: SHOP_CONFIG.fb || '',
+      fbPageId: SHOP_CONFIG.fbPageId || '',
+      fbPixelId: SHOP_CONFIG.fbPixelId || '',
+      fbCatalogEnabled: !!SHOP_CONFIG.fbCatalogEnabled
+    },
     shopInfo: {
       name:     SHOP_INFO.name     || '',
       phone:    SHOP_INFO.phone    || '',
@@ -6585,6 +6969,8 @@ document.addEventListener('DOMContentLoaded', () => {
   loadVouchersFromGithub();
   loadVipFromGithub();
   loadSettingsFromGithub();
+  // Init Facebook Page Plugin embed (lazy, chỉ load FB SDK khi user scroll tới)
+  setTimeout(() => { try { initFbPageEmbed(); } catch(e){ console.warn('FB embed init error:', e); } }, 100);
 }, { once: true });
 
 </script> <!-- Admin Login Modal -->
