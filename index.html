@@ -673,21 +673,21 @@ a{text-decoration:none;color:inherit}
 
 .site-footer{background:var(--card);border-top:1px solid var(--border);padding:32px 24px;margin-top:20px}
 
-/* ══ FACEBOOK FANPAGE EMBED SECTION (Phương án 1) ══ */
-.fb-page-section{background:linear-gradient(135deg,#fff5fa 0%,#fbf3ff 100%);padding:60px 24px;border-top:1.5px solid var(--border)}
-.fb-page-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:center}
+/* ══ FACEBOOK FANPAGE EMBED SECTION (Phương án 1) — compact layout ══ */
+.fb-page-section{background:linear-gradient(135deg,#fff5fa 0%,#fbf3ff 100%);padding:36px 24px;border-top:1.5px solid var(--border)}
+.fb-page-inner{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:center}
 .fb-page-head{padding:0}
-.fb-page-tag{display:inline-block;background:#1877F2;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px;letter-spacing:.5px}
-.fb-page-head h2{font-size:28px;font-weight:800;color:var(--text);margin-bottom:12px;line-height:1.2}
-.fb-page-head p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px;max-width:440px}
-.fb-page-embed-wrap{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:6px;box-shadow:0 4px 24px rgba(0,0,0,.06);min-height:400px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.fb-page-loading{font-size:13px;color:var(--muted);text-align:center;padding:40px 20px}
+.fb-page-tag{display:inline-block;background:#1877F2;color:#fff;font-size:10.5px;font-weight:700;padding:3px 12px;border-radius:20px;margin-bottom:10px;letter-spacing:.4px}
+.fb-page-head h2{font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;line-height:1.25}
+.fb-page-head p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px;max-width:420px}
+.fb-page-embed-wrap{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:4px;box-shadow:0 3px 16px rgba(0,0,0,.05);min-height:320px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.fb-page-loading{font-size:13px;color:var(--muted);text-align:center;padding:32px 18px}
 @media (max-width: 768px){
-  .fb-page-section{padding:40px 14px}
-  .fb-page-inner{grid-template-columns:1fr;gap:24px}
-  .fb-page-head h2{font-size:21px}
-  .fb-page-head p{font-size:13px;max-width:100%}
-  .fb-page-embed-wrap{min-height:380px;width:100%}
+  .fb-page-section{padding:28px 14px}
+  .fb-page-inner{grid-template-columns:1fr;gap:18px}
+  .fb-page-head h2{font-size:19px}
+  .fb-page-head p{font-size:12.5px;max-width:100%;margin-bottom:10px}
+  .fb-page-embed-wrap{min-height:300px;width:100%;max-width:320px;margin:0 auto}
 }
 .site-footer-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 
@@ -3581,11 +3581,11 @@ function doGet(){ return ContentService.createTextOutput('OK - Mum Bigsize Webho
 </div>
 
 <!-- Modal thêm/sửa đánh giá -->
-<div id="testi-modal" class="modal-overlay" style="display:none">
-  <div class="modal-box" style="max-width:560px;width:90%">
-    <div class="modal-head">
-      <h2 id="testi-modal-title">Thêm đánh giá</h2>
-      <button class="modal-close" onclick="closeTestiModal()">×</button>
+<div id="testi-modal" class="ad-overlay" style="display:none" onclick="if(event.target===this)closeTestiModal()">
+  <div class="ad-modal" style="max-width:560px;width:90%">
+    <div class="ad-modal-head">
+      <h3 id="testi-modal-title">Thêm đánh giá</h3>
+      <button style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:16px" onclick="closeTestiModal()">×</button>
     </div>
     <div style="padding:20px">
       <!-- Loại đánh giá -->
@@ -5808,9 +5808,9 @@ function renderFbPagePlugin(){
   const wrap = document.getElementById('fb-page-embed-wrap');
   if (!wrap || !SHOP_CONFIG.fbPageId) return;
   const pageUrl = `https://www.facebook.com/${SHOP_CONFIG.fbPageId}`;
-  // Tính width responsive theo container
-  const w = Math.min(360, wrap.clientWidth - 12);
-  wrap.innerHTML = `<div class="fb-page" data-href="${pageUrl}" data-tabs="timeline" data-width="${w}" data-height="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="${pageUrl}" class="fb-xfbml-parse-ignore"><a href="${pageUrl}">Mũm Big Size</a></blockquote></div>`;
+  // Tính width responsive theo container (compact layout: tối đa 280px)
+  const w = Math.min(280, wrap.clientWidth - 8);
+  wrap.innerHTML = `<div class="fb-page" data-href="${pageUrl}" data-tabs="timeline" data-width="${w}" data-height="420" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="${pageUrl}" class="fb-xfbml-parse-ignore"><a href="${pageUrl}">Mũm Big Size</a></blockquote></div>`;
   loadFbSdk().then(() => {
     if (window.FB && window.FB.XFBML) window.FB.XFBML.parse(wrap);
   });
