@@ -1,7 +1,10 @@
 {
   "shop": {
     "zalo": "0868488884",
-    "fb": "https://www.facebook.com/mumbigsize.top/"
+    "fb": "https://www.facebook.com/mumbigsize.top/",
+    "fbPageId": "226224323910922",
+    "fbPixelId": "",
+    "fbCatalogEnabled": false
   },
   "shopInfo": {
     "name": "Mũm",
@@ -15,10 +18,6 @@
     "accountNo": "2009222222",
     "accountName": "HOANG THI HANH"
   },
-  "momo": {
-    "phone": "0966875212",
-    "name": "HOANG THI HANH"
-  },
   "sheet": {
     "webhookUrl": "https://script.google.com/macros/s/AKfycbys-H0sh0cLqFPTlZ5zDpPeTp2joWQFP9UNvMUu4gTgtLTZqhU3AGoaHDQMquQawnAzJg/exec",
     "enabled": true
@@ -28,5 +27,5 @@
     "chatId": "-1003747002472",
     "enabled": true
   },
-  "_updatedAt": "2026-04-29T00:50:56.556Z"
+  "_updatedAt": "2026-05-01T04:34:12.988Z"
 }
