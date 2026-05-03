@@ -247,6 +247,31 @@ a{text-decoration:none;color:inherit}
 .hero-card:hover{transform:translateY(-5px);border-color:var(--pk);box-shadow:0 8px 24px rgba(233,30,140,.15)}
 .hero-card span{font-size:36px}
 .hero-card p{font-size:11px;color:var(--muted);text-align:center;font-weight:500}
+/* ═══ HERO BESTSELLERS — Top 5 sản phẩm bán chạy (hiển thị bên phải hero, chỉ desktop) ═══
+   Layout: 1 card lớn (top 1) bên trái + 4 card nhỏ (top 2-5) bên phải, dạng grid 2 cột */
+.hero-bestsellers{display:grid;grid-template-columns:1.35fr 1fr;gap:10px;max-width:480px;width:100%}
+.hero-bs-big{grid-row:span 2}
+.hero-bs-small-col{display:grid;grid-template-rows:1fr 1fr;gap:10px}
+.hero-bs-card{position:relative;background:#fff;border-radius:16px;overflow:hidden;cursor:pointer;border:1.5px solid rgba(255,255,255,.7);box-shadow:0 6px 20px rgba(233,30,140,.12);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;display:flex;flex-direction:column}
+.hero-bs-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(233,30,140,.22);border-color:var(--pk)}
+.hero-bs-img{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#fce4f5,#f0ebf8);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-bs-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.hero-bs-card:hover .hero-bs-img img{transform:scale(1.06)}
+.hero-bs-emoji{font-size:42px}
+.hero-bs-big .hero-bs-emoji{font-size:74px}
+.hero-bs-rank{position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#FFD700,#FF8C00);color:#fff;font-size:10px;font-weight:800;padding:4px 9px;border-radius:10px;z-index:2;letter-spacing:.4px;box-shadow:0 2px 8px rgba(255,140,0,.4);text-shadow:0 1px 2px rgba(0,0,0,.18)}
+.hero-bs-rank.rank-1{background:linear-gradient(135deg,#FF1744,#E91E8C);box-shadow:0 3px 10px rgba(233,30,140,.45)}
+.hero-bs-disc{position:absolute;top:8px;right:8px;background:var(--pk);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;z-index:2;box-shadow:0 2px 6px rgba(233,30,140,.35)}
+.hero-bs-info{padding:10px 11px 11px;display:flex;flex-direction:column;gap:4px;flex:1;min-height:0}
+.hero-bs-name{font-size:11.5px;color:var(--text);font-weight:600;line-height:1.35;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;min-height:30px}
+.hero-bs-big .hero-bs-name{font-size:13.5px;-webkit-line-clamp:2;min-height:36px}
+.hero-bs-pricerow{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;margin-top:auto}
+.hero-bs-price{color:var(--pk-d);font-size:13px;font-weight:800}
+.hero-bs-big .hero-bs-price{font-size:15px}
+.hero-bs-old{color:var(--light);font-size:10px;text-decoration:line-through}
+.hero-bs-sold{font-size:9.5px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:3px}
+.hero-bs-sold::before{content:'🔥';font-size:9px}
+.hero-bs-loading{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);background:rgba(255,255,255,.6);border-radius:16px;border:1.5px dashed var(--pk-b);backdrop-filter:blur(4px)}
 
 .flash-bar{background:var(--card);border-bottom:1px solid var(--border);border-top:2px solid var(--pk)}
 .flash-bar-inner{max-width:var(--max);margin:0 auto;padding:0 24px}
@@ -3220,7 +3245,14 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div id="scr-shop" class="screen active"> <header class="pc-header"> <div class="pc-header-inner"> <div class="logo-full" onclick="logoClick()" id="shop-logo"><img class="brand-logo" alt="Mũm Big Size" width="138" height="46" style="height:46px;width:auto;object-fit:contain;display:block"></div> <div class="pc-search"><span style="color:var(--light);font-size:15px">🔍</span><input type="text" placeholder="Tìm váy, áo, quần... size L đến 5XL 🌸" id="search-inp" oninput="doSearch()"></div> <nav class="pc-nav" id="pc-nav-bar"> <div class="pc-nav-link" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</div> <div class="nav-item-wrap" id="nav-cats-wrap"> <div class="pc-nav-link" onclick="toggleNavMenu('nav-cats-wrap', event)">Danh mục <span class="nav-caret">▼</span></div> <div class="nav-dd" id="nav-cats-dd"> <div class="nav-dd-it" onclick="setCatDirect('all');closeAllMenus()"><span>🏷️</span>Tất cả</div> <div class="nav-dd-it" onclick="setCatDirect('ao-chong-nang');closeAllMenus()"><span>🧥</span>Áo chống nắng</div> <div class="nav-dd-it" onclick="setCatDirect('ao-gio');closeAllMenus()"><span>💨</span>Áo gió</div> <div class="nav-dd-it" onclick="setCatDirect('ao-khoac-dong');closeAllMenus()"><span>🧣</span>Áo khoác đông</div> <div class="nav-dd-it" onclick="setCatDirect('hoodie');closeAllMenus()"><span>🦘</span>Hoodie</div> <div class="nav-dd-it" onclick="setCatDirect('sweater');closeAllMenus()"><span>🧸</span>Sweater</div> <div class="nav-dd-it" onclick="setCatDirect('tshirt');closeAllMenus()"><span>👕</span>T-shirt</div> <div class="nav-dd-it" onclick="setCatDirect('chan-vay');closeAllMenus()"><span>👗</span>Chân váy</div> <div class="nav-dd-it" onclick="setCatDirect('do-di-bien');closeAllMenus()"><span>🏖️</span>Đồ đi biển</div> <div class="nav-dd-it" onclick="setCatDirect('phu-kien');closeAllMenus()"><span>👜</span>Phụ kiện</div> <div class="nav-dd-it" onclick="setCatDirect('quan');closeAllMenus()"><span>👖</span>Quần</div> <div class="nav-dd-it" onclick="setCatDirect('ao-len');closeAllMenus()"><span>🧶</span>Áo len</div> <div class="nav-dd-it" onclick="setCatDirect('ao-parka');closeAllMenus()"><span>🥼</span>Áo Parka</div> <div class="nav-dd-it" onclick="setCatDirect('giay');closeAllMenus()"><span>👟</span>Giày</div> <div class="nav-dd-it" onclick="setCatDirect('dep');closeAllMenus()"><span>🩴</span>Dép</div> <div class="nav-dd-it" onclick="setCatDirect('so-mi');closeAllMenus()"><span>👔</span>Sơ mi</div> </div> </div> <div class="pc-nav-link" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</div> <div class="pc-nav-link" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</div> </nav> <div style="display:flex;gap:8px;margin-left:auto;align-items:center"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count">0</span></button> </div> </div> </header> <!-- Mobile menu bar: 3 NÚT CHÍNH (Trang chủ | Feedback | Collection) --> <div class="mob-menu-bar" id="mob-menu-bar"> <button class="mob-menu-btn" onclick="goScroll('hero-section');closeAllMenus()">🏠 Trang chủ</button> <button class="mob-menu-btn" onclick="goScroll('feedback-section');closeAllMenus()">💬 Feedback</button> <button class="mob-menu-btn" onclick="goScroll('flash-section');closeAllMenus()">🌸 Collection</button> </div> <!-- Mobile category chips bar - hiển thị danh mục dạng tag scroll ngang --> <div class="mob-cat-chips" id="mob-cat-chips"></div> <div class="mob-filter-bar" id="mob-cats" style="display:none"> </div> <!-- Marquee ribbon --> <div class="marquee-wrap"> <div class="marquee-inner"> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 130KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 MIỄN PHÍ SHIP ĐƠN TỪ 500.000Đ</span><span class="marquee-dot"></span> <span class="marquee-item">🌸 BST HÈ 2026 – TOP HOT</span><span class="marquee-dot"></span> <span class="marquee-item">💪 THÁCH THỨC CÂN NẶNG – LÊN ĐẾN 130KG</span><span class="marquee-dot"></span> <span class="marquee-item">🔄 ĐỔI SIZE MIỄN PHÍ TRONG 7 NGÀY</span><span class="marquee-dot"></span> <span class="marquee-item">✅ HÀNG CHẤT LƯỢNG CAM KẾT</span><span class="marquee-dot"></span> </div> </div> <div class="hero" id="hero-section"> <div class="hero-inner"> <div class="hero-animated"> <span class="hero-tag hero-tag-animated">🌸 MŨM COLLECTION SUMMER 2026</span> <h1 class="hero-h1" style="font-size:42px;font-weight:800;line-height:1.15;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px">Đẹp không cần<br><em style="font-style:normal;color:var(--pu)">thước đo</em> cân nặng</h1> <p class="hero-p" style="font-size:15px;color:var(--muted);margin-bottom:24px;line-height:1.85;max-width:480px">
           Mũm Big Size — thương hiệu thời trang dành riêng cho nàng <strong style="color:var(--pk-d)">50kg đến 130kg</strong>.<br>
           Chúng mình hiểu cơ thể bạn hơn ai hết — từng đường cắt, từng cm vải đều được thiết kế để bạn <strong style="color:var(--pu-d)">tự tin tỏa sáng</strong> mỗi ngày.
-        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">🌸 Xem Collection 2026</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-emoji-grid" id="hero-cat-grid"> <div class="hero-card" onclick="setCatDirect('ao-chong-nang')"><span>🧥</span><p>Chống nắng</p></div><div class="hero-card" onclick="setCatDirect('hoodie')"><span>🦘</span><p>Hoodie</p></div><div class="hero-card" onclick="setCatDirect('ao-gio')"><span>💨</span><p>Áo gió</p></div><div class="hero-card" onclick="setCatDirect('chan-vay')"><span>👗</span><p>Chân váy</p></div><div class="hero-card" onclick="setCatDirect('quan')"><span>👖</span><p>Quần</p></div><div class="hero-card" onclick="setCatDirect('giay')"><span>👟</span><p>Giày & Dép</p></div> </div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner">
+        </p> <div class="hero-btns" style="display:flex;gap:10px;flex-wrap:wrap"> <button class="btn btn-pk" style="padding:13px 26px;font-size:14px;font-weight:700;border-radius:50px" onclick="goScroll('products-section')">Khám phá ngay 🌸</button> <button class="btn" style="padding:13px 26px;font-size:14px;border-radius:50px" onclick="goScroll('flash-section')">🌸 Xem Collection 2026</button> </div> <div class="stat-pills hero-stats"> <div class="stat-pill"><span class="stat-pill-ic">👗</span><span class="stat-pill-num">6+</span> danh mục</div> <div class="stat-pill"><span class="stat-pill-ic">📏</span><span class="stat-pill-num">L→5XL</span> 7 size</div> <div class="stat-pill"><span class="stat-pill-ic">⭐</span><span class="stat-pill-num">4.9</span> đánh giá</div> <div class="stat-pill"><span class="stat-pill-ic">🚚</span>Ship toàn quốc</div> </div> </div> <div class="hero-visual hero-visual-wrap"> <div style="position:relative"> <div class="hero-bestsellers" id="hero-bestsellers">
+  <!-- Top 5 sản phẩm bán chạy nhất - render bằng JS sau khi load products -->
+  <div class="hero-bs-loading">
+    <div style="font-size:24px;margin-bottom:8px">🌸</div>
+    <div style="font-size:13px;color:var(--muted);font-weight:500">Đang tải sản phẩm hot...</div>
+  </div>
+</div> <!-- Hidden legacy grid - giữ id để code cũ không vỡ (renderCategories vẫn ghi vào đây) -->
+<div class="hero-emoji-grid" id="hero-cat-grid" style="display:none" aria-hidden="true"></div> </div> </div> </div> </div> <!-- Feature strip --> <div class="feature-strip"> <div class="feature-strip-inner">
   <div class="feat-strip-item"><span class="feat-strip-ic">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="16" cy="16" r="16" fill="url(#fs1)"/>
@@ -4367,6 +4399,60 @@ function renderCategories(){
       ? heroCats.map(c => `<div class="hero-card" onclick="setCatDirect('${c.slug}')"><span>${c.ic}</span><p>${c.name}</p></div>`).join('')
       : `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted);font-size:13px">Đang cập nhật sản phẩm 🌸</div>`;
   }
+  // Render top 5 bestsellers ở hero (mới, thay cho card emoji "Áo chống nắng" trống)
+  renderHeroBestsellers();
+}
+
+/* ══ HERO BESTSELLERS ══
+   Render top 5 sản phẩm bán chạy nhất ở khối visual bên phải hero.
+   Layout: 1 card lớn (bán chạy nhất) + 4 card nhỏ.
+   Click card sẽ mở trang chi tiết sản phẩm như bình thường.
+   Chỉ hiển thị trên desktop (mobile đã có .hero-visual-wrap{display:none}). */
+function renderHeroBestsellers(){
+  const wrap = document.getElementById('hero-bestsellers');
+  if(!wrap) return;
+  // Lọc sản phẩm đang bán, sắp xếp theo số đã bán giảm dần, lấy top 5
+  const top = (Array.isArray(products) ? products : [])
+    .filter(p => p && p.status !== 'off')
+    .sort((a,b) => (b.sold||0) - (a.sold||0))
+    .slice(0, 5);
+  if(top.length === 0){
+    wrap.innerHTML = `<div class="hero-bs-loading">
+      <div style="font-size:24px;margin-bottom:8px">🌸</div>
+      <div style="font-size:13px;font-weight:500">Đang cập nhật sản phẩm hot</div>
+    </div>`;
+    return;
+  }
+  // Helper render 1 card
+  const card = (p, isBig, rank) => {
+    const imgs = (typeof getProductImages === 'function') ? getProductImages(p) : [];
+    const imgSrc = imgs[0] || '';
+    const imgHtml = imgSrc
+      ? `<img src="${imgSrc}" alt="${(p.name||'').replace(/"/g,'&quot;')}" loading="lazy" decoding="async">`
+      : `<span class="hero-bs-emoji">${p.emoji || '👗'}</span>`;
+    const disc = (p.old > p.price) ? Math.round((1 - p.price/p.old) * 100) : 0;
+    const discBadge = disc > 0 ? `<span class="hero-bs-disc">-${disc}%</span>` : '';
+    const rankBadge = rank === 1
+      ? `<span class="hero-bs-rank rank-1">🏆 #1</span>`
+      : `<span class="hero-bs-rank">TOP ${rank}</span>`;
+    const soldText = p.sold >= 1000 ? (p.sold/1000).toFixed(1) + 'k' : (p.sold || 0);
+    return `<div class="hero-bs-card${isBig?' hero-bs-big':''}" onclick="openDetail(${p.id})" role="button" tabindex="0" aria-label="${(p.name||'').replace(/"/g,'&quot;')}">
+      <div class="hero-bs-img">${imgHtml}${rankBadge}${discBadge}</div>
+      <div class="hero-bs-info">
+        <div class="hero-bs-name">${p.name || ''}</div>
+        <div class="hero-bs-pricerow">
+          <span class="hero-bs-price">${formatVND(p.price)}đ</span>
+          ${p.old > p.price ? `<span class="hero-bs-old">${formatVND(p.old)}đ</span>` : ''}
+        </div>
+        <div class="hero-bs-sold">Đã bán ${soldText}</div>
+      </div>
+    </div>`;
+  };
+  // Render: 1 card lớn (top[0]) bên trái + cột 4 card nhỏ (top[1..4]) bên phải
+  // Nếu chỉ có 1-2 sản phẩm thì layout sẽ tự động co lại
+  const big = top[0] ? card(top[0], true, 1) : '';
+  const small = top.slice(1, 5).map((p, i) => card(p, false, i+2)).join('');
+  wrap.innerHTML = big + (small ? `<div class="hero-bs-small-col">${small}</div>` : '');
 }
 
 /* Click chip danh mục mobile - set catF, scroll xuống section sản phẩm, update active */
