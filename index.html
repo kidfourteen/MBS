@@ -248,30 +248,39 @@ a{text-decoration:none;color:inherit}
 .hero-card span{font-size:36px}
 .hero-card p{font-size:11px;color:var(--muted);text-align:center;font-weight:500}
 /* ═══ HERO BESTSELLERS — Top 5 sản phẩm bán chạy (hiển thị bên phải hero, chỉ desktop) ═══
-   Layout: 1 card lớn (top 1) bên trái + 4 card nhỏ (top 2-5) bên phải, dạng grid 2 cột */
-.hero-bestsellers{display:grid;grid-template-columns:1.35fr 1fr;gap:10px;max-width:480px;width:100%}
-.hero-bs-big{grid-row:span 2}
-.hero-bs-small-col{display:grid;grid-template-rows:1fr 1fr;gap:10px}
+   Layout: card #1 full-width hàng đầu (ảnh ngang dạng hero card), 4 card nhỏ grid 2x2 bên dưới.
+   Layout này tránh kéo dài chiều cao card lớn khi info ngắn (không bị khoảng trắng to). */
+.hero-bestsellers{display:flex;flex-direction:column;gap:10px;max-width:480px;width:100%}
+.hero-bs-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .hero-bs-card{position:relative;background:#fff;border-radius:16px;overflow:hidden;cursor:pointer;border:1.5px solid rgba(255,255,255,.7);box-shadow:0 6px 20px rgba(233,30,140,.12);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;display:flex;flex-direction:column}
 .hero-bs-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(233,30,140,.22);border-color:var(--pk)}
-.hero-bs-img{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#fce4f5,#f0ebf8);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+/* Card lớn #1 - dạng landscape: ảnh trái + info phải để giữ chiều cao gọn */
+.hero-bs-big{display:grid;grid-template-columns:1fr 1.05fr;align-items:stretch}
+.hero-bs-big .hero-bs-img{aspect-ratio:1/1}
+.hero-bs-big .hero-bs-info{padding:14px 14px 14px 12px;justify-content:center;gap:6px}
+/* Card nhỏ - dạng vertical: ảnh trên + info dưới */
+.hero-bs-small{display:flex;flex-direction:column}
+.hero-bs-img{width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#fce4f5,#f0ebf8);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hero-bs-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
 .hero-bs-card:hover .hero-bs-img img{transform:scale(1.06)}
 .hero-bs-emoji{font-size:42px}
-.hero-bs-big .hero-bs-emoji{font-size:74px}
+.hero-bs-big .hero-bs-emoji{font-size:64px}
 .hero-bs-rank{position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#FFD700,#FF8C00);color:#fff;font-size:10px;font-weight:800;padding:4px 9px;border-radius:10px;z-index:2;letter-spacing:.4px;box-shadow:0 2px 8px rgba(255,140,0,.4);text-shadow:0 1px 2px rgba(0,0,0,.18)}
 .hero-bs-rank.rank-1{background:linear-gradient(135deg,#FF1744,#E91E8C);box-shadow:0 3px 10px rgba(233,30,140,.45)}
 .hero-bs-disc{position:absolute;top:8px;right:8px;background:var(--pk);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;z-index:2;box-shadow:0 2px 6px rgba(233,30,140,.35)}
 .hero-bs-info{padding:10px 11px 11px;display:flex;flex-direction:column;gap:4px;flex:1;min-height:0}
 .hero-bs-name{font-size:11.5px;color:var(--text);font-weight:600;line-height:1.35;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;min-height:30px}
-.hero-bs-big .hero-bs-name{font-size:13.5px;-webkit-line-clamp:2;min-height:36px}
+.hero-bs-big .hero-bs-name{font-size:14px;-webkit-line-clamp:2;min-height:0;line-height:1.3}
 .hero-bs-pricerow{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;margin-top:auto}
+.hero-bs-big .hero-bs-pricerow{margin-top:4px}
 .hero-bs-price{color:var(--pk-d);font-size:13px;font-weight:800}
-.hero-bs-big .hero-bs-price{font-size:15px}
+.hero-bs-big .hero-bs-price{font-size:17px}
 .hero-bs-old{color:var(--light);font-size:10px;text-decoration:line-through}
+.hero-bs-big .hero-bs-old{font-size:11.5px}
 .hero-bs-sold{font-size:9.5px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:3px}
+.hero-bs-big .hero-bs-sold{font-size:11px;margin-top:2px}
 .hero-bs-sold::before{content:'🔥';font-size:9px}
-.hero-bs-loading{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);background:rgba(255,255,255,.6);border-radius:16px;border:1.5px dashed var(--pk-b);backdrop-filter:blur(4px)}
+.hero-bs-loading{text-align:center;padding:60px 20px;color:var(--muted);background:rgba(255,255,255,.6);border-radius:16px;border:1.5px dashed var(--pk-b);backdrop-filter:blur(4px)}
 
 .flash-bar{background:var(--card);border-bottom:1px solid var(--border);border-top:2px solid var(--pk)}
 .flash-bar-inner{max-width:var(--max);margin:0 auto;padding:0 24px}
@@ -4436,7 +4445,8 @@ function renderHeroBestsellers(){
       ? `<span class="hero-bs-rank rank-1">🏆 #1</span>`
       : `<span class="hero-bs-rank">TOP ${rank}</span>`;
     const soldText = p.sold >= 1000 ? (p.sold/1000).toFixed(1) + 'k' : (p.sold || 0);
-    return `<div class="hero-bs-card${isBig?' hero-bs-big':''}" onclick="openDetail(${p.id})" role="button" tabindex="0" aria-label="${(p.name||'').replace(/"/g,'&quot;')}">
+    const cls = isBig ? 'hero-bs-card hero-bs-big' : 'hero-bs-card hero-bs-small';
+    return `<div class="${cls}" onclick="openDetail(${p.id})" role="button" tabindex="0" aria-label="${(p.name||'').replace(/"/g,'&quot;')}">
       <div class="hero-bs-img">${imgHtml}${rankBadge}${discBadge}</div>
       <div class="hero-bs-info">
         <div class="hero-bs-name">${p.name || ''}</div>
@@ -4448,11 +4458,10 @@ function renderHeroBestsellers(){
       </div>
     </div>`;
   };
-  // Render: 1 card lớn (top[0]) bên trái + cột 4 card nhỏ (top[1..4]) bên phải
-  // Nếu chỉ có 1-2 sản phẩm thì layout sẽ tự động co lại
+  // Layout: card #1 (full-width) + grid 2x2 cho card #2-5
   const big = top[0] ? card(top[0], true, 1) : '';
   const small = top.slice(1, 5).map((p, i) => card(p, false, i+2)).join('');
-  wrap.innerHTML = big + (small ? `<div class="hero-bs-small-col">${small}</div>` : '');
+  wrap.innerHTML = big + (small ? `<div class="hero-bs-row">${small}</div>` : '');
 }
 
 /* Click chip danh mục mobile - set catF, scroll xuống section sản phẩm, update active */
