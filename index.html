@@ -294,6 +294,20 @@ a{text-decoration:none;color:inherit}
 .prod-emoji-fallback{font-size:58px;position:relative;z-index:0}
 .like-btn{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.9);border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;z-index:2;transition:transform .15s}
 .like-btn:hover{transform:scale(1.15)}
+/* ══ PRODUCT CARD IMAGE SWIPE ══ */
+.prod-swipe-track{position:absolute;inset:0;width:100%;height:100%}
+.prod-swipe-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease;display:block;pointer-events:none}
+.prod-swipe-img.active{opacity:1;pointer-events:auto}
+.prod-swipe-arrow{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--pk-d);font-size:20px;font-weight:700;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.12);opacity:0;transition:opacity .2s,background .15s,transform .15s;font-family:Arial,sans-serif}
+.prod-swipe-arrow:hover{background:#fff;transform:translateY(-50%) scale(1.08)}
+.prod-swipe-prev{left:6px}
+.prod-swipe-next{right:6px}
+.prod-card:hover .prod-swipe-arrow{opacity:1}
+.prod-swipe-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3;background:rgba(0,0,0,.18);padding:4px 8px;border-radius:12px;backdrop-filter:blur(4px)}
+.prod-swipe-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:all .2s;border:none}
+.prod-swipe-dot.active{background:#fff;width:18px;border-radius:4px}
+.prod-swipe-dot:hover{background:rgba(255,255,255,.85)}
+.prod-color-badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;z-index:2;backdrop-filter:blur(6px);max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;pointer-events:none}
 .sold-tag{position:absolute;bottom:7px;left:7px;background:rgba(255,255,255,.88);color:var(--muted);font-size:9px;padding:2px 8px;border-radius:10px;z-index:2}
 .prod-info{padding:12px}
 .prod-name{font-size:13px;font-weight:500;margin-bottom:4px;line-height:1.4}
@@ -2053,6 +2067,13 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
   .pc-search { display: none; }
   .pc-nav { display: none; }
 
+  /* Product card swipe: trên mobile arrows ẩn (vì có touch swipe), dots to hơn */
+  .prod-swipe-arrow{display:none}
+  .prod-swipe-dot{width:7px;height:7px}
+  .prod-swipe-dot.active{width:20px}
+  .prod-swipe-dots{padding:5px 9px}
+  .prod-color-badge{font-size:10.5px;padding:3px 8px}
+
   .logo-full img.brand-logo { height: 36px !important; }
 
   .pc-cart-btn {
@@ -3390,7 +3411,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div class="cart-overlay-bg" id="cart-bg" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer"> <div class="cart-head"><h2>🛒 Giỏ hàng</h2><button class="cart-close" onclick="closeCart()">×</button></div> <div class="cart-items" id="cart-items-el"></div> <div class="cart-foot" id="cart-foot-el"></div>
 </div> <!-- ══════════ PRODUCT DETAIL (LANDING PAGE) ══════════ -->
-<div id="scr-detail" class="screen"> <header class="pc-header"> <div class="pdp-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" width="132" height="44" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <nav class="pc-nav"> <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button> </nav> <div style="display:flex;gap:8px;margin-left:12px"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button> </div> </div> </header> <div class="pdp-wrap"> <!-- Breadcrumb --> <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px"> <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span> <span>›</span><span id="pdp-cat-crumb"></span> <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span> </div> <!-- Top: gallery + buy --> <div class="pdp-top"> <div class="pdp-gallery"> <div class="pdp-main-img" id="pdp-main-img"> <span class="pdp-main-emoji" id="pdp-main-emoji"></span> </div> <div class="pdp-thumbs" id="pdp-thumbs"></div> </div> <div class="pdp-buy"> <div class="pdp-badge-row" id="pdp-badges"></div> <div class="pdp-name" id="pdp-name"></div> <div class="pdp-rating"> <span class="pdp-stars">★★★★★</span> <span style="font-size:13px;font-weight:600">4.9</span> <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span> <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span> </div> <div class="pdp-price-row"> <span class="pdp-price" id="pdp-price"></span> <span class="pdp-old" id="pdp-old"></span> <span class="pdp-save" id="pdp-save"></span> </div> <div class="pdp-label">Chọn size</div> <div class="pdp-sizes" id="pdp-sizes"></div> <div class="pdp-size-info" id="pdp-size-info" style="display:none"></div> <div class="pdp-label">Màu sắc</div> <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div> <div class="pdp-label">Số lượng</div> <div class="pdp-qty-row" style="margin-bottom:24px"> <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button> <span class="pdp-qty-num" id="pdp-qty">1</span> <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button> </div> <div class="pdp-btn-row"> <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button> <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button> </div> <div class="pdp-trust"> <div class="pdp-trust-item">🚚 Miễn phí ship từ 500.000đ</div> <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div> <div class="pdp-trust-item">✅ Hàng chất lượng</div> <div class="pdp-trust-item">💳 COD toàn quốc</div> </div> </div> </div> <!-- Content: description + reviews + related --> <div class="pdp-content"> <div class="pdp-main-content"> <!-- Description --> <div class="pdp-section"> <h2>📋 Mô tả sản phẩm</h2> <div class="pdp-desc-text" id="pdp-desc-text"></div> <div class="pdp-features" id="pdp-features"> <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div> <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div> <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div> <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div> </div> </div> <!-- Size guide --> <div class="pdp-section"> <h2>📏 Bảng size chi tiết</h2> <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p> <table class="size-table"> <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead> <tbody> <tr><td><strong>S</strong></td><td>40–48 kg</td><td>78–84 cm</td><td>62–68 cm</td><td>84–90 cm</td></tr>
+<div id="scr-detail" class="screen"> <header class="pc-header"> <div class="pdp-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" width="132" height="44" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <nav class="pc-nav"> <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button> </nav> <div style="display:flex;gap:8px;margin-left:12px"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button> </div> </div> </header> <div class="pdp-wrap"> <!-- Breadcrumb --> <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px"> <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span> <span>›</span><span id="pdp-cat-crumb"></span> <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span> </div> <!-- Top: gallery + buy --> <div class="pdp-top"> <div class="pdp-gallery"> <div class="pdp-main-img" id="pdp-main-img"> <span class="pdp-main-emoji" id="pdp-main-emoji"></span> </div> <div class="pdp-thumbs" id="pdp-thumbs"></div> </div> <div class="pdp-buy"> <div class="pdp-badge-row" id="pdp-badges"></div> <div class="pdp-name" id="pdp-name"></div> <div class="pdp-rating"> <span class="pdp-stars">★★★★★</span> <span style="font-size:13px;font-weight:600">4.9</span> <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span> <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span> </div> <div class="pdp-price-row"> <span class="pdp-price" id="pdp-price"></span> <span class="pdp-old" id="pdp-old"></span> <span class="pdp-save" id="pdp-save"></span> </div> <div class="pdp-label">Chọn size</div> <div class="pdp-sizes" id="pdp-sizes"></div> <div class="pdp-size-info" id="pdp-size-info" style="display:none"></div> <div class="pdp-label">Màu sắc <span id="pdp-color-label" style="font-weight:600;color:var(--pk-d);margin-left:6px;font-size:13px"></span></div> <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div> <div class="pdp-label">Số lượng</div> <div class="pdp-qty-row" style="margin-bottom:24px"> <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button> <span class="pdp-qty-num" id="pdp-qty">1</span> <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button> </div> <div class="pdp-btn-row"> <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button> <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button> </div> <div class="pdp-trust"> <div class="pdp-trust-item">🚚 Miễn phí ship từ 500.000đ</div> <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div> <div class="pdp-trust-item">✅ Hàng chất lượng</div> <div class="pdp-trust-item">💳 COD toàn quốc</div> </div> </div> </div> <!-- Content: description + reviews + related --> <div class="pdp-content"> <div class="pdp-main-content"> <!-- Description --> <div class="pdp-section"> <h2>📋 Mô tả sản phẩm</h2> <div class="pdp-desc-text" id="pdp-desc-text"></div> <div class="pdp-features" id="pdp-features"> <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div> <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div> <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div> <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div> </div> </div> <!-- Size guide --> <div class="pdp-section"> <h2>📏 Bảng size chi tiết</h2> <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p> <table class="size-table"> <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead> <tbody> <tr><td><strong>S</strong></td><td>40–48 kg</td><td>78–84 cm</td><td>62–68 cm</td><td>84–90 cm</td></tr>
 <tr><td><strong>M</strong></td><td>48–55 kg</td><td>84–90 cm</td><td>68–74 cm</td><td>90–96 cm</td></tr>
 <tr><td><strong>L</strong></td><td>55–65 kg</td><td>90–96 cm</td><td>74–80 cm</td><td>96–102 cm</td></tr>
 <tr><td><strong>XL</strong></td><td>65–75 kg</td><td>96–102 cm</td><td>80–88 cm</td><td>102–108 cm</td></tr>
@@ -3846,11 +3867,30 @@ const SIZE_TABLE = {
    5 màu mặc định cho mọi sản phẩm. Admin bấm chọn từ 5 ô preset có sẵn,
    không phải gõ HEX tay. Có thể thêm màu lẻ tùy chỉnh nếu sản phẩm có màu lạ. */
 const COLOR_PRESETS = [
-  { name: "Hồng",      hex: "#F8C8DC" },
-  { name: "Đen",       hex: "#1A1A1A" },
-  { name: "Xanh ngọc", hex: "#A8DDD3" },
-  { name: "Xám",       hex: "#B8B8B8" },
-  { name: "Xanh than", hex: "#2C3E50" }
+  { name: "Trắng",       hex: "#FFFFFF" },
+  { name: "Đen",         hex: "#1A1A1A" },
+  { name: "Be",          hex: "#E8DCC4" },
+  { name: "Kem",         hex: "#FAF3E0" },
+  { name: "Hồng",        hex: "#F8C8DC" },
+  { name: "Hồng pastel", hex: "#FFD1DC" },
+  { name: "Hồng đậm",    hex: "#E91E8C" },
+  { name: "Đỏ",          hex: "#D32F2F" },
+  { name: "Đỏ đô",       hex: "#7B1F2D" },
+  { name: "Cam",         hex: "#F57C00" },
+  { name: "Vàng kem",    hex: "#F5E6B3" },
+  { name: "Vàng",        hex: "#F9C846" },
+  { name: "Xanh ngọc",   hex: "#A8DDD3" },
+  { name: "Xanh mint",   hex: "#B5E7CC" },
+  { name: "Xanh lá",     hex: "#388E3C" },
+  { name: "Xanh navy",   hex: "#1E3A5F" },
+  { name: "Xanh than",   hex: "#2C3E50" },
+  { name: "Xanh dương",  hex: "#42A5F5" },
+  { name: "Tím",         hex: "#9C27B0" },
+  { name: "Tím lavender",hex: "#C8B6E2" },
+  { name: "Nâu",         hex: "#6D4C41" },
+  { name: "Nâu cafe",    hex: "#3E2723" },
+  { name: "Xám",         hex: "#B8B8B8" },
+  { name: "Xám đậm",     hex: "#555555" }
 ];
 
 /* Tìm tên màu theo HEX (so với preset) - fallback "Màu" nếu không khớp */
@@ -4563,10 +4603,136 @@ function renderShop(){
   grid.innerHTML=list.map(p=>{
     const pImgs = getProductImages(p);
     const hasImg = pImgs.length > 0;
+    // Lấy tất cả ảnh của tất cả variants màu - dùng cho swipe ngang
+    const allVariantImgs = [];
+    if (Array.isArray(p.colors)) {
+      p.colors.forEach((c, ci) => {
+        if (c && Array.isArray(c.images)) {
+          c.images.forEach(src => {
+            if (src) allVariantImgs.push({ src, colorIdx: ci, colorName: (c.name || findColorName(c.hex || '')) });
+          });
+        }
+      });
+    }
+    // Fallback: nếu không có variant images thì dùng ảnh sản phẩm chung
+    if (allVariantImgs.length === 0 && hasImg) {
+      pImgs.forEach(src => allVariantImgs.push({ src, colorIdx: 0, colorName: '' }));
+    }
+    const totalImgs = allVariantImgs.length;
+    const showSwipe = totalImgs > 1; // Chỉ hiển thị nav khi có >1 ảnh
+
+    // Render ảnh + nav arrows + dots
+    let imgHtml = '';
+    if (hasImg) {
+      imgHtml = `<div class="prod-swipe-track" data-idx="0" data-total="${totalImgs}">` +
+        allVariantImgs.map((it, i) =>
+          `<img src="${it.src}" alt="${p.name}" loading="lazy" class="prod-swipe-img${i===0?' active':''}" data-color="${(it.colorName||'').replace(/"/g,'&quot;')}">`
+        ).join('') + `</div>`;
+    } else {
+      imgHtml = `<span class="prod-emoji-fallback">${p.emoji}</span>`;
+    }
+
+    const navArrows = showSwipe ? `
+      <button class="prod-swipe-arrow prod-swipe-prev" onclick="event.stopPropagation();swipeProdImg(this,-1)" aria-label="Ảnh trước">‹</button>
+      <button class="prod-swipe-arrow prod-swipe-next" onclick="event.stopPropagation();swipeProdImg(this,1)" aria-label="Ảnh tiếp">›</button>` : '';
+
+    const dotsHtml = showSwipe ? `<div class="prod-swipe-dots">` +
+      allVariantImgs.map((it, i) =>
+        `<span class="prod-swipe-dot${i===0?' active':''}" data-idx="${i}" onclick="event.stopPropagation();gotoProdImg(this,${i})" title="${(it.colorName||'').replace(/"/g,'&quot;')}"></span>`
+      ).join('') + `</div>` : '';
+
+    const colorBadgeHtml = showSwipe && allVariantImgs[0].colorName
+      ? `<span class="prod-color-badge">${allVariantImgs[0].colorName}</span>`
+      : '';
+
     return`<div class="prod-card" onclick="openDetail(${p.id})"> <div class="prod-img-wrap">
-        ${hasImg?`<img src="${pImgs[0]}" alt="${p.name}" loading="lazy">`:`<span class="prod-emoji-fallback">${p.emoji}</span>`}
-        <button class="like-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button> <span class="sold-tag">Đã bán ${p.sold>=1000?(p.sold/1000).toFixed(1)+'k':p.sold}</span> </div> <div class="prod-info"> <div class="prod-name">${p.name}</div> <div><span class="prod-price">${formatVND(p.price)}đ</span><span class="prod-old">${formatVND(p.old)}đ</span></div> <div class="prod-sizes">${p.sizes.slice(0,4).map(s=>`<span class="ps-tag">${s}</span>`).join('')}</div> <div style="display:flex;align-items:center;gap:4px"><span class="stars">★★★★★</span><span style="font-size:11px;color:var(--light)">4.9</span></div> <button class="add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">+ Thêm vào giỏ hàng</button> </div> </div>`;
+        ${imgHtml}
+        ${navArrows}
+        ${colorBadgeHtml}
+        <button class="like-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button> <span class="sold-tag">Đã bán ${p.sold>=1000?(p.sold/1000).toFixed(1)+'k':p.sold}</span>
+        ${dotsHtml}
+      </div> <div class="prod-info"> <div class="prod-name">${p.name}</div> <div><span class="prod-price">${formatVND(p.price)}đ</span><span class="prod-old">${formatVND(p.old)}đ</span></div> <div class="prod-sizes">${p.sizes.slice(0,4).map(s=>`<span class="ps-tag">${s}</span>`).join('')}</div> <div style="display:flex;align-items:center;gap:4px"><span class="stars">★★★★★</span><span style="font-size:11px;color:var(--light)">4.9</span></div> <button class="add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">+ Thêm vào giỏ hàng</button> </div> </div>`;
   }).join('');
+  // Sau khi render, gắn touch listeners cho mobile swipe
+  attachProdSwipeTouch();
+}
+
+/* ══ PRODUCT CARD IMAGE SWIPE ══
+   Cho phép khách lướt qua các ảnh variant (mỗi màu) ngay trên card mà không cần vào trang chi tiết.
+   - Desktop: nút mũi tên ‹ › và chấm dưới ảnh
+   - Mobile: vuốt ngang (touch swipe) */
+
+/* Chuyển ảnh prev/next bằng nút mũi tên */
+function swipeProdImg(btnEl, dir){
+  const wrap = btnEl.closest('.prod-img-wrap');
+  if(!wrap) return;
+  const track = wrap.querySelector('.prod-swipe-track');
+  if(!track) return;
+  const total = parseInt(track.dataset.total) || 1;
+  let idx = parseInt(track.dataset.idx) || 0;
+  idx = (idx + dir + total) % total;
+  showProdImg(wrap, idx);
+}
+
+/* Click trực tiếp 1 dot */
+function gotoProdImg(dotEl, idx){
+  const wrap = dotEl.closest('.prod-img-wrap');
+  if(!wrap) return;
+  showProdImg(wrap, idx);
+}
+
+/* Set ảnh active theo index + cập nhật dots + cập nhật badge tên màu */
+function showProdImg(wrap, idx){
+  const track = wrap.querySelector('.prod-swipe-track');
+  if(!track) return;
+  track.dataset.idx = idx;
+  const imgs = wrap.querySelectorAll('.prod-swipe-img');
+  imgs.forEach((im, i) => im.classList.toggle('active', i === idx));
+  const dots = wrap.querySelectorAll('.prod-swipe-dot');
+  dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  // Cập nhật badge tên màu
+  const badge = wrap.querySelector('.prod-color-badge');
+  const colorName = imgs[idx] ? imgs[idx].getAttribute('data-color') : '';
+  if(badge){
+    if(colorName){ badge.textContent = colorName; badge.style.display = ''; }
+    else { badge.style.display = 'none'; }
+  }
+}
+
+/* Gắn touch swipe cho tất cả product cards trên mobile */
+function attachProdSwipeTouch(){
+  document.querySelectorAll('.prod-img-wrap').forEach(wrap => {
+    const track = wrap.querySelector('.prod-swipe-track');
+    if(!track) return;
+    if(wrap.dataset.touchAttached === '1') return;
+    wrap.dataset.touchAttached = '1';
+    let startX = 0, startY = 0, isSwiping = false;
+    wrap.addEventListener('touchstart', e => {
+      if(e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isSwiping = false;
+    }, { passive: true });
+    wrap.addEventListener('touchmove', e => {
+      if(e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      // Chỉ swipe nếu chuyển động ngang rõ ràng (>10px) và lớn hơn dọc
+      if(Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+        isSwiping = true;
+      }
+    }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      if(!isSwiping) return;
+      const endX = (e.changedTouches[0] || {}).clientX || startX;
+      const dx = endX - startX;
+      if(Math.abs(dx) < 30) return; // ngưỡng tối thiểu để tính là swipe
+      const total = parseInt(track.dataset.total) || 1;
+      let idx = parseInt(track.dataset.idx) || 0;
+      idx = (idx + (dx < 0 ? 1 : -1) + total) % total;
+      showProdImg(wrap, idx);
+    }, { passive: true });
+  });
 }
 function setCat(el,c){
   catF=c;
@@ -4689,8 +4855,14 @@ function openDetail(id){
   document.getElementById('pdp-colors').innerHTML = colorsArr.map((c, i) => {
     const hex = (typeof c === 'object' && c.hex) ? c.hex : (typeof c === 'string' ? c : '#CCCCCC');
     const name = (typeof c === 'object' && c.name) ? c.name : findColorName(hex);
-    return `<div class="pdp-cdot${i===0?' sel':''}" style="background:${hex};border:2px solid #ddd" onclick="pdpSelCol(this, ${i})" title="${name}"></div>`;
+    return `<div class="pdp-cdot${i===0?' sel':''}" style="background:${hex};border:2px solid #ddd" onclick="pdpSelCol(this, ${i})" title="${name}" data-color-name="${name.replace(/"/g,'&quot;')}"></div>`;
   }).join('');
+  // Hiện tên màu mặc định (màu đầu tiên) ngay khi mở PDP
+  const firstColorName = colorsArr.length
+    ? ((typeof colorsArr[0] === 'object' && colorsArr[0].name) ? colorsArr[0].name : findColorName(colorsArr[0]))
+    : '';
+  const colorLbl = document.getElementById('pdp-color-label');
+  if (colorLbl) colorLbl.textContent = firstColorName ? 'Màu: ' + firstColorName : '';
 
   // Description
   document.getElementById('pdp-desc-text').textContent=p.desc||'Sản phẩm chất lượng cao, thiết kế dành riêng cho nàng bigsize. Chất liệu thoáng mát, co giãn tốt, phù hợp nhiều dịp.';
@@ -4791,7 +4963,11 @@ function pdpSelCol(el, colorIdx){
   if (curProd) pdpRenderGallery(curProd, pdpCurColorIdx);
   // Lưu tên màu hiện tại để dùng khi add to cart
   const c = curProd && curProd.colors && curProd.colors[pdpCurColorIdx];
-  if (c) pdpCurColor = (typeof c === 'object' ? c.name : findColorName(c));
+  const name = c ? (typeof c === 'object' ? c.name : findColorName(c)) : '';
+  if (c) pdpCurColor = name;
+  // Cập nhật label tên màu hiển thị cho khách
+  const colorLbl = document.getElementById('pdp-color-label');
+  if (colorLbl) colorLbl.textContent = name ? 'Màu: ' + name : '';
 }
 function pdpChangeQty(d){pdpQtyVal=Math.max(1,pdpQtyVal+d);document.getElementById('pdp-qty').textContent=pdpQtyVal;}
 function pdpAddCart(){
