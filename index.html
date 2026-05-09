@@ -4031,7 +4031,7 @@ function sendTelegramNotification(order) {
   const payLabels = {cod:'💵 COD (thu tiền khi giao)',bank:'🏦 Chuyển khoản ngân hàng',momo:'🍑 MoMo'};
   const statusLabels = {pending:'⏳ Chờ xác nhận',awaiting:'⏳ Đã chuyển - chờ xác nhận',paid:'✅ Đã thanh toán'};
 
-  const items = order.items.map(i=>`  • ${i.name} (Size ${i.size}) x${i.qty} = ${formatVND(i.price*i.qty)}đ`).join('\n');
+  const items = order.items.map(i=>`  • ${i.name} (Size ${i.size}${i.color?`, Màu ${i.color}`:''}) x${i.qty} = ${formatVND(i.price*i.qty)}đ`).join('\n');
 
   const msg = [
     '🛍 *ĐƠN HÀNG MỚI - MŨM BIGSIZE*',
@@ -4077,7 +4077,7 @@ function sendOrderToSheet(order){
   if (!SHEET_CONFIG.enabled || !SHEET_CONFIG.webhookUrl) return;
   const payLabels = {cod:'COD',bank:'Chuyển khoản',momo:'MoMo'};
   const statusLabels = {pending:'Chờ xác nhận',awaiting:'Chờ xác nhận',paid:'Đã thanh toán',failed:'Thất bại'};
-  const items = (order.items||[]).map(i=>`${i.name} (Size ${i.size}) x${i.qty}`).join(' | ');
+  const items = (order.items||[]).map(i=>`${i.name} (Size ${i.size}${i.color?`, Màu ${i.color}`:''}) x${i.qty}`).join(' | ');
   const payload = {
     id: order.id||'',
     time: new Date().toLocaleString('vi-VN', {timeZone:'Asia/Ho_Chi_Minh'}),
@@ -5043,8 +5043,15 @@ function pdpSelCol(el, colorIdx){
 function pdpChangeQty(d){pdpQtyVal=Math.max(1,pdpQtyVal+d);document.getElementById('pdp-qty').textContent=pdpQtyVal;}
 function pdpAddCart(){
   if(!curProd)return;
-  const ex=cart.find(i=>i.id===curProd.id&&i.size===pdpCurSize);
-  if(ex)ex.qty+=pdpQtyVal;else cart.push({...curProd,size:pdpCurSize,qty:pdpQtyVal});
+  // Lấy tên màu hiện tại đang chọn (nếu sản phẩm có nhiều màu)
+  const curColorObj = curProd.colors && curProd.colors[pdpCurColorIdx];
+  const colorName = curColorObj
+    ? (typeof curColorObj === 'object' ? (curColorObj.name || findColorName(curColorObj.hex||'')) : findColorName(curColorObj))
+    : '';
+  // Cùng id + size + color mới được merge qty (khác màu = item riêng)
+  const ex=cart.find(i=>i.id===curProd.id&&i.size===pdpCurSize&&(i.color||'')===colorName);
+  if(ex)ex.qty+=pdpQtyVal;
+  else cart.push({...curProd,size:pdpCurSize,qty:pdpQtyVal,color:colorName,colorIdx:pdpCurColorIdx});
   // Cập nhật badge NGAY - không dùng animation override để tránh lag
   const n=cart.reduce((a,i)=>a+i.qty,0);
   syncCartCount(n);
@@ -5055,7 +5062,12 @@ function pdpAddCart(){
 function pdpBuyNow(){pdpAddCart();setTimeout(openCart,150);}
 function pdpOrderZalo(){
   if(!curProd)return;
-  const msg=encodeURIComponent(`🛍 ĐẶT HÀNG – MŨM BIGSIZE\n\nSản phẩm: ${curProd.name}\nSize: ${pdpCurSize} | SL: ${pdpQtyVal}\nGiá: ${formatVND(curProd.price*pdpQtyVal)}đ\n\nVui lòng cho mình biết tên, SĐT và địa chỉ nhận hàng ạ 🌸`);
+  const curColorObj = curProd.colors && curProd.colors[pdpCurColorIdx];
+  const colorName = curColorObj
+    ? (typeof curColorObj === 'object' ? (curColorObj.name || findColorName(curColorObj.hex||'')) : findColorName(curColorObj))
+    : '';
+  const colorLine = colorName ? ` | Màu: ${colorName}` : '';
+  const msg=encodeURIComponent(`🛍 ĐẶT HÀNG – MŨM BIGSIZE\n\nSản phẩm: ${curProd.name}\nSize: ${pdpCurSize}${colorLine} | SL: ${pdpQtyVal}\nGiá: ${formatVND(curProd.price*pdpQtyVal)}đ\n\nVui lòng cho mình biết tên, SĐT và địa chỉ nhận hàng ạ 🌸`);
   window.open(getZalo()+'?text='+msg,'_blank');
 }
 function pdpOrderFB(){
@@ -5084,9 +5096,11 @@ function closeCart(){
 function quickAdd(id){
   const p=products.find(x=>x.id===id);if(!p)return;
   if(p.sizes&&p.sizes.length===1){
-    // Chỉ 1 size → add thẳng
-    const ex=cart.find(i=>i.id===p.id&&i.size===p.sizes[0]);
-    if(ex)ex.qty++;else cart.push({...p,size:p.sizes[0],qty:1});
+    // Chỉ 1 size → add thẳng (lấy màu đầu tiên làm mặc định)
+    const c0 = p.colors && p.colors[0];
+    const colorName = c0 ? (typeof c0 === 'object' ? (c0.name || findColorName(c0.hex||'')) : findColorName(c0)) : '';
+    const ex=cart.find(i=>i.id===p.id&&i.size===p.sizes[0]&&(i.color||'')===colorName);
+    if(ex)ex.qty++;else cart.push({...p,size:p.sizes[0],qty:1,color:colorName,colorIdx:0});
     updBadge();
     showCartToast(p,1,p.sizes[0]);
   } else {
@@ -5113,7 +5127,19 @@ function renderCartFoot(){
 
 /* ── Build 1 cart item HTML ── */
 function buildCiHtml(it,i){
-  return `<div class="ci" data-ci="${i}"> <div class="ci-img">${(()=>{const _imgs=getProductImages(it);return _imgs[0]?`<img src="${_imgs[0]}" alt="" loading="lazy">`:`<span>${it.emoji}</span>`;})()}</div> <div class="ci-info"> <div class="ci-name">${it.name}</div> <div class="ci-meta" style="color:var(--muted);font-size:11px">Size: ${it.size}</div> <div style="display:flex;align-items:center;gap:8px;margin-top:6px"> <div class="ci-qty-ctrl"> <button onclick="cartChangeQty(${i},-1)">−</button> <span id="ci-qty-${i}">${it.qty}</span> <button onclick="cartChangeQty(${i},1)">+</button> </div> <div class="ci-price" id="ci-price-${i}" style="margin:0">${formatVND(it.price*it.qty)}đ</div> </div> </div> <button class="ci-del" onclick="rmCart(${i})">×</button> </div>`;
+  // Lấy hex của màu đã chọn (nếu có) để vẽ chấm tròn nhỏ - cho khách dễ nhận diện trực quan
+  let colorHex = '';
+  if(it.color && Array.isArray(it.colors)){
+    const found = it.colors.find(c => {
+      if(typeof c === 'object') return (c.name||'') === it.color;
+      return findColorName(c) === it.color;
+    });
+    if(found) colorHex = (typeof found === 'object' ? (found.hex||'') : found) || '';
+  }
+  // Render dòng meta: Size + Màu (nếu có)
+  const colorDot = colorHex ? `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${colorHex};border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:4px"></span>` : '';
+  const colorPart = it.color ? ` <span style="color:var(--muted);margin:0 4px">•</span> Màu: ${colorDot}<strong style="color:var(--text);font-weight:600">${it.color}</strong>` : '';
+  return `<div class="ci" data-ci="${i}"> <div class="ci-img">${(()=>{const _imgs=getProductImages(it);return _imgs[0]?`<img src="${_imgs[0]}" alt="" loading="lazy">`:`<span>${it.emoji}</span>`;})()}</div> <div class="ci-info"> <div class="ci-name">${it.name}</div> <div class="ci-meta" style="color:var(--muted);font-size:11px">Size: <strong style="color:var(--text);font-weight:600">${it.size}</strong>${colorPart}</div> <div style="display:flex;align-items:center;gap:8px;margin-top:6px"> <div class="ci-qty-ctrl"> <button onclick="cartChangeQty(${i},-1)">−</button> <span id="ci-qty-${i}">${it.qty}</span> <button onclick="cartChangeQty(${i},1)">+</button> </div> <div class="ci-price" id="ci-price-${i}" style="margin:0">${formatVND(it.price*it.qty)}đ</div> </div> </div> <button class="ci-del" onclick="rmCart(${i})">×</button> </div>`;
 }
 
 function renderCart(){
@@ -5186,7 +5212,10 @@ function renderCheckoutSummary(){
   const totalDisc = prepayDisc + vipDisc + voucherDisc;
   const total = Math.max(0, tot + ship - totalDisc);
 
-  let html = cart.map(it=>`<div class="sum-row"><span>${it.name} x${it.qty}</span><span>${formatVND(it.price*it.qty)}đ</span></div>`).join('');
+  let html = cart.map(it=>{
+    const meta = [it.size?`Size ${it.size}`:'', it.color?`Màu ${it.color}`:''].filter(Boolean).join(' · ');
+    return `<div class="sum-row"><span>${it.name}${meta?` <span style="color:var(--muted);font-size:11px;font-weight:400">(${meta})</span>`:''} x${it.qty}</span><span>${formatVND(it.price*it.qty)}đ</span></div>`;
+  }).join('');
   html += `<div class="sum-row"><span>Tạm tính</span><span>${formatVND(tot)}đ</span></div>`;
   html += `<div class="sum-row"><span>Phí vận chuyển</span><span>${ship===0?'<span style="color:var(--gr);font-weight:600">Miễn phí 🎉</span>':formatVND(ship)+'đ'}</span></div>`;
   if(prepayDisc > 0){
@@ -5334,6 +5363,7 @@ function saveOrder(o){
     phone:o.phone,
     product:o.items.map(i=>i.name+(o.items.length>1?` x${i.qty}`:'')).join(', '),
     size:o.items.map(i=>i.size).join('/'),
+    color:o.items.map(i=>i.color||'').filter(Boolean).join('/'),
     total:o.total,
     payMethod:o.payMethod,
     payStatus:o.payStatus,
@@ -5560,7 +5590,7 @@ function renderAOrds(f){
   let list=(f==='all'?orders:orders.filter(o=>o.status===f)).filter(o=>adPayFilter==='all'||o.payStatus===adPayFilter);
   if(!list.length){el.innerHTML='<div style="text-align:center;padding:28px;color:var(--muted);font-size:13px">Không có đơn hàng</div>';return;}
   el.innerHTML=list.map((o,idx)=>`
-    <div class="ord-row" style="flex-wrap:wrap;gap:6px;padding:14px 16px"> <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:200px"> <div class="ord-ch" style="background:var(--pk-l);color:var(--pk-d);font-size:14px;font-weight:700;flex-shrink:0">${o.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</div> <div class="ord-info"> <div class="ord-name">${o.name} <span style="font-size:11px;color:var(--muted)">${o.id}</span></div> <div class="ord-detail">📞 ${o.phone||''} · ${o.product} (${o.size}) · ${o.time}</div>
+    <div class="ord-row" style="flex-wrap:wrap;gap:6px;padding:14px 16px"> <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:200px"> <div class="ord-ch" style="background:var(--pk-l);color:var(--pk-d);font-size:14px;font-weight:700;flex-shrink:0">${o.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}</div> <div class="ord-info"> <div class="ord-name">${o.name} <span style="font-size:11px;color:var(--muted)">${o.id}</span></div> <div class="ord-detail">📞 ${o.phone||''} · ${o.product} (${o.size}${o.color?` · ${o.color}`:''}) · ${o.time}</div>
           ${o.addr?`<div style="font-size:11px;color:var(--muted)">📍 ${o.addr}</div>`:''}
         </div> </div> <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         ${getPayMethodBadge(o.payMethod)}
