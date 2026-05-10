@@ -333,6 +333,7 @@ a{text-decoration:none;color:inherit}
 .prod-old{color:var(--light);font-size:11px;text-decoration:line-through;margin-left:4px}
 .prod-sizes{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
 .ps-tag{font-size:9px;padding:2px 6px;border:1px solid var(--border);border-radius:4px;color:var(--muted)}
+.ps-arrow{display:inline-flex;align-items:center;font-size:11px;color:var(--pk);font-weight:700;margin:0 2px;line-height:1}
 .stars{color:#EF9F27;font-size:11px}
 .add-btn{width:100%;background:var(--pk-l);border:1px solid var(--pk-b);color:var(--pk-d);border-radius:8px;padding:8px;font-size:12px;font-weight:600;cursor:pointer;margin-top:8px;font-family:var(--font);transition:all .2s}
 .add-btn:hover{background:var(--pk);color:#fff}
@@ -3436,7 +3437,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <div class="cart-overlay-bg" id="cart-bg" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cart-drawer"> <div class="cart-head"><h2>🛒 Giỏ hàng</h2><button class="cart-close" onclick="closeCart()">×</button></div> <div class="cart-items" id="cart-items-el"></div> <div class="cart-foot" id="cart-foot-el"></div>
 </div> <!-- ══════════ PRODUCT DETAIL (LANDING PAGE) ══════════ -->
-<div id="scr-detail" class="screen"> <header class="pc-header"> <div class="pdp-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" width="132" height="44" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <nav class="pc-nav"> <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button> </nav> <div style="display:flex;gap:8px;margin-left:12px"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button> </div> </div> </header> <div class="pdp-wrap"> <!-- Breadcrumb --> <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px"> <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span> <span>›</span><span id="pdp-cat-crumb"></span> <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span> </div> <!-- Top: gallery + buy --> <div class="pdp-top"> <div class="pdp-gallery"> <div class="pdp-main-img" id="pdp-main-img"> <span class="pdp-main-emoji" id="pdp-main-emoji"></span> </div> <div class="pdp-thumbs" id="pdp-thumbs"></div> </div> <div class="pdp-buy"> <div class="pdp-badge-row" id="pdp-badges"></div> <div class="pdp-name" id="pdp-name"></div> <div class="pdp-rating"> <span class="pdp-stars">★★★★★</span> <span style="font-size:13px;font-weight:600">4.9</span> <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span> <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span> </div> <div class="pdp-price-row"> <span class="pdp-price" id="pdp-price"></span> <span class="pdp-old" id="pdp-old"></span> <span class="pdp-save" id="pdp-save"></span> </div> <div class="pdp-label">Chọn size</div> <div class="pdp-sizes" id="pdp-sizes"></div> <div class="pdp-size-info" id="pdp-size-info" style="display:none"></div> <div class="pdp-label">Màu sắc <span id="pdp-color-label" style="font-weight:600;color:var(--pk-d);margin-left:6px;font-size:13px"></span></div> <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div> <div class="pdp-label">Số lượng</div> <div class="pdp-qty-row" style="margin-bottom:24px"> <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button> <span class="pdp-qty-num" id="pdp-qty">1</span> <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button> </div> <div class="pdp-btn-row"> <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button> <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button> </div> <div class="pdp-trust"> <div class="pdp-trust-item">🚚 Miễn phí ship từ 500.000đ</div> <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div> <div class="pdp-trust-item">✅ Hàng chất lượng</div> <div class="pdp-trust-item">💳 COD toàn quốc</div> </div> </div> </div> <!-- Content: description + reviews + related --> <div class="pdp-content"> <div class="pdp-main-content"> <!-- Description --> <div class="pdp-section"> <h2>📋 Mô tả sản phẩm</h2> <div class="pdp-desc-text" id="pdp-desc-text"></div> <div class="pdp-features" id="pdp-features"> <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div> <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div> <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div> <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div> </div> </div> <!-- Size guide --> <div class="pdp-section"> <h2>📏 Bảng size chi tiết</h2> <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p> <table class="size-table"> <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead> <tbody> <tr><td><strong>S</strong></td><td>40–48 kg</td><td>78–84 cm</td><td>62–68 cm</td><td>84–90 cm</td></tr>
+<div id="scr-detail" class="screen"> <header class="pc-header"> <div class="pdp-header-inner"> <div onclick="backShop()" style="cursor:pointer"><img class="brand-logo" alt="Mũm Big Size" width="132" height="44" style="height:44px;width:auto;object-fit:contain;display:block"></div> <div style="flex:1"></div> <nav class="pc-nav"> <button class="btn" onclick="backShop()" style="font-size:13px">← Tất cả sản phẩm</button> </nav> <div style="display:flex;gap:8px;margin-left:12px"> <button class="pc-cart-btn" onclick="openCart()">🛒 Giỏ hàng <span class="cart-badge-num" id="cart-count2">0</span></button> </div> </div> </header> <div class="pdp-wrap"> <!-- Breadcrumb --> <div id="pdp-breadcrumb" style="font-size:12px;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:6px"> <span style="cursor:pointer;color:var(--pk)" onclick="backShop()">Trang chủ</span> <span>›</span><span id="pdp-cat-crumb"></span> <span>›</span><span id="pdp-name-crumb" style="color:var(--text)"></span> </div> <!-- Top: gallery + buy --> <div class="pdp-top"> <div class="pdp-gallery"> <div class="pdp-main-img" id="pdp-main-img"> <span class="pdp-main-emoji" id="pdp-main-emoji"></span> </div> <div class="pdp-thumbs" id="pdp-thumbs"></div> </div> <div class="pdp-buy"> <div class="pdp-badge-row" id="pdp-badges"></div> <div class="pdp-name" id="pdp-name"></div> <div class="pdp-rating"> <span class="pdp-stars">★★★★★</span> <span style="font-size:13px;font-weight:600" id="pdp-rating-num">4.9</span> <span style="font-size:12px;color:var(--muted)" id="pdp-sold-txt"></span> <span style="font-size:12px;color:var(--gr);margin-left:4px">✓ Còn hàng</span> </div> <div class="pdp-price-row"> <span class="pdp-price" id="pdp-price"></span> <span class="pdp-old" id="pdp-old"></span> <span class="pdp-save" id="pdp-save"></span> </div> <div class="pdp-label">Chọn size</div> <div class="pdp-sizes" id="pdp-sizes"></div> <div class="pdp-size-info" id="pdp-size-info" style="display:none"></div> <div class="pdp-label">Màu sắc <span id="pdp-color-label" style="font-weight:600;color:var(--pk-d);margin-left:6px;font-size:13px"></span></div> <div class="pdp-colors" id="pdp-colors" style="margin-bottom:20px"></div> <div class="pdp-label">Số lượng</div> <div class="pdp-qty-row" style="margin-bottom:24px"> <button class="pdp-qbtn" onclick="pdpChangeQty(-1)">−</button> <span class="pdp-qty-num" id="pdp-qty">1</span> <button class="pdp-qbtn" onclick="pdpChangeQty(1)">+</button> </div> <div class="pdp-btn-row"> <button class="pdp-btn-add" onclick="pdpAddCart()">🛒 Thêm vào giỏ hàng</button> <button class="pdp-btn-buy" onclick="pdpBuyNow()">⚡ Mua ngay</button> </div> <div class="pdp-trust"> <div class="pdp-trust-item">🚚 Miễn phí ship từ 500.000đ</div> <div class="pdp-trust-item">🔄 Đổi size 7 ngày</div> <div class="pdp-trust-item">✅ Hàng chất lượng</div> <div class="pdp-trust-item">💳 COD toàn quốc</div> </div> </div> </div> <!-- Content: description + reviews + related --> <div class="pdp-content"> <div class="pdp-main-content"> <!-- Description --> <div class="pdp-section"> <h2>📋 Mô tả sản phẩm</h2> <div class="pdp-desc-text" id="pdp-desc-text"></div> <div class="pdp-features" id="pdp-features"> <div class="feat-item"><span class="feat-icon">👗</span><div class="feat-text"><strong>Chất liệu cao cấp</strong>Vải mềm mại, thoáng mát, co giãn 4 chiều thoải mái cả ngày</div></div> <div class="feat-item"><span class="feat-icon">📐</span><div class="feat-text"><strong>Form dáng chuẩn</strong>Thiết kế riêng cho vóc dáng bigsize, tôn lên đường cong tự nhiên</div></div> <div class="feat-item"><span class="feat-icon">🎨</span><div class="feat-text"><strong>Màu sắc bền đẹp</strong>Màu nhuộm cao cấp, không phai sau nhiều lần giặt</div></div> <div class="feat-item"><span class="feat-icon">✂️</span><div class="feat-text"><strong>Đường may tỉ mỉ</strong>Từng đường may được kiểm tra kỹ, bền chắc và gọn gàng</div></div> </div> </div> <!-- Size guide --> <div class="pdp-section"> <h2>📏 Bảng size chi tiết</h2> <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Đo vòng ngực, vòng eo, vòng mông và đối chiếu bảng bên dưới để chọn size phù hợp nhất.</p> <table class="size-table"> <thead><tr><th>Size</th><th>Cân nặng</th><th>Vòng ngực</th><th>Vòng eo</th><th>Vòng mông</th></tr></thead> <tbody> <tr><td><strong>S</strong></td><td>40–48 kg</td><td>78–84 cm</td><td>62–68 cm</td><td>84–90 cm</td></tr>
 <tr><td><strong>M</strong></td><td>48–55 kg</td><td>84–90 cm</td><td>68–74 cm</td><td>90–96 cm</td></tr>
 <tr><td><strong>L</strong></td><td>55–65 kg</td><td>90–96 cm</td><td>74–80 cm</td><td>96–102 cm</td></tr>
 <tr><td><strong>XL</strong></td><td>65–75 kg</td><td>96–102 cm</td><td>80–88 cm</td><td>102–108 cm</td></tr>
@@ -3445,7 +3446,7 @@ button, .mob-chip, .cat-item, .sz-btn, .add-btn,
 <tr><td><strong>4XL</strong></td><td>95–105 kg</td><td>116–124 cm</td><td>104–112 cm</td><td>120–128 cm</td></tr>
 <tr><td><strong>5XL</strong></td><td>105–115 kg</td><td>124–132 cm</td><td>112–122 cm</td><td>128–136 cm</td></tr>
 <tr><td><strong>6XL</strong></td><td>115–120 kg</td><td>132–140 cm</td><td>122–132 cm</td><td>136–144 cm</td></tr>
-<tr><td><strong>7XL</strong></td><td>120–130 kg</td><td>140–148 cm</td><td>132–142 cm</td><td>144–152 cm</td></tr> </tbody> </table> </div> <!-- Reviews --> <div class="pdp-section"> <h2>⭐ Đánh giá khách hàng</h2> <div class="review-summary"> <div class="review-score"><div class="big">4.9</div><div style="color:#EF9F27;font-size:16px;margin:4px 0">★★★★★</div><div style="font-size:12px;color:var(--muted)">1,247 đánh giá</div></div> <div class="review-bars"> <div class="rbar-row"><span class="rbar-lbl">5</span><div class="rbar-track"><div class="rbar-fill" style="width:88%"></div></div><span style="font-size:11px;color:var(--muted)">88%</span></div> <div class="rbar-row"><span class="rbar-lbl">4</span><div class="rbar-track"><div class="rbar-fill" style="width:9%"></div></div><span style="font-size:11px;color:var(--muted)">9%</span></div> <div class="rbar-row"><span class="rbar-lbl">3</span><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><span style="font-size:11px;color:var(--muted)">2%</span></div> <div class="rbar-row"><span class="rbar-lbl">2</span><div class="rbar-track"><div class="rbar-fill" style="width:1%"></div></div><span style="font-size:11px;color:var(--muted)">1%</span></div> </div> </div> <div id="review-list"> <div class="review-item"><div class="ri-header"><div class="ri-avatar">LT</div><div><div class="ri-name">Lê Thị Thảo</div><div style="color:#EF9F27;font-size:12px">★★★★★</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">2 ngày trước</div></div><div class="ri-text">Mình mua size 2XL, nặng 78kg. Vải mềm lắm, mặc vào rất thoải mái. Đường may tỉ mỉ, nhìn sang hơn hình nhiều. Chắc chắn sẽ mua thêm!</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div> <div class="review-item"><div class="ri-header"><div class="ri-avatar">NH</div><div><div class="ri-name">Nguyễn Hà My</div><div style="color:#EF9F27;font-size:12px">★★★★★</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">5 ngày trước</div></div><div class="ri-text">Shop giao hàng nhanh, đóng gói cẩn thận. Size chuẩn theo bảng, mình 85kg mua 3XL vừa đẹp. Màu đẹp y hình, chất liệu mát mẻ phù hợp thời tiết miền Nam.</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div> <div class="review-item"><div class="ri-header"><div class="ri-avatar">PB</div><div><div class="ri-name">Phạm Bảo Châu</div><div style="color:#EF9F27;font-size:12px">★★★★☆</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">1 tuần trước</div></div><div class="ri-text">Sản phẩm đẹp, vải tốt. Trừ 1 sao vì giao hơi chậm 1 ngày so với dự kiến. Nhưng chất lượng thì 10/10, sẽ ủng hộ shop tiếp!</div><div class="ri-verified">✓ Đã mua hàng xác nhận</div></div> </div> </div> </div> <!-- Right sidebar --> <div class="pdp-sidebar"> <div class="pdp-sidebar-card"> <h3>🔥 Sản phẩm liên quan</h3> <div id="pdp-related"></div> </div> <div class="pdp-sidebar-card" style="position:sticky;top:80px"> <h3>📦 Thông tin giao hàng</h3> <div style="display:flex;flex-direction:column;gap:10px"> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🚚</span><div><div style="font-size:13px;font-weight:600">Giao hàng toàn quốc</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Miễn phí ship đơn từ 500.000đ. Ship trong 2–4 ngày.</div></div></div> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🔄</span><div><div style="font-size:13px;font-weight:600">Đổi trả dễ dàng</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Đổi size miễn phí trong 7 ngày nếu không vừa.</div></div></div> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">💳</span><div><div style="font-size:13px;font-weight:600">Thanh toán linh hoạt</div><div style="font-size:12px;color:var(--muted);margin-top:2px">COD, chuyển khoản, MoMo, ZaloPay.</div></div></div> </div> </div> </div> </div> </div>
+<tr><td><strong>7XL</strong></td><td>120–130 kg</td><td>140–148 cm</td><td>132–142 cm</td><td>144–152 cm</td></tr> </tbody> </table> </div> <!-- Reviews --> <div class="pdp-section"> <h2>⭐ Đánh giá khách hàng</h2> <div class="review-summary"> <div class="review-score"><div class="big" id="pdp-rev-score">4.9</div><div style="color:#EF9F27;font-size:16px;margin:4px 0">★★★★★</div><div style="font-size:12px;color:var(--muted)" id="pdp-rev-count">0 đánh giá</div></div> <div class="review-bars" id="pdp-rev-bars"> <div class="rbar-row"><span class="rbar-lbl">5</span><div class="rbar-track"><div class="rbar-fill" style="width:88%"></div></div><span style="font-size:11px;color:var(--muted)">88%</span></div> <div class="rbar-row"><span class="rbar-lbl">4</span><div class="rbar-track"><div class="rbar-fill" style="width:9%"></div></div><span style="font-size:11px;color:var(--muted)">9%</span></div> <div class="rbar-row"><span class="rbar-lbl">3</span><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><span style="font-size:11px;color:var(--muted)">2%</span></div> <div class="rbar-row"><span class="rbar-lbl">2</span><div class="rbar-track"><div class="rbar-fill" style="width:1%"></div></div><span style="font-size:11px;color:var(--muted)">1%</span></div> </div> </div> <div id="review-list"></div> </div> </div> <!-- Right sidebar --> <div class="pdp-sidebar"> <div class="pdp-sidebar-card"> <h3>🔥 Sản phẩm liên quan</h3> <div id="pdp-related"></div> </div> <div class="pdp-sidebar-card" style="position:sticky;top:80px"> <h3>📦 Thông tin giao hàng</h3> <div style="display:flex;flex-direction:column;gap:10px"> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🚚</span><div><div style="font-size:13px;font-weight:600">Giao hàng toàn quốc</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Miễn phí ship đơn từ 500.000đ. Ship trong 2–4 ngày.</div></div></div> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">🔄</span><div><div style="font-size:13px;font-weight:600">Đổi trả dễ dàng</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Đổi size miễn phí trong 7 ngày nếu không vừa.</div></div></div> <div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:18px">💳</span><div><div style="font-size:13px;font-weight:600">Thanh toán linh hoạt</div><div style="font-size:12px;color:var(--muted);margin-top:2px">COD, chuyển khoản, MoMo, ZaloPay.</div></div></div> </div> </div> </div> </div> </div>
 </div> <!-- ══════════ CHECKOUT ══════════ -->
 <div id="scr-checkout" class="screen"> <header class="pc-header ck-header"> <div class="pc-header-inner"> <button class="ck-back-btn" onclick="closeCheckout()" title="Quay lại giỏ hàng" aria-label="Quay lại giỏ hàng">←</button> <div class="ck-header-title"> <div onclick="exitCheckout()" style="cursor:pointer;display:flex;align-items:center;gap:8px"><img class="brand-logo" alt="Mũm Big Size" width="96" height="32" style="height:32px;width:auto;object-fit:contain"></div> <div class="ck-header-step">Thanh toán</div> </div> <button class="ck-exit-btn" onclick="exitCheckout()" title="Thoát (đã lưu thông tin)" aria-label="Thoát">✕</button> </div> </header> <div class="checkout-page"> <!-- ══ CỘT TRÁI: Form thông tin + Phương thức TT ══ -->
 <div class="ck-col-left">
@@ -4315,6 +4316,314 @@ let orders=[
   {id:'#2398',name:'Phạm Thu Hà',phone:'0911223344',product:'Quần suông ống rộng',size:'4XL',total:225,payMethod:'cod',payStatus:'awaiting',status:'done',time:'2 giờ trước',addr:'ĐN',note:''},
 ];
 let cart=[], curProd=null, curSize='', curQty=1;
+
+/* ══════════════════════════════════════════════════════════════════
+   REVIEW SYSTEM — Mũm Bigsize
+   - Database: ~100 review templates chia theo nhóm sản phẩm
+   - Name pool: ~80 tên Việt phổ biến
+   - Generate cố định 5 review/sản phẩm dựa trên product ID (seed)
+   - Rating sản phẩm: 4.3 → 4.9 cố định theo ID
+   - Số đánh giá: ~30-60% của sold (cũng cố định theo ID)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── REVIEW POOL: text + rating (5/4/3 sao) ── */
+const REVIEW_POOL = {
+  // ÁO CHỐNG NẮNG / ÁO GIÓ - tự nhiên, ít kỹ thuật
+  outerwear: [
+    {t:"Mua áo chống nắng size {SIZE}, mình {WEIGHT}kg mặc vừa khít. Vải mát, đi nắng cả buổi không thấy bí. Khóa kéo trơn không kẹt. Cực ưng!", r:5},
+    {t:"Trước hay bị cháy nắng hai cánh tay, từ ngày mặc áo này không bị nữa. Ngực to mà mặc vẫn vừa, phần mông che được. Shop có tâm.", r:5},
+    {t:"Áo nhẹ tênh, gấp gọn bỏ túi xách đi đâu cũng tiện. Mình hay ra ngoài nên cần áo này lắm. Giá rẻ hơn chỗ khác mà chất tốt hơn.", r:5},
+    {t:"Mình {WEIGHT}kg lo size {SIZE} không vừa, ai dè mặc thoải mái còn dư chỗ. Vải đứng dáng, không nhăn nhúm. Sẽ mua thêm màu khác.", r:5},
+    {t:"Lần đầu tìm được áo bigsize che được hết bụng và bắp tay. Mặc lên tự tin hẳn, ra đường không còn ngại. Cảm ơn shop!", r:5},
+    {t:"Vải mềm, không cọ da, mặc cả ngày không khó chịu. Mũ rộng vừa che được mặt khi đi xe máy. Mua xong giới thiệu cho mẹ luôn.", r:5},
+    {t:"Áo có 2 túi to bỏ điện thoại với chìa khóa tiện lắm. Form rộng vừa, không bó người. Mình đi giao hàng cả ngày mặc rất ổn.", r:5},
+    {t:"Đặt thứ 5 chiều thứ 7 nhận, ship khá nhanh. Mở ra mặc thử ngay, vừa size, đẹp y hình. Không phải đổi trả gì cả.", r:5},
+    {t:"Mình hay ra mồ hôi mà mặc cái này không bị bết người. Vải thấm hút ổn. Tay áo dài che được bắp tay - điểm cộng to với người béo.", r:5},
+    {t:"Áo mặc đi làm, đi chơi, đi du lịch đều hợp. Trẻ trung, không quê. Mình {WEIGHT}kg mặc {SIZE} dáng đẹp lắm.", r:5},
+    {t:"Shop tư vấn size qua Zalo nhiệt tình. Mình ngại nói cân nặng nhưng chị shop dịu dàng giúp chọn size, mặc vào vừa khít.", r:5},
+    {t:"Mua tặng mẹ, mẹ {WEIGHT}kg mặc {SIZE} đẹp. Mẹ khen vải mát, không nóng. Mẹ chưa từng mặc áo bigsize đẹp như vậy.", r:5},
+    {t:"Áo có lớp lót bên trong nên không bị xuyên thấu khi ra nắng. Vải bên ngoài bóng nhẹ nhìn sang. Đáng tiền lắm.", r:5},
+    // 4 sao
+    {t:"Áo đẹp, vừa size. Trừ 1 sao vì màu thực tế hơi nhạt hơn ảnh shop một chút. Nhưng nói chung vẫn ưng.", r:4},
+    {t:"Form chuẩn, mặc thoải mái. Hơi tiếc là có 1-2 sợi chỉ thừa ở mép, mình tự cắt là xong. Vải thì cực ưng.", r:4},
+    {t:"Vải đẹp nhưng mùi vải mới hơi nồng lúc đầu, giặt 1 lần là bay mùi. Form mặc lên đẹp, che được nhược điểm.", r:4},
+    {t:"Mua đúng size theo bảng, mặc vừa nhưng tay áo hơi dài chút so với cánh tay mình. Không sao, gấp tay lên vẫn xinh.", r:4},
+    // 3 sao
+    {t:"Áo mặc tạm ổn. Vải hơi mỏng so với mong đợi nhưng được cái nhẹ, đi du lịch tiện. Cải thiện chất liệu thì sẽ tuyệt.", r:3},
+    {t:"Form ok nhưng giao hàng hơi chậm 2 ngày so với hẹn. Áo thì vẫn đẹp, mặc được. Hy vọng shop cải thiện ship.", r:3},
+    // 5 sao tiếp
+    {t:"Áo xinh xỉu, mặc lên mặt mũi sáng hẳn. Mình hay tự ti vì da đen mà cái áo này tôn da lắm. Mua thêm 2 màu nữa.", r:5},
+    {t:"Đường may chắc, không lo bục. Khoá kéo cũng trơn tru. Lần thứ 3 mua ở shop rồi, lần nào cũng ưng. Tin tưởng!", r:5},
+    {t:"Mình {WEIGHT}kg, ngực 105cm, mua {SIZE} vừa vặn không bị căng. Mỗi lần ra ngoài đều mặc, cảm giác bảo vệ da rất ổn.", r:5},
+    {t:"Áo siêu đẹp, mặc với chân váy hay quần đều xinh. Form rộng nhẹ kiểu Hàn, mình mê. Ai bigsize chưa mặc thử thì nên thử.", r:5},
+    {t:"Đóng gói cẩn thận có thiệp cảm ơn của shop. Áo giặt 5 lần rồi vẫn như mới. Bao chất, bao đẹp, bao yêu shop.", r:5},
+    {t:"Mặc áo này đi biển che nắng cực tốt, không bị đỏ da. Vải mát thoáng nên nóng cũng không sao. Đỉnh!", r:5},
+    {t:"Đi ăn cưới mặc áo này khoác ngoài đầm xòe rất sang. Không ngờ áo chống nắng cũng có thể đẹp như vậy. Tuyệt vời.", r:5},
+    {t:"Áo có dây rút ở eo, kéo lại tôn dáng. Mình hay bị áo rộng thùng thình kéo xuống nhìn xuề xòa, cái này thì ngược lại.", r:5},
+    {t:"Size từ S đến 7XL đầy đủ luôn, hiếm shop có size to vậy. Mình {WEIGHT}kg vẫn tìm được áo vừa. Yêu shop!", r:5},
+    {t:"Áo mặc cả ngày không bị ngứa hay nổi mẩn. Mình da nhạy cảm dễ dị ứng vải mà cái này hoàn toàn không sao.", r:5},
+    {t:"Tay áo bo gọn gàng, không bị phồng lên khó chịu. Cổ áo cao vừa đủ che được cái cổ ngắn của mình. Đỉnh!", r:5},
+    {t:"Mua cho cả nhà, từ con gái 60kg đến mẹ 90kg, ai cũng có size. Cả nhà đều ưng. Cảm ơn shop nhiều!", r:5},
+    {t:"Áo dài qua mông che được hết phần đùi to. Tự tin hẳn khi đi cùng bạn bè dáng nhỏ. Mê mẩn.", r:5},
+    {t:"Lần đầu mua hàng online cho hàng bigsize, sợ không vừa. May là chuẩn size, mặc đẹp. Sẽ mua thêm.", r:5},
+    {t:"Áo nhẹ mà vẫn cản nắng tốt. Đứng nắng 30 phút không bị bỏng rát da như áo cotton thường. Đáng tiền.", r:5},
+  ],
+
+  // HOODIE - trộn 2 mood (đi chơi + ấm mùa đông)
+  hoodie: [
+    {t:"Hoodie mặc đi học rất hợp, kiểu oversized che hết bụng mỡ. Mình {WEIGHT}kg mua {SIZE} vừa rộng đẹp. Mê quá!", r:5},
+    {t:"Áo nỉ bông bên trong êm như nhung. Mặc đi Đà Lạt không cần áo khoác ngoài, vẫn ấm. Đáng đồng tiền.", r:5},
+    {t:"Mua hoodie mặc đi chơi với bạn, ai cũng khen xinh. Túi to để được điện thoại + ví. Tiện lợi cực.", r:5},
+    {t:"Mùa đông Hà Nội mặc cái này thay áo khoác. Ấm, ko cồng kềnh, ngồi xe máy không bị gió lùa. Tuyệt!", r:5},
+    {t:"Form rộng nhẹ kiểu Hàn, mặc với quần legging hay quần jean đều đẹp. Mình mê style này lắm.", r:5},
+    {t:"Hoodie đẹp, dây rút mũ điều chỉnh được. Cổ áo bo cao kín không bị lạnh gáy khi đi xe máy.", r:5},
+    {t:"Mặc đi ngủ, mặc đi quán cafe, mặc đi học - cái nào cũng hợp. Vải mềm, không bị xù sau giặt nhiều lần.", r:5},
+    {t:"Mình {WEIGHT}kg mua size {SIZE}, dáng oversize rất xinh. Tay áo bo gọn không bị tuột xuống khi cử động.", r:5},
+    {t:"Áo dày dặn, đi mưa lất phất nhẹ không sao. Mình hay sợ lạnh tay chân nên rất ưng cái này.", r:5},
+    {t:"Hoodie có khoá kéo, dễ mặc dễ cởi không phải chui đầu. Hợp với người tóc dài như mình.", r:5},
+    {t:"Mặc đi cafe sống ảo cực xinh. Bạn bè cứ hỏi shop nào mà đẹp vậy. Đã giới thiệu cho 3 đứa rồi haha.", r:5},
+    {t:"Lần đầu tìm được hoodie bigsize không bị bó vai. Mình vai rộng nên hay mệt vì áo chật, cái này thoải mái.", r:5},
+    {t:"Áo ấm vừa phải, mặc mùa thu Sài Gòn cực hợp. Không quá nóng cũng không quá lạnh. Đa năng.", r:5},
+    {t:"Cổ áo và tay áo bo dày, không bị lỏng sau giặt. Đường may đôi chắc chắn, không lo bục chỉ.", r:5},
+    // 4 sao
+    {t:"Hoodie đẹp, ấm. Trừ 1 sao vì giặt máy bị xù lông nhẹ. Lần sau giặt tay nó sẽ giữ form lâu hơn.", r:4},
+    {t:"Form chuẩn, đúng size theo bảng. Tiếc là dây rút mũ hơi ngắn so với mình thích. Ngoài ra ưng.", r:4},
+    {t:"Áo ổn, vải dày. Hơi tiếc là túi không có khóa kéo, dễ rơi đồ. Nhưng giá rẻ thì chấp nhận được.", r:4},
+    {t:"Mặc lên đẹp nhưng hơi nóng nếu đi vào trong nhà có sưởi. Mặc ngoài trời lạnh thì rất ấm.", r:4},
+    // 3 sao
+    {t:"Hoodie mặc bình thường, không có gì nổi bật. Giá phải chăng nên không đòi hỏi cao. Mặc nhà ổn.", r:3},
+    {t:"Áo OK nhưng dày hơn mong đợi, mùa hè không mặc được. Mua phải canh thời tiết. Form thì đẹp.", r:3},
+    // 5 sao tiếp
+    {t:"Mua hoodie cho cả mình và em gái. Em gái 55kg, mình 88kg, đều có size hợp. Cùng style luôn.", r:5},
+    {t:"Vải lông cừu giả bên trong cực êm. Mặc xong không muốn cởi ra. Mùa đông là chân ái của áo này.", r:5},
+    {t:"Áo có form rộng vừa đủ che mỡ bụng và bắp tay. Mình tự ti với 2 chỗ này nên rất quan trọng.", r:5},
+    {t:"Mua áo về mặc liền 3 ngày liên tục không thay vì quá thoải mái. Vải mềm dễ chịu, không gây dị ứng.", r:5},
+    {t:"Hoodie có in chữ nhỏ ở ngực, không lòe loẹt. Đẹp tinh tế, mặc đi đâu cũng được.", r:5},
+    {t:"Đặt size {SIZE} cho mẹ {WEIGHT}kg, mẹ khen vừa và ấm. Mẹ ít khi khen đồ mà khen cái này thì biết là chất lượng.", r:5},
+    {t:"Mình hay bị lạnh chân tay, mặc cái này tay áo dài che được cả mu bàn tay. Cảm động luôn.", r:5},
+    {t:"Mặc với chân váy chữ A là combo hoàn hảo. Trẻ trung mà vẫn nữ tính. Người lớn mặc cũng đẹp.", r:5},
+    {t:"Áo nhẹ hơn mình tưởng dù dày dặn. Vai không bị mỏi khi mặc cả ngày. Đỉnh nhất là điểm này.", r:5},
+    {t:"Lông cừu bên trong không rơi rớt khi mặc lâu. Có shop khác mặc 2 lần là rụng đầy người, cái này thì không.", r:5},
+  ],
+
+  // SWEATER / ÁO LEN - ấm áp, đẹp
+  sweater: [
+    {t:"Sweater mặc bên trong áo khoác mùa đông cực hợp. Vải mịn không cọ da. Mình {WEIGHT}kg mặc {SIZE} vừa.", r:5},
+    {t:"Áo len mềm như mây, không bị ngứa cổ như áo len thường. Mặc cả ngày không khó chịu chút nào.", r:5},
+    {t:"Form ôm nhẹ, không quá bó người béo. Vải co giãn tốt, ngồi xếp bằng cũng không sao. Tuyệt vời.", r:5},
+    {t:"Mặc sweater đi làm văn phòng rất chuyên nghiệp. Combine với chân váy bút chì là combo công sở chuẩn.", r:5},
+    {t:"Áo dày vừa đủ ấm, không quá nóng khi vào phòng máy lạnh. Mùa thu đông mặc rất ổn.", r:5},
+    {t:"Cổ áo cao che được phần cổ ngắn của mình. Tự tin hẳn, không phải kéo cổ cao mãi như áo khác.", r:5},
+    {t:"Vải đẹp, không bị xù sau 5 lần giặt. Mình giặt máy luôn vẫn không sao. Đáng tiền lắm.", r:5},
+    {t:"Áo len có nhiều màu pastel xinh xỉu. Mình mua màu hồng kem, mặc lên trẻ ra cả tuổi. Yêu lắm!", r:5},
+    {t:"Mua tặng chị gái nặng {WEIGHT}kg, chị bảo lần đầu mặc áo len bigsize không bị chật ngực. Cảm ơn shop.", r:5},
+    {t:"Áo dáng suông che được bụng dưới rất khéo. Mình mới sinh con xong nên mặc cái này tự tin lắm.", r:5},
+    {t:"Vải bông mềm, không bị tĩnh điện như len thường. Mặc với áo khác bên trong không bị dính.", r:5},
+    {t:"Đường viền cổ và tay áo bo đều, không bị lệch. Đường may tinh tế nhìn rõ shop có tâm.", r:5},
+    {t:"Sweater mặc đi cafe sống ảo cực ổn. Background nào cũng hợp với áo này. Đẹp xỉu.", r:5},
+    // 4 sao
+    {t:"Áo đẹp, vải mềm. Trừ 1 sao vì hơi xù sau lần giặt thứ 3. Có thể do mình giặt sai cách.", r:4},
+    {t:"Sweater ấm, mặc thoải mái. Tiếc là tay áo hơi dài với người tay ngắn như mình. Gấp lên thì xinh.", r:4},
+    {t:"Vải đẹp, form ổn. Hơi tiếc là bo tay áo lỏng nhẹ sau vài tuần mặc. Có thể do giặt máy nhiều.", r:4},
+    // 3 sao
+    {t:"Áo mặc tạm được. Vải mỏng hơn áo len thường, mùa lạnh sâu phải mặc thêm áo trong. Phù hợp mùa thu.", r:3},
+    // 5 sao tiếp
+    {t:"Mình {WEIGHT}kg ngực to mua {SIZE} vừa khít, không bị căng nút áo. Cuối cùng cũng tìm được áo len vừa người.", r:5},
+    {t:"Áo có lớp lót cotton bên trong nên mặc trực tiếp với da không sao. Không phải mặc thêm áo lót dày.", r:5},
+    {t:"Mặc sweater với quần culottes là set đồ yêu thích của mình mùa này. Vừa ấm vừa thoải mái.", r:5},
+    {t:"Áo len giặt xong vẫn giữ form, không bị nhão lưng hay rộng cổ. Đó là điều mình quan tâm nhất.", r:5},
+    {t:"Mua áo len cho mùa Đà Lạt, mặc mỗi sáng đi cafe ngắm sương. Ấm áp dễ chịu, không lạnh.", r:5},
+    {t:"Áo nhẹ hơn mình tưởng. Mặc cả ngày vai không bị mỏi. Đường may chắc chắn không có lỗi.", r:5},
+    {t:"Cổ tròn vừa, không cao quá nóng cũng không thấp quá hở xương quai xanh. Vừa đủ thanh lịch.", r:5},
+    {t:"Sweater dáng dài qua mông là cứu cánh cho hội bigsize. Mặc với legging là combo hoàn hảo.", r:5},
+  ],
+
+  // GENERAL (quần, váy, tshirt, sơ mi, đồ đi biển, phụ kiện, giày dép, áo khoác đông, áo parka)
+  general: [
+    {t:"Sản phẩm đẹp, đúng mô tả. Mình {WEIGHT}kg mua {SIZE} vừa khít. Vải tốt, đường may chắc chắn. Sẽ ủng hộ shop tiếp.", r:5},
+    {t:"Hàng đẹp y hình, không phải photoshop quá đà như shop khác. Đóng gói cẩn thận. Ưng từ giao diện đến chất lượng.", r:5},
+    {t:"Mặc lên tự tin hẳn, che được nhược điểm cơ thể. Cảm ơn shop có size đến {SIZE} cho người to như mình.", r:5},
+    {t:"Shop tư vấn nhiệt tình qua Zalo. Đặt hàng buổi tối, sáng mai shop nhắn xác nhận liền. Chuyên nghiệp.", r:5},
+    {t:"Đặt online lần đầu mua hàng bigsize mà không phải đổi trả. Size chuẩn theo bảng, mặc vừa luôn.", r:5},
+    {t:"Giá hợp lý, chất lượng vượt mong đợi. Mình so sánh với shop khác cùng mức giá thì shop này ngon hơn.", r:5},
+    {t:"Mua tặng mẹ, mẹ {WEIGHT}kg mặc {SIZE} đẹp lắm. Mẹ ít khen đồ con mua mà lần này khen.", r:5},
+    {t:"Lần thứ 3 mua ở shop, lần nào cũng ưng. Tin tưởng vào chất lượng. Sẽ là khách hàng lâu dài.", r:5},
+    {t:"Form đẹp tôn dáng, không phải kiểu rộng thùng thình. Bigsize mà vẫn xinh, không xuề xòa.", r:5},
+    {t:"Vải mềm mịn, không gây ngứa. Da mình nhạy cảm hay bị mẩn nhưng cái này hoàn toàn không sao.", r:5},
+    // 4 sao
+    {t:"Sản phẩm đẹp, vừa size. Trừ 1 sao vì giao hàng hơi chậm 1 ngày so với dự kiến. Chất lượng thì 10 điểm.", r:4},
+    {t:"Form ổn, vải tốt. Hơi tiếc là màu thực tế nhạt hơn ảnh shop một chút. Nhưng vẫn đẹp.", r:4},
+    // 3 sao
+    {t:"Sản phẩm tạm ổn, không có gì nổi bật. Giá phải chăng nên không đòi hỏi cao. Mặc nhà thì OK.", r:3},
+    // 5 sao tiếp
+    {t:"Cảm ơn shop có size {SIZE}, hiếm shop bigsize có size to như vậy. Mình {WEIGHT}kg cuối cùng cũng có đồ vừa.", r:5},
+    {t:"Mua xong giặt 5 lần rồi vẫn như mới, không phai màu, không nhão form. Đáng tiền lắm.", r:5},
+  ]
+};
+
+/* ── NAME POOL: Tên Việt phổ biến (~80 tên, đa dạng vùng miền) ── */
+const REVIEW_NAMES = [
+  "Nguyễn Thị Hương","Trần Thị Hoa","Lê Thị Thảo","Phạm Thị Lan","Hoàng Thị Mai",
+  "Vũ Thị Linh","Đặng Thị Hồng","Bùi Thị Trang","Đỗ Thị Nga","Hồ Thị Yến",
+  "Ngô Thị Phương","Dương Thị Thu","Lý Thị Nhung","Phan Thị Hà","Võ Thị Loan",
+  "Đinh Thị Vân","Trương Thị Kim","Cao Thị Diệu","Mai Thị Bích","Tạ Thị Ánh",
+  "Nguyễn Hà My","Trần Bảo Châu","Lê Quỳnh Anh","Phạm Khánh Linh","Hoàng Phương Anh",
+  "Vũ Ngọc Diệp","Đặng Hoàng Yến","Bùi Thanh Tâm","Đỗ Minh Châu","Hồ Quỳnh Như",
+  "Ngô Thu Trang","Dương Mai Phương","Lý Bảo Ngọc","Phan Khánh Vy","Võ Tường Vi",
+  "Đinh Thúy Hằng","Trương Thanh Thảo","Cao Diệu Linh","Mai Thanh Huyền","Tạ Bích Ngọc",
+  "Nguyễn Phương Thảo","Trần Thanh Tú","Lê Thu Hà","Phạm Hương Giang","Hoàng Thúy Vy",
+  "Vũ Mai Anh","Đặng Quỳnh Trang","Bùi Hồng Nhung","Đỗ Thu Trang","Hồ Khánh Hà",
+  "Ngô Bảo Trâm","Dương Phương Linh","Lý Hà Phương","Phan Thanh Hằng","Võ Mai Hương",
+  "Đinh Bích Phương","Trương Hoài Thu","Cao Phương Nga","Mai Hoàng Yến","Tạ Tuyết Mai",
+  "Nguyễn Lan Anh","Trần Hoài Linh","Lê Hồng Vân","Phạm Bảo Hân","Hoàng Diệu Linh",
+  "Vũ Thanh Mai","Đặng Bích Hà","Bùi Quỳnh Anh","Đỗ Hồng Hạnh","Hồ Mỹ Linh",
+  "Ngô Hồng Vy","Dương Thanh Hương","Lý Bảo Châu","Phan Thúy Quỳnh","Võ Hồng Ngọc",
+  "Đinh Phương Mai","Trương Khánh Ly","Cao Thanh Tâm","Mai Thu Hồng","Tạ Phương Anh"
+];
+
+/* ── HASH: tạo seed ổn định từ product ID ── */
+function reviewHash(id, salt) {
+  let h = (salt || 0) * 2654435761;
+  const s = String(id);
+  for (let i = 0; i < s.length; i++) {
+    h = ((h << 5) - h) + s.charCodeAt(i);
+    h = h >>> 0; // unsigned 32-bit
+  }
+  return h;
+}
+
+/* ── Pick category group cho 1 sản phẩm ── */
+function getReviewGroup(p) {
+  if (!p || !p.cat) return 'general';
+  const cat = p.cat;
+  if (['ao-chong-nang','ao-gio'].includes(cat)) return 'outerwear';
+  if (cat === 'hoodie') return 'hoodie';
+  if (['sweater','ao-len'].includes(cat)) return 'sweater';
+  return 'general';
+}
+
+/* ── Sinh weight + size phù hợp với sản phẩm cho 1 review ── */
+function genReviewMeta(p, seed) {
+  const sizes = (p && Array.isArray(p.sizes) && p.sizes.length) ? p.sizes : ['L','XL','2XL','3XL'];
+  // Map size → khoảng cân nặng phổ biến
+  const sizeWeight = {
+    'S':[48,55],'M':[55,62],'L':[62,70],'XL':[70,78],
+    '2XL':[78,88],'3XL':[88,98],'4XL':[98,108],'5XL':[108,118],'6XL':[118,128],'7XL':[125,135]
+  };
+  const size = sizes[seed % sizes.length];
+  const wRange = sizeWeight[size] || [70,80];
+  const weight = wRange[0] + (seed % (wRange[1] - wRange[0] + 1));
+  return { size, weight };
+}
+
+/* ── Main: generate 5 review cố định cho 1 product ── */
+function genProductReviews(p) {
+  if (!p) return [];
+  const group = getReviewGroup(p);
+  const pool = REVIEW_POOL[group] || REVIEW_POOL.general;
+  const id = p.id || 0;
+
+  // Pick 5 review không trùng từ pool
+  const picked = [];
+  const used = new Set();
+  let attempts = 0;
+  while (picked.length < 5 && attempts < 50) {
+    const idx = reviewHash(id, attempts + 1) % pool.length;
+    if (!used.has(idx)) {
+      used.add(idx);
+      picked.push(pool[idx]);
+    }
+    attempts++;
+  }
+  // Sắp xếp: 5★ trước, 4★ giữa, 3★ cuối (tự nhiên kiểu khách thấy review tích cực trước)
+  picked.sort((a, b) => b.r - a.r);
+
+  // Gắn tên + meta + ngày cho từng review
+  return picked.map((rv, i) => {
+    const nameSeed = reviewHash(id, 100 + i);
+    const name = REVIEW_NAMES[nameSeed % REVIEW_NAMES.length];
+    const meta = genReviewMeta(p, reviewHash(id, 200 + i));
+    // Ngày: review sao cao = mới hơn (1-7 ngày), sao thấp = cũ hơn (1-3 tuần)
+    const dayBase = rv.r === 5 ? 1 : (rv.r === 4 ? 5 : 12);
+    const dayRange = rv.r === 5 ? 6 : (rv.r === 4 ? 9 : 14);
+    const days = dayBase + (reviewHash(id, 300 + i) % dayRange);
+    let when;
+    if (days === 1) when = 'Hôm qua';
+    else if (days < 7) when = days + ' ngày trước';
+    else if (days < 14) when = '1 tuần trước';
+    else if (days < 21) when = '2 tuần trước';
+    else when = '3 tuần trước';
+    // Replace placeholder
+    const text = rv.t.replace(/\{SIZE\}/g, meta.size).replace(/\{WEIGHT\}/g, meta.weight);
+    return {
+      name,
+      avatar: name.split(' ').map(w => w[0]).join('').slice(-2).toUpperCase(),
+      rating: rv.r,
+      text,
+      when,
+      verified: true
+    };
+  });
+}
+
+/* ── Rating tổng (4.3 → 4.9) cố định theo product ID ── */
+function genProductRating(p) {
+  if (!p) return 4.7;
+  const h = reviewHash(p.id, 999);
+  // 4.3 đến 4.9 = 7 mức (4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9)
+  // Phân bố: nhiều ở 4.7-4.9, ít ở 4.3-4.4 (giống thực tế)
+  const tier = h % 100;
+  if (tier < 5)  return 4.3;   // 5%
+  if (tier < 12) return 4.4;   // 7%
+  if (tier < 22) return 4.5;   // 10%
+  if (tier < 38) return 4.6;   // 16%
+  if (tier < 60) return 4.7;   // 22%
+  if (tier < 82) return 4.8;   // 22%
+  return 4.9;                  // 18%
+}
+
+/* ── Số đánh giá: ~30-60% của sold, cố định theo ID ── */
+function genReviewCount(p) {
+  if (!p) return 0;
+  const sold = Math.max(0, p.sold || 0);
+  if (sold === 0) return 0;
+  // Tỷ lệ 30-60% cố định theo ID
+  const ratioPct = 30 + (reviewHash(p.id, 777) % 31); // 30..60
+  const cnt = Math.round(sold * ratioPct / 100);
+  return Math.max(1, cnt);
+}
+
+/* ── Phân bố % sao trong biểu đồ (cố định theo ID, dao động nhẹ) ── */
+function genRatingDist(p) {
+  // Tỷ lệ thực tế kiểu shop bigsize: chủ yếu 5★, ít 4★, hiếm 3★, rất hiếm 2★
+  const h = reviewHash(p ? p.id : 0, 555);
+  // Dùng >>> (unsigned shift) để đảm bảo không ra số âm trên uint32
+  const five = 82 + (h % 11);                  // 82..92
+  const four = 5 + ((h >>> 4) % 8);            // 5..12
+  const three = 1 + ((h >>> 8) % 4);           // 1..4
+  let two = 100 - five - four - three;
+  if (two < 0) {
+    const overflow = -two;
+    return { five, four: Math.max(2, four - overflow), three, two: 0 };
+  }
+  return { five, four, three, two };
+}
+
+/* ── Format SIZE display: "S | M → 6XL | 7XL" hoặc "S | M | L" nếu ít size ── */
+function formatSizeRange(sizes) {
+  if (!Array.isArray(sizes) || sizes.length === 0) return '';
+  if (sizes.length <= 4) {
+    return sizes.map(s => `<span class="ps-tag">${s}</span>`).join('');
+  }
+  // ≥5 size: 2 đầu + 2 cuối với mũi tên ở giữa
+  const first2 = sizes.slice(0, 2);
+  const last2 = sizes.slice(-2);
+  const head = first2.map(s => `<span class="ps-tag">${s}</span>`).join('');
+  const tail = last2.map(s => `<span class="ps-tag">${s}</span>`).join('');
+  return head + `<span class="ps-arrow">→</span>` + tail;
+}
+
+
 let catF='all', szF='all', sortF='default', searchQ='';
 let adPF='all', adOF='all';
 let editId=null, selEmoji='👗', selSizes=[], uploadedImgs=[];
@@ -4722,7 +5031,7 @@ function renderShop(){
         ${colorBadgeHtml}
         <button class="like-btn" onclick="event.stopPropagation();this.textContent=this.textContent==='🤍'?'❤️':'🤍'">🤍</button> <span class="sold-tag">Đã bán ${p.sold>=1000?(p.sold/1000).toFixed(1)+'k':p.sold}</span>
         ${dotsHtml}
-      </div> <div class="prod-info"> <div class="prod-name">${p.name}</div> <div><span class="prod-price">${formatVND(p.price)}đ</span><span class="prod-old">${formatVND(p.old)}đ</span></div> <div class="prod-sizes">${p.sizes.slice(0,4).map(s=>`<span class="ps-tag">${s}</span>`).join('')}</div> <div style="display:flex;align-items:center;gap:4px"><span class="stars">★★★★★</span><span style="font-size:11px;color:var(--light)">4.9</span></div> <button class="add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">+ Thêm vào giỏ hàng</button> </div> </div>`;
+      </div> <div class="prod-info"> <div class="prod-name">${p.name}</div> <div><span class="prod-price">${formatVND(p.price)}đ</span><span class="prod-old">${formatVND(p.old)}đ</span></div> <div class="prod-sizes">${formatSizeRange(p.sizes)}</div> <div style="display:flex;align-items:center;gap:4px"><span class="stars">★★★★★</span><span style="font-size:11px;color:var(--light)">${genProductRating(p).toFixed(1)}</span></div> <button class="add-btn" onclick="event.stopPropagation();quickAdd(${p.id})">+ Thêm vào giỏ hàng</button> </div> </div>`;
   }).join('');
   // Sau khi render, gắn touch listeners cho mobile swipe
   attachProdSwipeTouch();
@@ -4906,6 +5215,37 @@ function openDetail(id){
 
   document.getElementById('pdp-name').textContent=p.name;
   document.getElementById('pdp-sold-txt').textContent=`| Đã bán ${p.sold>=1000?(p.sold/1000).toFixed(1)+'k':p.sold}`;
+  // Dynamic rating + review count + reviews list (cố định theo product ID)
+  const _rating = genProductRating(p);
+  const _revCount = genReviewCount(p);
+  const _ratingEl = document.getElementById('pdp-rating-num');
+  if(_ratingEl) _ratingEl.textContent = _rating.toFixed(1);
+  const _scoreEl = document.getElementById('pdp-rev-score');
+  if(_scoreEl) _scoreEl.textContent = _rating.toFixed(1);
+  const _cntEl = document.getElementById('pdp-rev-count');
+  if(_cntEl) _cntEl.textContent = _revCount.toLocaleString('vi-VN') + ' đánh giá';
+  // Render rating bars (phân bố sao cố định theo ID)
+  const _dist = genRatingDist(p);
+  const _barsEl = document.getElementById('pdp-rev-bars');
+  if(_barsEl) {
+    _barsEl.innerHTML = [
+      ['5', _dist.five], ['4', _dist.four], ['3', _dist.three], ['2', _dist.two]
+    ].map(([s, pct]) => `<div class="rbar-row"><span class="rbar-lbl">${s}</span><div class="rbar-track"><div class="rbar-fill" style="width:${pct}%"></div></div><span style="font-size:11px;color:var(--muted)">${pct}%</span></div>`).join('');
+  }
+  // Render 5 reviews
+  const _reviews = genProductReviews(p);
+  const _listEl = document.getElementById('review-list');
+  if(_listEl) {
+    if(_revCount === 0) {
+      _listEl.innerHTML = '<div style="text-align:center;padding:30px;color:var(--muted);font-size:13px">Sản phẩm mới - chưa có đánh giá. Hãy là người đầu tiên! 🌸</div>';
+    } else {
+      _listEl.innerHTML = _reviews.map(rv => {
+        const fullStars = '★'.repeat(rv.rating);
+        const emptyStars = '☆'.repeat(5 - rv.rating);
+        return `<div class="review-item"><div class="ri-header"><div class="ri-avatar">${rv.avatar}</div><div><div class="ri-name">${rv.name}</div><div style="color:#EF9F27;font-size:12px">${fullStars}${emptyStars}</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted)">${rv.when}</div></div><div class="ri-text">${rv.text}</div>${rv.verified?'<div class="ri-verified">✓ Đã mua hàng xác nhận</div>':''}</div>`;
+      }).join('');
+    }
+  }
   document.getElementById('pdp-price').textContent=formatVND(p.price)+'đ';
   document.getElementById('pdp-old').textContent=formatVND(p.old)+'đ';
   document.getElementById('pdp-save').textContent=`Tiết kiệm ${formatVND(p.old-p.price)}đ`;
