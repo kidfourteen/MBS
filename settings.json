@@ -4,7 +4,7 @@
     "fb": "https://www.facebook.com/mumbigsize.top/",
     "fbPageId": "226224323910922",
     "fbPixelId": "",
-    "fbCatalogEnabled": false
+    "fbCatalogEnabled": true
   },
   "shopInfo": {
     "name": "Mũm",
@@ -27,5 +27,5 @@
     "chatId": "-1003747002472",
     "enabled": true
   },
-  "_updatedAt": "2026-05-01T04:34:12.988Z"
+  "_updatedAt": "2026-05-12T06:12:56.162Z"
 }
