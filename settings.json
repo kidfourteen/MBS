@@ -10,7 +10,7 @@
     "name": "Mũm",
     "phone": "0868488884",
     "address": "Mumbigsize.com",
-    "shipFee": 20000,
+    "shipFee": 19000,
     "freeFrom": 400000
   },
   "bank": {
@@ -27,5 +27,5 @@
     "chatId": "-1003747002472",
     "enabled": true
   },
-  "_updatedAt": "2026-05-12T06:12:56.162Z"
+  "_updatedAt": "2026-06-17T04:53:50.564Z"
 }
