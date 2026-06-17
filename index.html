@@ -173,7 +173,7 @@
   var pixelId = '';
   try {
     var cfg = JSON.parse(localStorage.getItem('shop_cfg') || '{}');
-    pixelId = (cfg.fbPixelId || '').trim();
+    pixelId = (cfg.fbPixelId || '26769352792742346').trim();
   } catch(e){}
   if (!pixelId || !/^\d{10,20}$/.test(pixelId)) return; // Bỏ qua nếu chưa cấu hình
 
