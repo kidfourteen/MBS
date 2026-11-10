@@ -50,5 +50,12 @@
     "fbUrl": "https://www.facebook.com/mumbigsizechamcom/posts/pfbid02mWQ639Hupha3C6FTNk6gjLHFgvyzjnAmSegrSojyWr3cnaYsS5JepPc59LtyDvJzl",
     "name": "Feedback săn mây iu iu",
     "visible": true
+  },
+  {
+    "id": 8,
+    "type": "fb",
+    "fbUrl": "https://www.facebook.com/mumbigsizechamcom/posts/pfbid02vZ3AwnwaAA8UvMtomskLcvdgx6D8zKNpFQhDPywaii7pbSsqSVRk2B9f4YA9cuWxl",
+    "name": "Đánh giá Facebook",
+    "visible": true
   }
 ]
