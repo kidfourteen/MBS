@@ -639,5 +639,68 @@
     ],
     "desc": "Hàng 2 lớp, \nChất thun băng lạnh Hàn 𝐌𝐄̂̀𝐌 - 𝐌𝐈̣𝐍 - 𝐌𝐀́𝐓 𝐓𝐀𝐘.\nĐược dệt bằng công nghệ SUNSTOP dòng COOL-AIR có khả năng chống tia UV và ngăn chặn bức sáng nhiệt mạnh.\nCo giãn 4 chiều, k bị xù lông, bai nhão hay phai màu ngay cả khi giặt máy chế độ nhanh hay giặt nước nóng",
     "topBanner": false
+  },
+  {
+    "id": 1794284247935,
+    "name": "Zip Hoodie Nỉ Hàn Mùa Đông 2026 - D2",
+    "price": 299,
+    "old": 499,
+    "emoji": "👗",
+    "cat": "ao-khoac-dong",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL"
+    ],
+    "colors": [
+      {
+        "name": "Xanh than",
+        "hex": "#2C3E50",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284085/mum-bigsize/q2lrdnml9lhoilb8mrwq.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284088/mum-bigsize/zkltd30uqwp1cx20zmjb.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284092/mum-bigsize/i0wvmtbahwpskkqy1gbj.webp"
+        ]
+      },
+      {
+        "name": "Xám",
+        "hex": "#B8B8B8",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284104/mum-bigsize/t88dtjawtutj1vv6zmhh.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284111/mum-bigsize/b2ruhq0lja7zklpogn2t.webp"
+        ]
+      },
+      {
+        "name": "Xám đậm",
+        "hex": "#555555",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284146/mum-bigsize/bqku6l4xlbgrwdy7i9sk.webp"
+        ]
+      },
+      {
+        "name": "Đen",
+        "hex": "#1A1A1A",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284160/mum-bigsize/nktsynwamhzujdm58u3f.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284171/mum-bigsize/gg549zbodyhzruadgj8l.webp"
+        ]
+      }
+    ],
+    "status": "on",
+    "sold": 1200,
+    "tags": [
+      "sale",
+      "hot",
+      "mới về"
+    ],
+    "desc": "🌟 HÀNG QCCC: Chuẩn từng đường kim, khóa kéo êm, form chuẩn\n🧶 NỈ HÀN CAO CẤP: Dày dặn giữ nhiệt đỉnh cao, mềm mịn, BAO KHÔNG XÙ.\n✨ Hack dáng, Che khuyết điểm!!\n🧢 MŨ TRÙM SÂU: Che kín gió rét, đeo tai nghe cực thoải mái.",
+    "topBanner": true
   }
 ]
