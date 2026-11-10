@@ -702,5 +702,68 @@
     ],
     "desc": "🌟 HÀNG QCCC: Chuẩn từng đường kim, khóa kéo êm, form chuẩn\n🧶 NỈ HÀN CAO CẤP: Dày dặn giữ nhiệt đỉnh cao, mềm mịn, BAO KHÔNG XÙ.\n✨ Hack dáng, Che khuyết điểm!!\n🧢 MŨ TRÙM SÂU: Che kín gió rét, đeo tai nghe cực thoải mái.",
     "topBanner": true
+  },
+  {
+    "id": 1794284443116,
+    "name": "Hoodie Nỉ Hàn Đông 2026 - D6",
+    "price": 299,
+    "old": 499,
+    "emoji": "👗",
+    "cat": "ao-khoac-dong",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "4XL",
+      "5XL",
+      "6XL",
+      "7XL"
+    ],
+    "colors": [
+      {
+        "name": "Đỏ đô",
+        "hex": "#7B1F2D",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284376/mum-bigsize/noicbaumddpan44wtgbu.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284378/mum-bigsize/nfqcwlzkuwlnga5dmuo1.webp"
+        ]
+      },
+      {
+        "name": "Xanh than",
+        "hex": "#2C3E50",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284383/mum-bigsize/madgouash0izcndym0wc.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284387/mum-bigsize/ribmmauxfkhyrkkv2amq.webp"
+        ]
+      },
+      {
+        "name": "Đen",
+        "hex": "#1A1A1A",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284390/mum-bigsize/cqwawnrwziyfhsaz7xg7.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284393/mum-bigsize/czlf1zlufo2xymmjmx1l.webp"
+        ]
+      },
+      {
+        "name": "Xám",
+        "hex": "#B8B8B8",
+        "images": [
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284397/mum-bigsize/pf5h1db7xgc5m5hfmkmg.webp",
+          "https://res.cloudinary.com/dwnqwmxob/image/upload/v1794284400/mum-bigsize/usvai7qmhjenzvz0pisa.webp"
+        ]
+      }
+    ],
+    "status": "on",
+    "sold": 1200,
+    "tags": [
+      "sale",
+      "hot",
+      "mới về"
+    ],
+    "desc": "🌟 HÀNG QCCC: Chuẩn từng đường kim, khóa kéo êm, form chuẩn\n🧶 NỈ HÀN CAO CẤP: Dày dặn giữ nhiệt đỉnh cao, mềm mịn, BAO KHÔNG XÙ.\n✨ Hack dáng, Che khuyết điểm!!\n🧢 MŨ TRÙM SÂU: Che kín gió rét, đeo tai nghe cực thoải mái.",
+    "topBanner": true
   }
 ]
